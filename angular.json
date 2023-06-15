@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sonhv_learning": {
+    "ecommerce-portal": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/sonhv_learning",
+            "outputPath": "dist/ecommerce-portal",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "sonhv_learning:build:production"
+              "browserTarget": "ecommerce-portal:build:production"
             },
             "development": {
-              "browserTarget": "sonhv_learning:build:development"
+              "browserTarget": "ecommerce-portal:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sonhv_learning:build"
+            "browserTarget": "ecommerce-portal:build"
           }
         },
         "test": {

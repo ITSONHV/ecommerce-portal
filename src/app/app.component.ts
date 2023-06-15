@@ -15,5 +15,5 @@ export class AppComponent implements OnInit  {
           this.expenseObj = { ...data }
       }
     )};
-  title = 'sonhv_learning';
+  title = 'ecommerce-portal';
 }
