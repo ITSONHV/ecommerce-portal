@@ -1,7 +1,5 @@
 jQuery(document).ready(function() {
     "use strict";
-
-
     /******************************************
        Newsletter popup
     ******************************************/

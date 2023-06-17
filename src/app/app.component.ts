@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryModel } from 'src/models/category.model';
 import { MainService } from 'src/services/main.service';
 
 @Component({
@@ -7,13 +8,9 @@ import { MainService } from 'src/services/main.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit  {
-  public expenseObj : any = null;
+  public expenseObj : CategoryModel |any;
   constructor(private _mainsvc: MainService){}
   ngOnInit(): void {
-    this._mainsvc.getExpense().subscribe(
-      (data: any) => {
-          this.expenseObj = { ...data }
-      }
-    )};
+   };
   title = 'ecommerce-portal';
 }

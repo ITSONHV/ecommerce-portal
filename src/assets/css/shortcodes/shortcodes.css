@@ -1745,7 +1745,7 @@ dd {
 	margin-left: 20px;
 }
 .dl-horizontal {
- *zoom: 1;
+ zoom: 1;
 }
 .dl-horizontal:before, .dl-horizontal:after {
 	display: table;

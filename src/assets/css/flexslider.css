@@ -194,7 +194,7 @@ html[xmlns] .slides {
 	margin:0 3px;
 	display:inline-block;
 	zoom:1;
-*display:inline
+	display:inline
 }
 .flex-control-paging li a {
 	width:11px;
@@ -250,5 +250,4 @@ left:10px
 .flex-direction-nav .flex-next {
 opacity:1;
 right:10px
-}
-}
+}}

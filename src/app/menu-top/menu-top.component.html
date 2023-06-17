@@ -13,9 +13,10 @@
             </div>
             
             <!-- Shop by category -->
-            <div class="mega-menu-category" id="mega-menu-category" [ngStyle]="{'style':'none !important'}">
-              <ul class="nav">
-                <li><a routerLink="/">Home pages </a>
+            <div class="mega-menu-category">
+              <ul class="nav" *ngFor="let item of menuObject">
+                <li>
+                  <a routerLink="/">{{item.categoryName}}</a>
                   <div class="wrap-popup column1">
                     <div class="popup">
                       <ul class="nav">
@@ -27,7 +28,7 @@
                     </div>
                   </div>
                 </li>
-                <li><a href="#">Pages</a>
+                <!-- <li><a href="#">Pages</a>
                   <div class="wrap-popup">
                     <div class="popup">
                       <div class="row">
@@ -250,7 +251,7 @@
                     </div>
                   </div>
                 </li>
-                <li class="nosub"><a [routerLink]="['/danh-muc-san-pham-g']">Accessories</a></li>
+                <li class="nosub"><a [routerLink]="['/danh-muc-san-pham-g']">Accessories</a></li> -->
               </ul>
             </div>
           </div>
