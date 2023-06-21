@@ -18,7 +18,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 
 const routes: Routes = [
   { path: '', 
-    component: HomeComponent
+    component: HomeComponent,
+    pathMatch : 'full'
   },
   {
     path: 'tin-tuc',
@@ -65,8 +66,18 @@ const routes: Routes = [
     component: ProductGridComponent
   },
   {
+    path: 'danh-muc-san-pham-g/:categoryId/:categoryName',
+    component: ProductGridComponent,
+    pathMatch: 'full'
+  },
+  {
     path: 'danh-muc-san-pham-l',
     component: ProductListComponent
+  },
+  {
+    path: 'danh-muc-san-pham-l/:categoryId/:categoryName',
+    component: ProductListComponent,
+    pathMatch: 'full',
   },
   {
     path: 'lich-su-mua-hang',

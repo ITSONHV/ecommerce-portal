@@ -24,7 +24,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
-
+import { MatTreeModule } from "@angular/material/tree";
+import { MatIconModule } from "@angular/material/icon";
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,8 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatTreeModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
