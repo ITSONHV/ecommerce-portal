@@ -2,24 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { MainService } from 'src/services/main.service';
 import { NestedTreeControl } from "@angular/cdk/tree";
 import { MatTreeNestedDataSource } from "@angular/material/tree";
-import { CategoryModel } from 'src/models/category.model';
+import { ICategory } from 'src/interfaces/ICategory';
+import { Params, Router, ActivatedRoute } from '@angular/router';
+import { ProductGridComponent } from '../product-grid/product-grid.component';
 @Component({
   selector: 'app-menu-top',
   templateUrl: './menu-top.component.html',
   styleUrls: ['./menu-top.component.css']
 })
 export class MenuTopComponent implements OnInit {
-
-  treeControl = new NestedTreeControl<any>((node) => node.sub_menu);
-  dataSource = new MatTreeNestedDataSource<CategoryModel>();
+  public productGrComponent : ProductGridComponent ;
   public isHidden = false;
   public menuObject : any;
   public subMenu : any;
   comment: string = "";
   public rootMenu : any;
-  public allMenu : Array<CategoryModel> = [];
+  public allMenu : Array<ICategory> = [];
 
-  constructor(private _mainsvc: MainService){
+  constructor(private _mainsvc: MainService, private router: Router,private activatedRoute: ActivatedRoute){
   }
   hasChild = (_: number, node: any) =>
     !!node.categoryName && node.categoryName.length > 0;
@@ -39,31 +39,16 @@ export class MenuTopComponent implements OnInit {
       this.subMenu = this.menuObject.filter((item: any)=>{
         return (item.categoryParent != 0 && item.categoryParent !=  null)
       });
-      this.rootMenu.forEach((element: any) => {
-        let subMenuObject  = new CategoryModel() ;
-        subMenuObject.id = element.id;
-        subMenuObject.categoryName = element.categoryName
-        subMenuObject.categoryParent = element.categoryParent;
-        subMenuObject.createdDate = element.createdDate;
-        subMenuObject.createdUser = element.createdUser;
-        subMenuObject.sortOrder = element.sortOrder;
-        subMenuObject.status = element.status;
-        subMenuObject.updatedDate = element.updatedDate;
-        subMenuObject.updatedUser = element.updatedUser;
+      this.rootMenu.forEach((element: ICategory) => {
+        let subMenuObject = element ;
         subMenuObject.submenu = this.subMenu.filter((item: any) => {
           return item.categoryParent == element.id;
         })
         this.allMenu.push(subMenuObject);
       });
-      //this.dataSource.data = this.listMenu(data.data,0);
-      console.log(this.menuObject);
-      console.log(this.subMenu );
-      console.log(this.allMenu );
     }
   )
-  
  }
-
  listMenu(data : any, id: any) : any{
     var hash = this.arr2hash(data, id);
     return this.hash2tree(hash, 0);
@@ -89,5 +74,17 @@ arr2hash(data: any, id: any): any {
   toggleHandle(): void{
     debugger
     this.isHidden = true;
+  }
+  handleMenu(event : any,category: any): void{
+    const queryParams: Params = { categoryId: category.id,categoryName: category.categoryName };
+    this.router.navigate(
+      ['danh-muc-san-pham-g'],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: queryParams, 
+        queryParamsHandling: 'merge'
+      }
+    )
+    event.preventDefault();
   }
 }

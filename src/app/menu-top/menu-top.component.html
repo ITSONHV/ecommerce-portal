@@ -14,7 +14,7 @@
           <!-- Shop by category -->
           <div class="mega-menu-category" *ngFor="let item of allMenu">
             <ul class="nav">
-              <li><a [routerLink]="['/danh-muc-san-pham-g',item.id,item.categoryName]">{{item.categoryName}}</a>
+              <li><a (click)="handleMenu($event,item)" [routerLink]="['/danh-muc-san-pham-g']">{{item.categoryName}}</a>
                   <div class="wrap-popup">
                     <div class="popup">
                       <div class="row">

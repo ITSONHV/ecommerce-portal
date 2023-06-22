@@ -12,24 +12,23 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product-grid.component.css']
 })
 export class ProductGridComponent implements OnInit {
-  public listProduct : any ;
+  public listProduct : any = [] ;
   public urlImg : string = environment.urlImg;
   public categoryId : any ;
   public categoryName: any ;
   constructor(private _svc : MainService,private _router: ActivatedRoute ) {
   }
   ngOnInit(): void {
-    this._router.paramMap.subscribe(params => {
-      this.categoryId = params.get('categoryId');
-      this.categoryName = params.get('categoryName');
+    this._router.queryParams.subscribe(params => {
+      this.categoryId = params['categoryId'];
+      this.categoryName = params['categoryName'];
+      if(this.categoryId != null && this.categoryId != ""){
+        this.getProductPagesbyCategoryId(this.categoryId);
+      }
+      else{
+        this.getProductPages();  
+      }
     });
-    
-    if(this.categoryId != null && this.categoryId != 0){
-      this.getProductPagesbyCategoryId(this.categoryId);
-    }
-    else{
-      this.getProductPages();  
-    }
   }
   getProductPages()  {
     this._svc.getProductPages().subscribe(
