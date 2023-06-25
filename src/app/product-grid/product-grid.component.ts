@@ -14,16 +14,16 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductGridComponent implements OnInit {
   public listProduct : any = [] ;
   public urlImg : string = environment.urlImg;
-  public categoryId : any ;
+  public urlSlug : any ;
   public categoryName: any ;
   constructor(private _svc : MainService,private _router: ActivatedRoute ) {
   }
   ngOnInit(): void {
     this._router.queryParams.subscribe(params => {
-      this.categoryId = params['categoryId'];
-      this.categoryName = params['categoryName'];
-      if(this.categoryId != null && this.categoryId != ""){
-        this.getProductPagesbyCategoryId(this.categoryId);
+      this.urlSlug = params['slug'];
+      this.categoryName = this._svc.categoryName;
+      if(this.urlSlug != null && this.urlSlug != ""){
+        this.getProductPagesByCategorySlug(this.urlSlug);
       }
       else{
         this.getProductPages();  
@@ -46,7 +46,17 @@ export class ProductGridComponent implements OnInit {
         this.listProduct = respones.data;
       },
       (err) =>{
-
+        console.log(err);
+      }
+    );
+  }
+  getProductPagesByCategorySlug(slug : string){
+    this._svc.getProductPagesByCategorySlug(slug).subscribe(
+      (respones: ObjectModel)=>{
+        this.listProduct = respones.data;
+      },
+      (err) =>{
+        console.log(err);
       }
     );
   }

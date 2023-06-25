@@ -32,6 +32,8 @@ export class MenuTopComponent implements OnInit {
  getMenu(){
   this._mainsvc.getCategories().subscribe(
     (data: any) => {
+      console.log(data);
+      
       this.menuObject = {... data}.data;
       this.rootMenu = this.menuObject.filter((item: any)=>{
         return item.categoryParent == 0 || item.categoryParent ==  null
@@ -76,7 +78,8 @@ arr2hash(data: any, id: any): any {
     this.isHidden = true;
   }
   handleMenu(event : any,category: any): void{
-    const queryParams: Params = { categoryId: category.id,categoryName: category.categoryName };
+    const queryParams: Params = {slug: category.urlSlug };
+    this._mainsvc.categoryName=category.categoryName;
     this.router.navigate(
       ['danh-muc-san-pham-g'],
       {

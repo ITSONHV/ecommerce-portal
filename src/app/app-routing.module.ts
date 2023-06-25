@@ -66,18 +66,8 @@ const routes: Routes = [
     component: ProductGridComponent
   },
   {
-    path: 'danh-muc-san-pham-g/:categoryId/:categoryName',
-    component: ProductGridComponent,
-    pathMatch: 'full'
-  },
-  {
     path: 'danh-muc-san-pham-l',
     component: ProductListComponent
-  },
-  {
-    path: 'danh-muc-san-pham-l/:categoryId/:categoryName',
-    component: ProductListComponent,
-    pathMatch: 'full',
   },
   {
     path: 'lich-su-mua-hang',

@@ -5,7 +5,7 @@
           <ul>
             <li class="home"> <a title="Go to Home Page" [routerLink]="['/']" routerLinkActive="router-link-active" >Home</a><span>&raquo;</span></li>
             <li class=""> <a title="Go to Home Page" href="shop_grid.html">Fashion</a><span>&raquo;</span></li>
-            <li><strong>Lorem Ipsum is simply</strong></li>
+            <li><strong>{{product.productName}}</strong></li>
           </ul>
         </div>
       </div>
@@ -20,14 +20,10 @@
           <div class="product-view-area">
             <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
               <div class="icon-sale-label sale-left">Sale</div>
-              <div class="large-image"> <a href="./../assets/images/products/product-1.jpg" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" src="./../assets/images/products/product-1.jpg" alt="products"> </a> </div>
+              <div class="large-image"> <a [href]="urlImg + imgfirst" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" [src]="urlImg + imgfirst" alt="products"> </a> </div>
               <div class="flexslider flexslider-thumb">
-                <ul class="previews-list slides">
-                  <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 2"/></a></li>
-                  <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 1"/></a></li>
-                  <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 1"/></a></li>
-                  <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 2"/></a></li>
-                  <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 2"/></a></li>
+                <ul class="previews-list slides" *ngFor="let item of product?.productImages ;  let i = index ">
+                  <li *ngIf="i > 0"><a [href]='urlImg + item.imageUrl' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img [src]="urlImg + item.imageUrl" alt = "Thumbnail 2"/></a></li>
                 </ul>
               </div>
               <!-- end: more-./../assets/images --> 
@@ -35,7 +31,7 @@
             </div>
             <div class="col-xs-12 col-sm-7 col-lg-7 col-md-7 product-details-area">
               <div class="product-name">
-                <h1>Lorem Ipsum is simply</h1>
+                <h1>{{product.productName}}</h1>
               </div>
               <div class="price-box">
                 <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $329.99 </span> </p>
@@ -47,9 +43,8 @@
                 <p class="availability in-stock pull-right">Availability: <span>In Stock</span></p>
               </div>
               <div class="short-description">
-                <h2>Quick Overview</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Donec non est at libero vulputate rutrum.
-                <p> Vivamus adipiscing nisl ut dolor dignissim semper. Class aptent taciti sociosqu ad litora torquent per conubia nostra.</p>
+                <h2>Mô tả</h2>
+                <p>{{product.content}}</p>
               </div>
               <div class="product-color-size-area">
                 <div class="color-area">

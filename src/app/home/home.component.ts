@@ -25,9 +25,10 @@ export class HomeComponent implements OnInit {
     this._svc.getProductPages().subscribe(
       (respones: ObjectModel)=>{
         this.listProduct = respones.data;
+        console.log(this.listProduct);
       },
       (err) =>{
-
+        console.log(err);
       }
     );
   }

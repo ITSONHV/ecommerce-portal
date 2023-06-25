@@ -6,7 +6,7 @@
           <ul>
             <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Home</a><span>&raquo;</span></li>
             <li class=""> <a title="Go to Home Page" [routerLink]="['/danh-muc-san-pham-g']">Smartphone</a><span>&raquo;</span></li>
-            <li><strong>iPhone 6</strong></li>
+            <li><strong>{{categoryName}}</strong></li>
           </ul>
         </div>
       </div>
@@ -82,7 +82,7 @@
                     <div class="item-inner">
                       <div class="product-thumbnail">
                         <div class="icon-new-label new-left">New</div>
-                        <div class="pr-img-area"> <a [title]="item.productName" [routerLink]="['/chi-tiet']">
+                        <div class="pr-img-area"> <a [title]="item.productName" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" [src]="[urlImg + item.imageUrl]" alt="HTML template"> <img class="hover-img" src="{{urlImg + item.imageUrl}}" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -95,11 +95,15 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']">{{item.productName}}</a> </div>
+                          <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
+                               <ng-container *ngIf="item.promotionPrice == 0">
+                                <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
+                                <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price | currency: "VND" }} </span> </p>
+                              </ng-container>
                             </div>
                             <div class="pro-action">
                               <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
@@ -351,13 +355,13 @@
               <div class="carousel-inner" role="listbox">
                 <div class="item active"> <img src="./../assets/images/add-slide1.jpg" alt="slide1">
                   <div class="carousel-caption">
-                    <h3><a [routerLink]="['/chi-tiet']" title=" Sample Product">Sale Up to 50% off</a></h3>
+                    <h3><a [routerLink]="['/chi-tiet']"  title=" Sample Product">Sale Up to 50% off</a></h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <a href="#" class="info">shopping Now</a> </div>
                 </div>
                 <div class="item"> <img src="./../assets/images/add-slide2.jpg" alt="slide2">
                   <div class="carousel-caption">
-                    <h3><a [routerLink]="['/chi-tiet']" title=" Sample Product">Smartwatch Collection</a></h3>
+                    <h3><a [routerLink]="['/chi-tiet']"  title=" Sample Product">Smartwatch Collection</a></h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <a href="#" class="info">All Collection</a> </div>
                 </div>
@@ -379,17 +383,17 @@
             <div class="block-content">
               <ul>
                 <li class="item">
-                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']" title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
+                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
                   <div class="products-block-right">
-                    <p class="product-name"> <a [routerLink]="['/chi-tiet']">Lorem ipsum dolor sit amet Consectetur</a> </p>
+                    <p class="product-name"> <a [routerLink]="['/chi-tiet']" >Lorem ipsum dolor sit amet Consectetur</a> </p>
                     <span class="price">$19.99</span>
                     <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
                   </div>
                 </li>
                 <li class="item">
-                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']" title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
+                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
                   <div class="products-block-right">
-                    <p class="product-name"> <a [routerLink]="['/chi-tiet']">Consectetur utes anet adipisicing elit</a> </p>
+                    <p class="product-name"> <a [routerLink]="['/chi-tiet']" >Consectetur utes anet adipisicing elit</a> </p>
                     <span class="price">$89.99</span>
                     <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                   </div>

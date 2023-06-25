@@ -47,7 +47,7 @@
         <div class="jtv-best-sale-list">
           <div class="wpb_wrapper">
             <div class="best-title text-left">
-              <h2>Special Offers</h2>
+              <h2>Ưu đãi đặc biệt</h2>
             </div>
           </div>
           <div class="slider-items-products">
@@ -57,7 +57,7 @@
                   <div class="item-inner">
                     <div class="product-thumbnail">
                       <div class="icon-new-label new-left">New</div>
-                      <div class="pr-img-area"> <a title="{{item.productName}}" routerLink="/chi-tiet">
+                      <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                         <figure> <img class="first-img" [src]="urlImg + item.imageUrl" alt="HTML template"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="HTML template"></figure>
                         </a></div>
                       <div class="pr-info-area">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a [title]="item.productName" routerLink="/chi-tiet">{{item.productName}}</a> </div>
+                        <div class="item-title"> <a [title]="item.productName" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
                         <div class="item-content">
                           <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                           <div class="item-price">
@@ -92,7 +92,7 @@
                 <!-- <div class="product-item">
                   <div class="item-inner">
                     <div class="product-thumbnail">
-                      <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                         <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                         </a> </div>
                       <div class="pr-info-area">
@@ -105,7 +105,7 @@
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                         <div class="item-content">
                           <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                           <div class="item-price">
@@ -125,7 +125,7 @@
                 <div class="product-item">
                   <div class="item-inner">
                     <div class="product-thumbnail">
-                      <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                         <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                         </a> </div>
                       <div class="pr-info-area">
@@ -138,7 +138,7 @@
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                         <div class="item-content">
                           <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                           <div class="item-price">
@@ -160,7 +160,7 @@
                     <div class="icon-sale-label sale-left">Sale</div>
                     <div class="icon-new-label new-right">New</div>
                     <div class="product-thumbnail">
-                      <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                         <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                         </a> </div>
                       <div class="pr-info-area">
@@ -173,7 +173,7 @@
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                         <div class="item-content">
                           <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                           <div class="item-price">
@@ -191,7 +191,7 @@
                   <div class="item-inner">
                     <div class="product-thumbnail">
                       <div class="icon-new-label new-left">New</div>
-                      <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                         <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                         </a> </div>
                       <div class="pr-info-area">
@@ -204,7 +204,7 @@
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                         <div class="item-content">
                           <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                           <div class="item-price">
@@ -235,7 +235,7 @@
   <div class="container">
     <div class="home-tab">
       <div class="tab-title text-left">
-        <h2>Best selling</h2>
+        <h2>Sản phẩm bán chạy nhất</h2>
         <ul class="nav home-nav-tabs home-product-tabs">
           <li class="active"><a href="#computer" data-toggle="tab" aria-expanded="false">Computer</a></li>
           <li><a href="#smartphone" data-toggle="tab" aria-expanded="false">Smartphone</a></li>
@@ -248,12 +248,12 @@
           <div class="featured-pro">
             <div class="slider-items-products">
               <div id="computer-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4">
+                <div class="slider-items slider-width-col4" *ngFor="let item of listProduct?.data">
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
                         <div class="icon-new-label new-left">New</div>
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -266,171 +266,9 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="icon-sale-label sale-left">Sale</div>
-                      <div class="icon-new-label new-right">New</div>
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="icon-new-label new-left">New</div>
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
                             </div>
@@ -451,13 +289,13 @@
           <div class="top-sellers-pro">
             <div class="slider-items-products">
               <div id="smartphone-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4 ">
+                <div class="slider-items slider-width-col4 " *ngFor="let item of listProduct?.data">
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
                         <div class="icon-sale-label sale-left">Sale</div>
                         <div class="icon-new-label new-right">New</div>
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -470,7 +308,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -488,7 +326,7 @@
                     <div class="item-inner">
                       <div class="product-thumbnail">
                         <div class="icon-sale-label sale-left">Sale</div>
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -501,7 +339,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -521,7 +359,7 @@
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -534,7 +372,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -554,7 +392,7 @@
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -567,7 +405,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -584,7 +422,7 @@
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -597,7 +435,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -617,7 +455,7 @@
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -630,7 +468,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -653,13 +491,13 @@
           <div class="top-sellers-pro">
             <div class="slider-items-products">
               <div id="watches-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4 ">
+                <div class="slider-items slider-width-col4 " *ngFor="let item of listProduct?.data">
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
                         <div class="icon-sale-label sale-left">Sale</div>
                         <div class="icon-new-label new-right">New</div>
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -672,7 +510,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -689,7 +527,7 @@
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -702,7 +540,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -719,7 +557,7 @@
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -732,7 +570,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -752,7 +590,7 @@
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -765,7 +603,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -788,13 +626,13 @@
           <div class="top-sellers-pro">
             <div class="slider-items-products">
               <div id="photo-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4 ">
+                <div class="slider-items slider-width-col4 " *ngFor="let item of listProduct?.data">
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
                         <div class="icon-sale-label sale-left">Sale</div>
                         <div class="icon-new-label new-right">New</div>
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -807,7 +645,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -824,7 +662,7 @@
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -837,7 +675,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -854,7 +692,7 @@
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -867,7 +705,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -887,7 +725,7 @@
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                           <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
@@ -900,7 +738,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
@@ -938,18 +776,9 @@
         </div>
         <div class="col-md-5 hot-pr-img-area">
           <div id="daily-deal-slider" class="product-flexslider hidden-buttons">
-            <div class="slider-items slider-width-col4 ">
-              <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
+            <div class="slider-items slider-width-col4 " *ngFor="let item of listProduct?.data">
+              <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
                 <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                </a> </div>
-              <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
-                <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> </figure>
-                </a> </div>
-              <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
-                <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> </figure>
-                </a> </div>
-              <div class="pr-img-area"> <a title="Product title here" routerLink="/chi-tiet">
-                <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> </figure>
                 </a> </div>
             </div>
           </div>
@@ -983,14 +812,14 @@
             </div>
             <div class="slider-items-products">
               <div id="toprate-products-slider" class="product-flexslider">
-                <div class="slider-items">
+                <div class="slider-items" *ngFor="let item of listProduct?.data">
                   <ul class="products-grid">
                     <li class="item">
                       <div class="item-inner">
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
@@ -1011,7 +840,7 @@
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$99.99</span> </span> </div>
@@ -1034,7 +863,7 @@
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
@@ -1055,7 +884,7 @@
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$99.99</span> </span> </div>
@@ -1078,7 +907,7 @@
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
@@ -1099,7 +928,7 @@
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box">
@@ -1148,14 +977,14 @@
             </div>
             <div class="slider-items-products">
               <div id="new-products-slider" class="product-flexslider">
-                <div class="slider-items">
+                <div class="slider-items" *ngFor="let item of listProduct?.data">
                   <ul class="products-grid">
                     <li class="item">
                       <div class="item-inner">
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
@@ -1176,7 +1005,7 @@
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box">
@@ -1202,7 +1031,7 @@
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
@@ -1223,7 +1052,7 @@
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box">
@@ -1249,7 +1078,7 @@
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
@@ -1270,7 +1099,7 @@
                         <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
                         <div class="item-info">
                           <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" routerLink="/chi-tiet">Product title here </a> </div>
+                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                             <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box">
