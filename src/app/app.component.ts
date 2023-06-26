@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { CategoryModel } from 'src/models/category.model';
+import { Component, OnInit,ViewChild  } from '@angular/core';
 import { MainService } from 'src/services/main.service';
 
 @Component({
@@ -8,9 +7,9 @@ import { MainService } from 'src/services/main.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit  {
-  public expenseObj : CategoryModel |any;
   constructor(private _mainsvc: MainService){}
   ngOnInit(): void {
+    
    };
   title = 'ecommerce-portal';
 }

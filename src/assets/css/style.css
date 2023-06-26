@@ -206,10 +206,10 @@ ul.inline, ol.inline {
 }
 ul.inline>li, ol.inline>li {
 	display: inline-block;
-*display:inline;
+	display:inline;
 	padding-right: 5px;
 	padding-left: 5px;
-*zoom:1
+	zoom:1
 }
 ul ul, ol ul {
 	list-style-type: circle
@@ -4158,7 +4158,7 @@ html {
 }
 .cms-home-page .mega-menu-category {
 	width: 100%;
-	display: inline-block !important;
+	/* display: inline-block !important; */
 }
 .mega-menu-category ul {
 	padding: 0px;
@@ -7297,7 +7297,7 @@ label[for="rememberme"] {
 	list-style-type: none; margin-top:18px;
 }
 #message-box-conact{ margin-top:18px;}
-.900-list>li>a {
+	.list>li>a {
 	font-weight: 700;
 	text-transform: uppercase
 }
@@ -7990,7 +7990,7 @@ label[for="rememberme"] {
 .on-sale-product .owl-theme .owl-controls .owl-page {
 	display: inline-block;
 	zoom: 1;
- *display: inline;/*IE7 life-saver */
+ 	display: inline;/*IE7 life-saver */
 }
 .on-sale-product .owl-theme .owl-controls .owl-page span {
 	display: block;
