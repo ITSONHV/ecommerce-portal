@@ -714,7 +714,7 @@ color: #333333;
 	line-height: 34px;
 	padding: 4px 15px 0px;
 	display: inline-block;
-	background: #e83f33;
+	background: #8d5652;
 	border: none;
 	color: #fff;
 	border-left: 0px #e8e6e2 solid;
@@ -722,7 +722,7 @@ color: #333333;
 	right: 0px;
 }
 #search button:hover {
-	background: #e83f33;
+	background: #8d5652;
 	border: none;
 	color: #fff
 }
@@ -3404,7 +3404,7 @@ nav {
 	position: relative;
 	margin: auto;
 	width: 100%;
-	background: #e83f33;
+	background: #8d5652;
 }
 .jtv-sticky-menu {
 	position: fixed;
@@ -3413,7 +3413,7 @@ nav {
 	display: block;
 	top: 0px;
 	width: 100%;
-	background: #e83f33;
+	background: #8d5652;
 	height: 45px;
 	transition: all .3s ease-out 0s;
 	left: 0px;
@@ -4092,7 +4092,7 @@ html {
 }
 .menu > li > a:hover, .menu > li > a:focus, .menu > li.active > a {
 	text-decoration: none;
-	color: #e83f33;
+	color: #8d5652;
 }
 /* Mega Menu */
 .mega-container {
@@ -4105,7 +4105,7 @@ html {
 	cursor: pointer;
 	display: inline-block;
 	font-size: 28px;
-	background: #cb2d22;
+	background: #8d5652;
 	width: 100%;
 	margin-top: -5px;
 }
@@ -4136,7 +4136,7 @@ html {
 .mega-menu-title h3:after {
 	content: "\f038";
 	display: inline-block;
-	background: #cb2d22;
+	background: #8d5652;
 	width: 50px;
 	height: 40px;
 	position: absolute;
@@ -4151,7 +4151,7 @@ html {
 }
 
 .mega-menu-category {
-	display: none;
+	/* display: none; */
 	background: #fff;
 	border: 1px solid #e5e5e5;
 	box-shadow: 0 0px 0px 0 rgba(0,0,0,.2);

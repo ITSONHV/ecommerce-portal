@@ -15,9 +15,11 @@ export class ProductDetailComponent implements OnInit {
   public product : any;
   public urlImg : string = environment.urlImg;
   public imgfirst : string;
+  public categoryName = "";
   constructor(private _svc : MainService,private _router: ActivatedRoute) {
   }
   ngOnInit(): void {
+    this.categoryName = this._svc.categoryName;
     this._router.queryParams.subscribe(params => {
       this.slug = params['slug'];
       this.getProductbyProductNameSlug(this.slug)

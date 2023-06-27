@@ -6,8 +6,8 @@
         <div class="col-xs-12">
           <ul>
             <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Home</a><span>&raquo;</span></li>
-            <li class=""> <a title="Go to Home Page" [routerLink]="['/danh-muc-san-pham-g']">Smartphone</a><span>&raquo;</span></li>
-            <li><strong>iPhone 6</strong></li>
+            <li class=""> <a title="Go to Home Page" [routerLink]="['/danh-muc-san-pham-l']">{{categoryName}}</a><span>&raquo;</span></li>
+            <li><strong>{{categoryName}}</strong></li>
           </ul>
         </div>
       </div>
@@ -46,7 +46,7 @@
           </div>
           <div class="shop-inner">
             <div class="page-title">
-              <h2>iPhone 6</h2>
+              <h2>{{categoryName}}</h2>
             </div>
             <div class="toolbar">
               <div class="view-mode">
@@ -77,29 +77,25 @@
               </div>
             </div>
             <div class="product-list-area">
-              <ul class="products-list" id="products-list">
+              <ul class="products-list" *ngFor="let item of listProduct?.data" id="products-list">
                 <li class="item ">
                   <div class="product-img">
                     <div class="icon-sale-label sale-left">Sale</div>
-                    <a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">
-                    <figure> <img class="small-image" src="./../assets/images/products/product-1.jpg" alt="Ipsums Dolors Untra"></figure>
+                    <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" [title]="item.productName">
+                    <figure> <img class="small-image" src="{{urlImg + item.imageUrl}}" alt="{{item.productName}}"></figure>
                     </a> </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
+                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" [title]="item.productName">{{item.productName}}</a></h2>
                     <div class="ratings">
                       <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
                       <p class="rating-links"> <a href="#/">4 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
                     </div>
                     <div class="price-box">
-                      <p class="special-price"> <span class="price-label"></span> <span class="price"> $222.99 </span> </p>
-                      <p class="old-price"> <span class="price-label"></span> <span class="price"> $442.99 </span> </p>
+                      <p class="special-price" > <span class="price-label"></span> <span class="price">{{item.promotionPrice | currency: "VND"}}</span> </p>
+                      <p class="old-price" *ngIf="item.promotionPrice !== 0"> <span class="price-label"></span> <span class="price">{{item.price | currency: "VND" }} </span> </p>
                     </div>
                     <div class="desc std">
-                      <p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, 
-                        gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. 
-                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                        cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl 
-                        ut dolor dignissim semper. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']">Learn More</a> </p>
+                      <p>{{item.description}} <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Learn More</a> </p>
                     </div>
                     <div class="actions">
                       <button class="button cart-button" title="Add to Cart" type="button"><i class="fa fa-shopping-basket"></i><span>Add to Cart</span></button>
@@ -110,12 +106,12 @@
                     </div>
                   </div>
                 </li>
-                <li class="item ">
-                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">
+                <!-- <li class="item ">
+                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">
                     <figure> <img class="small-image" src="./../assets/images/products/product-1.jpg" alt="Ipsums Dolors Untra"></figure>
                     </a> </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
+                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
                     <div class="ratings">
                       <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                       <p class="rating-links"> <a href="#/">3 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
@@ -123,7 +119,7 @@
                     <div class="price-box"> <span class="regular-price"> <span class="price">$99.99</span> </span> </div>
                     <div class="desc std">
                       <p>Aliquam et metus pharetra, bibendum massa nec, fermentum odio. Nunc id leo ultrices, mollis ligula in, finibus tortor. Mauris eu dui ut.
-                      <p> Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']">Learn More</a> </p>
+                      <p> Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu ex. Aenean posuere libero eu augue condimentum rhoncus. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Learn More</a> </p>
                     </div>
                     <div class="actions">
                       <button class="button cart-button" title="Add to Cart" type="button"><i class="fa fa-shopping-basket"></i><span>Add to Cart</span></button>
@@ -137,17 +133,17 @@
                 <li class="item ">
                   <div class="product-img">
                     <div class="icon-new-label new-right">New</div>
-                    <a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">
+                    <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">
                     <figure> <img class="small-image" src="./../assets/images/products/product-1.jpg" alt="Ipsums Dolors Untra"></figure>
                     </a> </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
+                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
                     <div class="ratings">
                       <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                       <p class="rating-links"> <a href="#/">0 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
                     </div>
                     <div class="price-box"> <span class="regular-price"> <span class="price">$699.99</span> </span> </div>
-                    <div class="desc std">Donec Vitae Hendrerit Arcu, Sit Amet Faucibus Nisl. Cras Pretium Arcu Ex. Aenean Posuere Libero Eu Augue Condimentum Rhoncus. Praesent Ornare Tortor Donec Vitae Hendrerit Arcu, Sit Amet Faucibus Nisl. Praesent ornare tortor Aenean posuere libero eu augue condimentum rhoncus. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']">Learn More</a> </div>
+                    <div class="desc std">Donec Vitae Hendrerit Arcu, Sit Amet Faucibus Nisl. Cras Pretium Arcu Ex. Aenean Posuere Libero Eu Augue Condimentum Rhoncus. Praesent Ornare Tortor Donec Vitae Hendrerit Arcu, Sit Amet Faucibus Nisl. Praesent ornare tortor Aenean posuere libero eu augue condimentum rhoncus. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Learn More</a> </div>
                     <div class="actions">
                       <button class="button cart-button" title="Add to Cart" type="button"><i class="fa fa-shopping-basket"></i><span>Add to Cart</span></button>
                       <ul>
@@ -158,17 +154,17 @@
                   </div>
                 </li>
                 <li class="item ">
-                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">
+                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">
                     <figure> <img class="small-image" src="./../assets/images/products/product-1.jpg" alt="Ipsums Dolors Untra"></figure>
                     </a> </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
+                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
                     <div class="ratings">
                       <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                       <p class="rating-links"> <a href="#/">0 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
                     </div>
                     <div class="price-box"> <span class="regular-price"> <span class="price">$399.99</span> </span> </div>
-                    <div class="desc std">Aliquam quis dui at orci mattis tincidunt et vel risus. In odio quam, vestibulum non faucibus sit amet, posuere id lectus. In odio quam, vestibulum non faucibus sit amet, posuere id lectus. Nulla nunc felis, condimentum ac congue blandit, mattis a mauris. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']">Learn More</a> </div>
+                    <div class="desc std">Aliquam quis dui at orci mattis tincidunt et vel risus. In odio quam, vestibulum non faucibus sit amet, posuere id lectus. In odio quam, vestibulum non faucibus sit amet, posuere id lectus. Nulla nunc felis, condimentum ac congue blandit, mattis a mauris. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Learn More</a> </div>
                     <div class="actions">
                       <button class="button cart-button" title="Add to Cart" type="button"><i class="fa fa-shopping-basket"></i><span>Add to Cart</span></button>
                       <ul>
@@ -179,17 +175,17 @@
                   </div>
                 </li>
                 <li class="item ">
-                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">
+                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">
                     <figure> <img class="small-image" src="./../assets/images/products/product-1.jpg" alt="Ipsums Dolors Untra"></figure>
                     </a> </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
+                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
                     <div class="ratings">
                       <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                       <p class="rating-links"> <a href="#/">0 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
                     </div>
                     <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                    <div class="desc std">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']">Learn More</a> </div>
+                    <div class="desc std">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Learn More</a> </div>
                     <div class="actions">
                       <button class="button cart-button" title="Add to Cart" type="button"><i class="fa fa-shopping-basket"></i><span>Add to Cart</span></button>
                       <ul>
@@ -200,11 +196,11 @@
                   </div>
                 </li>
                 <li class="item ">
-                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">
+                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">
                     <figure> <img class="small-image" src="./../assets/images/products/product-1.jpg" alt="Ipsums Dolors Untra"></figure>
                     </a> </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
+                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
                     <div class="ratings">
                       <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                       <p class="rating-links"> <a href="#/">0 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
@@ -214,7 +210,7 @@
                       <p>Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi
                         accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a
                         ornare odio. Sed non mauris vitae erat consequat auctor eu in elit.</p>
-                      <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']">Learn More</a> </p>
+                      <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Learn More</a> </p>
                     </div>
                     <div class="actions">
                       <button class="button cart-button" title="Add to Cart" type="button"><i class="fa fa-shopping-basket"></i><span>Add to Cart</span></button>
@@ -226,11 +222,11 @@
                   </div>
                 </li>
                 <li class="item ">
-                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">
+                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">
                     <figure> <img class="small-image" src="./../assets/images/products/product-1.jpg" alt="Ipsums Dolors Untra"></figure>
                     </a> </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
+                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
                     <div class="ratings">
                       <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                       <p class="rating-links"> <a href="#/">0 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
@@ -239,7 +235,7 @@
                     <div class="desc std">
                       <p>Vivamus dignissim nisl eu euismod ullamcorper. Donec 
                         pellentesque diam id est tristique vestibulum. Donec eget feugiat ante. 
-                        Integerarcu libero, dictum nec congue sed, faucibus sit amet lectus. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']">Learn More</a> </p>
+                        Integerarcu libero, dictum nec congue sed, faucibus sit amet lectus. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Learn More</a> </p>
                     </div>
                     <div class="actions">
                       <button class="button cart-button" title="Add to Cart" type="button"><i class="fa fa-shopping-basket"></i><span>Add to Cart</span></button>
@@ -251,11 +247,11 @@
                   </div>
                 </li>
                 <li class="item ">
-                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">
+                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">
                     <figure> <img class="small-image" src="./../assets/images/products/product-1.jpg" alt="Ipsums Dolors Untra"></figure>
                     </a> </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
+                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
                     <div class="ratings">
                       <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                       <p class="rating-links"> <a href="#/">0 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
@@ -263,7 +259,7 @@
                     <div class="price-box"> <span class="regular-price"> <span class="price">$299.99</span> </span> </div>
                     <div class="desc std">Morbi accumsan ipsum velit. Nam
                       nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris itae 
-                      erat conuat auctor eu in elitlass aptent taciti sociosqu ad litora. Morbi pretium sed velit in tempus. Nullam nec aliquam lorem. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']">Learn More</a> </div>
+                      erat conuat auctor eu in elitlass aptent taciti sociosqu ad litora. Morbi pretium sed velit in tempus. Nullam nec aliquam lorem. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Learn More</a> </div>
                     <div class="actions">
                       <button class="button cart-button" title="Add to Cart" type="button"><i class="fa fa-shopping-basket"></i><span>Add to Cart</span></button>
                       <ul>
@@ -274,17 +270,17 @@
                   </div>
                 </li>
                 <li class="item ">
-                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">
+                  <div class="product-img"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">
                     <figure> <img class="small-image" src="./../assets/images/products/product-1.jpg" alt="Ipsums Dolors Untra"></figure>
                     </a> </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
+                    <h2 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}" title="Ipsums Dolors Untra">Ipsums Dolors Untra</a></h2>
                     <div class="ratings">
                       <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                       <p class="rating-links"> <a href="#/">0 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
                     </div>
                     <div class="price-box"> <span class="regular-price" > <span class="price">$79.00</span> </span> </div>
-                    <div class="desc std">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ultrices sollicitudin justo, eget mollis justo semper vel. Duis tempor eget leo eget pretium. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']">Learn More</a> </div>
+                    <div class="desc std">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ultrices sollicitudin justo, eget mollis justo semper vel. Duis tempor eget leo eget pretium. <a class="link-learn" title="Learn More" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Learn More</a> </div>
                     <div class="actions">
                       <button class="button cart-button" title="Add to Cart" type="button"><i class="fa fa-shopping-basket"></i><span>Add to Cart</span></button>
                       <ul>
@@ -293,7 +289,7 @@
                       </ul>
                     </div>
                   </div>
-                </li>
+                </li> -->
               </ul>
             </div>
             <div class="pagination-area">
@@ -531,7 +527,7 @@
                 </div>
                 <div class="item"> <img src="./../assets/images/add-slide3.jpg" alt="slide3">
                   <div class="carousel-caption">
-                    <h3><a [routerLink]="['/chi-tiet']" title=" Sample Product">Summer Sale</a></h3>
+                    <h3><a [routerLink]="['/chi-tiet']"  title=" Sample Product">Summer Sale</a></h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                   </div>
                 </div>
@@ -547,17 +543,17 @@
             <div class="block-content">
               <ul>
                 <li class="item">
-                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']" title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
+                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
                   <div class="products-block-right">
-                    <p class="product-name"> <a [routerLink]="['/chi-tiet']">Lorem ipsum dolor sit amet Consectetur</a> </p>
+                    <p class="product-name"> <a [routerLink]="['/chi-tiet']" >Lorem ipsum dolor sit amet Consectetur</a> </p>
                     <span class="price">$19.99</span>
                     <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
                   </div>
                 </li>
                 <li class="item">
-                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']" title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
+                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
                   <div class="products-block-right">
-                    <p class="product-name"> <a [routerLink]="['/chi-tiet']">Consectetur utes anet adipisicing elit</a> </p>
+                    <p class="product-name"> <a [routerLink]="['/chi-tiet']" >Consectetur utes anet adipisicing elit</a> </p>
                     <span class="price">$89.99</span>
                     <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                   </div>
