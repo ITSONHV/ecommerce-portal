@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+;(function(jQuery) {
     "use strict";
     /******************************************
        Newsletter popup
@@ -28,7 +28,7 @@ jQuery(document).ready(function() {
             CollapseMenu: !0,
             ClassName: "mobile-menu"
 
-        }),
+        });
 
         /******************************************
         	Our clients slider
@@ -45,7 +45,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: false,
             autoPlay: true
-        }),
+        });
 
  /******************************************
            computer slider
@@ -62,7 +62,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: !1,
             autoPlay: false
-        }),
+        });
 		
         /******************************************
           smartphone slider
@@ -79,7 +79,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: !1,
             autoPlay: false
-        }),
+        });
 
 
         /******************************************
@@ -97,7 +97,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: !1,
             autoPlay: true
-        }),
+        });
 
         /******************************************
         	daily deal slider
@@ -114,7 +114,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: !1,
             autoPlay: true
-        }),
+        });
 		
 		/******************************************
         	Photo slider
@@ -131,7 +131,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: !1,
             autoPlay: true
-        }),
+        });
 
         /******************************************
         	best sale slider
@@ -177,7 +177,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: !1,
             autoPlay: false
-        }),
+        });
 
 
         /******************************************
@@ -212,7 +212,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: !1,
             transitionStyle: "backSlide"
-        }),
+        });
         /******************************************
         	testimonials slider
         ******************************************/
@@ -229,7 +229,7 @@ jQuery(document).ready(function() {
             pagination: false,
             autoPlay: true,
             singleItem: true
-        }),
+        });
 
         /******************************************
         	Mega Menu
@@ -296,7 +296,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: !1,
             autoPlay: false
-        }),
+        });
 
         /******************************************
         	Related product slider
@@ -313,7 +313,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: !1,
             autoPlay: true
-        }),
+        });
 
         /******************************************
         	Related posts
@@ -330,7 +330,7 @@ jQuery(document).ready(function() {
             slideSpeed: 500,
             pagination: !1,
             autoPlay: true
-        }),
+        });
 
 
         /******************************************
@@ -356,7 +356,7 @@ jQuery(document).ready(function() {
                     t.closest('.slider-range').find('.amount-range-price').html(result);
                 }
             });
-        })
+        });
 
     /******************************************
         Footer expander
@@ -456,7 +456,7 @@ jQuery(document).ready(function() {
         });
     }
 
-})
+})(jQuery);
 
 
 

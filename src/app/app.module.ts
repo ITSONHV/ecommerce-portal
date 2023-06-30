@@ -26,10 +26,12 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { MatTreeModule } from "@angular/material/tree";
 import { MatIconModule } from "@angular/material/icon";
+import { HomeProSaleComponent } from './home/home-pro-sales/home-pro-sale.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    HomeProSaleComponent,
     HeaderComponent,
     FooterComponent,
     BlogComponent,
@@ -59,6 +61,6 @@ import { MatIconModule } from "@angular/material/icon";
     MatIconModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
