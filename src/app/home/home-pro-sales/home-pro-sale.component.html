@@ -1,0 +1,36 @@
+<div class="product-item"  *ngFor="let item of listProduct?.data">
+    <div class="item-inner">
+      <div class="product-thumbnail">
+        <div class="icon-new-label new-left">New</div>
+        <div class="pr-img-area"> <a title="{{item.productName}}">
+          <figure> <img class="first-img" [src]="urlImg + item.imageUrl" alt="HTML template"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="HTML template"></figure>
+          </a></div>
+        <div class="pr-info-area">
+          <div class="pr-button">
+            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
+            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
+            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
+          </div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="info-inner">
+          <div class="item-title"> <a [title]="item.productName">{{item.productName}}</a> </div>
+          <div class="item-content">
+            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+            <div class="item-price">
+              <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price"> <span class="price">{{item.price }}</span> </span> 
+                <ng-container *ngIf="item.promotionPrice == 0">
+                  <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice }} </span> </p>
+                  <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price }} </span> </p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="pro-action">
+              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
