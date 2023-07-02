@@ -8,5 +8,6 @@ export const AppConfigs = {
         getProductPagesbyCategorySlug : "Product/paging?UrlCategorySlug=",
         getProductbyProductNameSlug : "Product/by-slug?slug=",
         getProductbyProductId : "ProductProduct/by-id?id=",
+        getProductBestSales : "Product/paging?PageSize=8&Page=1&IsBestSelling=1",
     }
 }

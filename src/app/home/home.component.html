@@ -4,22 +4,48 @@
   <div class="container">
     <div class="row">
       <div class="col col-md-3 col-sm-6 col-xs-12">
-        <div>
-          
+        <div class="block-wrapper ship">
+          <div class="text-des">
+            <div class="icon-wrapper"><i class="fa fa-paper-plane"></i></div>
+            <div class="service-wrapper">
+              <h3>World-Wide Shipping</h3>
+              <p>On order over $99</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col col-md-3 col-sm-6 col-xs-12 ">
-        <div>
-          
+        <div class="block-wrapper return">
+          <div class="text-des">
+            <div class="icon-wrapper"><i class="fa fa-rotate-right"></i></div>
+            <div class="service-wrapper">
+              <h3>30 Days Return</h3>
+              <p>Moneyback guarantee </p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col col-md-3 col-sm-6 col-xs-12">
-        <div >
-          
+        <div class="block-wrapper support">
+          <div class="text-des">
+            <div class="icon-wrapper"><i class="fa fa-umbrella"></i></div>
+            <div class="service-wrapper">
+              <h3>Support 24/7</h3>
+              <p>Call us: ( +123 ) 456 789</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col col-md-3 col-sm-6 col-xs-12">
-        <div>
+        <div class="block-wrapper user">
+          <div class="text-des">
+            <div class="icon-wrapper"><i class="fa fa-tags"></i></div>
+            <div class="service-wrapper">
+              <h3>Member Discount</h3>
+              <p>25% on order over $199</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -47,183 +73,17 @@
         <div class="jtv-best-sale-list">
           <div class="wpb_wrapper">
             <div class="best-title text-left">
-              <h2>Ưu đãi đặc biệt</h2>
+              <h2>SẢN PHẨM ƯU ĐÃI</h2>
             </div>
           </div>
-          <div class="slider-items-products">
-            <div id="jtv-best-sale-slider" class="product-flexslider">
-              <div class="slider-items" *ngFor="let item of listProduct?.data">
-                <div class="product-item">
-                  <div class="item-inner">
-                    <div class="product-thumbnail">
-                      <div class="icon-new-label new-left">New</div>
-                      <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                        <figure> <img class="first-img" [src]="urlImg + item.imageUrl" alt="HTML template"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="HTML template"></figure>
-                        </a></div>
-                      <div class="pr-info-area">
-                        <div class="pr-button">
-                          <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                          <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                          <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a [title]="item.productName" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price"> <span class="price">{{item.price | currency: "VND" }}</span> </span> 
-                              <ng-container *ngIf="item.promotionPrice == 0">
-                                <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
-                                <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price | currency: "VND" }} </span> </p>
-                              </ng-container>
-                            </div>
-                          </div>
-                          <div class="pro-action">
-                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+         <div class="slider-items-products">
+             <div id="jtv-best-sale-slider" class="product-flexslider">
+              <div class="slider-items" >   
+                
+                  <carousel-holder-product-sale [listProduct]="listProduct"></carousel-holder-product-sale>
                 </div>
-                <!-- <div class="product-item">
-                  <div class="item-inner">
-                    <div class="product-thumbnail">
-                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                        <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                        </a> </div>
-                      <div class="pr-info-area">
-                        <div class="pr-button">
-                          <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                          <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                          <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="pro-action">
-                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item">
-                  <div class="item-inner">
-                    <div class="product-thumbnail">
-                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                        <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                        </a> </div>
-                      <div class="pr-info-area">
-                        <div class="pr-button">
-                          <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                          <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                          <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="pro-action">
-                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item">
-                  <div class="item-inner">
-                    <div class="icon-sale-label sale-left">Sale</div>
-                    <div class="icon-new-label new-right">New</div>
-                    <div class="product-thumbnail">
-                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                        <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                        </a> </div>
-                      <div class="pr-info-area">
-                        <div class="pr-button">
-                          <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                          <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                          <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                          </div>
-                          <div class="pro-action">
-                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item">
-                  <div class="item-inner">
-                    <div class="product-thumbnail">
-                      <div class="icon-new-label new-left">New</div>
-                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                        <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                        </a> </div>
-                      <div class="pr-info-area">
-                        <div class="pr-button">
-                          <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                          <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                          <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="pro-action">
-                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
               </div>
-            </div>
-          </div>
+          </div> 
         </div>
       </div>
     </div>
@@ -231,11 +91,11 @@
 </div>
 
 <!-- All products-->
-<ng-container *ngIf="isLoadComplete">
+<ng-container >
   <div class="container">
     <div class="home-tab">
       <div class="tab-title text-left">
-        <h2>Sản phẩm bán chạy nhất</h2>
+        <h2>SẢN PHẨM BÁN CHẠY</h2>
         <ul class="nav home-nav-tabs home-product-tabs">
           <li class="active"><a href="#computer" data-toggle="tab" aria-expanded="false">Computer</a></li>
           <li><a href="#smartphone" data-toggle="tab" aria-expanded="false">Smartphone</a></li>
@@ -243,18 +103,21 @@
           <li><a href="#photo" data-toggle="tab" aria-expanded="false">Photo & Camera</a></li>
         </ul>
       </div>
-      <div id="productTabContent" class="tab-content">
+      <div id="productTabContent" class="tab-content" *ngIf="isLoadComplete">
         <div class="tab-pane active in" id="computer">
           <div class="featured-pro">
             <div class="slider-items-products">
               <div id="computer-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4" *ngFor="let item of listProduct?.data">
+                <div class="slider-items slider-width-col4">
+                  <owl-carousel-o [options]="productBestSalesOwl" #owlTEST>
+                    <!-- <ng-container > -->
+                      <ng-template *ngFor="let item of listProductSales?.data" carouselSlide [id]="item.productCode+'4'">
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
                         <div class="icon-new-label new-left">New</div>
                         <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
+                          <figure> <img class="first-img" [src]="urlImg + item.imageUrl"  alt="HTML template"> <img class="hover-img" [src]="urlImg + item.imageUrl"  alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
                           <div class="pr-button">
@@ -280,6 +143,8 @@
                       </div>
                     </div>
                   </div>
+                  </ng-template>
+                </owl-carousel-o>
                 </div>
               </div>
             </div>
@@ -289,14 +154,17 @@
           <div class="top-sellers-pro">
             <div class="slider-items-products">
               <div id="smartphone-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4 " *ngFor="let item of listProduct?.data">
+                <div class="slider-items slider-width-col4">
+                  <owl-carousel-o [options]="productBestSalesOwl2">
+                    <!-- <ng-container > -->
+                      <ng-template *ngFor="let item of listProductSales?.data" carouselSlide [id]="item.productCode">
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
                         <div class="icon-sale-label sale-left">Sale</div>
                         <div class="icon-new-label new-right">New</div>
                         <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
+                          <figure> <img class="first-img" [src]="urlImg + item.imageUrl" alt="HTML template"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
                           <div class="pr-button">
@@ -322,166 +190,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="icon-sale-label sale-left">Sale</div>
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  </ng-template>
+                </owl-carousel-o>
                 </div>
               </div>
             </div>
@@ -491,14 +201,16 @@
           <div class="top-sellers-pro">
             <div class="slider-items-products">
               <div id="watches-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4 " *ngFor="let item of listProduct?.data">
+                <div class="slider-items slider-width-col4">
+                  <owl-carousel-o [options]="productBestSalesOwl">
+                    <!-- <ng-container > -->
+                      <ng-template *ngFor="let item of listProductSales?.data" carouselSlide [id]="item.productCode">
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="icon-sale-label sale-left">Sale</div>
-                        <div class="icon-new-label new-right">New</div>
+                        <div class="icon-new-label new-left">New</div>
                         <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
+                          <figure> <img class="first-img" [src]="urlImg + item.imageUrl"  alt="HTML template"> <img class="hover-img" [src]="urlImg + item.imageUrl"  alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
                           <div class="pr-button">
@@ -512,7 +224,7 @@
                         <div class="info-inner">
                           <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
                             </div>
@@ -524,99 +236,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  </ng-template>
+                </owl-carousel-o>
                 </div>
               </div>
             </div>
@@ -626,14 +247,16 @@
           <div class="top-sellers-pro">
             <div class="slider-items-products">
               <div id="photo-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4 " *ngFor="let item of listProduct?.data">
+                <div class="slider-items slider-width-col4">
+                  <owl-carousel-o [options]="productBestSalesOwl">
+                    <!-- <ng-container > -->
+                      <ng-template *ngFor="let item of listProductSales?.data" carouselSlide [id]="item.productCode">
                   <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
-                        <div class="icon-sale-label sale-left">Sale</div>
-                        <div class="icon-new-label new-right">New</div>
+                        <div class="icon-new-label new-left">New</div>
                         <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
+                          <figure> <img class="first-img" [src]="urlImg + item.imageUrl"  alt="HTML template"> <img class="hover-img" [src]="urlImg + item.imageUrl"  alt="HTML template"></figure>
                           </a> </div>
                         <div class="pr-info-area">
                           <div class="pr-button">
@@ -647,7 +270,7 @@
                         <div class="info-inner">
                           <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
                           <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                             <div class="item-price">
                               <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
                             </div>
@@ -659,99 +282,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  </ng-template>
+                </owl-carousel-o>
                 </div>
               </div>
             </div>

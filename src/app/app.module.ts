@@ -26,6 +26,9 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { MatTreeModule } from "@angular/material/tree";
 import { MatIconModule } from "@angular/material/icon";
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { CarouselHolderComponent } from './owl-carousel/carousel-holder-component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';   
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +52,8 @@ import { MatIconModule } from "@angular/material/icon";
     NotFoundComponent,
     ProductListComponent,
     OrderHistoryComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    CarouselHolderComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,8 @@ import { MatIconModule } from "@angular/material/icon";
     HttpClientModule,
     MatTreeModule,
     MatIconModule,
+    BrowserAnimationsModule,
+    CarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

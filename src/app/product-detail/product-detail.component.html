@@ -1,11 +1,12 @@
-<div class="breadcrumbs">
+<div class="breadcrumbs" *ngIf="product" >
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
           <ul>
             <li class="home"> <a title="Go to Home Page" [routerLink]="['/']" routerLinkActive="router-link-active" >Home</a><span>&raquo;</span></li>
             <li class=""> <a title="Go to Home Page" href="shop_grid.html">{{categoryName}}</a><span>&raquo;</span></li>
-            <li><strong>{{product.productName}}</strong></li>
+        
+            <li ><strong> {{product.productName}}</strong></li>
           </ul>
         </div>
       </div>
@@ -13,7 +14,7 @@
   </div>
   <!-- Breadcrumbs End --> 
   <!-- Main Container -->
-  <div class="main-container col2-left-layout">
+  <div class="main-container col2-left-layout" *ngIf="product">
     <div class="container">
       <div class="row">
         <div class="col-main col-sm-9 col-xs-12">

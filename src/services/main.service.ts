@@ -77,6 +77,16 @@ export class MainService {
                 })
             )
     };
+    getProductBestSales(): Observable<ObjectModel> {
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductBestSales)
+            .pipe(
+                mergeMap((response_: any) => {
+                    let result = new ObjectModel();
+                    result = response_;
+                    return of<ObjectModel>(<ObjectModel>result);
+                })
+            )
+    }
     getServerErrorMessage(error: HttpErrorResponse): string {
         switch (error.status) {
             case 404: {

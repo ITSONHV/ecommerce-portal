@@ -1,4 +1,5 @@
 export class ProductModel {
+        id: number;
         productCode: string  ;
         productName: string ;
         categoryId: number  ;
