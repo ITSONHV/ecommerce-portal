@@ -8,5 +8,6 @@ export const AppConfigs = {
         getProductPagesbyCategorySlug : "Product/paging?UrlCategorySlug=",
         getProductbyProductNameSlug : "Product/by-slug?slug=",
         getProductbyProductId : "ProductProduct/by-id?id=",
+        getSliderLimit : "Slides/limit?limit=",
     }
 }

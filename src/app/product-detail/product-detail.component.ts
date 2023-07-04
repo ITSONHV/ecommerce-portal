@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { ProductModel } from 'src/models/product.model';
@@ -16,25 +18,67 @@ export class ProductDetailComponent implements OnInit {
   public urlImg : string = environment.urlImg;
   public imgfirst : string;
   public categoryName = "";
-  constructor(private _svc : MainService,private _router: ActivatedRoute) {
+  public customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    items:6,
+    dots: false,
+    margin:10,
+    autoplayTimeout: 3000,
+    autoplaySpeed: 1000,
+    autoplay:true,
+    navSpeed: 700,
+    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 3
+      },
+      640: {
+        items: 4
+      },
+      900: {
+        items: 4
+      },
+      1024: {
+        items: 4
+      }
+    },
+    nav: false
+  };
+  constructor(private _svc : MainService,private _router: ActivatedRoute,
+    private spinner: NgxSpinnerService, 
+ ) {
   }
   ngOnInit(): void {
+    this.spinner.show();
     this.categoryName = this._svc.categoryName;
     this._router.queryParams.subscribe(params => {
       this.slug = params['slug'];
       this.getProductbyProductNameSlug(this.slug)
     });
   }
+  ngAfterViewInit(): void {
+    
+  }
   getProductbyProductNameSlug(slug : string){
     this._svc.getProductbyProductNameSlug(slug).subscribe(
       (respones: ObjectModel)=>{
         this.product = respones.data;
-        if(this.product != null)
-            this.imgfirst = this.product.productImages[0]?.imageUrl;
+        if(this.product != null){
+          this.imgfirst = this.product.productImages[0]?.imageUrl??"";
+          this.product.productImages?.shift();
+        }
         console.log(this.product);
+        this.spinner.hide();
       },
       (err) =>{
         console.log(err);
+        this.spinner.hide();
       }
     );
   }

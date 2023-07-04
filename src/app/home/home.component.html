@@ -1,5 +1,7 @@
 <app-slider></app-slider>
 <!-- service section -->
+
+<ng-container *ngIf="isLoadComplete">
 <div class="jtv-service-area">
   <div class="container">
     <div class="row">
@@ -24,13 +26,14 @@
     </div>
   </div>
 </div>
+</div>
 <div class="inner-box">
   <div class="container">
     <div class="row"> 
       <!-- Banner -->
       <div class="col-md-3 top-banner hidden-sm">
         <div class="jtv-banner3">
-          <div class="jtv-banner3-inner"><a href="#"><img src="./../assets/images/sub1.jpg" alt="HTML template"></a>
+          <div class="jtv-banner3-inner"><a href="#"><img [src]="pathBanner" alt="HTML template"></a>
             <div class="hover_content">
               <div class="hover_data">
                 <div class="title"> Big Sale </div>
@@ -52,8 +55,50 @@
           </div>
           <div class="slider-items-products">
             <div id="jtv-best-sale-slider" class="product-flexslider">
-              <div class="slider-items" *ngFor="let item of listProduct?.data">
-                <div class="product-item">
+              <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let item of listProduct?.data">
+                  <ng-template carouselSlide [id]="item.id">
+                    <div class="product-item">
+                      <div class="item-inner">
+                        <div class="product-thumbnail">
+                          <div class="icon-new-label new-left">New</div>
+                          <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
+                            <figure> <img class="first-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"></figure>
+                            </a> </div>
+                          <div class="pr-info-area">
+                            <div class="pr-button">
+                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
+                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
+                              <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item-info">
+                          <div class="info-inner">
+                            <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
+                            <div class="item-content">
+                              <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                              <div class="item-price">
+                                <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price"> <span class="price">{{item.price | currency: "VND" }}</span> </span> 
+                                  <ng-container *ngIf="item.promotionPrice == 0">
+                                    <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
+                                    <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price | currency: "VND" }} </span> </p>
+                                  </ng-container>
+                                </div>
+                              </div>
+                              <div class="pro-action">
+                                <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ng-container>
+              </owl-carousel-o>
+              <!-- <div class="slider-items" *ngFor="let item of listProduct?.data"> -->
+                <!-- <div class="product-item">
                   <div class="item-inner">
                     <div class="product-thumbnail">
                       <div class="icon-new-label new-left">New</div>
@@ -88,7 +133,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!-- <div class="product-item">
                   <div class="item-inner">
                     <div class="product-thumbnail">
@@ -221,7 +266,7 @@
                     </div>
                   </div>
                 </div> -->
-              </div>
+              <!-- </div> -->
             </div>
           </div>
         </div>
@@ -231,7 +276,6 @@
 </div>
 
 <!-- All products-->
-<ng-container *ngIf="isLoadComplete">
   <div class="container">
     <div class="home-tab">
       <div class="tab-title text-left">
@@ -248,39 +292,93 @@
           <div class="featured-pro">
             <div class="slider-items-products">
               <div id="computer-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4" *ngFor="let item of listProduct?.data">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="icon-new-label new-left">New</div>
-                        <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
+                <owl-carousel-o [options]="customOptions">
+                  <ng-container *ngFor="let item of listProduct?.data">
+                    <ng-template carouselSlide [id]="item.id">
+                      <div class="product-item">
+                        <div class="item-inner">
+                          <div class="product-thumbnail">
+                            <div class="icon-new-label new-left">New</div>
+                            <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
+                              <figure> <img class="first-img" img class="first-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"></figure>
+                              </a> </div>
+                            <div class="pr-info-area">
+                              <div class="pr-button">
+                                <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
+                                <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
+                                <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a></div>
+                              <div class="item-content">
+                                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                <div class="item-price">
+                                <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price"> <span class="price">{{item.price | currency: "VND" }}</span> </span> 
+                                  <ng-container *ngIf="item.promotionPrice == 0">
+                                    <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
+                                    <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price | currency: "VND" }} </span> </p>
+                                  </ng-container>
+                                </div>
+                              </div>
+                                <div class="pro-action">
+                                  <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                          <div class="item-content">
-                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
+                    </ng-template>
+                  </ng-container>
+                </owl-carousel-o>
+                <owl-carousel-o [options]="customOptions">
+                  <ng-container *ngFor="let item of listProduct?.data">
+                    <ng-template carouselSlide [id]="item.id">
+                      <div class="slider-items slider-width-col4">
+                        <div class="product-item">
+                          <div class="item-inner">
+                            <div class="product-thumbnail">
+                              <div class="icon-new-label new-left">New</div>
+                              <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
+                                <figure> <img class="first-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"></figure>
+                                </a> </div>
+                              <div class="pr-info-area">
+                                <div class="pr-button">
+                                  <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
+                                  <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
+                                  <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
+                                </div>
+                              </div>
                             </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
+                            <div class="item-info">
+                              <div class="info-inner">
+                                <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
+                                <div class="item-content">
+                                  <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
+                                  <div class="item-price">
+                                    <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price"> <span class="price">{{item.price | currency: "VND" }}</span> </span> 
+                                      <ng-container *ngIf="item.promotionPrice == 0">
+                                        <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
+                                        <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price | currency: "VND" }} </span> </p>
+                                      </ng-container>
+                                    </div>
+                                  </div>
+                                  <div class="pro-action">
+                                    <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
+                    </ng-template>
+                  </ng-container>
+                </owl-carousel-o>
+                
               </div>
             </div>
           </div>
@@ -1335,3 +1433,4 @@
     </div>
   </div>
 </ng-container>
+<ngx-spinner [fullScreen] = "true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)" color="#0b499c"></ngx-spinner>
