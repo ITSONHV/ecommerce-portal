@@ -158,8 +158,8 @@ export class HomeComponent implements OnInit {
     dots: false,
     margin:10,
     autoplayTimeout: 3000,
-    autoplaySpeed: 2000,
-    autoplay: false,
+    autoplaySpeed: 1000,
+    autoplay: true,
     navSpeed: 2000,
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
@@ -187,34 +187,36 @@ export class HomeComponent implements OnInit {
     public elementRef: ElementRef) {
   }
   ngOnInit(): void {
-    this.spinner.show();
     this.getProductPages();
     this.getTrademark();
-
-
-    
     this.isLoadComplete = true;
-    this.spinner.hide();
   }
   getProductPages() {
+    this.spinner.show();
     this._svc.getProductPages().subscribe(
       (respones: ObjectModel) => {
         this.listProduct = respones.data;
+      this.spinner.hide();
       },
       (err) => {
         console.log(err);
-        
+        this.spinner.hide();
       }
     );
   }
 
   getTrademark() {
+    this.spinner.show();
     this._svc.getTrademarkLimit(10).subscribe(
       (respones: ObjectModel) => {
         this.listTrademark = respones.data;
+        console.log(this.listTrademark);
+        
+        this.spinner.hide();
       },
       (err) => {
         console.log(err);
+       this.spinner.hide();
       }
     );
   }

@@ -58,7 +58,8 @@ export class MenuTopComponent implements OnInit,AfterViewInit {
           // Lọc ra các phần tử của mảng con có parentId bằng với id của phần tử hiện tại của mảng cha
           let children = this.subMenu.filter((child: any) => child.categoryParent === parent.id);
           // Gán thuộc tính sub bằng giá trị của thuộc tính value của các phần tử con
-          parent.submenu = children.map((child: any) => child);
+          if(children.length > 0)
+            parent.submenu = children.map((child: any) => child);
         });
         console.log("menu",this.allMenu);
         this.spinner.hide();

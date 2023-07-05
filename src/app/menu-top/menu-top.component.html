@@ -20,7 +20,7 @@
                   <div class="row" *ngFor="let item of item.submenu" >
                   <div class="col-md-4 col-sm-6">
                     <ul class="nav">
-                    <li><a [routerLink]="['/danh-muc-san-pham-g']"><span>{{item.categoryName}}</span></a></li>
+                    <li><a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)"><span>{{item.categoryName}}</span></a></li>
                     </ul>
                   </div>
                   <!-- <div class="col-md-4 col-sm-6 has-sep">
