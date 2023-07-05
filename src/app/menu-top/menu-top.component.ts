@@ -4,11 +4,20 @@ import { ICategory } from 'src/interfaces/ICategory';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import { ProductGridComponent } from '../product-grid/product-grid.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import 'jquery';
 @Component({
   selector: 'app-menu-top',
   templateUrl: './menu-top.component.html',
-  styleUrls: ['./menu-top.component.css']
+  styleUrls: ['./menu-top.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+    state('in', style({ opacity: 1 })),
+    state('out', style({ opacity: 0 })),
+    transition('out => in', animate('300ms ease-in')),
+    transition('in => out', animate('300ms ease-out'))
+    ])
+  ]
 })
 export class MenuTopComponent implements OnInit,AfterViewInit {
   public productGrComponent: ProductGridComponent;
@@ -99,4 +108,6 @@ export class MenuTopComponent implements OnInit,AfterViewInit {
       return false;
     return true;
   }
+
+  
 }
