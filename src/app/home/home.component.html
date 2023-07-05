@@ -2,296 +2,59 @@
 <!-- service section -->
 
 <ng-container *ngIf="isLoadComplete">
-<div class="jtv-service-area">
-  <div class="container">
-    <div class="row">
-      <div class="col col-md-3 col-sm-6 col-xs-12">
-        <div>
-          
+  <div class="jtv-service-area">
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-3 col-sm-6 col-xs-12">
+          <div>
+
+          </div>
         </div>
-      </div>
-      <div class="col col-md-3 col-sm-6 col-xs-12 ">
-        <div>
-          
+        <div class="col col-md-3 col-sm-6 col-xs-12 ">
+          <div>
+
+          </div>
         </div>
-      </div>
-      <div class="col col-md-3 col-sm-6 col-xs-12">
-        <div >
-          
+        <div class="col col-md-3 col-sm-6 col-xs-12">
+          <div>
+
+          </div>
         </div>
-      </div>
-      <div class="col col-md-3 col-sm-6 col-xs-12">
-        <div>
+        <div class="col col-md-3 col-sm-6 col-xs-12">
+          <div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
-<div class="inner-box">
-  <div class="container">
-    <div class="row"> 
-      <!-- Banner -->
-      <div class="col-md-3 top-banner hidden-sm">
-        <div class="jtv-banner3">
-          <div class="jtv-banner3-inner"><a href="#"><img [src]="pathBanner" alt="HTML template"></a>
-            <div class="hover_content">
-              <div class="hover_data">
-                <div class="title"> Big Sale </div>
-                <div class="desc-text">Up to 55% off</div>
-                <span>Camera, Laptop & Mobile</span>
-                <p><a href="#" class="shop-now">Get it now!</a></p>
+  <div class="inner-box">
+    <div class="container">
+      <div class="row">
+        <!-- Banner -->
+        <div class="col-md-3 top-banner hidden-sm">
+          <div class="jtv-banner3">
+            <div class="jtv-banner3-inner"><a href="#"><img [src]="pathBanner" alt="HTML template"></a>
+              <div class="hover_content">
+                <div class="hover_data">
+                  <div class="title"> Big Sale </div>
+                  <div class="desc-text">Up to 55% off</div>
+                  <span>Camera, Laptop & Mobile</span>
+                  <p><a href="#" class="shop-now">Get it now!</a></p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Best Sale -->
-      <div class="col-sm-12 col-md-9 jtv-best-sale special-pro">
-        <div class="jtv-best-sale-list">
-          <div class="wpb_wrapper">
-            <div class="best-title text-left">
-              <h2>Ưu đãi đặc biệt</h2>
+        <!-- Best Sale -->
+        <div class="col-sm-12 col-md-9 jtv-best-sale special-pro">
+          <div class="jtv-best-sale-list">
+            <div class="wpb_wrapper">
+              <div class="best-title text-left">
+                <h2>ƯU ĐÃI ĐẶC BIỆT</h2>
+              </div>
             </div>
-          </div>
-          <div class="slider-items-products">
-            <div id="jtv-best-sale-slider" class="product-flexslider">
-              <owl-carousel-o [options]="customOptions">
-                <ng-container *ngFor="let item of listProduct?.data">
-                  <ng-template carouselSlide [id]="item.id.toString()">
-                    <div class="product-item">
-                      <div class="item-inner">
-                        <div class="product-thumbnail">
-                          <div class="icon-new-label new-left">New</div>
-                          <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                            <figure> <img class="first-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"></figure>
-                            </a> </div>
-                          <div class="pr-info-area">
-                            <div class="pr-button">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                              <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
-                            <div class="item-content">
-                              <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                              <div class="item-price">
-                                <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price"> <span class="price">{{item.price | currency: "VND" }}</span> </span> 
-                                  <ng-container *ngIf="item.promotionPrice == 0">
-                                    <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
-                                    <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price | currency: "VND" }} </span> </p>
-                                  </ng-container>
-                                </div>
-                              </div>
-                              <div class="pro-action">
-                                <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </ng-template>
-                </ng-container>
-              </owl-carousel-o>
-              <!-- <div class="slider-items" *ngFor="let item of listProduct?.data"> -->
-                <!-- <div class="product-item">
-                  <div class="item-inner">
-                    <div class="product-thumbnail">
-                      <div class="icon-new-label new-left">New</div>
-                      <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                        <figure> <img class="first-img" [src]="urlImg + item.imageUrl" alt="HTML template"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="HTML template"></figure>
-                        </a></div>
-                      <div class="pr-info-area">
-                        <div class="pr-button">
-                          <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                          <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                          <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a [title]="item.productName" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price"> <span class="price">{{item.price | currency: "VND" }}</span> </span> 
-                              <ng-container *ngIf="item.promotionPrice == 0">
-                                <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
-                                <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price | currency: "VND" }} </span> </p>
-                              </ng-container>
-                            </div>
-                          </div>
-                          <div class="pro-action">
-                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-                <!-- <div class="product-item">
-                  <div class="item-inner">
-                    <div class="product-thumbnail">
-                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                        <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                        </a> </div>
-                      <div class="pr-info-area">
-                        <div class="pr-button">
-                          <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                          <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                          <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="pro-action">
-                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item">
-                  <div class="item-inner">
-                    <div class="product-thumbnail">
-                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                        <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                        </a> </div>
-                      <div class="pr-info-area">
-                        <div class="pr-button">
-                          <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                          <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                          <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="pro-action">
-                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item">
-                  <div class="item-inner">
-                    <div class="icon-sale-label sale-left">Sale</div>
-                    <div class="icon-new-label new-right">New</div>
-                    <div class="product-thumbnail">
-                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                        <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                        </a> </div>
-                      <div class="pr-info-area">
-                        <div class="pr-button">
-                          <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                          <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                          <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                          </div>
-                          <div class="pro-action">
-                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item">
-                  <div class="item-inner">
-                    <div class="product-thumbnail">
-                      <div class="icon-new-label new-left">New</div>
-                      <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                        <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                        </a> </div>
-                      <div class="pr-info-area">
-                        <div class="pr-button">
-                          <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                          <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                          <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="pro-action">
-                            <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-              <!-- </div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- All products-->
-  <div class="container">
-    <div class="home-tab">
-      <div class="tab-title text-left">
-        <h2>Sản phẩm bán chạy nhất</h2>
-        <ul class="nav home-nav-tabs home-product-tabs">
-          <li class="active"><a href="#computer" data-toggle="tab" aria-expanded="false">Computer</a></li>
-          <li><a href="#smartphone" data-toggle="tab" aria-expanded="false">Smartphone</a></li>
-          <li><a href="#watches" data-toggle="tab" aria-expanded="false">Watches</a></li>
-          <li><a href="#photo" data-toggle="tab" aria-expanded="false">Photo & Camera</a></li>
-        </ul>
-      </div>
-      <div id="productTabContent" class="tab-content">
-        <div class="tab-pane active in" id="computer">
-          <div class="featured-pro">
             <div class="slider-items-products">
-              <div id="computer-slider" class="product-flexslider hidden-buttons">
+              <div id="jtv-best-sale-slider" class="product-flexslider">
                 <owl-carousel-o [options]="customOptions">
                   <ng-container *ngFor="let item of listProduct?.data">
                     <ng-template carouselSlide [id]="item.id.toString()">
@@ -299,30 +62,42 @@
                         <div class="item-inner">
                           <div class="product-thumbnail">
                             <div class="icon-new-label new-left">New</div>
-                            <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                              <figure> <img class="first-img" img class="first-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"></figure>
+                            <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
+                                [queryParams]="{slug: item.productNameSlug}">
+                                <figure> <img class="first-img" [src]="urlImg + item.imageUrl"
+                                    alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl"
+                                    alt="{{item.productName}}"></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
-                                <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                                <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
+                                <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i
+                                      class="fa fa-heart-o"></i> </a> </div>
+                                <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i
+                                      class="fa fa-link"></i> </a> </div>
+                                <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i
+                                      class="fa fa-search"></i> </a> </div>
                               </div>
                             </div>
                           </div>
                           <div class="item-info">
                             <div class="info-inner">
-                              <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a></div>
+                              <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
+                                  [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
                               <div class="item-content">
-                                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                <div class="item-price">
-                                <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price"> <span class="price">{{item.price | currency: "VND" }}</span> </span> 
-                                  <ng-container *ngIf="item.promotionPrice == 0">
-                                    <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
-                                    <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price | currency: "VND" }} </span> </p>
-                                  </ng-container>
+                                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                    class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
                                 </div>
-                              </div>
+                                <div class="item-price">
+                                  <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price">
+                                      <span class="price">{{item.price | currency: "VND" }}</span> </span>
+                                    <ng-container *ngIf="item.promotionPrice == 0">
+                                      <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span
+                                          class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
+                                      <p class="old-price"> <span class="price-label">Giá cũ:</span> <span
+                                          class="price"> {{item.price | currency: "VND" }} </span> </p>
+                                    </ng-container>
+                                  </div>
+                                </div>
                                 <div class="pro-action">
                                   <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
                                 </div>
@@ -334,41 +109,76 @@
                     </ng-template>
                   </ng-container>
                 </owl-carousel-o>
-                <owl-carousel-o [options]="customOptions">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All products-->
+  <div class="container">
+    <div class="home-tab">
+      <div class="tab-title text-left">
+        <h2>SẢN PHẨM BÁN CHẠY</h2>
+        <!-- <ul class="nav home-nav-tabs home-product-tabs">
+          <li class="active"><a href="#computer" data-toggle="tab" aria-expanded="false">Computer</a></li>
+          <li><a href="#smartphone" data-toggle="tab" aria-expanded="false">Smartphone</a></li>
+          <li><a href="#watches" data-toggle="tab" aria-expanded="false">Watches</a></li>
+          <li><a href="#photo" data-toggle="tab" aria-expanded="false">Photo & Camera</a></li>
+        </ul> -->
+      </div>
+      <div id="productTabContent" class="tab-content">
+        <div class="tab-pane active in" id="computer">
+          <div class="featured-pro">
+            <div class="slider-items-products">
+              <div id="computer-slider" class="product-flexslider hidden-buttons">
+                <owl-carousel-o [options]="customBestSaleProduct">
                   <ng-container *ngFor="let item of listProduct?.data">
                     <ng-template carouselSlide [id]="item.id.toString()">
-                      <div class="slider-items slider-width-col4">
-                        <div class="product-item">
-                          <div class="item-inner">
-                            <div class="product-thumbnail">
-                              <div class="icon-new-label new-left">New</div>
-                              <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                                <figure> <img class="first-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl" alt="{{item.productName}}"></figure>
-                                </a> </div>
-                              <div class="pr-info-area">
-                                <div class="pr-button">
-                                  <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                  <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                                  <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i class="fa fa-search"></i> </a> </div>
-                                </div>
+                      <div class="product-item">
+                        <div class="item-inner">
+                          <div class="product-thumbnail">
+                            <div class="icon-new-label new-left">New</div>
+                            <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
+                                [queryParams]="{slug: item.productNameSlug}">
+                                <figure> <img class="first-img" img class="first-img" [src]="urlImg + item.imageUrl"
+                                    alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl"
+                                    alt="{{item.productName}}"></figure>
+                              </a> </div>
+                            <div class="pr-info-area">
+                              <div class="pr-button">
+                                <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i
+                                      class="fa fa-heart-o"></i> </a> </div>
+                                <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i
+                                      class="fa fa-link"></i> </a> </div>
+                                <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i
+                                      class="fa fa-search"></i> </a> </div>
                               </div>
                             </div>
-                            <div class="item-info">
-                              <div class="info-inner">
-                                <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
-                                <div class="item-content">
-                                  <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                  <div class="item-price">
-                                    <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price"> <span class="price">{{item.price | currency: "VND" }}</span> </span> 
-                                      <ng-container *ngIf="item.promotionPrice == 0">
-                                        <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
-                                        <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price | currency: "VND" }} </span> </p>
-                                      </ng-container>
-                                    </div>
+                          </div>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
+                                  [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a></div>
+                              <div class="item-content">
+                                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                    class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+                                </div>
+                                <div class="item-price">
+                                  <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price">
+                                      <span class="price">{{item.price | currency: "VND" }}</span> </span>
+                                    <ng-container *ngIf="item.promotionPrice == 0">
+                                      <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span
+                                          class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
+                                      <p class="old-price"> <span class="price-label">Giá cũ:</span> <span
+                                          class="price"> {{item.price | currency: "VND" }} </span> </p>
+                                    </ng-container>
                                   </div>
-                                  <div class="pro-action">
-                                    <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
-                                  </div>
+                                </div>
+                                <div class="pro-action">
+                                  <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
                                 </div>
                               </div>
                             </div>
@@ -378,12 +188,11 @@
                     </ng-template>
                   </ng-container>
                 </owl-carousel-o>
-                
               </div>
             </div>
           </div>
         </div>
-        <div class="tab-pane wow animated fadeInLeft" id="smartphone">
+        <!-- <div class="tab-pane wow animated fadeInLeft" id="smartphone">
           <div class="top-sellers-pro">
             <div class="slider-items-products">
               <div id="smartphone-slider" class="product-flexslider hidden-buttons">
@@ -854,37 +663,108 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
   <div class="container">
     <div class="row">
-      <div class="daily-deal-section"> 
-        <!-- daily deal section-->
-        <div class="col-md-7 daily-deal">
-          <h3 class="deal-title">Deal of the day</h3>
-          <div class="title-divider"><span></span></div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel massa eget ante tincidunt vestibulum. Aenean vel metus magna. Mauris nec. Nunc congue ac libero ut lacinia. In ultrices
-            elementum ipsum, in tempus enim accumsan.. </p>
-          <div class="hot-offer-text">Summer Sale <span>2017</span></div>
-          <div class="box-timer"> <span class="des-hot-deal">Hurry up! Special offer</span>
-            <div class="time" data-countdown="countdown" data-date="09-30-2017-10-20-50"></div>
-            <a href="#" class="link">Shopping Now</a> </div>
-        </div>
-        <div class="col-md-5 hot-pr-img-area">
-          <div id="daily-deal-slider" class="product-flexslider hidden-buttons">
-            <div class="slider-items slider-width-col4 " *ngFor="let item of listProduct?.data">
-              <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
-                </a> </div>
+      <div class="col-md-12 text-center">
+        <a href="#" class="but_medium2"><i class="fa fa-shopping-cart"></i>&nbsp; XEM THÊM</a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <div class="container">
+    <div class="home-tab">
+      <div class="tab-title text-left">
+        <h2>SẢN PHẨM MỚI</h2>
+        <!-- <ul class="nav home-nav-tabs home-product-tabs">
+          <li class="active"><a href="#computer" data-toggle="tab" aria-expanded="false">Computer</a></li>
+          <li><a href="#smartphone" data-toggle="tab" aria-expanded="false">Smartphone</a></li>
+          <li><a href="#watches" data-toggle="tab" aria-expanded="false">Watches</a></li>
+          <li><a href="#photo" data-toggle="tab" aria-expanded="false">Photo & Camera</a></li>
+        </ul> -->
+      </div>
+      <div id="productTabContent" class="tab-content">
+        <div class="tab-pane active in" id="computer">
+          <div class="featured-pro">
+            <div class="slider-items-products">
+              <div id="computer-slider" class="product-flexslider hidden-buttons">
+                <owl-carousel-o [options]="customNewProduct">
+                  <ng-container *ngFor="let item of listProduct?.data">
+                    <ng-template carouselSlide [id]="item.id.toString()">
+                      <div class="product-item">
+                        <div class="item-inner">
+                          <div class="product-thumbnail">
+                            <div class="icon-new-label new-left">New</div>
+                            <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
+                                [queryParams]="{slug: item.productNameSlug}">
+                                <figure> <img class="first-img" img class="first-img" [src]="urlImg + item.imageUrl"
+                                    alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl"
+                                    alt="{{item.productName}}"></figure>
+                              </a> </div>
+                            <div class="pr-info-area">
+                              <div class="pr-button">
+                                <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i
+                                      class="fa fa-heart-o"></i> </a> </div>
+                                <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i
+                                      class="fa fa-link"></i> </a> </div>
+                                <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i
+                                      class="fa fa-search"></i> </a> </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
+                                  [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a></div>
+                              <div class="item-content">
+                                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                    class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+                                </div>
+                                <div class="item-price">
+                                  <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price">
+                                      <span class="price">{{item.price | currency: "VND" }}</span> </span>
+                                    <ng-container *ngIf="item.promotionPrice == 0">
+                                      <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span
+                                          class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
+                                      <p class="old-price"> <span class="price-label">Giá cũ:</span> <span
+                                          class="price"> {{item.price | currency: "VND" }} </span> </p>
+                                    </ng-container>
+                                  </div>
+                                </div>
+                                <div class="pro-action">
+                                  <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ng-container>
+                </owl-carousel-o>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="banner-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <a href="#" class="but_medium2"><i class="fa fa-shopping-cart"></i>&nbsp; XEM THÊM</a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <!-- <div class="banner-section">
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
@@ -895,329 +775,71 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="featured-products">
-    <div class="container">
-      <div class="row"> 
-        
-        <!-- Best Sale -->
-        <div class="col-sm-12 col-md-4 jtv-best-sale">
-          <div class="jtv-best-sale-list">
-            <div class="wpb_wrapper">
-              <div class="best-title text-left">
-                <h2>Top Rate</h2>
-              </div>
-            </div>
+  </div> -->
+  <div class="container">
+    <div class="home-tab">
+      <div class="tab-title text-left">
+        <h2>SẢN PHẨM NỔI BẬT</h2>
+      </div>
+      <div id="productTabContent" class="tab-content">
+        <div class="tab-pane active in" id="computer">
+          <div class="featured-pro">
             <div class="slider-items-products">
-              <div id="toprate-products-slider" class="product-flexslider">
-                <div class="slider-items" *ngFor="let item of listProduct?.data">
-                  <ul class="products-grid">
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$99.99</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <ul class="products-grid">
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$99.99</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <ul class="products-grid">
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
+              <div id="computer-slider" class="product-flexslider hidden-buttons">
+                <owl-carousel-o [options]="customHotProduct">
+                  <ng-container *ngFor="let item of listProduct?.data">
+                    <ng-template carouselSlide [id]="item.id.toString()">
+                      <div class="product-item">
+                        <div class="item-inner">
+                          <div class="product-thumbnail">
+                            <div class="icon-new-label new-left">New</div>
+                            <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
+                                [queryParams]="{slug: item.productNameSlug}">
+                                <figure> <img class="first-img" img class="first-img" [src]="urlImg + item.imageUrl"
+                                    alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl"
+                                    alt="{{item.productName}}"></figure>
+                              </a> </div>
+                            <div class="pr-info-area">
+                              <div class="pr-button">
+                                <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i
+                                      class="fa fa-heart-o"></i> </a> </div>
+                                <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i
+                                      class="fa fa-link"></i> </a> </div>
+                                <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i
+                                      class="fa fa-search"></i> </a> </div>
                               </div>
                             </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Banner -->
-        <div class="col-md-4 top-banner hidden-sm">
-          <div class="jtv-banner3">
-            <div class="jtv-banner3-inner"><a href="#"><img src="./../assets/images/sub1a.jpg" alt="HTML template"></a>
-              <div class="hover_content">
-                <div class="hover_data bottom">
-                  <div class="desc-text">Top Brands at discount prices </div>
-                  <div class="title">Electronisc Sale</div>
-                  <span>Smartphone & Cell phone</span>
-                  <p><a href="#" class="shop-now">Get it now!</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-4 jtv-best-sale">
-          <div class="jtv-best-sale-list">
-            <div class="wpb_wrapper">
-              <div class="best-title text-left">
-                <h2>New products</h2>
-              </div>
-            </div>
-            <div class="slider-items-products">
-              <div id="new-products-slider" class="product-flexslider">
-                <div class="slider-items" *ngFor="let item of listProduct?.data">
-                  <ul class="products-grid">
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
+                                  [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a></div>
+                              <div class="item-content">
+                                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+                                    class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i>
+                                </div>
+                                <div class="item-price">
+                                  <div class="price-box"> <span *ngIf="item.promotionPrice > 0" class="regular-price">
+                                      <span class="price">{{item.price | currency: "VND" }}</span> </span>
+                                    <ng-container *ngIf="item.promotionPrice == 0">
+                                      <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span
+                                          class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
+                                      <p class="old-price"> <span class="price-label">Giá cũ:</span> <span
+                                          class="price"> {{item.price | currency: "VND" }} </span> </p>
+                                    </ng-container>
+                                  </div>
+                                </div>
+                                <div class="pro-action">
+                                  <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
+                                </div>
                               </div>
                             </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
                           </div>
                         </div>
                       </div>
-                    </li>
-                  </ul>
-                  <ul class="products-grid">
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <ul class="products-grid">
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="item">
-                      <div class="item-inner">
-                        <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="HTML template" src="./../assets/images/products/product-1.jpg"> </a> </div>
-                        <div class="item-info">
-                          <div class="info-inner">
-                            <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">Product title here </a> </div>
-                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $456.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $567.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" class="add-to-cart"><i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                            <div class="pr-button-hover">
-                              <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                              <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i class="fa fa-link"></i> </a> </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+                    </ng-template>
+                  </ng-container>
+                </owl-carousel-o>
               </div>
             </div>
           </div>
@@ -1225,9 +847,16 @@
       </div>
     </div>
   </div>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <a href="#" class="but_medium2"><i class="fa fa-shopping-cart"></i>&nbsp; XEM THÊM</a>
+      </div>
+    </div>
+  </div>
+  <br>
   <!-- Blog -->
-  <section class="blog-post-wrapper">
+  <!-- <section class="blog-post-wrapper">
     <div class="container">
       <div class="best-title text-left">
         <h2>Our Latest News</h2>
@@ -1299,29 +928,33 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- our clients Slider -->
 
   <div class="container">
+    <div class="tab-title text-left">
+      <h2>THƯƠNG HIỆU</h2>
+    </div>
     <div class="row">
+
       <div class="col-md-12 col-xs-12">
         <div class="our-clients">
           <div class="slider-items-products">
             <div id="our-clients-slider" class="product-flexslider hidden-buttons">
               <div class="slider-items slider-width-col6">
-                <div class="item"><a href="#"><img src="./../assets/images/brand1.png" alt="Image"></a> </div>
-                <div class="item"><a href="#"><img src="./../assets/images/brand2.png" alt="Image"></a> </div>
-                <div class="item"><a href="#"><img src="./../assets/images/brand3.png" alt="Image"></a> </div>
-                <div class="item"><a href="#"><img src="./../assets/images/brand4.png" alt="Image"></a> </div>
-                <div class="item"><a href="#"><img src="./../assets/images/brand5.png" alt="Image"></a> </div>
-                <div class="item"><a href="#"><img src="./../assets/images/brand6.png" alt="Image"></a> </div>
-                <div class="item"><a href="#"><img src="./../assets/images/brand7.png" alt="Image"></a> </div>
-                <div class="item"><a href="#"><img src="./../assets/images/brand8.png" alt="Image"></a> </div>
-                <div class="item"><a href="#"><img src="./../assets/images/brand9.png" alt="Image"></a> </div>
-                <div class="item"><a href="#"><img src="./../assets/images/brand10.png" alt="Image"></a> </div>
-                <div class="item"><a href="#"><img src="./../assets/images/brand11.png" alt="Image"></a> </div>
+
+                <owl-carousel-o [options]="customBrand">
+                  <ng-container *ngFor="let item of listTrademark?.data">
+                    <ng-template carouselSlide [id]="item.id.toString()">
+
+                      <div class="item"><a href="#"><img [src]="urlImg + item.imageUrl" alt="Image"></a> </div>
+
+                    </ng-template>
+                  </ng-container>
+                </owl-carousel-o>
               </div>
+
             </div>
           </div>
         </div>
@@ -1336,7 +969,8 @@
         <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
           <div class="row">
             <div class="col-xs-12 col-sm-6 col-lg-6 col-md-6">
-              <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-sunglasses.jpg" alt="banner sunglasses"> </a>
+              <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-sunglasses.jpg"
+                    alt="banner sunglasses"> </a>
                 <div class="text-des-container">
                   <div class="text-des">
                     <h2>Galaxy Note 5</h2>
@@ -1346,7 +980,8 @@
               </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-6 col-md-6">
-              <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-kids.jpg" alt="banner kids"> </a>
+              <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-kids.jpg" alt="banner kids">
+                </a>
                 <div class="text-des-container">
                   <div class="text-des">
                     <h2>Music & Sound</h2>
@@ -1354,7 +989,8 @@
                   </div>
                 </div>
               </div>
-              <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-women.jpg" alt="banner women"> </a>
+              <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-women.jpg" alt="banner women">
+                </a>
                 <div class="text-des-container">
                   <div class="text-des">
                     <h2>Best Quality Music</h2>
@@ -1366,7 +1002,8 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-4 col-lg-4 col-md-4">
-          <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-arrival.jpg" alt="banner arrival"> </a>
+          <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-arrival.jpg" alt="banner arrival">
+            </a>
             <div class="text-des-container">
               <div class="text-des">
                 <h2>special collection</h2>
@@ -1382,7 +1019,7 @@
 
   <div class="footer-newsletter">
     <div class="container">
-      <div class="row"> 
+      <div class="row">
         <!-- Newsletter -->
         <div class="col-md-6 col-sm-6">
           <form id="newsletter-validate-detail" method="post" action="#">
@@ -1390,7 +1027,7 @@
             <div class="title-divider"><span></span></div>
             <p class="sub-title text-center">Get 25% off</p>
             <div class="newsletter-inner">
-              <input class="newsletter-email" name='Email' placeholder='Enter Your Email'/>
+              <input class="newsletter-email" name='Email' placeholder='Enter Your Email' />
               <button class="button subscribe" type="submit" title="Subscribe">Subscribe</button>
             </div>
           </form>
@@ -1404,26 +1041,36 @@
             <div id="testimonials-slider" class="product-flexslider hidden-buttons home-testimonials">
               <div class="slider-items slider-width-col4 ">
                 <div class="holder">
-                  <blockquote>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+                  <blockquote>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
                     minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip volutpat.
                     Integer rutrum ante eu lacus.Vestibulum libero nisl, porta vel.</blockquote>
                   <div class="thumb"> <img src="./../assets/images/testimonials-img3.jpg" alt="testimonials img"> </div>
-                  <div class="holder-info"> <strong class="name">John Doe</strong> <strong class="designation">CEO, Company</strong></div>
+                  <div class="holder-info"> <strong class="name">John Doe</strong> <strong class="designation">CEO,
+                      Company</strong></div>
                 </div>
                 <div class="holder">
-                  <blockquote>Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing elit.Lorem ipsum dolor sit ame consetur adipisicing elit.Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing elit.</blockquote>
+                  <blockquote>Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing
+                    elit.Lorem ipsum dolor sit ame consetur adipisicing elit.Lorem ipsum dolor sit ame consetur
+                    adipisicing elit. Voluptate, consetur adipisicing elit.</blockquote>
                   <div class="thumb"> <img src="./../assets/images/testimonials-img1.jpg" alt="testimonials img"> </div>
-                  <div class="holder-info"> <strong class="name">Vince Roy</strong> <strong class="designation">CEO, Newspaper</strong> </div>
+                  <div class="holder-info"> <strong class="name">Vince Roy</strong> <strong class="designation">CEO,
+                      Newspaper</strong> </div>
                 </div>
                 <div class="holder">
-                  <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim. Donec sit amet eros. Cras feugiat luctus nulla vitae posuere. Suspendisse potenti. </blockquote>
+                  <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                    ut labore et dolore magna aliqua. Ut enim ad minim. Donec sit amet eros. Cras feugiat luctus nulla
+                    vitae posuere. Suspendisse potenti. </blockquote>
                   <div class="thumb"> <img src="./../assets/images/testimonials-img2.jpg" alt="testimonials img"> </div>
-                  <div class="holder-info"><strong class="name">John Doe</strong> <strong class="designation">CEO, ABC Softwear</strong></div>
+                  <div class="holder-info"><strong class="name">John Doe</strong> <strong class="designation">CEO, ABC
+                      Softwear</strong></div>
                 </div>
                 <div class="holder">
-                  <blockquote>Aliquam erat volutpat. Sed do eiusmod tempor incididunt Integer rutrum ante eu lacus. Vestibulum libero nisl, porta vel, scelerisque eget. Donec sit amet eros. Nulla non ornare nisi, sed condimentum lorem. Morbi sed vehicula magna.</blockquote>
+                  <blockquote>Aliquam erat volutpat. Sed do eiusmod tempor incididunt Integer rutrum ante eu lacus.
+                    Vestibulum libero nisl, porta vel, scelerisque eget. Donec sit amet eros. Nulla non ornare nisi, sed
+                    condimentum lorem. Morbi sed vehicula magna.</blockquote>
                   <div class="thumb"> <img src="./../assets/images/testimonials-img4.jpg" alt="testimonials img"> </div>
-                  <div class="holder-info"> <strong class="name">Vince Roy</strong> <strong class="designation">CEO, XYZ Softwear</strong></div>
+                  <div class="holder-info"> <strong class="name">Vince Roy</strong> <strong class="designation">CEO, XYZ
+                      Softwear</strong></div>
                 </div>
               </div>
             </div>
@@ -1433,4 +1080,5 @@
     </div>
   </div>
 </ng-container>
-<ngx-spinner [fullScreen] = "true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)" color="#0b499c"></ngx-spinner>
+<ngx-spinner [fullScreen]="true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)"
+  color="#0b499c"></ngx-spinner>

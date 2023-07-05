@@ -9,5 +9,6 @@ export const AppConfigs = {
         getProductbyProductNameSlug : "Product/by-slug?slug=",
         getProductbyProductId : "ProductProduct/by-id?id=",
         getSliderLimit : "Slides/limit?limit=",
+        getTrademarkLimit : "trademark/limit?limit=",
     }
 }

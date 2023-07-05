@@ -89,6 +89,16 @@ export class MainService {
             )
     };
 
+    getTrademarkLimit(limit: number): Observable<ObjectModel> {
+        return this.http.get<any>(`${this.urlApi}${AppConfigs.urls.getTrademarkLimit}${limit}`)
+            .pipe(
+                retry(3), // retry a failed request up to 3 times
+                catchError(this.handleError), // then handle the error
+                mergeMap((response_: any) => {
+                    return of<ObjectModel>(<ObjectModel>response_);
+                })
+            )
+    };
 
 
 

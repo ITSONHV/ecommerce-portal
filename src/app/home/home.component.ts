@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   public listProduct: any;
   public urlImg: string = environment.urlImg;
   public categoryId: any;
+  public listTrademark: any;
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -27,7 +28,139 @@ export class HomeComponent implements OnInit {
     autoplayTimeout: 3000,
     autoplaySpeed: 1000,
     autoplay:true,
-    navSpeed: 700,
+    navSpeed: 1000,
+    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 3
+      },
+      640: {
+        items: 4
+      },
+      900: {
+        items: 4
+      },
+      1024: {
+        items: 4
+      }
+    },
+    nav: false
+  };
+
+  public customBestSaleProduct: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    items:6,
+    dots: false,
+    margin:10,
+    autoplayTimeout: 3000,
+    autoplaySpeed: 2000,
+    autoplay:true,
+    navSpeed: 2000,
+    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 3
+      },
+      640: {
+        items: 4
+      },
+      900: {
+        items: 4
+      },
+      1024: {
+        items: 4
+      }
+    },
+    nav: false
+  };
+
+  public customHotProduct: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    items: 4,
+    dots: false,
+    margin:10,
+    autoplayTimeout: 3000,
+    autoplaySpeed: 2000,
+    autoplay: false,
+    navSpeed: 2000,
+    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 3
+      },
+      640: {
+        items: 4
+      },
+      900: {
+        items: 4
+      },
+      1024: {
+        items: 4
+      }
+    },
+    nav: false
+  };
+
+  public customNewProduct: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    items: 4,
+    dots: false,
+    margin:10,
+    autoplayTimeout: 3000,
+    autoplaySpeed: 2000,
+    autoplay: false,
+    navSpeed: 2000,
+    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 3
+      },
+      640: {
+        items: 4
+      },
+      900: {
+        items: 4
+      },
+      1024: {
+        items: 4
+      }
+    },
+    nav: false
+  };
+
+  public customBrand: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    items: 4,
+    dots: false,
+    margin:10,
+    autoplayTimeout: 3000,
+    autoplaySpeed: 2000,
+    autoplay: false,
+    navSpeed: 2000,
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
@@ -56,17 +189,32 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.getProductPages();
+    this.getTrademark();
+
+
+    
+    this.isLoadComplete = true;
+    this.spinner.hide();
   }
   getProductPages() {
     this._svc.getProductPages().subscribe(
       (respones: ObjectModel) => {
         this.listProduct = respones.data;
-        this.isLoadComplete = true;
-        this.spinner.hide();
       },
       (err) => {
         console.log(err);
-        this.spinner.hide();
+        
+      }
+    );
+  }
+
+  getTrademark() {
+    this._svc.getTrademarkLimit(10).subscribe(
+      (respones: ObjectModel) => {
+        this.listTrademark = respones.data;
+      },
+      (err) => {
+        console.log(err);
       }
     );
   }
