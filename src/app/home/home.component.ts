@@ -13,10 +13,13 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class HomeComponent implements OnInit {
   isLoadComplete = false;
-  public listProduct: any;
+  public listProductBestSelling: any;
   public urlImg: string = environment.urlImg;
   public categoryId: any;
   public listTrademark: any;
+  public listProductSales: any;
+  public listProductIsNew: any;
+  public listProductIsHot: any;
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -187,15 +190,18 @@ export class HomeComponent implements OnInit {
     public elementRef: ElementRef) {
   }
   ngOnInit(): void {
-    this.getProductPages();
+    this.getProductIsBestSellingPages();
+    this.getProductSale();
+    this. getProductIsHot();
+    this.getProductIsNew();
     this.getTrademark();
     this.isLoadComplete = true;
   }
-  getProductPages() {
+  getProductIsBestSellingPages() {
     this.spinner.show();
-    this._svc.getProductPages().subscribe(
+    this._svc.getProductIsBestSellingPages().subscribe(
       (respones: ObjectModel) => {
-        this.listProduct = respones.data;
+        this.listProductBestSelling = respones.data;
       this.spinner.hide();
       },
       (err) => {
@@ -219,5 +225,49 @@ export class HomeComponent implements OnInit {
        this.spinner.hide();
       }
     );
+  }
+  getProductSale() {
+    this.spinner.show();
+    this._svc.getProductBestDiscountPages().subscribe(
+      (respones: ObjectModel) => {
+        this.listProductSales = respones.data;
+      this.spinner.hide();
+      },
+      (err) => {
+        console.log(err);
+        this.spinner.hide();
+      }
+    );
+  }
+
+  getProductIsHot() {
+    this.spinner.show();
+    this._svc.getProductIsHotPages().subscribe(
+      (respones: ObjectModel) => {
+        this.listProductIsHot = respones.data;
+      this.spinner.hide();
+      },
+      (err) => {
+        console.log(err);
+        this.spinner.hide();
+      }
+    );
+  }
+
+  getProductIsNew() {
+    this.spinner.show();
+    this._svc.getProductIsNewPages().subscribe(
+      (respones: ObjectModel) => {
+        this.listProductIsNew = respones.data;
+      this.spinner.hide();
+      },
+      (err) => {
+        console.log(err);
+        this.spinner.hide();
+      }
+    );
+  }
+  counterRate(i: number) {
+    return new Array(i);
   }
 }

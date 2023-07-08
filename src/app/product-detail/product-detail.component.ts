@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -15,9 +16,14 @@ import { MainService } from 'src/services/main.service';
 export class ProductDetailComponent implements OnInit {
   public slug: string;
   public product : any;
+  public productSale : any;
   public urlImg : string = environment.urlImg;
   public imgfirst : string;
   public categoryName = "";
+  public htmlContent = '';
+  public htmlDescription = '';
+  urlVideoSafe: SafeResourceUrl;
+  public reviewsProducts : any;
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -33,7 +39,7 @@ export class ProductDetailComponent implements OnInit {
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
-        items: 1
+        items: 2
       },
       400: {
         items: 3
@@ -51,7 +57,7 @@ export class ProductDetailComponent implements OnInit {
     nav: false
   };
   constructor(private _svc : MainService,private _router: ActivatedRoute,
-    private spinner: NgxSpinnerService, 
+    private spinner: NgxSpinnerService, public sanitizer: DomSanitizer
  ) {
   }
   ngOnInit(): void {
@@ -61,6 +67,7 @@ export class ProductDetailComponent implements OnInit {
       this.slug = params['slug'];
       this.getProductbyProductNameSlug(this.slug)
     });
+    this.getProductSales();
   }
   ngAfterViewInit(): void {
     
@@ -72,6 +79,12 @@ export class ProductDetailComponent implements OnInit {
         if(this.product != null){
           this.imgfirst = this.product.productImages[0]?.imageUrl??"";
           this.product.productImages?.shift();
+          this.htmlContent = this.product.content;
+          this.htmlDescription = this.product.description;
+          this.getReviewProducts(this.product.id);
+          if(this.product.video != ''){
+            this.urlVideoSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.product.video);
+          }
         }
         console.log(this.product);
         this.spinner.hide();
@@ -81,5 +94,34 @@ export class ProductDetailComponent implements OnInit {
         this.spinner.hide();
       }
     );
+  }
+
+  getReviewProducts(productId : number){
+    this._svc.getReviewProductLimit(5, productId).subscribe(
+      (respones: ObjectModel)=>{
+        this.reviewsProducts = respones.data;    
+        this.spinner.hide();
+      },
+      (err) =>{
+        console.log(err);
+        this.spinner.hide();
+      }
+    );
+  }
+
+  getProductSales(){
+    this._svc.getProductIsBestSellingPages().subscribe(
+      (respones: ObjectModel)=>{
+        this.productSale = respones.data;    
+        this.spinner.hide();
+      },
+      (err) =>{
+        console.log(err);
+        this.spinner.hide();
+      }
+    );
+  }
+  counterRate(i: number) {
+    return new Array(i);
   }
 }

@@ -24,7 +24,7 @@
               <div class="flexslider flexslider-thumb">
                 <owl-carousel-o [options]="customOptions">
                   <ng-container *ngFor="let item of product?.productImages ;  let i = index ;">
-                    <ng-template carouselSlide [id]="item.id">
+                    <ng-template carouselSlide [id]="item.id.toString()">
                       <li><a [href]='urlImg + item.imageUrl' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img [src]="urlImg + item.imageUrl" alt = "Thumbnail 2"/></a></li>
                     </ng-template>
                   </ng-container>
@@ -41,15 +41,17 @@
               </div>
               <div class="ratings">
                 <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p>
-                <p class="availability in-stock pull-right">Availability: <span>In Stock</span></p>
+                <p class="rating-links"> <a href="#">1 Đánh giá</a> <span class="separator"></span>
+                   <!-- <a href="#">Add Your Review</a>  -->
+                  </p>
+                <p class="availability in-stock pull-right" *ngIf="product?.guarantee > 0">Bảo hành: <span>{{product.guarantee}} tháng</span></p>
               </div>
               <div class="short-description">
                 <h2>Mô tả</h2>
-                <p>{{product?.content}}</p>
+                <div [innerHTML]="htmlContent"></div>
               </div>
               <div class="product-color-size-area">
-                <div class="color-area">
+                <!-- <div class="color-area">
                   <h2 class="saider-bar-title">Color</h2>
                   <div class="color">
                     <ul>
@@ -73,19 +75,19 @@
                       <li><a href="#">XXL</a></li>
                     </ul>
                   </div>
-                </div>
+                </div> -->
               </div>
               <div class="product-variation">
                 <form action="#" method="post">
                   <div class="cart-plus-minus">
-                    <label for="qty">Qty:</label>
+                    <label for="qty">Số lượng:</label>
                     <div class="numbers-row">
                       <div onClick="var result = document.getElementById('qty'); var qty = result.value;" class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
                       <input type="text" class="qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
                       <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
                     </div>
                   </div>
-                  <button class="button pro-add-to-cart" title="Add to Cart" type="button"><span><i class="fa fa-shopping-basket"></i> Add to Cart</span></button>
+                  <button class="button pro-add-to-cart" title="Thêm vào giỏ" type="button"><span><i class="fa fa-shopping-basket"></i> Thêm vào giỏ</span></button>
                 </form>
               </div>
               <div class="product-cart-option">
@@ -100,133 +102,71 @@
           <div class="product-overview-tab">
             <div class="product-tab-inner">
               <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
-                <li class="active"> <a href="#description" data-toggle="tab"> Description </a> </li>
-                <li> <a href="#reviews" data-toggle="tab">Reviews</a> </li>
-                <li><a href="#product_tags" data-toggle="tab">Tags</a></li>
-                <li> <a href="#custom_tabs" data-toggle="tab">Custom Tab</a> </li>
+                <li class="active"> <a href="#custom_tabs" data-toggle="tab">THÔNG SỐ KỸ THUẬT</a> </li>
+                <li > <a href="#description" data-toggle="tab"> CHI TIẾT SẢN PHẨM </a> </li>
+                <li> <a href="#reviews" data-toggle="tab">ĐÁNH GIÁ</a> </li>
+                <li><a href="#product_video" data-toggle="tab">Video</a></li>
               </ul>
               <div id="productTabContent" class="tab-content">
-                <div class="tab-pane fade in active" id="description">
+
+                <div class="tab-pane fade  in active" id="custom_tabs">
+                  <div class="product-tabs-content-inner clearfix">
+                  <!-- Load thông số -->
+                    <table class="table table-bordered">
+                      <ng-container *ngFor="let item of product?.productAttributes">
+                      <tr>
+                        <td class="att-name"><strong>{{item.attributeName}}</strong></td>
+                        <td class="att-value"><a href="#">{{item.attributeValueName}}</a></td>
+                      </tr>          
+                      </ng-container>       
+                    </table>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="description">
                   <div class="std">
-                    <p>Proin lectus ipsum, gravida et mattis vulputate, 
-                      tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in 
-                      faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend 
-                      laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla
-                      luctus malesuada tincidunt. Nunc facilisis sagittis ullamcorper. Proin 
-                      lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et 
-                      lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et 
-                      ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus 
-                      adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada 
-                      tincidunt. Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, 
-                      gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. 
-                      Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                      cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl 
-                      ut dolor dignissim semper. Nulla luctus malesuada tincidunt.</p>
-                    <p> Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.</p>
-                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+                    <div [innerHTML]="htmlDescription"></div>
                   </div>
                 </div>
                 <div id="reviews" class="tab-pane fade">
                   <div class="col-sm-5 col-lg-5 col-md-5">
                     <div class="reviews-content-left">
-                      <h2>Customer Reviews</h2>
                       <div class="review-ratting">
-                        <p><a href="#">Amazing</a> Review by Company</p>
-                        <table>
-                          <tbody>
-                            <tr>
-                              <th>Price</th>
-                              <td><div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div></td>
-                            </tr>
-                            <tr>
-                              <th>Value</th>
-                              <td><div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div></td>
-                            </tr>
-                            <tr>
-                              <th>Quality</th>
-                              <td><div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <p class="author"> Angela Mack<small> (Posted on 16/12/2015)</small> </p>
-                      </div>
-                      <div class="review-ratting">
-                        <p><a href="#">Good!!!!!</a> Review by Company</p>
-                        <table>
-                          <tbody>
-                            <tr>
-                              <th>Price</th>
-                              <td><div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div></td>
-                            </tr>
-                            <tr>
-                              <th>Value</th>
-                              <td><div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div></td>
-                            </tr>
-                            <tr>
-                              <th>Quality</th>
-                              <td><div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <p class="author"> Lifestyle<small> (Posted on 20/12/2015)</small> </p>
-                      </div>
-                      <div class="review-ratting">
-                        <p><a href="#">Excellent</a> Review by Company</p>
-                        <table>
-                          <tbody>
-                            <tr>
-                              <th>Price</th>
-                              <td><div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div></td>
-                            </tr>
-                            <tr>
-                              <th>Value</th>
-                              <td><div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div></td>
-                            </tr>
-                            <tr>
-                              <th>Quality</th>
-                              <td><div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <p class="author"> Jone Deo<small> (Posted on 25/12/2015)</small> </p>
-                      </div>
+                        <ng-container *ngIf="!reviewsProducts || reviewsProducts?.length == 0">
+                          <p>Không có đánh giá cho sản phẩm này.</p>
+                        </ng-container>
+                        
+                        <ng-container *ngFor="let review of reviewsProducts">
+                          <p> {{review.content}}</p>
+                          <div class="rating"><a>Đánh giá: </a>
+                             <ng-container *ngIf="review.rate >= 0">
+                            <i class="fa fa-star" *ngFor="let rate of counterRate(review.rate)"></i>
+                            <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - review.rate)"></i>
+                          </ng-container>
+                        </div>          
+                            <p class="author"> {{review.name}}<small> (Posted on 16/12/2015)</small> </p>
+                        </ng-container>
+                      </div>                    
                     </div>
                   </div>
                   <div class="col-sm-7 col-lg-7 col-md-7">
                     <div class="reviews-content-right">
-                      <h2>Write Your Own Review</h2>
+                      <h2>Nội dung đánh giá</h2>
                       <form>
-                        <h3>You're reviewing: <span>Donec Ac Tempus</span></h3>
-                        <h4>How do you rate this product?<em>*</em></h4>
+                        <h4>Bạn nghĩ thế nào về sản phẩm này?<em>*</em></h4>
                         <div class="table-responsive reviews-table">
                           <table>
                             <tbody>
                               <tr>
                                 <th></th>
-                                <th>1 star</th>
-                                <th>2 stars</th>
-                                <th>3 stars</th>
-                                <th>4 stars</th>
-                                <th>5 stars</th>
+                                <th>1 <i class="fa fa-star"></i></th>
+                                <th>2 <i class="fa fa-star"></i></th>
+                                <th>3 <i class="fa fa-star"></i></th>
+                                <th>4 <i class="fa fa-star"></i></th>
+                                <th>5 <i class="fa fa-star"></i></th>
                               </tr>
                               <tr>
-                                <td>Quality</td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                              </tr>
-                              <tr>
-                                <td>Price</td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                              </tr>
-                              <tr>
-                                <td>Value</td>
+                                <td>Đánh giá</td>
                                 <td><input type="radio"></td>
                                 <td><input type="radio"></td>
                                 <td><input type="radio"></td>
@@ -238,15 +178,15 @@
                         </div>
                         <div class="form-area">
                           <div class="form-element">
-                            <label>Nickname <em>*</em></label>
+                            <label>Họ và tên <em>*</em></label>
                             <input type="text">
                           </div>
                           <div class="form-element">
-                            <label>Summary of Your Review <em>*</em></label>
+                            <label>Số điện thoại <em></em></label>
                             <input type="text">
                           </div>
                           <div class="form-element">
-                            <label>Review <em>*</em></label>
+                            <label>Nội dung <em>*</em></label>
                             <textarea></textarea>
                           </div>
                           <div class="buttons-set">
@@ -257,38 +197,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="product_tags">
-                  <div class="box-collateral box-tags">
-                    <div class="tags">
-                      <form id="addTagForm" action="#" method="get">
-                        <div class="form-add-tags">
-                          <div class="input-box">
-                            <label for="productTagName">Add Your Tags:</label>
-                            <input class="input-text" name="productTagName" id="productTagName" type="text">
-                            <button type="button" title="Add Tags" class="button add-tags"><i class="fa fa-plus"></i> &nbsp;<span>Add Tags</span> </button>
-                          </div>
-                          <!--input-box--> 
-                        </div>
-                      </form>
-                    </div>
-                    <!--tags-->
-                    <p class="note">Use spaces to separate tags. Use single quotes (') for phrases.</p>
+                <div class="tab-pane fade" id="product_video">
+                  <div class="">
+                    <iframe [width]="840" height="840px" [src]="urlVideoSafe"  frameborder="0" allowfullscreen></iframe>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="custom_tabs">
-                  <div class="product-tabs-content-inner clearfix">
-                    <p><strong>Lorem Ipsum</strong><span>&nbsp;is
-                      simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                      has been the industry's standard dummy text ever since the 1500s, when 
-                      an unknown printer took a galley of type and scrambled it to make a type
-                      specimen book. It has survived not only five centuries, but also the 
-                      leap into electronic typesetting, remaining essentially unchanged. It 
-                      was popularised in the 1960s with the release of Letraset sheets 
-                      containing Lorem Ipsum passages, and more recently with desktop 
-                      publishing software like Aldus PageMaker including versions of Lorem 
-                      Ipsum.</span></p>
-                  </div>
-                </div>
+               
               </div>
             </div>
           </div>
@@ -337,19 +251,27 @@
           </div>
           <div class="block special-product">
             <div class="sidebar-bar-title">
-              <h3>Special Products</h3>
+              <h3>Sản phẩm ưu đãi</h3>
             </div>
             <div class="block-content">
-              <ul>
-                <li class="item">
-                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: product?.productNameSlug}" title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
-                  <div class="products-block-right">
-                    <p class="product-name"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: product?.productNameSlug}">Lorem ipsum dolor sit amet Consectetur</a> </p>
-                    <span class="price">$19.99</span>
-                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
-                  </div>
-                </li>
-                <li class="item">
+              <ul *ngIf="productSale">
+                <ng-container *ngFor="let item of productSale?.data; let i = index">
+                  <li class="item" *ngIf="i < 3">
+                    <div class="products-block-left"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item?.productNameSlug}" title="Sample Product" class="product-image"><img [src]='urlImg + item.imageUrl' alt="Sample Product "></a></div>
+                    <div class="products-block-right">
+                      <p class="product-name"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item?.productNameSlug}">{{item.productName}}</a> </p>
+                      <span class="special-price price">{{product?.promotionPrice | currency: "VND"}}</span>
+                      <div class="rating">
+                        <ng-container *ngIf="item.rate >= 0">
+                          <i class="fa fa-star" *ngFor="let rate of counterRate(item.rate)"></i>
+                          <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
+                        </ng-container>
+                       </div>
+                    </div>
+                  </li>
+                </ng-container>
+                
+                <!-- <li class="item">
                   <div class="products-block-left"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: product?.productNameSlug}" title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
                   <div class="products-block-right">
                     <p class="product-name"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: product?.productNameSlug}">Consectetur utes anet adipisicing elit</a> </p>
@@ -364,7 +286,7 @@
                     <span class="price">$99.99</span>
                     <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                   </div>
-                </li>
+                </li> -->
               </ul>
               <a class="link-all" href="shop_grid.html">All Products</a> </div>
           </div>
@@ -402,7 +324,7 @@
       <div class="col-xs-12">
         <div class="related-product-area">
           <div class="page-header">
-            <h2>Sản phẩm liên quan</h2>
+            <h2>SẢN PHẨM LIÊN QUAN</h2>
           </div>
           <div class="related-products-pro">
             <div class="slider-items-products">

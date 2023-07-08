@@ -36,6 +36,49 @@ export class MainService {
                 })
             )
     }
+    getProductBestDiscountPages(): Observable<ObjectModel> {
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductBestDiscountPages)
+            .pipe(
+                mergeMap((response_: any) => {
+                    let result = new ObjectModel();
+                    result = response_;
+                    return of<ObjectModel>(<ObjectModel>result);
+                })
+            )
+    }
+
+    getProductIsHotPages(): Observable<ObjectModel> {
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductIsHotPages)
+            .pipe(
+                mergeMap((response_: any) => {
+                    let result = new ObjectModel();
+                    result = response_;
+                    return of<ObjectModel>(<ObjectModel>result);
+                })
+            )
+    }
+
+    getProductIsNewPages(): Observable<ObjectModel> {
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductIsNewPages)
+            .pipe(
+                mergeMap((response_: any) => {
+                    let result = new ObjectModel();
+                    result = response_;
+                    return of<ObjectModel>(<ObjectModel>result);
+                })
+            )
+    }
+    getProductIsBestSellingPages(): Observable<ObjectModel> {
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductIsBestSellingPages)
+            .pipe(
+                mergeMap((response_: any) => {
+                    let result = new ObjectModel();
+                    result = response_;
+                    return of<ObjectModel>(<ObjectModel>result);
+                })
+            )
+    }
+
     getProductPagesByCategoryId(categoryId: number): Observable<ObjectModel> {
         return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPagesbyCategoryId + `${categoryId}`)
             .pipe(
@@ -100,6 +143,16 @@ export class MainService {
             )
     };
 
+    getReviewProductLimit(limit: number, productId: number): Observable<ObjectModel> {
+        return this.http.get<any>(`${this.urlApi}${AppConfigs.urls.getReviewProducts}` + "?limit=" + `${limit}` +"&productId=" + `${productId}`)
+            .pipe(
+                retry(3), // retry a failed request up to 3 times
+                catchError(this.handleError), // then handle the error
+                mergeMap((response_: any) => {
+                    return of<ObjectModel>(<ObjectModel>response_);
+                })
+            )
+    };
 
 
     getServerErrorMessage(error: HttpErrorResponse): string {

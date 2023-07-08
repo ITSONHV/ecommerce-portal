@@ -2204,7 +2204,7 @@ a.link:hover {
 ******************************************/
 
 .icon-new-label {
-	font-size: 10px;
+	font-size: 15px;
 	color: #333;
 	text-align: center;
 	display: block;
@@ -2216,8 +2216,8 @@ a.link:hover {
 	margin-top: 0px;
 	margin-left: 0px;
 	background: #fff764;
-	line-height: 10px;
-	border-radius: 2px;
+	line-height: 12px;
+	border-radius: 12px;
 }
 .new-right {
 	right: 6px;
@@ -2230,7 +2230,7 @@ a.link:hover {
 	padding: 4px 8px;
 }
 .icon-sale-label {
-	font-size: 10px;
+	font-size: 15px;
 	color: #fff;
 	text-align: center;
 	display: block;
@@ -2241,8 +2241,8 @@ a.link:hover {
 	margin-top: 0px;
 	margin-left: 0px;
 	background: #e53939;
-	line-height: 10px;
-	border-radius: 2px;
+	line-height: 12px;
+	border-radius: 13px;
 }
 .sale-right {
 	right: 6px;
@@ -2255,7 +2255,7 @@ a.link:hover {
 	padding: 4px 8px;
 }
 .icon-hot-label {
-	font-size: 10px;
+	font-size: 15px;
 	color: #fff;
 	text-align: center;
 	display: block;
@@ -2268,8 +2268,8 @@ a.link:hover {
 	margin-left: 0px;
 	background: #f81c31;
 	border: 1px solid #ec1226;
-	line-height: 10px;
-	border-radius: 3px;
+	line-height: 12px;
+	border-radius: 13px;
 	padding: 3px 8px 5px 8px;
 }
 .hot-right {

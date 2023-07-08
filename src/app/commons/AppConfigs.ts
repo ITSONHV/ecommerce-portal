@@ -10,5 +10,10 @@ export const AppConfigs = {
         getProductbyProductId : "ProductProduct/by-id?id=",
         getSliderLimit : "Slides/limit?limit=",
         getTrademarkLimit : "trademark/limit?limit=",
+        getProductBestDiscountPages : "Product/paging?IsBestDiscount=1",
+        getProductIsHotPages : "Product/paging?IsHot=1",
+        getProductIsNewPages : "Product/paging?IsNew=1",
+        getProductIsBestSellingPages : "Product/paging?IsBestSelling=1",        
+        getReviewProducts : "Product/get-reviews",        
     }
 }
