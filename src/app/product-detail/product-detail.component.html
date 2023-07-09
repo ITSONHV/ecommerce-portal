@@ -40,8 +40,13 @@
                 <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">{{product?.price | currency: "VND"}} </span> </p>
               </div>
               <div class="ratings">
-                <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                <p class="rating-links"> <a href="#">1 Đánh giá</a> <span class="separator"></span>
+                <div class="rating"> 
+                  <ng-container *ngIf="product?.rate >= 0">
+                    <i class="fa fa-star" *ngFor="let rate of counterRate(product?.rate)"></i>
+                    <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - product?.rate)"></i>
+                  </ng-container>
+                 </div>
+                <p class="rating-links"> <a href="#">{{product?.countRate}} Đánh giá</a> <span class="separator"></span>
                    <!-- <a href="#">Add Your Review</a>  -->
                   </p>
                 <p class="availability in-stock pull-right" *ngIf="product?.guarantee > 0">Bảo hành: <span>{{product.guarantee}} tháng</span></p>
@@ -144,7 +149,7 @@
                             <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - review.rate)"></i>
                           </ng-container>
                         </div>          
-                            <p class="author"> {{review.name}}<small> (Posted on 16/12/2015)</small> </p>
+                            <p class="author"> {{review.name}}<small> {{review.createdDate}}</small> </p>
                         </ng-container>
                       </div>                    
                     </div>
@@ -295,18 +300,8 @@
               <h3>Popular Tags</h3>
             </div>
             <div class="tag">
-              <ul>
-                <li><a href="#">Boys</a></li>
-                <li><a href="#">Camera</a></li>
-                <li><a href="#">good</a></li>
-                <li><a href="#">Computers</a></li>
-                <li><a href="#">Phone</a></li>
-                <li><a href="#">clothes</a></li>
-                <li><a href="#">girl</a></li>
-                <li><a href="#">shoes</a></li>
-                <li><a href="#">women</a></li>
-                <li><a href="#">accessoties</a></li>
-                <li><a href="#">View All Tags</a></li>
+              <ul >
+                <li *ngFor="let item of product?.productTags"><a href="#">{{item}}</a></li>
               </ul>
             </div>
           </div>
