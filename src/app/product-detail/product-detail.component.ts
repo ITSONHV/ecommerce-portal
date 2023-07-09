@@ -82,9 +82,6 @@ export class ProductDetailComponent implements OnInit {
           this.htmlContent = this.product.content;
           this.htmlDescription = this.product.description;
           this.getReviewProducts(this.product.id);
-          if(this.product.video != ''){
-            this.urlVideoSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.product.video);
-          }
         }
         console.log(this.product);
         this.spinner.hide();

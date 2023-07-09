@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { MainService } from 'src/services/main.service';
 import { ICategory } from 'src/interfaces/ICategory';
 import { Params, Router, ActivatedRoute } from '@angular/router';
@@ -19,7 +19,7 @@ import 'jquery';
     ])
   ]
 })
-export class MenuTopComponent implements OnInit,AfterViewInit {
+export class MenuTopComponent implements OnInit, AfterViewInit {
   public productGrComponent: ProductGridComponent;
   public isHidden = false;
   public menuObject: any;
@@ -28,9 +28,11 @@ export class MenuTopComponent implements OnInit,AfterViewInit {
   public rootMenu: any;
   public categoryName = "";
   public isShowMenu = this._mainsvc.isShowMenu;
+  public isShowIconMenuMobile = true;
   public allMenu: Array<ICategory> = [];
-  constructor(private _mainsvc: MainService, 
-    private router: Router, 
+  @Output() sendEventToParent = new EventEmitter<boolean>();
+  constructor(private _mainsvc: MainService,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     public elementRef: ElementRef,
     private spinner: NgxSpinnerService,
@@ -58,10 +60,19 @@ export class MenuTopComponent implements OnInit,AfterViewInit {
           // Lọc ra các phần tử của mảng con có parentId bằng với id của phần tử hiện tại của mảng cha
           let children = this.subMenu.filter((child: any) => child.categoryParent === parent.id);
           // Gán thuộc tính sub bằng giá trị của thuộc tính value của các phần tử con
-          if(children.length > 0)
+          if (children.length > 0)
             parent.submenu = children.map((child: any) => child);
         });
-        console.log("menu",this.allMenu);
+        if (this.allMenu.length > 0) {
+          if (localStorage.getItem('allmenu-app')?.length != 0) {
+            localStorage.removeItem('allmenu-app');
+            localStorage.setItem('allmenu-app', JSON.stringify(this.allMenu));
+          }
+          else {
+            localStorage.setItem('allmenu-app', JSON.stringify(this.allMenu));
+          }
+        }
+        console.log("menu", this.allMenu);
         this.spinner.hide();
       }
     )
@@ -105,10 +116,12 @@ export class MenuTopComponent implements OnInit,AfterViewInit {
     event.preventDefault();
   }
   checkRouterHome(): boolean {
-    if(this.router.url != "/")
+    if (this.router.url != "/")
       return false;
     return true;
   }
-
-  
+  handleClickMenuMobile() {
+    this.isShowIconMenuMobile = !this.isShowIconMenuMobile;
+    this.sendEventToParent.emit(this.isShowIconMenuMobile);
+  }
 }
