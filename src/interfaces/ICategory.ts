@@ -8,6 +8,8 @@ export interface  ICategory {
     status:number;
     updatedDate:string ;
     updatedUser:string;
+    active: boolean | undefined;
+    urlSlug:string,
     submenu?: ICategory[];
   }
     

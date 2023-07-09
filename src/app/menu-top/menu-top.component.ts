@@ -1,16 +1,25 @@
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { MainService } from 'src/services/main.service';
 import { ICategory } from 'src/interfaces/ICategory';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import { ProductGridComponent } from '../product-grid/product-grid.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import 'jquery';
 @Component({
   selector: 'app-menu-top',
   templateUrl: './menu-top.component.html',
-  styleUrls: ['./menu-top.component.css']
+  styleUrls: ['./menu-top.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+    state('in', style({ opacity: 1 })),
+    state('out', style({ opacity: 0 })),
+    transition('out => in', animate('300ms ease-in')),
+    transition('in => out', animate('300ms ease-out'))
+    ])
+  ]
 })
-export class MenuTopComponent implements OnInit,AfterViewInit {
+export class MenuTopComponent implements OnInit, AfterViewInit {
   public productGrComponent: ProductGridComponent;
   public isHidden = false;
   public menuObject: any;
@@ -18,94 +27,24 @@ export class MenuTopComponent implements OnInit,AfterViewInit {
   public comment: string = "";
   public rootMenu: any;
   public categoryName = "";
-  public allMenu: Array<ICategory> = [
-    // {
-    //   id : 1,
-    //   categoryName:"Menu 1" ,
-    //   categoryParent: 0,
-    //   createdDate: "" ,
-    //   createdUser : "" ,
-    //   sortOrder: 0 ,
-    //   status:0,
-    //   updatedDate:"" ,
-    //   updatedUser:"",
-    //   submenu: [
-
-    //   ]
-    // },
-    // {
-    //   id : 2,
-    //   categoryName:"Menu 2" ,
-    //   categoryParent: 0,
-    //   createdDate: "" ,
-    //   createdUser : "" ,
-    //   sortOrder: 0 ,
-    //   status:0,
-    //   updatedDate:"" ,
-    //   updatedUser:"",
-    //   submenu: [
-
-    //   ]
-    // },
-    // {
-    //   id : 3,
-    //   categoryName:"Menu 3" ,
-    //   categoryParent: 0,
-    //   createdDate: "" ,
-    //   createdUser : "" ,
-    //   sortOrder: 0 ,
-    //   status:0,
-    //   updatedDate:"" ,
-    //   updatedUser:"",
-    //   submenu: [
-
-    //   ]
-    // },
-    // {
-    //   id : 4,
-    //   categoryName:"Menu 4" ,
-    //   categoryParent: 0,
-    //   createdDate: "" ,
-    //   createdUser : "" ,
-    //   sortOrder: 0 ,
-    //   status:0,
-    //   updatedDate:"" ,
-    //   updatedUser:"",
-    //   submenu: [
-
-    //   ]
-    // }
-  ];
-  constructor(private _mainsvc: MainService, 
-    private router: Router, 
+  public isShowMenu = this._mainsvc.isShowMenu;
+  public isShowIconMenuMobile = true;
+  public allMenu: Array<ICategory> = [];
+  @Output() sendEventToParent = new EventEmitter<boolean>();
+  constructor(private _mainsvc: MainService,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     public elementRef: ElementRef,
     private spinner: NgxSpinnerService,
     ) {
   }
-
   ngOnInit(): void {
     this.spinner.show();
     this.categoryName = this._mainsvc.categoryName;
     this.getMenu();
   }
   ngAfterViewInit(): void {
-    let elclass = document.getElementsByClassName('mega-menu-category');
-    if(this.router.url ==="/"){
-      if(elclass.length > 0){
-        for (let index = 0; index < elclass.length; index++) {
-          const element = elclass[index] as HTMLElement;
-          element.setAttribute("style","display: block !important");
-        }
-      }
-    }
-    $(this.elementRef.nativeElement).find('.mega-menu-category .nav > li').hover(function() {
-      jQuery(this).addClass("active");
-      jQuery(this).find('.popup').stop(true, true).fadeIn('slow');},
-      function() {
-        jQuery(this).removeClass("active");
-        jQuery(this).find('.popup').stop(true, true).fadeOut('slow');
-    });
+    this.activatedRoute.url.subscribe(url => console.log(url))
   }
   getMenu() {
     this._mainsvc.getCategories().subscribe(
@@ -121,9 +60,19 @@ export class MenuTopComponent implements OnInit,AfterViewInit {
           // Lọc ra các phần tử của mảng con có parentId bằng với id của phần tử hiện tại của mảng cha
           let children = this.subMenu.filter((child: any) => child.categoryParent === parent.id);
           // Gán thuộc tính sub bằng giá trị của thuộc tính value của các phần tử con
-          parent.submenu = children.map((child: any) => child);
+          if (children.length > 0)
+            parent.submenu = children.map((child: any) => child);
         });
-        console.log("menu",this.allMenu);
+        if (this.allMenu.length > 0) {
+          if (localStorage.getItem('allmenu-app')?.length != 0) {
+            localStorage.removeItem('allmenu-app');
+            localStorage.setItem('allmenu-app', JSON.stringify(this.allMenu));
+          }
+          else {
+            localStorage.setItem('allmenu-app', JSON.stringify(this.allMenu));
+          }
+        }
+        console.log("menu", this.allMenu);
         this.spinner.hide();
       }
     )
@@ -151,16 +100,7 @@ export class MenuTopComponent implements OnInit,AfterViewInit {
     return top;
   };
   toggleHandle(event: any): void {
-    let focusElement: HTMLElement = document.getElementById('mega-menu-category') as HTMLElement;
-    if (focusElement.style.display) {
-      focusElement.style.display = 'block !important'
-    }
-    else if(this.checkRouterHome()) {
-      focusElement.style.display = 'block !important'
-    }
-    else {
-      focusElement.style.display = 'none !important'
-    }
+    this.isShowMenu = !this.isShowMenu;
   }
   handleMenu(event: any, category: any): void {
     const queryParams: Params = { slug: category.urlSlug };
@@ -176,8 +116,12 @@ export class MenuTopComponent implements OnInit,AfterViewInit {
     event.preventDefault();
   }
   checkRouterHome(): boolean {
-    if(this.router.url != "/")
+    if (this.router.url != "/")
       return false;
     return true;
+  }
+  handleClickMenuMobile() {
+    this.isShowIconMenuMobile = !this.isShowIconMenuMobile;
+    this.sendEventToParent.emit(this.isShowIconMenuMobile);
   }
 }

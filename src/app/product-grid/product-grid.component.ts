@@ -5,6 +5,7 @@ import { ObjectModel } from 'src/models/object_paging.model';
 import Swal from 'sweetalert2';
 import { ProductModel } from 'src/models/product.model';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-product-grid',
@@ -16,7 +17,9 @@ export class ProductGridComponent implements OnInit {
   public urlImg : string = environment.urlImg;
   public urlSlug : any ;
   public categoryName: any ;
-  constructor(private _svc : MainService,private _router: ActivatedRoute ) {
+  constructor(private _svc : MainService,private _router: ActivatedRoute,
+    private spinner: NgxSpinnerService, 
+    ) {
   }
   ngOnInit(): void {
     this._router.queryParams.subscribe(params => {
@@ -31,32 +34,41 @@ export class ProductGridComponent implements OnInit {
     });
   }
   getProductPages()  {
+    this.spinner.show();
     this._svc.getProductPages().subscribe(
       (respones: ObjectModel)=>{
         this.listProduct = respones.data;
+        this.spinner.hide();
       },
       (err) =>{
-
+        console.log(err);
+        this.spinner.hide();
       }
     );
   }
   getProductPagesbyCategoryId(categoryId : number){
+    this.spinner.show();
     this._svc.getProductPagesByCategoryId(categoryId).subscribe(
       (respones: ObjectModel)=>{
         this.listProduct = respones.data;
+        this.spinner.hide();
       },
       (err) =>{
         console.log(err);
+        this.spinner.hide();
       }
     );
   }
   getProductPagesByCategorySlug(slug : string){
+    this.spinner.show();
     this._svc.getProductPagesByCategorySlug(slug).subscribe(
       (respones: ObjectModel)=>{
         this.listProduct = respones.data;
+        this.spinner.hide();
       },
       (err) =>{
         console.log(err);
+        this.spinner.hide();
       }
     );
   }

@@ -236,6 +236,7 @@ jQuery(document).ready(function() {
         ******************************************/
 
         jQuery('.mega-menu-title').on('click', function() {
+            debugger
             if (jQuery('.mega-menu-category').is(':visible')) {
                 jQuery('.mega-menu-category').slideUp();
             } else {
@@ -255,6 +256,7 @@ jQuery(document).ready(function() {
 
 
     jQuery('.mega-menu-category .nav > li.view-more').on('click', function(e) {
+        debugger
         if (jQuery('.mega-menu-category .nav > li.more-menu').is(':visible')) {
             jQuery('.mega-menu-category .nav > li.more-menu').stop().slideUp();
             jQuery(this).find('a').text('More category');

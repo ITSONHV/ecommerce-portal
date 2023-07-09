@@ -2,3 +2,15 @@
     overflow: hidden;
     position: relative;
 }
+
+.table tr td.att-name {
+    width: 255px;
+    height: 46px;
+    background: #f0f3fc;
+}
+
+.table tr td {
+    border: 1px solid #dddfe6;
+    vertical-align: middle;
+    text-indent: 17px;
+}

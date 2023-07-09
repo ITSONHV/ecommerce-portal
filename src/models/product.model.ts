@@ -21,4 +21,13 @@ export class ProductModel {
         updatedUser: string  ;
         createdUser: string  ;
         ProductNameSlug : string;
+        productAttributesModel: productAttributesModel[];
+}
+
+export class productAttributesModel {
+        attributeName: string  ;
+        attributeValueName: string ;
+        attributeId: number  ;
+        attributeValueID: number  ;
+        productId: number  ;
 }

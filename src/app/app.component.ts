@@ -1,15 +1,79 @@
-import { Component, OnInit,ViewChild  } from '@angular/core';
+import { Component, Inject, OnInit,ViewChild  } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MainService } from 'src/services/main.service';
+import { MenuTopComponent } from './menu-top/menu-top.component';
 
+import { DOCUMENT } from '@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit  {
-  constructor(private _mainsvc: MainService){}
+  isShowMenu = false;
+  isShowIconMenuChild = false;
+  allMenu : any;
+  cssCloseMenuMobile = {
+    'left': '-250px',
+    'width': '250px',
+    'height': '7786px', 
+    'display': 'none', 
+    'overflow': 'hidden',
+  }
+  cssOpenMenuMobile = {
+    'left': '0px', 
+    'width': '250px', 
+    'height': '7786px', 
+    'display': 'block', 
+    'overflow': 'hidden',
+  }
+  constructor(private _mainsvc: MainService, private activatedRoute: ActivatedRoute,
+    private router: Router, 
+    @Inject(DOCUMENT) private document: Document,
+    private spinner: NgxSpinnerService
+    ){}
   ngOnInit(): void {
-    
+    this.loadMenuToMobile();
    };
   title = 'ecommerce-portal';
+  ngAfterViewInit(): void {
+  }
+  listenEventFromChild(check: boolean) : void {
+    this.isShowMenu = !this.isShowMenu;
+    const body = this.document.body;
+    if (body.classList.contains('mmPushBody')) {
+      body.classList.remove('mmPushBody');
+    } else {
+      body.classList.add('mmPushBody');
+    }
+  }
+  clickIconShow(itemParen:any) : void {
+    itemParen.isExpanded = !itemParen.isExpanded;
+      for (let item of this.allMenu) {
+        if (item.id !== itemParen.id) {
+          item.isExpanded = false;
+      }
+    }
+  }
+  loadMenuToMobile():void{
+    this.spinner.show();
+    if(localStorage.getItem('allmenu-app')){
+      this.allMenu = JSON.parse(localStorage.getItem('allmenu-app') ?? "");
+    }
+    this.spinner.hide();
+  }
+  handleMenu(event: any, category: any): void {
+    const queryParams: Params = { slug: category.urlSlug };
+    this._mainsvc.categoryName = category.categoryName;
+    this.router.navigate(
+      ['danh-muc-san-pham-g'],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    )
+    event.preventDefault();
+  }
 }
