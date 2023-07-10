@@ -1,0 +1,11 @@
+.footer-logo a {
+    color: #333333;
+}
+.logoImg{
+    width: 100% !important; 
+	max-width: 150px !important;
+	max-height: 200px !important;
+	height: auto !important;	
+    display: block;
+    margin: auto;
+}

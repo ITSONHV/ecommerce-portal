@@ -40,7 +40,7 @@
                   <div class="title"> Ưu đãi to </div>
                   <div class="desc-text">Up to 55% off</div>
                   <span>Màn hình, Laptop</span>
-                  <p><a href="#" class="shop-now">Mua nào!</a></p>
+                  <p><a href="#" class="shop-now">Mua ngay !</a></p>
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
 
 
                             <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                [queryParams]="{slug: item.productNameSlug}">
+                                (click)="handleViewDetailProduct($event,item)">
                                 <figure> <img class="first-img" [src]="urlImg + item.imageUrl"
                                     alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl"
                                     alt="{{item.productName}}"></figure>
@@ -90,7 +90,7 @@
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                  [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
+                                  (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a> </div>
                               <div class="item-content">
                                 <div class="rating">
                                   <!-- Tạo sao đánh giá -->
@@ -156,7 +156,7 @@
                           <div class="product-thumbnail">
                             <div class="icon-new-label new-left">New</div>
                             <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                [queryParams]="{slug: item.productNameSlug}">
+                                (click)="handleViewDetailProduct($event,item)">
                                 <figure> <img class="first-img" img class="first-img" [src]="urlImg + item.imageUrl"
                                     alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl"
                                     alt="{{item.productName}}"></figure>
@@ -175,7 +175,7 @@
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                  [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a></div>
+                                  (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a></div>
                               <div class="item-content">
                                 <div class="rating">
                                      <!-- Tạo sao đánh giá -->
@@ -247,7 +247,7 @@
                           <div class="product-thumbnail">
                             <div class="icon-new-label new-left">New</div>
                             <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                [queryParams]="{slug: item.productNameSlug}">
+                                (click)="handleViewDetailProduct($event,item)">
                                 <figure> <img class="first-img" img class="first-img" [src]="urlImg + item.imageUrl"
                                     alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl"
                                     alt="{{item.productName}}"></figure>
@@ -266,7 +266,7 @@
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                  [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a></div>
+                                  (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a></div>
                               <div class="item-content">
                                 <div class="rating"> 
                                     <!-- Tạo sao đánh giá -->
@@ -344,7 +344,7 @@
                           <div class="product-thumbnail">
                             <div class="icon-hot-label hot-left">Hot</div>
                             <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                [queryParams]="{slug: item.productNameSlug}">
+                                (click)="handleViewDetailProduct($event,item)">
                                 <figure> <img class="first-img" img class="first-img" [src]="urlImg + item.imageUrl"
                                     alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl"
                                     alt="{{item.productName}}"></figure>
@@ -363,7 +363,7 @@
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                  [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a></div>
+                                  (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a></div>
                               <div class="item-content">
                                 <div class="rating"> 
                                    <!-- Tạo sao đánh giá -->

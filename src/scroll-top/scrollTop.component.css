@@ -1,0 +1,16 @@
+.toTop_part {
+  position: fixed;
+  bottom: 15px;
+  right: 30px;
+  z-index: 2000;
+
+  button {
+    cursor: pointer;
+    min-width: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #004f93;
+    background-color:#ff7918 !important;
+  }
+}
