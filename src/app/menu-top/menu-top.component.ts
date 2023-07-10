@@ -6,6 +6,7 @@ import { ProductGridComponent } from '../product-grid/product-grid.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import 'jquery';
+import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-menu-top',
   templateUrl: './menu-top.component.html',
@@ -36,6 +37,8 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     public elementRef: ElementRef,
     private spinner: NgxSpinnerService,
+    private meta: Meta,
+    private titleService: Title
     ) {
   }
   ngOnInit(): void {
@@ -72,7 +75,6 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
             localStorage.setItem('allmenu-app', JSON.stringify(this.allMenu));
           }
         }
-        console.log("menu", this.allMenu);
         this.spinner.hide();
       }
     )
@@ -103,6 +105,9 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     this.isShowMenu = !this.isShowMenu;
   }
   handleMenu(event: any, category: any): void {
+    this.meta.updateTag({ name: 'description', content: category.seoDescription });
+    this.titleService.setTitle(category.seoTitle);
+    this.meta.updateTag({ name: 'keywords', content: category.seoKeyword });
     const queryParams: Params = { slug: category.urlSlug };
     this._mainsvc.categoryName = category.categoryName;
     this.router.navigate(

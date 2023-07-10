@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { ProductModel } from 'src/models/product.model';
 import { MainService } from 'src/services/main.service';
+import { SwalService } from 'src/services/swal.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-detail',
@@ -22,7 +24,7 @@ export class ProductDetailComponent implements OnInit {
   public categoryName = "";
   public htmlContent = '';
   public htmlDescription = '';
-  urlVideoSafe: SafeResourceUrl;
+  public quantity = 1 ;
   public reviewsProducts : any;
   public customOptions: OwlOptions = {
     loop: true,
@@ -57,13 +59,15 @@ export class ProductDetailComponent implements OnInit {
     nav: false
   };
   constructor(private _svc : MainService,private _router: ActivatedRoute,
-    private spinner: NgxSpinnerService, public sanitizer: DomSanitizer
+    private spinner: NgxSpinnerService, public sanitizer: DomSanitizer,
+    private _swal: SwalService
  ) {
   }
   ngOnInit(): void {
     this.spinner.show();
     this.categoryName = this._svc.categoryName;
     this._router.queryParams.subscribe(params => {
+      debugger
       this.slug = params['slug'];
       this.getProductbyProductNameSlug(this.slug)
     });
@@ -120,5 +124,31 @@ export class ProductDetailComponent implements OnInit {
   }
   counterRate(i: number) {
     return new Array(i);
+  }
+  decreaseQuantity(): void{
+    if (!isNaN(this.quantity) && this.quantity > 0) {
+      this.quantity--;
+    }
+    else{
+      this._swal.Swal(
+        'Số lượng không hợp lệ!',
+        'Thông báo',
+        'warning',
+        'Đóng'
+      )
+    }
+  }
+  increaseQuantity(): void{
+    if (!isNaN(this.quantity)) {
+      this.quantity++;
+    }
+    else{
+      this._swal.Swal(
+        'Số lượng không hợp lệ!',
+        'Thông báo',
+        'warning',
+        'Đóng'
+      )
+    }
   }
 }

@@ -8,6 +8,9 @@ export class CategoryModel {
     status:number ;
     updatedDate:string ;
     updatedUser:string ;
+    seoDescription:string ;
+    seoTitle:string ;
+    seoKeyword:string ;
     submenu?: CategoryModel[];
   }
     

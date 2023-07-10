@@ -28,6 +28,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SafePipe } from './commons/PipeCustom';
+import { ScrollTopComponent } from 'src/scroll-top/scrollTop.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +54,8 @@ import { SafePipe } from './commons/PipeCustom';
     ProductListComponent,
     OrderHistoryComponent,
     OrderDetailComponent,
-    SafePipe
+    SafePipe,
+    ScrollTopComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { SafePipe } from './commons/PipeCustom';
     CarouselModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    FormsModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

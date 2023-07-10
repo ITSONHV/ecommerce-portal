@@ -5,6 +5,7 @@ import { ObjectModel } from 'src/models/object_paging.model';
 import { MainService } from 'src/services/main.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -187,7 +188,12 @@ export class HomeComponent implements OnInit {
   pathBanner="./../assets/images/sub1.jpg";
   constructor(private _svc: MainService, 
     private spinner: NgxSpinnerService, 
-    public elementRef: ElementRef) {
+    public elementRef: ElementRef,
+    private meta: Meta,
+    private _router: ActivatedRoute,
+    private router: Router,
+    private titleService: Title
+    ) {
   }
   ngOnInit(): void {
     this.getProductIsBestSellingPages();
@@ -269,5 +275,21 @@ export class HomeComponent implements OnInit {
   }
   counterRate(i: number) {
     return new Array(i);
+  }
+  handleViewDetailProduct(event: any, product: any): void {
+    debugger
+    this.meta.updateTag({ name: 'description', content: product.seoDescription ?? ""});
+    this.titleService.setTitle(product.seoTitle ?? "");
+    this.meta.updateTag({ name: 'keywords', content: product.seoKeyword ?? ""});
+    const queryParams: Params = { slug: product.productNameSlug };
+    this.router.navigate(
+      ['chi-tiet'],
+      {
+        relativeTo: this._router,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    )
+    event.preventDefault();
   }
 }

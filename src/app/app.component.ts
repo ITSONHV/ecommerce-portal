@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit,ViewChild  } from '@angular/core';
+import { Component, HostListener, Inject, OnInit,ViewChild  } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MainService } from 'src/services/main.service';
 import { MenuTopComponent } from './menu-top/menu-top.component';
@@ -14,6 +14,35 @@ export class AppComponent implements OnInit  {
   isShowMenu = false;
   isShowIconMenuChild = false;
   allMenu : any;
+  @HostListener('window:resize', ['$event'])
+  onResize(event : any) {
+    // Lấy chiều rộng và chiều cao của cửa sổ
+    const width = event.target.innerWidth;
+    const height = event.target.innerHeight;
+    // Thực hiện các hành động phù hợp
+    if(width >= 765 && height >= 722){
+      if(this.isShowMenu === true){
+        this.isShowMenu = false;
+        const body = this.document.body;
+        if (body.classList.contains('mmPushBody')) {
+          body.classList.remove('mmPushBody');
+        } else {
+          body.classList.add('mmPushBody');
+        }
+      }
+    }
+    else{
+      if(this.isShowMenu === true){
+        this.isShowMenu = false;
+        const body = this.document.body;
+        if (body.classList.contains('mmPushBody')) {
+          body.classList.remove('mmPushBody');
+        } else {
+          body.classList.add('mmPushBody');
+        }
+      }
+    }
+  }
   cssCloseMenuMobile = {
     'left': '-250px',
     'width': '250px',
@@ -75,5 +104,8 @@ export class AppComponent implements OnInit  {
       }
     )
     event.preventDefault();
+  }
+  onActivate(event: any) {
+    window.scroll(0, 0);
   }
 }
