@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { MainService } from 'src/services/main.service';
@@ -168,19 +168,19 @@ export class HomeComponent implements OnInit {
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
-        items: 1
-      },
-      400: {
         items: 3
       },
-      640: {
+      400: {
         items: 4
+      },
+      640: {
+        items: 5
       },
       900: {
-        items: 4
+        items: 6
       },
       1024: {
-        items: 4
+        items: 6
       }
     },
     nav: false

@@ -72,5 +72,9 @@ export class ProductGridComponent implements OnInit {
       }
     );
   }
+  
+  counterRate(i: number) {
+    return new Array(i);
+  }
 }
 
