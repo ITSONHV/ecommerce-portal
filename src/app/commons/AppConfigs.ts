@@ -3,6 +3,7 @@ export const AppConfigs = {
     urls: {
         getExpense:'/expense',
         getCategorise:'category/all',
+        getCategoryBySlug:'category/by-slug?slug=',
         getProductPages : "Product/paging",
         getProductPagesbyCategoryId : "Product/paging?CategoryId=",
         getProductPagesbyCategorySlug : "Product/paging?UrlCategorySlug=",
@@ -15,5 +16,6 @@ export const AppConfigs = {
         getProductIsNewPages : "Product/paging?IsNew=1",
         getProductIsBestSellingPages : "Product/paging?IsBestSelling=1",        
         getReviewProducts : "Product/get-reviews",        
+        getGroupSerrchByCategoryID : "filters/category-by-id?CategoryId=",        
     }
 }
