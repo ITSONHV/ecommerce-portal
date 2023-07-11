@@ -58,4 +58,8 @@ export class ProductListComponent implements OnInit {
       }
     );
   }
+
+  counterRate(i: number) {
+    return new Array(i);
+  }
 }
