@@ -6,17 +6,28 @@
         <div class="product-view-area">
           <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
             <div class="icon-sale-label sale-left">Sale</div>
-            <div class="large-image"> <a href="./../assets/images/products/product-1.jpg" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" src="./../assets/images/products/product-1.jpg"> </a> </div>
+            <div class="large-image"> <a href="./../assets/images/products/product-1.jpg" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" src="./../assets/images/products/product-1.jpg"> </a> </div> 
             <div class="flexslider flexslider-thumb">
-              <ul class="previews-list slides">
+            <owl-carousel-o [options]="customOptions">
+              <ng-container>
+                <ng-template carouselSlide class="previews-list slides">
                 <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 2"/></a></li>
-                <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 1"/></a></li>
-                <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 1"/></a></li>
+                </ng-template>
+                <ng-template carouselSlide class="previews-list slides">
                 <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 2"/></a></li>
+                </ng-template>
+                <ng-template carouselSlide class="previews-list slides">
                 <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 2"/></a></li>
-              </ul>
+                </ng-template>
+                <ng-template carouselSlide class="previews-list slides">
+                  <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 2"/></a></li>
+                </ng-template>
+                <ng-template carouselSlide class="previews-list slides">
+                  <li><a href='./../assets/images/products/product-1.jpg' class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: './../assets/images/products/product-1.jpg' "><img src="./../assets/images/products/product-1.jpg" alt = "Thumbnail 2"/></a></li>
+                </ng-template>
+              </ng-container>
+            </owl-carousel-o>
             </div>
-            
             <!-- end: more-./../assets/images --> 
             
           </div>
@@ -69,9 +80,9 @@
                   <div class="cart-plus-minus">
                     <label for="qty">Quantity:</label>
                     <div class="numbers-row">
-                      <div onClick="var result = document.getElementById('qty'); var qty = result.value; result.value--;return false;" class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
-                      <input type="text" class="qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
-                      <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
+                      <div (click)="decreaseQuantity()"  class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
+                      <input type="text" class="qty" title="Qty" [(ngModel)]="quantity" value="1" maxlength="12" id="qty" name="qty">
+                      <div (click)="increaseQuantity()" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
                     </div>
                   </div>
                   <button class="button pro-add-to-cart" title="Add to Cart" type="button"><span><i class="fa fa-shopping-basket"></i> Add to Cart</span></button>
@@ -90,5 +101,5 @@
         
       </div>
     </div>
-<a style="display: inline;" id="quick_view_popup-close" href="index.html"><i class="icon pe-7s-close"></i></a> 
+<a style="display: inline;" (click)="handleClickCloseModal($event)" id="quick_view_popup-close" href="#"><i class="icon pe-7s-close"></i></a> 
 </div>

@@ -129,6 +129,9 @@ export class ProductDetailComponent implements OnInit {
     if (!isNaN(this.quantity) && this.quantity > 0) {
       this.quantity--;
     }
+    else if(!isNaN(this.quantity) && this.quantity === 0){
+      return;
+    }
     else{
       this._swal.Swal(
         'Số lượng không hợp lệ!',

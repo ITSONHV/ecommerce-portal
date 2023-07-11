@@ -10,14 +10,16 @@ export class SwalService {
         title?: string,
         icon?: SweetAlertIcon,
         confirmButtonText?: string,
+        target?: any,
         cancelButtonText?: string,
-        showCancelButton?: boolean
+        showCancelButton?: boolean,
     ): Promise<SweetAlertResult> {
         const options: SweetAlertOptions = {
             text,
             title,
             icon,
             confirmButtonText,
+            target,
             cancelButtonText,
             showCancelButton
         };

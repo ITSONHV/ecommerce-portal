@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ObjectModel } from 'src/models/object_paging.model';
@@ -14,6 +14,7 @@ import { Meta, Title } from '@angular/platform-browser';
 })
 export class HomeComponent implements OnInit {
   isLoadComplete = false;
+  isShowQuickView = false;
   public listProductBestSelling: any;
   public urlImg: string = environment.urlImg;
   public categoryId: any;
@@ -21,6 +22,8 @@ export class HomeComponent implements OnInit {
   public listProductSales: any;
   public listProductIsNew: any;
   public listProductIsHot: any;
+  @Input() modalOpen: boolean;
+  @Output() modalClose = new EventEmitter();
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -291,5 +294,11 @@ export class HomeComponent implements OnInit {
       }
     )
     event.preventDefault();
+  }
+  openModalQuickView() {
+    this.isShowQuickView = !this.isShowQuickView;
+  }
+  listenEventFromChild(check: boolean) : void {
+    this.isShowQuickView = !this.isShowQuickView;
   }
 }
