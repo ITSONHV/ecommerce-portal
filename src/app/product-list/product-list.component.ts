@@ -14,6 +14,8 @@ export class ProductListComponent implements OnInit {
   public urlImg : string = environment.urlImg;
   public urlSlug : any ;
   public categoryName: any ;
+  public groupSearch: any;
+  public category: any;
   constructor(private _svc : MainService,private _router: ActivatedRoute ) {
   }
   ngOnInit(): void {
@@ -21,12 +23,16 @@ export class ProductListComponent implements OnInit {
       this.urlSlug = params['slug'];
       this.categoryName = this._svc.categoryName;
       if(this.urlSlug != null && this.urlSlug != ""){
+        this.getCategoryBySlug(this.urlSlug);
         this.getProductPagesByCategorySlug(this.urlSlug);
       }
       else{
-        this.getProductPages();  
+        this.getProductPages();
+        this.getGroupSearch(0); // get mặc định all
       }
     });
+
+    
   }
   getProductPages()  {
     this._svc.getProductPages().subscribe(
@@ -52,6 +58,32 @@ export class ProductListComponent implements OnInit {
     this._svc.getProductPagesByCategorySlug(slug).subscribe(
       (respones: ObjectModel)=>{
         this.listProduct = respones.data;
+      },
+      (err) =>{
+        console.log(err);
+      }
+    );
+  }
+
+  getCategoryBySlug(slug: string){
+    this._svc.getCategoryBySlug(slug).subscribe(
+      (respones: ObjectModel)=>{
+        this.category = respones.data;
+        if(this.category != null){  
+          debugger;
+          this.getGroupSearch(this.category.id);
+        }
+      },
+      (err) =>{
+        console.log(err);
+      }
+    );
+  }
+
+  getGroupSearch(cateID: number){
+    this._svc.getGroupSerrchByCategoryID(cateID).subscribe(
+      (respones: ObjectModel)=>{
+        this.groupSearch = respones.data;
       },
       (err) =>{
         console.log(err);

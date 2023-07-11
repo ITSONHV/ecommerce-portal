@@ -12,6 +12,7 @@ export class MainService {
     constructor(private http: HttpClient) { }
     urlApi = environment.apiUrl;
     categoryName : string;
+    categoryId : number;
     public isShowMenu = true;
     httpOptions = {
         headers: new HttpHeaders({
@@ -26,6 +27,17 @@ export class MainService {
                 )
             )
     }
+    getCategoryBySlug(slug: string): Observable<ObjectModel> {
+        return this.http.get<any>(`${this.urlApi}${AppConfigs.urls.getCategoryBySlug}${slug}`)
+            .pipe(
+                mergeMap((response_: any) => {
+                    let result = new ObjectModel();
+                    result = response_;
+                    return of<ObjectModel>(<ObjectModel>result);
+                })
+            )
+    }
+    
     getProductPages(): Observable<ObjectModel> {
         return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPages)
             .pipe(
@@ -154,7 +166,16 @@ export class MainService {
             )
     };
 
-
+    getGroupSerrchByCategoryID(cateID : number): Observable<ObjectModel> {
+        return this.http.get<any>(`${this.urlApi}${AppConfigs.urls.getGroupSerrchByCategoryID}${cateID}`)
+            .pipe(
+                retry(3), // retry a failed request up to 3 times
+                catchError(this.handleError), // then handle the error
+                mergeMap((response_: any) => {
+                    return of<ObjectModel>(<ObjectModel>response_);
+                })
+            )
+    };
     getServerErrorMessage(error: HttpErrorResponse): string {
         switch (error.status) {
             case 404: {

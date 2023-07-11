@@ -110,6 +110,7 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     this.meta.updateTag({ name: 'keywords', content: category.seoKeyword });
     const queryParams: Params = { slug: category.urlSlug };
     this._mainsvc.categoryName = category.categoryName;
+    this._mainsvc.categoryId = category.id;
     this.router.navigate(
       ['danh-muc-san-pham-g'],
       {

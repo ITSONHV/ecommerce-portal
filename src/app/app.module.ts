@@ -30,6 +30,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SafePipe } from './commons/PipeCustom';
 import { ScrollTopComponent } from 'src/scroll-top/scrollTop.component';
 import { FormsModule } from '@angular/forms';
+import { FacebookModule } from 'ngx-facebook';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +66,8 @@ import { FormsModule } from '@angular/forms';
     CarouselModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    FormsModule
+    FormsModule,
+    //  FacebookModule.forRoot()
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
