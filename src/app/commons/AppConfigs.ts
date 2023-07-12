@@ -16,6 +16,7 @@ export const AppConfigs = {
         getProductIsNewPages : "Product/paging?IsNew=1",
         getProductIsBestSellingPages : "Product/paging?IsBestSelling=1",        
         getReviewProducts : "Product/get-reviews",        
-        getGroupSerrchByCategoryID : "filters/category-by-id?CategoryId=",        
+        getGroupSerrchByCategoryID : "filters/category-by-id?CategoryId=",     
+        getProductListPaging : "Product/paging?",          
     }
 }

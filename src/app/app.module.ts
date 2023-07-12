@@ -31,7 +31,9 @@ import { SafePipe } from './commons/PipeCustom';
 import { ScrollTopComponent } from 'src/scroll-top/scrollTop.component';
 import { FormsModule } from '@angular/forms';
 import { FacebookModule } from 'ngx-facebook';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +69,8 @@ import { FacebookModule } from 'ngx-facebook';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     FormsModule,
+      MatTableModule,
+    MatPaginatorModule
     //  FacebookModule.forRoot()
   ],
   providers: [],

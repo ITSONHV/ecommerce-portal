@@ -5,6 +5,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, retry,mergeMap } from 'rxjs/operators';
 import { AppConfigs } from 'src/app/commons/AppConfigs';
 import { ObjectModel } from 'src/models/object_paging.model';
+import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
 @Injectable({
     providedIn: 'root',
 })
@@ -176,6 +177,25 @@ export class MainService {
                 })
             )
     };
+
+    getProductListPagings(page: number, pageSize: number, keySearch: string, minPrice: number, maxPrice: number): Observable<ApiPagingResponse<PagingModel>> {
+        let queryUrls = `${this.urlApi}${AppConfigs.urls.getProductListPaging}` 
+        + "?page=" + `${page}` + "&pageSize=" + `${pageSize}` + "&minPrice=" + `${minPrice}` + "&maxPrice=" + `${maxPrice}`;
+        
+        if(keySearch !== ''){
+            queryUrls += "&productName=" + `${keySearch}` ;
+        }
+        
+        return this.http.get<any>(queryUrls)
+            .pipe(
+                retry(3), // retry a failed request up to 3 times
+                catchError(this.handleError), // then handle the error
+                mergeMap((response_: any) => {
+                    return of<ApiPagingResponse<PagingModel>>(<ApiPagingResponse<PagingModel>>response_);
+                })
+            )
+    };
+
     getServerErrorMessage(error: HttpErrorResponse): string {
         switch (error.status) {
             case 404: {
