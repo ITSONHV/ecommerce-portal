@@ -20,7 +20,8 @@ export class ProductModel {
         updatedDate: string  ;
         updatedUser: string  ;
         createdUser: string  ;
-        ProductNameSlug : string;
+        productNameSlug : string;
+        rate : number;
         productAttributesModel: productAttributesModel[];
 }
 
