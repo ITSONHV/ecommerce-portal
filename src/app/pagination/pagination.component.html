@@ -1,0 +1,30 @@
+<div class="pagination" *ngIf="total > 0">
+    <button [disabled]="value.page === 1" (click)="selectPage(1)"><<</button>
+    <button [disabled]="value.page === 1" (click)="selectPage(value.page - 1)">
+      <
+    </button>
+    <button
+      *ngFor="let page of visiblePages"
+      [ngClass]="{'selected' : value.page === page}"
+      (click)="selectPage(page)"
+    >
+      {{ page }}
+    </button>
+    <button
+      [disabled]="value.page === totalPages"
+      (click)="selectPage(value.page + 1)"
+    >
+      >
+    </button>
+    <button
+      [disabled]="value.page === totalPages"
+      (click)="selectPage(totalPages)"
+    >
+      >>
+    </button>
+  </div>
+  
+  <!-- <select [ngModel]="value.pageSize" (ngModelChange)="selectPageSize($event)">
+    <option *ngFor="let size of pageSizes" [value]="size">{{ 18 }}</option>
+  </select> -->
+  

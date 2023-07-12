@@ -29,9 +29,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SafePipe } from './commons/PipeCustom';
 import { ScrollTopComponent } from 'src/scroll-top/scrollTop.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FacebookModule } from 'ngx-facebook';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { PaginationComponent } from './pagination/pagination.component';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +60,8 @@ import { FacebookModule } from 'ngx-facebook';
     OrderHistoryComponent,
     OrderDetailComponent,
     SafePipe,
-    ScrollTopComponent
+    ScrollTopComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +71,9 @@ import { FacebookModule } from 'ngx-facebook';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     FormsModule,
+      MatTableModule,
+    MatPaginatorModule,
+    ReactiveFormsModule
     //  FacebookModule.forRoot()
   ],
   providers: [],
