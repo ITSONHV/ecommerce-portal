@@ -37,6 +37,8 @@ export class ProductGridComponent implements OnInit  {
   public searchKey = '';
   public sortValue = 1;
   public selectedPageSize = 9;
+  public selectedPriceIndex : any;
+  public selectedTextIndex : any;
   public isLoadComplete = false;
 
   public visibleItems: PaginatedResponse<ProductModel> = {
@@ -75,22 +77,22 @@ export class ProductGridComponent implements OnInit  {
 
   //pagination: PaginationValue
   public onPageChange(pagination: any): void {
-    this.spinner.show();
+    //this.spinner.show();
     let currentPage = (pagination.page ?? 1);
     this._svc.getProductListPagings(currentPage,
       pagination.pageSize,
       this.searchKey,
-      this.minPrice,
-      this.maxPrice,
+      this.minPrice ?? 0,
+      this.maxPrice ?? 0,
       this.urlSlug,
       this.sortValue).subscribe(
         (respones: ApiPagingResponse<PagingModel>) => {
-          debugger;
+        
           this.totalRecords = respones.data.total;
           this.listProduct = respones.data.data;
           this.visibleItems = { items: respones.data.data, total: respones.data.total };
           this.isLoadComplete = true;
-          this.spinner.hide();
+          //this.spinner.hide();
           window.scroll(0, 50); // scroll lên 1 tý sau khi change value
         },
         (err) => {
@@ -150,8 +152,46 @@ export class ProductGridComponent implements OnInit  {
 	}
 
   onSelectedSort(value: string): void {
-		this.sortValue = Number(value); 
-    //this.paginationControl.patchValue(this.pagination);
+		this.sortValue = Number(value);
     this.onPageChange(this.pagination);
 	}
+
+  changeSelectionPrice(event: any, index: string) {
+    this.selectedPriceIndex = event.target.checked ? index : undefined;
+
+    let itemSelectd = this.getItemFromGroupSearch(index);
+    if(itemSelectd && itemSelectd !== undefined && itemSelectd != null){
+      this.minPrice = itemSelectd.minPrice;
+      this.maxPrice = itemSelectd.maxPrice;
+      this.onPageChange(this.pagination);
+    }
+    event.preventDefault();
+  }
+
+  changeSelectionKeySearch(event: any, index: string) {
+    this.selectedTextIndex = event.target.checked ? index : undefined;
+
+    let itemSelectd = this.getItemFromGroupSearch(index);
+    if(itemSelectd && itemSelectd !== undefined && itemSelectd != null){
+      this.searchKey = itemSelectd.filterSearchKey;
+      this.onPageChange(this.pagination);
+    }
+    event.preventDefault();
+  }
+
+  getItemFromGroupSearch( index: string){
+    let itemSelectd : any = {};
+    this.groupSearch.filter ((item: any) =>
+    {  
+      item.itemFilterValues.filter ((itemChild: any) =>{
+        if(itemChild.filterValueID === index)
+        { debugger;
+          itemSelectd = itemChild;
+          return;
+        }
+      });
+      return;
+    });
+    return itemSelectd;
+  }
 }

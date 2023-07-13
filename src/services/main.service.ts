@@ -187,7 +187,7 @@ export class MainService {
         + "&maxPrice=" + `${maxPrice}` 
         + "&sortValue=" + `${sortValue}`;
         
-        if(keySearch !== ''){
+        if(keySearch  != undefined && keySearch !== ''){
             queryUrls += "&productName=" + `${keySearch}` ;
         }
 

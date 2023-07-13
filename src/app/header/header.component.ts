@@ -1,22 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MainService } from 'src/services/main.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   public urlImage ="./../assets/images/logo.jpg";
   public searchKey = '';
-
+  public menuSearch : any;
   constructor( private router: Router
-    , private activatedRoute: ActivatedRoute,){
-    
+    , private activatedRoute: ActivatedRoute,
+    public _svc : MainService
+    ){   
   }
-  searchFilter(event: any, value: string) {
+
+  ngOnInit(){
+    this.loadMenuSearch();
+  }
+
+  searchFilter(event: any, value: string, cateSelect : string) {
     this.searchKey = value;
-    const queryParams: Params = { searchKey: this.searchKey };
+    let queryParams: Params = { searchKey: this.searchKey };
+    if(cateSelect !== undefined && cateSelect != null && cateSelect != '')
+    {
+      queryParams = { slug: cateSelect, searchKey: this.searchKey };
+    }
+
     this.router.navigate(
       ['danh-muc-san-pham-g'],
       {
@@ -26,5 +38,11 @@ export class HeaderComponent {
       }
     )
     event.preventDefault();
+  }
+
+  loadMenuSearch(){
+    if(localStorage.getItem('all-menu-search')){
+      this.menuSearch = JSON.parse(localStorage.getItem('all-menu-search') ?? "");
+    }
   }
 }
