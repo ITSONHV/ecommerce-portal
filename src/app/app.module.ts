@@ -30,7 +30,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SafePipe } from './commons/PipeCustom';
 import { ScrollTopComponent } from 'src/scroll-top/scrollTop.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FacebookModule } from 'ngx-facebook';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PaginationComponent } from './pagination/pagination.component';
@@ -74,7 +73,6 @@ import { PaginationComponent } from './pagination/pagination.component';
       MatTableModule,
     MatPaginatorModule,
     ReactiveFormsModule
-    //  FacebookModule.forRoot()
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
