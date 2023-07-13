@@ -129,7 +129,7 @@ export class ProductGridComponent implements OnInit  {
       (respones: ObjectModel)=>{
         this.category = respones.data;
        if(this.categoryCache){
-          this.meta.updateTag({ name: 'description', content: this.categoryCache.seoDescription };
+          this.meta.updateTag({ name: 'description', content: this.categoryCache.seoDescription });
           this.titleService.setTitle(this.categoryCache.seoTitle);
           this.meta.updateTag({ name: 'keywords', content: this.categoryCache.seoKeyword });
         }
