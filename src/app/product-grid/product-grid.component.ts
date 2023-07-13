@@ -58,14 +58,15 @@ export class ProductGridComponent implements OnInit  {
   ngOnInit(): void { 
     this._router.queryParams.subscribe(params => {
       this.urlSlug = params['slug'];
+      this.searchKey = params['searchKey'];
       this.categoryName = this._svc.categoryName;
       if(this.urlSlug != null && this.urlSlug != ""){
         this.getCategoryBySlug(this.urlSlug);    
         this.onPageChange(this.pagination);
       }
-      else if(localStorage.getItem('product-by-category-slug')?.length != 0){
-        this.listProduct = JSON.parse(localStorage.getItem('product-by-category-slug') ?? "");
-      }
+      // else if(localStorage.getItem('product-by-category-slug')?.length != 0){
+      //   this.listProduct = JSON.parse(localStorage.getItem('product-by-category-slug') ?? "");
+      // }
       else{      
         this.onPageChange(this.pagination);
         this.getGroupSearch(0); // get mặc định all
@@ -116,8 +117,8 @@ export class ProductGridComponent implements OnInit  {
           this.titleService.setTitle(this.categoryCache.seoTitle);
           this.meta.updateTag({ name: 'keywords', content: this.categoryCache.seoKeyword });
         }
-        localStorage.removeItem('product-by-category-slug');
-        localStorage.setItem('product-by-category-slug', JSON.stringify(this.listProduct));
+        // localStorage.removeItem('product-by-category-slug');
+        // localStorage.setItem('product-by-category-slug', JSON.stringify(this.listProduct));
         if(this.category != null){  
           this.getGroupSearch(this.category.id);
         }
