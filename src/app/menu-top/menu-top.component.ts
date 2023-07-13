@@ -105,12 +105,10 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     this.isShowMenu = !this.isShowMenu;
   }
   handleMenu(event: any, category: any): void {
-    this.meta.updateTag({ name: 'description', content: category.seoDescription });
-    this.titleService.setTitle(category.seoTitle);
-    this.meta.updateTag({ name: 'keywords', content: category.seoKeyword });
+    localStorage.removeItem('category-menu-select');
+    localStorage.setItem('category-menu-select', JSON.stringify(category));
     const queryParams: Params = { slug: category.urlSlug };
     this._mainsvc.categoryName = category.categoryName;
-    this._mainsvc.categoryId = category.id;
     this.router.navigate(
       ['danh-muc-san-pham-g'],
       {

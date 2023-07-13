@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, Meta, SafeResourceUrl, Title } from '@angular/platform-browser';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
@@ -26,6 +26,7 @@ export class ProductDetailComponent implements OnInit {
   public htmlDescription = '';
   public quantity = 1 ;
   public reviewsProducts : any;
+  public productsRelate : any;
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -60,14 +61,18 @@ export class ProductDetailComponent implements OnInit {
   };
   constructor(private _svc : MainService,private _router: ActivatedRoute,
     private spinner: NgxSpinnerService, public sanitizer: DomSanitizer,
-    private _swal: SwalService
+    private _swal: SwalService,
+    private rout: Router,
+    private meta: Meta,
+    private titleService: Title
  ) {
   }
   ngOnInit(): void {
     this.spinner.show();
     this.categoryName = this._svc.categoryName;
     this._router.queryParams.subscribe(params => {
-      debugger
+      if(!params['slug'])
+        this.rout.navigate(['/'])// nếu không lấy được params quay lại home
       this.slug = params['slug'];
       this.getProductbyProductNameSlug(this.slug)
     });
@@ -81,13 +86,17 @@ export class ProductDetailComponent implements OnInit {
       (respones: ObjectModel)=>{
         this.product = respones.data;
         if(this.product != null){
+          this.meta.updateTag({ name: 'description', content: this.product.seoDescription ?? ""});
+          this.titleService.setTitle(this.product.seoTitle ?? "");
+          this.meta.updateTag({ name: 'keywords', content: this.product.seoKeyword ?? ""});
+          
           this.imgfirst = this.product.productImages[0]?.imageUrl??"";
           this.product.productImages?.shift();
           this.htmlContent = this.product.content;
           this.htmlDescription = this.product.description;
           this.getReviewProducts(this.product.id);
+          this.getProductsRelate(this.product.categoryId)
         }
-        console.log(this.product);
         this.spinner.hide();
       },
       (err) =>{
@@ -109,6 +118,22 @@ export class ProductDetailComponent implements OnInit {
       }
     );
   }
+  getProductsRelate(categoryId : number){
+    this._svc.getProductPagesByCategoryId(categoryId).subscribe(
+      (respones: ObjectModel)=>{
+        if(respones.hasOwnProperty("data")){
+          const products = {...respones.data} as any;  
+          this.productsRelate = products.data;
+          console.log('rl',this.productsRelate);
+        } 
+        this.spinner.hide();
+      },
+      (err) =>{
+        console.log(err);
+        this.spinner.hide();
+      }
+    );
+  }
 
   getProductSales(){
     this._svc.getProductIsBestSellingPages().subscribe(
@@ -121,6 +146,18 @@ export class ProductDetailComponent implements OnInit {
         this.spinner.hide();
       }
     );
+  }
+  handleViewDetailProduct(event: any, product: any): void {
+    const queryParams: Params = { slug: product.productNameSlug };
+    this.rout.navigate(
+      ['chi-tiet'],
+      {
+        relativeTo: this._router,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    )
+    event.preventDefault();
   }
   counterRate(i: number) {
     return new Array(i);

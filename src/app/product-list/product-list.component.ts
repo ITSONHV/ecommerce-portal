@@ -31,6 +31,9 @@ export class ProductListComponent implements OnInit {
         this.getCategoryBySlug(this.urlSlug);
         this.getProductPagesByCategorySlug(this.urlSlug);
       }
+      else if(localStorage.getItem('product-by-category-slug')?.length != 0){
+        this.listProduct = JSON.parse(localStorage.getItem('product-by-category-slug') ?? "");
+      }
       else{
         this.getProductPages();
         this.getGroupSearch(0); // get mặc định all

@@ -201,7 +201,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getProductIsBestSellingPages();
     this.getProductSale();
-    this. getProductIsHot();
+    this.getProductIsHot();
     this.getProductIsNew();
     this.getTrademark();
     this.isLoadComplete = true;
@@ -225,8 +225,6 @@ export class HomeComponent implements OnInit {
     this._svc.getTrademarkLimit(10).subscribe(
       (respones: ObjectModel) => {
         this.listTrademark = respones.data;
-        console.log(this.listTrademark);
-        
         this.spinner.hide();
       },
       (err) => {
@@ -280,7 +278,6 @@ export class HomeComponent implements OnInit {
     return new Array(i);
   }
   handleViewDetailProduct(event: any, product: any): void {
-    debugger
     this.meta.updateTag({ name: 'description', content: product.seoDescription ?? ""});
     this.titleService.setTitle(product.seoTitle ?? "");
     this.meta.updateTag({ name: 'keywords', content: product.seoKeyword ?? ""});

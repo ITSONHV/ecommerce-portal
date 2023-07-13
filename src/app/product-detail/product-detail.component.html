@@ -4,7 +4,7 @@
         <div class="col-xs-12">
           <ul>
             <li class="home"> <a title="Go to Home Page" [routerLink]="['/']" routerLinkActive="router-link-active" >Home</a><span>&raquo;</span></li>
-            <li class="home"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: product?.productNameSlug}" routerLinkActive="router-link-active" >Chi tiết</a></li>
+            <li class="home"> <a [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,product)" routerLinkActive="router-link-active" >Chi tiết</a></li>
             <li class=""> <a href="shop_grid.html">{{categoryName}}</a><span>&raquo;</span></li>
             <li><strong>{{product?.productName}}</strong></li>
           </ul>
@@ -327,12 +327,13 @@
               <div id="related-product-slider" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col4 fadeInUp">
                   <owl-carousel-o [options]="customOptions">
-                    <ng-container *ngFor="let item of product?.productImages">
-                      <ng-template carouselSlide [id]="item.url">
+                    <ng-container *ngFor="let item of productsRelate">
+                      <ng-template carouselSlide [id]="item.id.toString()">
                         <div class="product-item">
                           <div class="item-inner">
                             <div class="product-thumbnail">
-                              <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: product?.productNameSlug}">
+                              <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
+                                (click)="handleViewDetailProduct($event,item)">
                                 <figure> <img class="first-img" [src]='urlImg + item.imageUrl' alt="HTML template"> <img class="hover-img" [src]='urlImg + item.imageUrl' alt="HTML template"></figure>
                                 </a> </div>
                               <div class="pr-info-area">
@@ -345,11 +346,20 @@
                             </div>
                             <div class="item-info">
                               <div class="info-inner">
-                                <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: product?.productNameSlug}">Product title here </a> </div>
+                                <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
+                                (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a> </div>
                                 <div class="item-content">
                                   <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                                   <div class="item-price">
-                                    <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
+                                    <div class="price-box"> <span *ngIf="item.promotionPrice == 0" class="regular-price">
+                                        <span class="price">{{item.price | currency: "VND" }}</span> </span>
+                                      <ng-container *ngIf="item.promotionPrice > 0">
+                                        <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span
+                                            class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
+                                        <p class="old-price"> <span class="price-label">Giá cũ:</span> <span
+                                            class="price"> {{item.price | currency: "VND" }} </span> </p>
+                                      </ng-container>
+                                    </div>
                                   </div>
                                   <div class="pro-action">
                                     <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
@@ -391,7 +401,8 @@
                           <div class="product-thumbnail">
                             <div class="icon-sale-label sale-left">Sale</div>
                             <div class="icon-new-label new-right">New</div>
-                            <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: product?.productNameSlug}">
+                            <div class="pr-img-area"> <a title="Product title here" [routerLink]="['/chi-tiet']"
+                                (click)="handleViewDetailProduct($event,item)">
                               <figure> <img class="first-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"> <img class="hover-img" src="./../assets/images/products/product-1.jpg" alt="HTML template"></figure>
                               </a> </div>
                             <div class="pr-info-area">
@@ -404,7 +415,8 @@
                           </div>
                           <div class="item-info">
                             <div class="info-inner">
-                              <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']" [queryParams]="{slug: product?.productNameSlug}">Product title here </a> </div>
+                              <div class="item-title"> <a title="Product title here" [routerLink]="['/chi-tiet']"
+                                (click)="handleViewDetailProduct($event,item)">Product title here </a> </div>
                               <div class="item-content">
                                 <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
                                 <div class="item-price">
