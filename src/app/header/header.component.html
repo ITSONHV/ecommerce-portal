@@ -89,8 +89,8 @@
                         <option>&nbsp;&nbsp;&nbsp;Mobiles </option>
                         <option>&nbsp;&nbsp;&nbsp;Music &amp; Audio </option>
                       </select>
-                      <input type="text" class="form-control" placeholder="Enter your search..." name="search">
-                      <button class="btn-search" type="button"><i class="fa fa-search"></i></button>
+                      <input #inputSearch  type="text" class="form-control" placeholder="Bạn muốn tìm..." name="search">
+                      <button class="btn-search" type="button" (click)="searchFilter($event,inputSearch.value)"><i class="fa fa-search"></i></button>
                     </div>
                   </form>
                 </div>

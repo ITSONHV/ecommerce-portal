@@ -1,0 +1,40 @@
+.block-filter {
+    background: #f0f3fc;
+    margin-bottom: 10px;
+}
+
+.block-filter .filter-header {
+    font-weight: 400;
+    font-size: 13px;
+    color: #413939;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 14px;
+
+    padding: 14px 15px;
+    background-color: #f0f3fc;
+    /* text-transform: uppercase; */
+    letter-spacing: 0.5px;
+}
+.block-filter .filter-body {
+    padding: 0 16px;
+    max-height: 450px;
+    overflow: auto;
+}
+.filter-body-inner {
+    padding: 16px 0;
+    border-top: 1px solid #dddfe6;
+}
+.filter-body-inner .filter-item {
+    margin-bottom: 8px;
+}
+
+.block-filter .active {
+    display: inherit;
+}
+
+.block-filter .noactive {
+    display: none;
+}
