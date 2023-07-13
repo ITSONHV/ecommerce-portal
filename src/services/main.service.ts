@@ -178,11 +178,16 @@ export class MainService {
             )
     };
 
-    getProductListPagings(page: number, pageSize: number, keySearch: string, minPrice: number, maxPrice: number, slugCate: string): Observable<ApiPagingResponse<PagingModel>> {
+    getProductListPagings(page: number, pageSize: number, keySearch: string, minPrice: number, maxPrice: number, slugCate: string, sortValue : number)
+    : Observable<ApiPagingResponse<PagingModel>> {
         let queryUrls = `${this.urlApi}${AppConfigs.urls.getProductListPaging}` 
-        + "?page=" + `${page}` + "&pageSize=" + `${pageSize}` + "&minPrice=" + `${minPrice}` + "&maxPrice=" + `${maxPrice}`;
+        + "?page=" + `${page}` 
+        + "&pageSize=" + `${pageSize}` 
+        + "&minPrice=" + `${minPrice}` 
+        + "&maxPrice=" + `${maxPrice}` 
+        + "&sortValue=" + `${sortValue}`;
         
-        if(keySearch !== ''){
+        if(keySearch  != undefined && keySearch !== ''){
             queryUrls += "&productName=" + `${keySearch}` ;
         }
 

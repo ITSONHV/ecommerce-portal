@@ -70,9 +70,15 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
           if (localStorage.getItem('allmenu-app')?.length != 0) {
             localStorage.removeItem('allmenu-app');
             localStorage.setItem('allmenu-app', JSON.stringify(this.allMenu));
+
+            localStorage.removeItem('all-menu-search');
+            localStorage.setItem('all-menu-search', JSON.stringify(this.menuObject));
           }
           else {
             localStorage.setItem('allmenu-app', JSON.stringify(this.allMenu));
+
+            localStorage.setItem('all-menu-search', JSON.stringify(this.menuObject));
+           
           }
         }
         this.spinner.hide();
@@ -108,10 +114,14 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     localStorage.removeItem('category-menu-select');
     localStorage.setItem('category-menu-select', JSON.stringify(category));
     const queryParams: Params = { slug: category.urlSlug };
+    this.meta.updateTag({ name: 'description', content: category.seoDescription });
+    this.titleService.setTitle(category.seoTitle);
+    this.meta.updateTag({ name: 'keywords', content: category.seoKeyword });
     this._mainsvc.categoryName = category.categoryName;
     this.router.navigate(
       ['danh-muc-san-pham-g'],
       {
+
         relativeTo: this.activatedRoute,
         queryParams: queryParams,
         queryParamsHandling: 'merge'

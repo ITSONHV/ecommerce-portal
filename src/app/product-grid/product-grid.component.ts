@@ -1,6 +1,6 @@
 import { environment } from './../../environments/environment';
 import { MainService } from 'src/services/main.service';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ObjectModel } from 'src/models/object_paging.model';
 import Swal from 'sweetalert2';
 import { ProductModel } from 'src/models/product.model';
@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
 import { FormControl } from '@angular/forms';
 import { PaginationValue } from '../pagination/pagination.component';
+import { DOCUMENT } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 
 
@@ -24,7 +25,7 @@ export interface PaginatedResponse<T> {
 })
 export class ProductGridComponent implements OnInit  {
   public pagination : PaginationValue = { page: 1, pageSize: 9};
-  public readonly paginationControl = new FormControl(this.pagination);
+  public paginationControl = new FormControl(this.pagination);
   public listProduct : any = [] ;
   public urlImg : string = environment.urlImg;
   public urlSlug : any ;
@@ -35,7 +36,10 @@ export class ProductGridComponent implements OnInit  {
   public minPrice = 0;
   public maxPrice = 0;
   public searchKey = '';
+  public sortValue = 1;
   public selectedPageSize = 9;
+  public selectedPriceIndex : any;
+  public selectedTextIndex : any;
   public isLoadComplete = false;
   public categoryCache: any ;
   public visibleItems: PaginatedResponse<ProductModel> = {
@@ -45,6 +49,7 @@ export class ProductGridComponent implements OnInit  {
 
   constructor(private _svc : MainService,private _router: ActivatedRoute,
     private spinner: NgxSpinnerService, 
+    @Inject(DOCUMENT) private document: Document,
     private rout: Router,
     private meta: Meta,
     private titleService: Title
@@ -53,8 +58,6 @@ export class ProductGridComponent implements OnInit  {
   ngOnInit(): void { 
     this._router.queryParams.subscribe(params => {
       this.urlSlug = params['slug'];
-      this.categoryCache = JSON.parse(localStorage.getItem('category-menu-select') ?? "");
-      this.categoryName = this.categoryCache !== "" ? this.categoryCache.categoryName : "";
       this.categoryName = this._svc.categoryName;
       if(this.urlSlug != null && this.urlSlug != ""){
         this.getCategoryBySlug(this.urlSlug);    
@@ -73,55 +76,35 @@ export class ProductGridComponent implements OnInit  {
        // console.log('aa' + x);
      });
   }
-  getProductPages()  {
-    this.spinner.show();
-    this._svc.getProductPages().subscribe(
-      (respones: ObjectModel)=>{
-        this.listProduct = respones.data;
-        this.spinner.hide();
-      },
-      (err) =>{
-        console.log(err);
-        this.spinner.hide();
-      }
-    );
-  }
-  getProductPagesbyCategoryId(categoryId : number){
-    this.spinner.show();
-    this._svc.getProductPagesByCategoryId(categoryId).subscribe(
-      (respones: ObjectModel)=>{
-        this.listProduct = respones.data;
-        this.spinner.hide();
-      },
-      (err) =>{
-        console.log(err);
-        this.spinner.hide();
-      }
-    );
-  }
 
   counterRate(i: number) {
     return new Array(i);
   }
 
- //pagination: PaginationValue
+  //pagination: PaginationValue
   public onPageChange(pagination: any): void {
-    this.spinner.show();
+    //this.spinner.show();
     let currentPage = (pagination.page ?? 1);
-    this._svc.getProductListPagings(currentPage,  (pagination.pageSize), this.searchKey, this.minPrice, this.maxPrice, this.urlSlug).subscribe(
-    (respones: ApiPagingResponse<PagingModel>)=>{
-      debugger;
-      this.totalRecords = respones.data.total;
-      this.listProduct = respones.data.data;
-      this.visibleItems = { items: respones.data.data, total: respones.data.total };
-      this.isLoadComplete = true;
-      this.spinner.hide();
-      window.scroll(0, 250); // scroll lên 1 tý sau khi change value
-    },
-    (err) =>{
-      console.log(err);
-      this.spinner.hide();
-    });
+    this._svc.getProductListPagings(currentPage,
+      pagination.pageSize,
+      this.searchKey,
+      this.minPrice ?? 0,
+      this.maxPrice ?? 0,
+      this.urlSlug,
+      this.sortValue).subscribe(
+        (respones: ApiPagingResponse<PagingModel>) => {
+        
+          this.totalRecords = respones.data.total;
+          this.listProduct = respones.data.data;
+          this.visibleItems = { items: respones.data.data, total: respones.data.total };
+          this.isLoadComplete = true;
+          //this.spinner.hide();
+          window.scroll(0, 50); // scroll lên 1 tý sau khi change value
+        },
+        (err) => {
+          console.log(err);
+          this.spinner.hide();
+        });
   }
 
   getCategoryBySlug(slug: string){
@@ -162,9 +145,68 @@ export class ProductGridComponent implements OnInit  {
     );
   }
 
+  handleClickGroupSearch(event: any, idDiv: any): void {
+    const idIner = 'body-inner' + idDiv;
+    const tag = this.document.getElementById(idIner);
+    if (tag?.classList.contains('noactive')) {
+      tag.classList.remove('noactive');
+      tag.classList.add('filter-body-inner');
+    } else {
+      tag?.classList.remove('filter-body-inner');
+      tag?.classList.add('noactive');
+    }
+    event.preventDefault();
+  }
+
   onSelectedPageSize(value: string): void {
 		this.selectedPageSize = Number(value); 
     this.pagination.pageSize = this.selectedPageSize;
+
+    this.paginationControl.patchValue(this.pagination);
     this.onPageChange(this.pagination);
 	}
+
+  onSelectedSort(value: string): void {
+		this.sortValue = Number(value);
+    this.onPageChange(this.pagination);
+	}
+
+  changeSelectionPrice(event: any, index: string) {
+    this.selectedPriceIndex = event.target.checked ? index : undefined;
+
+    let itemSelectd = this.getItemFromGroupSearch(index);
+    if(itemSelectd && itemSelectd !== undefined && itemSelectd != null){
+      this.minPrice = itemSelectd.minPrice;
+      this.maxPrice = itemSelectd.maxPrice;
+      this.onPageChange(this.pagination);
+    }
+    event.preventDefault();
+  }
+
+  changeSelectionKeySearch(event: any, index: string) {
+    this.selectedTextIndex = event.target.checked ? index : undefined;
+
+    let itemSelectd = this.getItemFromGroupSearch(index);
+    if(itemSelectd && itemSelectd !== undefined && itemSelectd != null){
+      this.searchKey = itemSelectd.filterSearchKey;
+      this.onPageChange(this.pagination);
+    }
+    event.preventDefault();
+  }
+
+  getItemFromGroupSearch( index: string){
+    let itemSelectd : any = {};
+    this.groupSearch.filter ((item: any) =>
+    {  
+      item.itemFilterValues.filter ((itemChild: any) =>{
+        if(itemChild.filterValueID === index)
+        { debugger;
+          itemSelectd = itemChild;
+          return;
+        }
+      });
+      return;
+    });
+    return itemSelectd;
+  }
 }

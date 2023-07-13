@@ -56,9 +56,9 @@
               <div class="sorter">
                 <div class="short-by">
                   <label>Sắp xếp:</label>
-                  <select>
-                    <option selected="selected">Giá tăng dần</option>
-                    <option>Giá giảm dần</option>
+                  <select #sortSelecte (change)="onSelectedSort(sortSelecte.value)">
+                    <option selected="selected" value="1">Giá tăng dần</option>
+                    <option value="2">Giá giảm dần</option>
                     <!-- <option>Price</option>
                     <option>Size</option> -->
                   </select>
@@ -132,12 +132,6 @@
             <div class="pagination-area" >
               <my-pagination *ngIf="isLoadComplete" [total]="visibleItems.total" [formControl]="paginationControl">
               </my-pagination>
-              <!-- <ul>
-                <li><a class="active" href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-              </ul> -->
             </div>
           </div>
         </div>
@@ -193,101 +187,59 @@
           </div>
           <div class="block shop-by-side">
             <div class="sidebar-bar-title">
-              <h3>Shop By</h3>
+              <h3>Bộ lọc sản phẩm</h3>
             </div>
             <div class="block-content">
-              <p class="block-subtitle">Shopping Options</p>
-              <div class="layered-Category">
-                <h2 class="saider-bar-title">Categories</h2>
-                <div class="layered-content">
-                  <ul class="check-box-list">
-                    <li>
-                      <input type="checkbox" id="jtv1" name="jtvc">
-                      <label for="jtv1"> <span class="button"></span> Women<span class="count">(12)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv1" name="jtvc">
-                      <label for="jtv1"> <span class="button"></span> Men<span class="count">(22)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv1" name="jtvc">
-                      <label for="jtv1"> <span class="button"></span> Kids<span class="count">(15)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv1" name="jtvc">
-                      <label for="jtv1"> <span class="button"></span> Accessories<span class="count">(12)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv1" name="jtvc">
-                      <label for="jtv1"> <span class="button"></span> Camera & Photo<span class="count">(12)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv2" name="jtvc">
-                      <label for="jtv2"> <span class="button"></span> Computers<span class="count">(18)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv3" name="jtvc">
-                      <label for="jtv3"> <span class="button"></span> Apple Store<span class="count">(15)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv4" name="jtvc">
-                      <label for="jtv4"> <span class="button"></span> Car Electronic<span class="count">(03)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv5" name="jtvc">
-                      <label for="jtv5"> <span class="button"></span> Accessories<span class="count">(04)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv7" name="jtvc">
-                      <label for="jtv7"> <span class="button"></span> Game & Video<span class="count">(07)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv8" name="jtvc">
-                      <label for="jtv8"> <span class="button"></span> Best selling<span class="count">(05)</span> </label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="manufacturer-area">
-                <h2 class="saider-bar-title">Manufacturer</h2>
-                <div class="saide-bar-menu">
-                  <ul>
-                    <li><a href="#"><i class="fa fa-angle-right"></i> Aliquam</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i> Duis tempus id </a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i> Leo quis molestie. </a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i> Suspendisse </a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i> Nunc gravida </a></li>
-                  </ul>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-          <div class="block product-price-range ">
-            <div class="sidebar-bar-title">
-              <h3>Price</h3>
-            </div>
-            <div class="block-content">
-              <div class="slider-range">
-                <div data-label-reasult="Range:" data-min="0" data-max="500" data-unit="$" class="slider-range-price" data-value-min="50" data-value-max="350"></div>
-                <div class="amount-range-price">Range: $10 - $550</div>
-                <ul class="check-box-list">
-                  <li>
-                    <input type="checkbox" id="p1" name="cc" />
-                    <label for="p1"> <span class="button"></span> $20 - $50<span class="count">(0)</span> </label>
-                  </li>
-                  <li>
-                    <input type="checkbox" id="p2" name="cc" />
-                    <label for="p2"> <span class="button"></span> $50 - $100<span class="count">(0)</span> </label>
-                  </li>
-                  <li>
-                    <input type="checkbox" id="p3" name="cc" />
-                    <label for="p3"> <span class="button"></span> $100 - $250<span class="count">(0)</span> </label>
-                  </li>
-                </ul>
+              <div *ngIf="isLoadComplete">
+                <ng-container *ngFor="let group of groupSearch; let i = index;">
+                   <!-- 0 là search text 1 là search price -->
+                  <ng-container *ngIf="group.typeSearch == 1">
+                    
+                    <div class="block-filter">
+                      <div class="filter-header" (click)="handleClickGroupSearch($event, i.toString())">
+                        <a>{{group.filterDisplayText}} </a><i class="fa fa-angle-right"></i></div>
+                      <div [attr.id]="'body-inner' + i"
+                        [ngClass]="{'filter-body-inner': i == 0, 'filter-body-inner noactive': i != 0}">
+                        <ul class="filter-body">
+                          <li class="filter-item" *ngFor="let item of group.itemFilterValues">
+                            <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionPrice($event, item.filterValueID)" 
+                              [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
+                            <label [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
+                        </ul>
+                        <div class="sp">Hoặc nhập giá dưới đây</div>
+                        <div class="inputPrice">
+
+                          <input #inputMinPrice  type="number" class="" placeholder="" name="minPrice" maxlength="10" min="0"  [(ngModel)]="minPrice">
+                          <input #inputMaxPrice  type="number" class="" placeholder="" name="maxPrice" maxlength="10" min="0" [(ngModel)]="maxPrice">
+                        </div>
+                        <div style="margin-top: 15px;"><a type="button" (click)="this.onPageChange(this.pagination);" class="but_ok_2"><i class="fa fa-check"></i>&nbsp; Áp dụng</a></div>
+                        
+                      </div>
+                    </div>
+                    
+                  </ng-container>
+                 
+
+                  <ng-container *ngIf="group.typeSearch == 0">
+                    <div class="block-filter">
+                      <div class="filter-header" (click)="handleClickGroupSearch($event, i.toString())">
+                        <a>{{group.filterDisplayText}} </a><i class="fa fa-angle-right"></i></div>
+                      <div [attr.id]="'body-inner' + i"
+                        [ngClass]="{'filter-body-inner': i == 0, 'filter-body-inner noactive': i != 0}">
+                        <ul class="filter-body">
+                          <li class="filter-item" *ngFor="let item of group.itemFilterValues">
+                            <input type="checkbox" id="{{item.filterValueID}}" name="cc" class="checkmark"  (change)="changeSelectionKeySearch($event, item.filterValueID)" 
+                            [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
+                            <label for="p1"> <span class="button"></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
+                        </ul>
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
               </div>
             </div>
           </div>
+          
           <div class="block sidebar-cart">
             <div class="sidebar-bar-title">
               <h3>My Cart</h3>
