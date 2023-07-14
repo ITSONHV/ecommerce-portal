@@ -56,26 +56,24 @@
             <div class="view-mode">
               <ul>
                   <li> <a [routerLink]="['/danh-muc-san-pham-g']"> <i class="fa fa-th-large"></i> </a> </li>
-                <li class="active"> <a [routerLink]="['/danh-muc-san-pham-l']"> <i class="fa fa-th-list"></i> </a> </li>
+                <li class="active"> <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{searchKey: this.searchKey}"> <i class="fa fa-th-list"></i> </a> </li>
               </ul>
             </div>
             <div class="sorter">
               <div class="short-by">
                 <label>Sắp xếp:</label>
-                <select>
-                  <option selected="selected">Giá tăng dần</option>
-                  <option>Giá giảm dần</option>
-                  <!-- <option>Price</option>
-                    <option>Size</option> -->
+               <select #sortSelecte (change)="onSelectedSort(sortSelecte.value)">
+                    <option selected="selected" value="1">Giá tăng dần</option>
+                    <option value="2">Giá giảm dần</option>
                 </select>
               </div>
               <div class="short-by page">
                 <label>Hiện thị:</label>
-                <select>
-                  <option selected="selected">10</option>
-                  <option>15</option>
-                  <option>30</option>
-                  <option>50</option>
+                <select #pageSizeSelect (change)="onSelectedPageSize(pageSizeSelect.value)">
+                  <option selected="selected">9</option>
+                  <option>18</option>
+                  <option>27</option>
+                  <option>36</option>
                 </select>
               </div>
             </div>
@@ -83,12 +81,11 @@
           <div class="product-list-area">
             <ul class="products-list" id="products-list">
               <ng-container
-                *ngIf="isLoadComplete && (!listProduct || !listProduct.data || listProduct.data.length == 0)">
-                <p>Không có sản phẩm nào phù hợp.</p>
-              </ng-container>
+              *ngIf="isLoadComplete && (visibleItems.items.length == 0)">
+              <p>Không có sản phẩm nào phù hợp.</p>
+             </ng-container>
 
-
-              <li class="item" *ngFor="let item of listProduct?.data">
+              <li class="item" *ngFor="let item of visibleItems.items">
                 <div class="product-img">
                   <div class="icon-sale-label sale-left">Sale</div>
                   <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}"
@@ -141,12 +138,8 @@
             </ul>
           </div>
           <div class="pagination-area">
-            <ul>
-              <li><a class="active" href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-            </ul>
+            <my-pagination *ngIf="isLoadComplete" [total]="visibleItems.total" [formControl]="paginationControl">
+            </my-pagination>
           </div>
         </div>
       </div>
@@ -223,34 +216,55 @@
           <div class="sidebar-bar-title">
             <h3>Lọc sản phẩm theo</h3>
           </div>
-          <!-- <div class="block-content">
-
-            
-          </div> -->
         </div>
         <div class="">
           <div class="block-content">
-            <div class="slider-range">
-              <div data-label-reasult="Range:" data-min="0" data-max="500" data-unit="$" class="slider-range-price"
-                data-value-min="50" data-value-max="350"></div>
-              <div *ngIf="isLoadComplete">
+            <div *ngIf="isLoadComplete">
               <ng-container *ngFor="let group of groupSearch; let i = index;">
-                <div class="block-filter">
-                  <div class="filter-header"(click)="handleClickGroupSearch($event, i.toString())"><a >{{group.filterDisplayText}} </a><i class="fa fa-angle-right"></i></div>
+                 <!-- 0 là search text 1 là search price -->
+                <ng-container *ngIf="group.typeSearch == 1">
                   
-                  <div [attr.id]="'body-inner' + i" [ngClass]="{'filter-body-inner': i == 0, 'filter-body-inner noactive': i != 0}">
-                    <ul class="filter-body">
-                      <ng-container *ngFor="let item of group.itemFilterValues">
-                        <li class="filter-item">
-                          <input type="checkbox" id="{{item.filterValueID}}" name="cc" />
-                          <label for="p1"> <span class="button"></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
-                        </li>
-                      </ng-container>
-                    </ul>
+                  <div class="block-filter">
+                    <div class="filter-header" (click)="handleClickGroupSearch($event, i.toString())">
+                      <a>{{group.filterDisplayText}} </a><i class="fa fa-angle-right"></i></div>
+                    <div [attr.id]="'body-inner' + i"
+                      [ngClass]="{'filter-body-inner': i == 0, 'filter-body-inner noactive': i != 0}">
+                      <ul class="filter-body">
+                        <li class="filter-item" *ngFor="let item of group.itemFilterValues">
+                          <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionPrice($event, item.filterValueID)" 
+                            [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
+                          <label [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
+                      </ul>
+                      <div class="sp">Hoặc nhập giá dưới đây</div>
+                      <div class="inputPrice">
+
+                        <input #inputMinPrice  type="number" class="" placeholder="" name="minPrice" maxlength="10" min="0"  [(ngModel)]="minPrice">
+                        <input #inputMaxPrice  type="number" class="" placeholder="" name="maxPrice" maxlength="10" min="0" [(ngModel)]="maxPrice">
+                      </div>
+                      <div style="margin-top: 15px;"><a type="button" (click)="this.onPageChange(this.pagination);" class="but_ok_2"><i class="fa fa-check"></i>&nbsp; Áp dụng</a></div>
+                      
+                    </div>
                   </div>
-                </div>       
+                  
+                </ng-container>
+               
+
+                <ng-container *ngIf="group.typeSearch == 0">
+                  <div class="block-filter">
+                    <div class="filter-header" (click)="handleClickGroupSearch($event, i.toString())">
+                      <a>{{group.filterDisplayText}} </a><i class="fa fa-angle-right"></i></div>
+                    <div [attr.id]="'body-inner' + i"
+                      [ngClass]="{'filter-body-inner': i == 0, 'filter-body-inner noactive': i != 0}">
+                      <ul class="filter-body">
+                        <li class="filter-item" *ngFor="let item of group.itemFilterValues">
+                          <input type="checkbox" id="{{item.filterValueID}}" name="cc" class="checkmark"  (change)="changeSelectionKeySearch($event, item.filterValueID)" 
+                          [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
+                          <label for="p1"> <span class="button"></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
+                      </ul>
+                    </div>
+                  </div>
+                </ng-container>
               </ng-container>
-             </div>
             </div>
           </div>
         </div>

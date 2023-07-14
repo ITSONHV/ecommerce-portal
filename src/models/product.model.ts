@@ -22,6 +22,7 @@ export class ProductModel {
         createdUser: string  ;
         productNameSlug : string;
         rate : number;
+        countRate : number;
         productAttributesModel: productAttributesModel[];
 }
 
