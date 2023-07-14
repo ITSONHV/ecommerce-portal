@@ -4,19 +4,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ObjectModel } from 'src/models/object_paging.model';
 import Swal from 'sweetalert2';
 import { ProductModel } from 'src/models/product.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
 import { FormControl } from '@angular/forms';
-import { PaginationValue } from '../pagination/pagination.component';
+import { PaginatedResponse, PaginationValue } from '../pagination/pagination.component';
 import { DOCUMENT } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
-
-
-export interface PaginatedResponse<T> {
-  items: T[];
-  total: number;
-}
 
 @Component({
   selector: 'app-product-grid',
@@ -47,25 +41,28 @@ export class ProductGridComponent implements OnInit  {
     total: this. totalRecords,
   };
 
-  constructor(private _svc : MainService,private _router: ActivatedRoute,
+  constructor(private _svc : MainService,public _router: ActivatedRoute,
     private spinner: NgxSpinnerService, 
     @Inject(DOCUMENT) private document: Document,
     private rout: Router,
     private meta: Meta,
-    private titleService: Title
+    private titleService: Title,
+    private activatedRoute: ActivatedRoute,
+    private router : Router
     ) {
   }
   ngOnInit(): void { 
     this._router.queryParams.subscribe(params => {
       this.urlSlug = params['slug'];
+      this.searchKey = params['searchKey'];
       this.categoryName = this._svc.categoryName;
       if(this.urlSlug != null && this.urlSlug != ""){
         this.getCategoryBySlug(this.urlSlug);    
         this.onPageChange(this.pagination);
       }
-      else if(localStorage.getItem('product-by-category-slug')?.length != 0){
-        this.listProduct = JSON.parse(localStorage.getItem('product-by-category-slug') ?? "");
-      }
+      // else if(localStorage.getItem('product-by-category-slug')?.length != 0){
+      //   this.listProduct = JSON.parse(localStorage.getItem('product-by-category-slug') ?? "");
+      // }
       else{      
         this.onPageChange(this.pagination);
         this.getGroupSearch(0); // get mặc định all
@@ -116,8 +113,8 @@ export class ProductGridComponent implements OnInit  {
           this.titleService.setTitle(this.categoryCache.seoTitle);
           this.meta.updateTag({ name: 'keywords', content: this.categoryCache.seoKeyword });
         }
-        localStorage.removeItem('product-by-category-slug');
-        localStorage.setItem('product-by-category-slug', JSON.stringify(this.listProduct));
+        // localStorage.removeItem('product-by-category-slug');
+        // localStorage.setItem('product-by-category-slug', JSON.stringify(this.listProduct));
         if(this.category != null){  
           this.getGroupSearch(this.category.id);
         }
@@ -134,10 +131,6 @@ export class ProductGridComponent implements OnInit  {
     this._svc.getGroupSerrchByCategoryID(cateID).subscribe(
       (respones: ObjectModel)=>{
         this.groupSearch = respones.data;
-        if(this.groupSearch != null && this.groupSearch.length > 0)
-        {
-          //this.idClassActive = 'body-inner0';
-        }
       },
       (err) =>{
         console.log(err);
@@ -173,24 +166,36 @@ export class ProductGridComponent implements OnInit  {
 
   changeSelectionPrice(event: any, index: string) {
     this.selectedPriceIndex = event.target.checked ? index : undefined;
-
-    let itemSelectd = this.getItemFromGroupSearch(index);
-    if(itemSelectd && itemSelectd !== undefined && itemSelectd != null){
-      this.minPrice = itemSelectd.minPrice;
-      this.maxPrice = itemSelectd.maxPrice;
+    debugger;
+    if(this.selectedPriceIndex === undefined){
+      this.minPrice = 0;
+      this.maxPrice = 0;
       this.onPageChange(this.pagination);
+    }else{
+      let itemSelectd = this.getItemFromGroupSearch(index);
+      if(itemSelectd && itemSelectd !== undefined && itemSelectd != null){
+        this.minPrice = itemSelectd.minPrice;
+        this.maxPrice = itemSelectd.maxPrice;
+        this.onPageChange(this.pagination);
+      }
     }
+    
     event.preventDefault();
   }
 
   changeSelectionKeySearch(event: any, index: string) {
     this.selectedTextIndex = event.target.checked ? index : undefined;
-
-    let itemSelectd = this.getItemFromGroupSearch(index);
-    if(itemSelectd && itemSelectd !== undefined && itemSelectd != null){
-      this.searchKey = itemSelectd.filterSearchKey;
-      this.onPageChange(this.pagination);
+    if(this.selectedTextIndex === undefined){
+      this.searchKey = ''; 
+       this.onPageChange(this.pagination);
+    }else{
+      let itemSelectd = this.getItemFromGroupSearch(index);
+      if(itemSelectd && itemSelectd !== undefined && itemSelectd != null){
+        this.searchKey = itemSelectd.filterSearchKey;
+        this.onPageChange(this.pagination);
+      }
     }
+  
     event.preventDefault();
   }
 
@@ -200,7 +205,7 @@ export class ProductGridComponent implements OnInit  {
     {  
       item.itemFilterValues.filter ((itemChild: any) =>{
         if(itemChild.filterValueID === index)
-        { debugger;
+        { 
           itemSelectd = itemChild;
           return;
         }

@@ -38,3 +38,46 @@
 .block-filter .noactive {
     display: none;
 }
+
+.checkmark {
+    height: 24px;
+    width: 24px;
+    background-color: #fff;
+    border: 1px solid #b3b8c2;
+    box-sizing: border-box;
+    position: relative;
+    
+}
+
+.filter-item li > label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #1a2948;
+    cursor: pointer;
+    flex-direction: row;
+}
+
+.sp {
+    color: #203140;
+    font-size: 12px;
+    line-height: 21px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    width: 100%;
+    margin-left: 8px;
+}
+
+.inputPrice {
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.inputPrice input {
+    width: calc(50% - 6.5px);
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-left: 5px;
+    margin-right: 5px;
+}
