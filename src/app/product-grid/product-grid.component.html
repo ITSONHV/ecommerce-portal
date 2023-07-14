@@ -44,13 +44,14 @@
           </div>
           <div class="shop-inner">
             <div class="page-title">
-              <h2>{{categoryName}}</h2>
+              <h2>{{this.category?.categoryName}}</h2>
             </div>
             <div class="toolbar">
               <div class="view-mode">
                 <ul>
                   <li class="active"> <a [routerLink]="['/danh-muc-san-pham-g']" > <i class="fa fa-th-large"></i> </a> </li>
                   <li> <a [routerLink]="['/danh-muc-san-pham-l']" [queryParams]="{searchKey: this.searchKey}"> <i class="fa fa-th-list"></i> </a> </li>
+                  <li> <a>({{visibleItems.total}} sản phẩm)</a> </li>
                 </ul>
               </div>
               <div class="sorter">
@@ -69,6 +70,18 @@
                     <option>27</option>
                     <option>36</option>
                   </select>
+                </div>
+                <div class="short-by">
+                  <label>Trạng thái:</label>
+                  <form [formGroup]="form">
+                  <select #typeStatus (change)="onChangeSelectedTypeStatus(typeStatus.value)" formControlName="typeStatus" required>
+                    <option selected="selected" value="0">Tất cả</option>   
+                    <option value="1">Ưu đãi </option>         
+                    <option value="2">Bán chạy</option>
+                    <option value="3">Mới</option>
+                    <option value="4">Nổi bậc</option>
+                  </select>
+                </form>
                 </div>
               </div>
             </div>
@@ -134,7 +147,7 @@
           </div>
         </div>
         <aside class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">
-          <div class="block category-sidebar">
+          <!-- <div class="block category-sidebar">
             <div class="sidebar-title">
               <h3>Categories</h3>
             </div>
@@ -182,7 +195,7 @@
               <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']">Furniture</a></li>
               <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']">KItchen</a></li>
             </ul>
-          </div>
+          </div> -->
           <div class="block shop-by-side">
             <div class="sidebar-bar-title">
               <h3>Bộ lọc sản phẩm</h3>
@@ -192,7 +205,6 @@
                 <ng-container *ngFor="let group of groupSearch; let i = index;">
                    <!-- 0 là search text 1 là search price -->
                   <ng-container *ngIf="group.typeSearch == 1">
-                    
                     <div class="block-filter">
                       <div class="filter-header" (click)="handleClickGroupSearch($event, i.toString())">
                         <a>{{group.filterDisplayText}} </a><i class="fa fa-angle-right"></i></div>
@@ -213,11 +225,8 @@
                         <div style="margin-top: 15px;"><a type="button" (click)="this.onPageChange(this.pagination);" class="but_ok_2"><i class="fa fa-check"></i>&nbsp; Áp dụng</a></div>
                         
                       </div>
-                    </div>
-                    
+                    </div>                 
                   </ng-container>
-                 
-
                   <ng-container *ngIf="group.typeSearch == 0">
                     <div class="block-filter">
                       <div class="filter-header" (click)="handleClickGroupSearch($event, i.toString())">
@@ -240,12 +249,12 @@
           
           <div class="block sidebar-cart">
             <div class="sidebar-bar-title">
-              <h3>My Cart</h3>
+              <h3>Giỏ hàng của bạn</h3>
             </div>
             <div class="block-content">
-              <p class="amount">There are <a [routerLink]="['gio-hang']">2 items</a> in your cart.</p>
+              <p class="amount">Có <a [routerLink]="['/gio-hang']">2 sản phẩm</a> trong giỏ.</p>
               <ul>
-                <li class="item"> <a [routerLink]="['gio-hang']" title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a>
+                <li class="item"> <a [routerLink]="['/gio-hang']" title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a>
                   <div class="product-details">
                     <div class="access"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a></div>
                     <p class="product-name"> <a [routerLink]="['gio-hang']">Lorem ipsum dolor sit amet Consectetur</a> </p>
@@ -254,17 +263,17 @@
                 <li class="item last"> <a href="#" title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product"></a>
                   <div class="product-details">
                     <div class="access"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a></div>
-                    <p class="product-name"> <a [routerLink]="['gio-hang']">Consectetur utes anet adipisicing elit</a> </p>
+                    <p class="product-name"> <a [routerLink]="['/gio-hang']">Consectetur utes anet adipisicing elit</a> </p>
                     <strong>1</strong> x <span class="price">$8.00</span> 
                     <!--access clearfix--> 
                   </div>
                 </li>
               </ul>
               <div class="summary">
-                <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">$27.99</span> </p>
+                <p class="subtotal"> <span class="label">Tổng tiền:</span> <span class="price">$27.99</span> </p>
               </div>
               <div class="cart-checkout">
-                <button class="button button-checkout" title="Submit" type="submit"><span>Checkout</span></button>
+                <button class="button button-checkout" title="Submit" type="submit"><span>Thanh toán</span></button>
               </div>
             </div>
           </div>
@@ -280,19 +289,19 @@
               
               <!-- Wrapper for slides -->
               <div class="carousel-inner" role="listbox">
-                <div class="item active"> <img src="./../assets/images/add-slide1.jpg" alt="slide1">
+                <div class="item active"> <img src="../../assets/images/image-banner.jpg" alt="banner"/> 
                   <div class="carousel-caption">
                     <h3><a [routerLink]="['/chi-tiet']"  title=" Sample Product">Sale Up to 50% off</a></h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <a href="#" class="info">shopping Now</a> </div>
                 </div>
-                <div class="item"> <img src="./../assets/images/add-slide2.jpg" alt="slide2">
+                <div class="item"> <img src="../../assets/images/laptop-banner.png" alt="banner"/> 
                   <div class="carousel-caption">
                     <h3><a [routerLink]="['/chi-tiet']"  title=" Sample Product">Smartwatch Collection</a></h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <a href="#" class="info">All Collection</a> </div>
                 </div>
-                <div class="item"> <img src="./../assets/images/add-slide3.jpg" alt="slide3">
+                <div class="item"> <img src="../../assets/images/image-manhinh-banner.jpg" alt="banner"/> 
                   <div class="carousel-caption">
                     <h3><a [routerLink]="['/chi-tiet']" title=" Sample Product">Summer Sale</a></h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -305,28 +314,28 @@
           </div>
           <div class="block special-product">
             <div class="sidebar-bar-title">
-              <h3>Special Products</h3>
+              <h3>Sản phẩm ưu đãi</h3>
             </div>
             <div class="block-content">
-              <ul>
+              <ul *ngIf="productSale">
+                <ng-container *ngFor="let item of productSale?.data; let i = index">
                 <li class="item">
-                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
+                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  [queryParams]="{slug: item?.productNameSlug}" [title]="item.productName" class="product-image"><img [src]='urlImg + item.imageUrl' alt="Sample Product "></a></div>
                   <div class="products-block-right">
-                    <p class="product-name"> <a [routerLink]="['/chi-tiet']" >Lorem ipsum dolor sit amet Consectetur</a> </p>
-                    <span class="price">$19.99</span>
-                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
+                    <p class="product-name"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item?.productNameSlug}">{{item.productName}}</a> </p>
+                    <span class="price">{{item?.promotionPrice | currency: "VND"}}</span>
+                    <div class="rating"> 
+                      <ng-container *ngIf="item.rate >= 0">
+                        <i class="fa fa-star" *ngFor="let rate of counterRate(item.rate)"></i>
+                        <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
+                      </ng-container>
+                    
+                    </div>
                   </div>
                 </li>
-                <li class="item">
-                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  title="Sample Product" class="product-image"><img src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a></div>
-                  <div class="products-block-right">
-                    <p class="product-name"> <a [routerLink]="['/chi-tiet']" >Consectetur utes anet adipisicing elit</a> </p>
-                    <span class="price">$89.99</span>
-                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                  </div>
-                </li>
+               </ng-container>       
               </ul>
-              <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']">All Products</a> </div>
+              <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']">Xem thêm</a> </div>
           </div>
           <div class="block popular-tags-area ">
             <div class="sidebar-bar-title">
@@ -349,7 +358,7 @@
             </div>
           </div>
        
-          <div class="offer-banner"><img src="./../assets/images/offer-banner.jpg" alt="banner"></div>
+          <div class="offer-banner"><img src="../../assets/images/image-banner.jpg" alt="banner"></div>
         </aside>
       </div>
     </div>

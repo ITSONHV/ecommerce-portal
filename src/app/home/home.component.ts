@@ -208,7 +208,7 @@ export class HomeComponent implements OnInit {
   }
   getProductIsBestSellingPages() {
     this.spinner.show();
-    this._svc.getProductIsBestSellingPages().subscribe(
+    this._svc.getProductIsBestSellingPages(6).subscribe(
       (respones: ObjectModel) => {
         this.listProductBestSelling = respones.data;
       this.spinner.hide();

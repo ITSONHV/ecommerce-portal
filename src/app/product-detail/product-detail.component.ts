@@ -76,7 +76,7 @@ export class ProductDetailComponent implements OnInit {
       this.slug = params['slug'];
       this.getProductbyProductNameSlug(this.slug)
     });
-    this.getProductSales();
+    this.getProductSales(3);
   }
   ngAfterViewInit(): void {
     
@@ -135,8 +135,8 @@ export class ProductDetailComponent implements OnInit {
     );
   }
 
-  getProductSales(){
-    this._svc.getProductIsBestSellingPages().subscribe(
+  getProductSales(limit: number){
+    this._svc.getProductIsBestSellingPages(limit).subscribe(
       (respones: ObjectModel)=>{
         this.productSale = respones.data;    
         this.spinner.hide();

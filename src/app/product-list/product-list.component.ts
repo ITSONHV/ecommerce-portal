@@ -29,9 +29,10 @@ export class ProductListComponent implements OnInit {
   public searchKey = '';
   public sortValue = 1;
   public selectedPageSize = 9;
-    public selectedPriceIndex : any;
+  public selectedPriceIndex : any;
   public selectedTextIndex : any;
   isLoadComplete = false;
+  public typeSearch : string;
   public visibleItems: PaginatedResponse<ProductModel> = {
     items: this.listProduct,
     total: this. totalRecords,
@@ -43,7 +44,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this._router.queryParams.subscribe(params => {
       this.urlSlug = params['slug'];
-        this.searchKey = params['searchKey'];
+      this.searchKey = params['searchKey'];
+      this.typeSearch = params['typeStatus'];
       this.categoryName = this._svc.categoryName;
       if(this.urlSlug != null && this.urlSlug != ""){
         this.getCategoryBySlug(this.urlSlug);
@@ -160,7 +162,8 @@ export class ProductListComponent implements OnInit {
       this.minPrice ?? 0,
       this.maxPrice ?? 0,
       this.urlSlug,
-      this.sortValue).subscribe(
+      this.sortValue,
+      this.typeSearch).subscribe(
         (respones: ApiPagingResponse<PagingModel>) => {
         
           this.totalRecords = respones.data.total;

@@ -81,8 +81,8 @@ export class MainService {
                 })
             )
     }
-    getProductIsBestSellingPages(): Observable<ObjectModel> {
-        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductIsBestSellingPages)
+    getProductIsBestSellingPages(limit : number): Observable<ObjectModel> {
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductIsBestSellingPages + `&PageSize=${limit}`)
             .pipe(
                 mergeMap((response_: any) => {
                     let result = new ObjectModel();
@@ -178,7 +178,7 @@ export class MainService {
             )
     };
 
-    getProductListPagings(page: number, pageSize: number, keySearch: string, minPrice: number, maxPrice: number, slugCate: string, sortValue : number)
+    getProductListPagings(page: number, pageSize: number, keySearch: string, minPrice: number, maxPrice: number, slugCate: string, sortValue : number, typeStatus : string)
     : Observable<ApiPagingResponse<PagingModel>> {
         let queryUrls = `${this.urlApi}${AppConfigs.urls.getProductListPaging}` 
         + "?page=" + `${page}` 
@@ -187,14 +187,39 @@ export class MainService {
         + "&maxPrice=" + `${maxPrice}` 
         + "&sortValue=" + `${sortValue}`;
         
-        if(keySearch  != undefined && keySearch !== ''){
+        if(keySearch != undefined && keySearch !== ''){
             queryUrls += "&productName=" + `${keySearch}` ;
         }
 
         if(slugCate != undefined && slugCate != null && slugCate !== ''){
             queryUrls += "&UrlCategorySlug=" + `${slugCate}` ;
         }
+        // 0 tất cả , 1 uu đãi, 2 bán chạy, 3 mới, nổi bậc 4
+        if(typeStatus !== undefined  && typeStatus !=null ){
+            switch(typeStatus){
+                case "1": {
+                    queryUrls += "&IsBestDiscount=1" ;
+                    break;
+                } 
+                case "2": {
+                    queryUrls += "&IsBestSelling=1";
+                    break;
+                } 
+                case "3": {
+                    queryUrls += "&IsNew=1" ;
+                    break;
+                }
+                case "4": {
+                    queryUrls += "&IsHot=1" ;
+                    break;
+                }
+                default:{
+    
+                }
+            }
+        }
         
+
         return this.http.get<any>(queryUrls)
             .pipe(
                 retry(3), // retry a failed request up to 3 times
