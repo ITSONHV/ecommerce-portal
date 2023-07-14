@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { MainService } from 'src/services/main.service';
 import { ICategory } from 'src/interfaces/ICategory';
-import { Params, Router, ActivatedRoute } from '@angular/router';
+import { Params, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { ProductGridComponent } from '../product-grid/product-grid.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -45,6 +45,16 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     this.spinner.show();
     this.categoryName = this._mainsvc.categoryName;
     this.getMenu();
+    this.router.events.subscribe((val) => {
+     if(val instanceof NavigationEnd) {
+        if(val.url !=='/' && val.url !== '' && val.url !=='/home'){
+          this.isShowMenu = false;
+        }
+        else{
+          this.isShowMenu = true;
+        }
+     }
+  });
   }
   ngAfterViewInit(): void {
     this.activatedRoute.url.subscribe(url => console.log(url))
@@ -108,7 +118,10 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     return top;
   };
   toggleHandle(event: any): void {
-    this.isShowMenu = !this.isShowMenu;
+    if(this.router.url ==='/')
+      this.isShowMenu = true;
+    else
+      this.isShowMenu = !this.isShowMenu;
   }
   handleMenu(event: any, category: any): void {
     localStorage.removeItem('category-menu-select');

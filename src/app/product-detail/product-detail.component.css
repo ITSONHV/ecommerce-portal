@@ -14,3 +14,14 @@
     vertical-align: middle;
     text-indent: 17px;
 }
+.product-item{
+    max-width: 178.5px; 
+    max-height: 258px;
+}
+.container{
+    margin-bottom: 30px;
+}
+.owl-item {
+    width: 0px !important; 
+    margin-right: 0px !important;
+}

@@ -34,7 +34,6 @@ export class ProductDetailComponent implements OnInit {
     pullDrag: false,
     items:6,
     dots: false,
-    margin:10,
     autoplayTimeout: 3000,
     autoplaySpeed: 1000,
     autoplay:true,
@@ -42,7 +41,7 @@ export class ProductDetailComponent implements OnInit {
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
-        items: 2
+        items: 2,
       },
       400: {
         items: 3

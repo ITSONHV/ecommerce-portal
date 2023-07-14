@@ -327,7 +327,7 @@
               <div id="related-product-slider" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col4 fadeInUp">
                   <owl-carousel-o [options]="customOptions">
-                    <ng-container *ngFor="let item of productsRelate">
+                    <ng-container style="width: 0px;" *ngFor="let item of productsRelate">
                       <ng-template carouselSlide [id]="item.id.toString()">
                         <div class="product-item">
                           <div class="item-inner">
