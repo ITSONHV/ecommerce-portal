@@ -7,7 +7,7 @@ import { ProductModel } from 'src/models/product.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PaginatedResponse, PaginationValue } from '../pagination/pagination.component';
 import { DOCUMENT } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
@@ -36,6 +36,9 @@ export class ProductGridComponent implements OnInit  {
   public selectedTextIndex : any;
   public isLoadComplete = false;
   public categoryCache: any ;
+  public productSale : any;
+  public typeSearch : string;
+  public form : any;
   public visibleItems: PaginatedResponse<ProductModel> = {
     items: this.listProduct,
     total: this. totalRecords,
@@ -48,13 +51,15 @@ export class ProductGridComponent implements OnInit  {
     private meta: Meta,
     private titleService: Title,
     private activatedRoute: ActivatedRoute,
-    private router : Router
+    private router : Router,
+    private formBuilder: FormBuilder
     ) {
   }
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this._router.queryParams.subscribe(params => {
       this.urlSlug = params['slug'];
       this.searchKey = params['searchKey'];
+      this.typeSearch = params['typeStatus'];
       this.categoryName = this._svc.categoryName;
       if(this.urlSlug != null && this.urlSlug != ""){
         this.getCategoryBySlug(this.urlSlug);    
@@ -70,8 +75,16 @@ export class ProductGridComponent implements OnInit  {
     });
      this.paginationControl.valueChanges.subscribe(x => {
       this.onPageChange(x);
-       // console.log('aa' + x);
      });
+     this.getProductSales(2);
+     this.form = this.formBuilder.group({
+      typeStatus: ["", Validators.required],
+    })
+
+    this.changeValueTypeSearch(this.typeSearch);
+    // this.valueWatcherSubscription = this.form.controls.typeStatus.valueChanges.subscribe(
+    //   ( val: string) => this.changeValueTypeSearch(val)
+    // );
   }
 
   counterRate(i: number) {
@@ -88,7 +101,8 @@ export class ProductGridComponent implements OnInit  {
       this.minPrice ?? 0,
       this.maxPrice ?? 0,
       this.urlSlug,
-      this.sortValue).subscribe(
+      this.sortValue,
+      this.typeSearch).subscribe(
         (respones: ApiPagingResponse<PagingModel>) => {
         
           this.totalRecords = respones.data.total;
@@ -183,6 +197,22 @@ export class ProductGridComponent implements OnInit  {
     event.preventDefault();
   }
 
+  onChangeSelectedTypeStatus(value: string): void {
+		this.typeSearch = value;
+    let queryParams: Params = { typeStatus: this.typeSearch };
+      
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    )
+
+    this.onPageChange(this.pagination);
+	}
+
   changeSelectionKeySearch(event: any, index: string) {
     this.selectedTextIndex = event.target.checked ? index : undefined;
     if(this.selectedTextIndex === undefined){
@@ -213,5 +243,30 @@ export class ProductGridComponent implements OnInit  {
       return;
     });
     return itemSelectd;
+  }
+
+  getProductSales(limit: number){
+    this._svc.getProductIsBestSellingPages(limit).subscribe(
+      (respones: ObjectModel)=>{
+        this.productSale = respones.data;    
+        this.spinner.hide();
+      },
+      (err) =>{
+        console.log(err);
+        this.spinner.hide();
+      }
+    );
+  }
+
+  changeValueTypeSearch(value: string){
+    if(parseInt(value) > 0){
+      this.form.controls.typeStatus.setValue(value);
+    } else {
+      this.form.controls.typeStatus.setValue("0");
+    }
+  }
+
+  ngOnDestroy() {
+   
   }
 }
