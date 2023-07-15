@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   public urlImage ="./../assets/images/logo.jpg";
   public searchKey = '';
   public menuSearch : any;
+  public hello = "Đăng Minh Computer chào bạn!";
   constructor( private router: Router
     , private activatedRoute: ActivatedRoute,
     public _svc : MainService

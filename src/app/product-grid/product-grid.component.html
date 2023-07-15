@@ -198,7 +198,7 @@
           </div> -->
           <div class="block shop-by-side">
             <div class="sidebar-bar-title">
-              <h3>Bộ lọc sản phẩm</h3>
+              <span style="font-size: 20px;">Bộ lọc sản phẩm</span>
             </div>
             <div class="block-content">
               <div *ngIf="isLoadComplete">
@@ -214,7 +214,7 @@
                           <li class="filter-item" *ngFor="let item of group.itemFilterValues">
                             <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionPrice($event, item.filterValueID)" 
                               [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
-                            <label [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
+                            <label class="textFilter" style="font-size: 13px;" [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
                         </ul>
                         <div class="sp">Hoặc nhập giá dưới đây</div>
                         <div class="inputPrice">

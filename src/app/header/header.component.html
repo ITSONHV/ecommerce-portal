@@ -6,10 +6,10 @@
           <div class="row">
             <div class="col-sm-4 col-md-4 col-xs-12"> 
               <!-- Default Welcome Message -->
-              <div class="welcome-msg hidden-xs hidden-sm">Default welcome msg! </div>
+              <div class="welcome-msg hidden-xs hidden-sm">{{hello}}</div>
               <!-- Language &amp; Currency wrapper -->
               <div class="language-currency-wrapper">
-                <div class="inner-cl">
+                <!-- <div class="inner-cl">
                   <div class="block block-language form-language">
                     <div class="lg-cur"><span><img src="./../assets/images/flag-default.jpg" alt="French"><span class="lg-fr">French</span><i class="fa fa-angle-down"></i></span></div>
                     <ul>
@@ -29,30 +29,30 @@
                       <li><a class="selected" href="#"><span class="cur_icon">$</span>USD</a></li>
                     </ul>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             
             <!-- top links -->
             <div class="headerlinkmenu col-md-8 col-sm-8 col-xs-12"> <span class="phone  hidden-xs hidden-sm">Hotline: <a href="tel:+84978691194"> 0978.691.194</a></span>
               <ul class="links">
-                <li class="hidden-xs"><a title="Bảo hành" href="#"><span>Bảo hành: <a href="tel:+84908708294">0908.708.294</a></span></a></li>
-                <li><a title="Store Locator" href="#"><span>Store Locator</span></a></li>
+                <li class="hidden-xs"><a title="Bảo hành" href="#"><span>Bảo hành:<a href="tel:+84908708294">0908.708.294</a></span></a></li>
+                <li><a title="Store Locator" href="#"><span>Vị trí cửa hàng</span></a></li>
                 <li><a title="Thanh toán" [routerLink]="['/thanh-toan']"><span>Thanh toán</span></a></li>
                 <li>
-                  <div class="dropdown"><a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>My Account</span> <i class="fa fa-angle-down"></i></a>
+                  <div class="dropdown"><a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>Người dùng </span> <i class="fa fa-angle-down"></i></a>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a [routerLink]="['/nguoi-dung']">Account</a></li>
-                      <li><a [routerLink]="['/danh-sach-yeu-thich']">Wishlist</a></li>
-                      <li><a [routerLink]="['/lich-su-mua-hang']">Order Tracking</a></li>
-                      <li><a [routerLink]="['/gioi-thieu']">About us</a></li>
+                      <li><a [routerLink]="['/nguoi-dung']">Tài khoản</a></li>
+                      <li><a [routerLink]="['/danh-sach-yeu-thich']">Yêu thích</a></li>
+                      <li><a [routerLink]="['/lich-su-mua-hang']">Theo dõi đơn hàng</a></li>
+                      <li><a [routerLink]="['/gioi-thieu']">Giới thiệu</a></li>
                       <li class="divider"></li>
-                      <li><a [routerLink]="['/nguoi-dung']">Log In</a></li>
-                      <li><a [routerLink]="['/dang-ky']">Register</a></li>
+                      <li><a [routerLink]="['/nguoi-dung']">Đăng nhập</a></li>
+                      <li><a [routerLink]="['/dang-ky']">Đăng ký</a></li>
                     </ul>
                   </div>
                 </li>
-                <li><a title="login" [routerLink]="['/nguoi-dung']"><span>Login</span></a></li>
+                <li><a title="login" [routerLink]="['/nguoi-dung']"><span>Đăng nhập</span></a></li>
               </ul>
             </div>
           </div>
@@ -94,13 +94,13 @@
               
             </div>
             <div class="col-xs-12 col-sm-4 col-md-3 top-cart">
-              <div class="link-wishlist"> <a [routerLink]="['/danh-sach-yeu-thich']"> <i class="icon-heart icons"></i><span> Wishlist</span></a> </div>
+              <div class="link-wishlist"> <a [routerLink]="['/danh-sach-yeu-thich']"> <i class="icon-heart icons"></i><span> Yêu thích</span></a> </div>
               <!-- top cart -->
               <div class="top-cart-contain">
                 <div class="mini-cart">
                   <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#">
                     <div class="cart-icon"><i class="icon-basket-loaded icons"></i><span class="cart-total">3</span></div>
-                    <div class="shoppingcart-inner hidden-xs"><span class="cart-title">My Cart</span> </div>
+                    <div class="shoppingcart-inner hidden-xs"><span class="cart-title">Giỏ hàng</span> </div>
                     </a></div>
                   <div>
                     <div class="top-cart-content">
@@ -122,7 +122,7 @@
                             <strong>2</strong> x <span class="price">$420.00</span> </div>
                         </li>
                       </ul>
-                      <div class="top-subtotal">Subtotal: <span class="price">$520.00</span></div>
+                      <div class="top-subtotal">Tổng tiền: <span class="price">$520.00</span></div>
                       <div class="actions">
                         <button class="btn-checkout" type="button" [routerLink]="['/thanh-toan']"><i class="fa fa-check"></i><span>Thanh toán</span></button>
                         <button class="view-cart" type="button" [routerLink]="['/gio-hang']"><i class="fa fa-shopping-cart"></i><span>Giỏ hàng</span></button>

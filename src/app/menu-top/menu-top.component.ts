@@ -45,16 +45,7 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     this.spinner.show();
     this.categoryName = this._mainsvc.categoryName;
     this.getMenu();
-    this.router.events.subscribe((val) => {
-     if(val instanceof NavigationEnd) {
-        if(val.url !=='/' && val.url !== '' && val.url !=='/home'){
-          this.isShowMenu = false;
-        }
-        else{
-          this.isShowMenu = true;
-        }
-     }
-  });
+    this.isShowMenu = false;
   }
   ngAfterViewInit(): void {
     this.activatedRoute.url.subscribe(url => console.log(url))
@@ -88,7 +79,7 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
             localStorage.setItem('allmenu-app', JSON.stringify(this.allMenu));
 
             localStorage.setItem('all-menu-search', JSON.stringify(this.menuObject));
-           
+
           }
         }
         this.spinner.hide();

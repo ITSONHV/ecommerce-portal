@@ -6,7 +6,7 @@
         </div>
         <span class="mm-label">DANH MỤC SẢN PHẨM</span>
       </div>
-      <div (click)="toggleHandle($event)" class="col-md-3 col-sm-3 mega-container hidden-xs">
+      <div (click)="toggleHandle($event)" (mouseenter)="isShowMenu = true" (mouseleave)="isShowMenu = false" class="col-md-3 col-sm-3 mega-container hidden-xs">
         <div class="navleft-container">
           <div class="mega-menu-title">
             <h3><span>DANH MỤC SẢN PHẨM</span></h3>

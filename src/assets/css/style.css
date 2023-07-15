@@ -503,10 +503,37 @@ label {
 }
 .welcome-msg {
 	text-align: left;
+	font-size: medium;
 	display: inline-block;
 	padding: 0px 12px 0px 0;
 	margin: 0px;
 	float: left;
+}
+@-webkit-keyframes my {
+	0% { color: #f80a0a; } 
+	50% { color: #1ac59a;  } 
+	100% { color: #f80a0a;   } 
+}
+@-moz-keyframes my { 
+	0% { color: #f80a0a;   } 
+	50% { color: #1ac55c;  }
+	100% { color: #f80a0a;   } 
+}
+@-o-keyframes my { 
+	0% { color: #f80a0a; } 
+	50% { color: #c8d367; } 
+	100% { color:#f80a0a;   } 
+}
+@keyframes my { 
+	0% { color: #f80a0a;   } 
+	50% { color: #c8d367; }
+	100% { color: #f80a0a;  } 
+} 
+.welcome-msg {
+	-webkit-animation: my 700ms infinite;
+	-moz-animation: my 700ms infinite; 
+	-o-animation: my 700ms infinite; 
+	animation: my 700ms infinite;
 }
 .phone {
 	padding: 2px 0px 2px 0;
