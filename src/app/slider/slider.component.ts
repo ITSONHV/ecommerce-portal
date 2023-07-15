@@ -25,7 +25,7 @@ export class SliderComponent implements OnInit {
     autoplaySpeed: 1000,
     autoplay: true,
     navSpeed: 700,
-    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+    navText: ["<a class=\"flex-prev\"><i class=\"fa fa-angle-left\" aria-hidden=\"true\"></i></a>", "<a class=\"flex-next\"><i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i></a>"],
     responsive: {
       0: {
         items: 1
@@ -43,7 +43,7 @@ export class SliderComponent implements OnInit {
         items: 1
       }
     },
-    nav: false
+    nav: true
   }
   constructor(private _svc: MainService,
     private spinner: NgxSpinnerService, 
