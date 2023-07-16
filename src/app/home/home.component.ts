@@ -6,6 +6,7 @@ import { MainService } from 'src/services/main.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Meta, Title } from '@angular/platform-browser';
+import { ProductModel } from 'src/models/product.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -238,6 +239,8 @@ export class HomeComponent implements OnInit {
     this._svc.getProductBestDiscountPages().subscribe(
       (respones: ObjectModel) => {
         this.listProductSales = respones.data;
+        console.log(this.listProductSales);
+        
       this.spinner.hide();
       },
       (err) => {
@@ -297,5 +300,10 @@ export class HomeComponent implements OnInit {
   }
   listenEventFromChild(check: boolean) : void {
     this.isShowQuickView = !this.isShowQuickView;
+  }
+  addToShopingCard(product:ProductModel): void{
+    this._svc.addToCart(product);
+    console.log(this._svc.getItemsCart);
+    alert("đã thêm giõ hàng")
   }
 }

@@ -6,15 +6,19 @@ import { catchError, map, retry,mergeMap } from 'rxjs/operators';
 import { AppConfigs } from 'src/app/commons/AppConfigs';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
+import { ICart } from 'src/interfaces/ICart';
+import { ProductModel } from 'src/models/product.model';
 @Injectable({
     providedIn: 'root',
 })
 export class MainService {
-    constructor(private http: HttpClient) { }
+    itemsCart: ICart[] = [];
+    totalMoney: number;
     urlApi = environment.apiUrl;
     categoryName : string;
     categoryId : number;
     public isShowMenu = true;
+    constructor(private http: HttpClient) { }
     httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -229,7 +233,25 @@ export class MainService {
                 })
             )
     };
-
+    addToCart(product: ProductModel) {    
+        const index = this.itemsCart.findIndex(item =>item.id == product.id)
+        if(index >= 0){
+            this.itemsCart[index].quantity++;
+        }
+        else{
+            var cart:ICart;
+            cart = { 
+              id: product.id, 
+              productName: product.productName, 
+              price: product.price, 
+              image: product.imageUrl, 
+              quantity:1,
+            }
+            this.itemsCart.push(cart); 
+        }
+    }
+    getItemsCart() { return this.itemsCart; }
+    clearItemsCart() { this.itemsCart = []; return this.itemsCart;}
     getServerErrorMessage(error: HttpErrorResponse): string {
         switch (error.status) {
             case 404: {
