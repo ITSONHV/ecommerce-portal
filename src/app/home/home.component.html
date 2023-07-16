@@ -409,6 +409,29 @@
   <div class="container">
     <div class="home-tab">
     <div class="tab-title text-left">
+      <h2>DANH MỤC SẢN PHẨM</h2>
+    </div>
+   </div>
+    <div class="row" *ngIf="this.allMenu &&this.allMenu != '' ">
+      <ng-container *ngFor="let item of allMenu; let i= index; ">
+        <div class="col-lg-4 col-sm-6"*ngIf="i < 6">
+                <div class="">
+                  <div  style="height: 144px;"  ngClass="{{'single-categories '+ 'bg'+ i}}">
+                    <a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)"><img [src]="urlImg + item.imageUrl"  alt="{{item.categoryName}}"></a>
+                    <h4><a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)">{{item.categoryName}}</a></h4>
+                    <a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)" class="read-more">Xem ngay</a>
+                  </div>
+                 </div>
+                </div>
+           
+      </ng-container>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="home-tab">
+    <div class="tab-title text-left">
       <h2>THƯƠNG HIỆU</h2>
     </div>
    </div>
@@ -433,59 +456,26 @@
     </div>
   </div>
 
-  <!-- BANNER-AREA-START -->
-  <section class="banner-area">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-          <div class="row">
-            <div class="col-xs-12 col-sm-6 col-lg-6 col-md-6">
-              <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-sunglasses.jpg"
-                    alt="banner sunglasses"> </a>
-                <div class="text-des-container">
-                  <div class="text-des">
-                    <h2>Galaxy Note 5</h2>
-                    <p>Fall Phone 25% off Colorful designs!</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-lg-6 col-md-6">
-              <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-kids.jpg" alt="banner kids">
-                </a>
-                <div class="text-des-container">
-                  <div class="text-des">
-                    <h2>Music & Sound</h2>
-                    <p>For the littlest people</p>
-                  </div>
-                </div>
-              </div>
-              <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-women.jpg" alt="banner women">
-                </a>
-                <div class="text-des-container">
-                  <div class="text-des">
-                    <h2>Best Quality Music</h2>
-                    <p>Modern Headphones designs shop!</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-lg-4 col-md-4">
-          <div class="banner-block"> <a href="#"> <img src="./../assets/images/banner-arrival.jpg" alt="banner arrival">
-            </a>
-            <div class="text-des-container">
-              <div class="text-des">
-                <h2>special collection</h2>
-                <p>Sale upto 50% off on selected items</p>
-              </div>
-            </div>
+  <div class="container">
+    <div class="home-tab">
+    <div class="tab-title text-left">
+      <h2>SẢN PHẨM VỪA XEM</h2>
+    </div>
+   </div>
+   <div id="productTabContent" class="tab-content">
+    <div class="tab-pane active in" id="computer">
+      <div class="featured-pro">
+        <div class="slider-items-products">
+          <div  class="product-flexslider hidden-buttons">
+            <!-- <app-product-recent></app-product-recent> -->
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+  </div>
+
+ 
 </ng-container>
 <app-quick-view (sendEventToParent)="listenEventFromChild($event)" *ngIf="isShowQuickView"></app-quick-view>
 <ngx-spinner [fullScreen]="true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)"

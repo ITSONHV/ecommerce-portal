@@ -13,6 +13,7 @@ import { ProductModel } from 'src/models/product.model';
 })
 export class MainService {
     itemsCart: ICart[] = [];
+    productRecent: any[] = [];
     totalMoney: number;
     urlApi = environment.apiUrl;
     categoryName : string;
@@ -252,6 +253,35 @@ export class MainService {
     }
     getItemsCart() { return this.itemsCart; }
     clearItemsCart() { this.itemsCart = []; return this.itemsCart;}
+
+    // lưu product vừa xem
+    setProductRecent(product: any) {
+        if(localStorage.getItem("product-recent") !== null &&
+           localStorage.getItem("product-recent")?.length != 0)
+        {
+            let prodcutRecents = JSON.parse(localStorage.getItem("product-recent") ?? "");
+            let itemExist = prodcutRecents.filter((item: any) => {
+                return item.id === product.id
+              });
+              debugger;
+
+              if(itemExist == undefined || itemExist.length == 0){
+                prodcutRecents.push(JSON.stringify(product));
+                localStorage.setItem('product-recent', JSON.stringify(prodcutRecents));
+              }
+        }
+        else{
+            this.productRecent.push(product);
+            localStorage.setItem('product-recent', JSON.stringify(this.productRecent));
+        }
+       
+    
+    }
+    // lấy product vừa xem
+    getProductRecent(){
+       return JSON.parse(localStorage.getItem("product-recent") ?? "");
+    }
+
     getServerErrorMessage(error: HttpErrorResponse): string {
         switch (error.status) {
             case 404: {

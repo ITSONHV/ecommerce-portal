@@ -74,6 +74,7 @@ export class ProductDetailComponent implements OnInit {
         this.rout.navigate(['/'])// nếu không lấy được params quay lại home
       this.slug = params['slug'];
       this.getProductbyProductNameSlug(this.slug)
+      this._svc.addToCart
     });
     this.getProductSales(3);
   }
@@ -94,7 +95,10 @@ export class ProductDetailComponent implements OnInit {
           this.htmlContent = this.product.content;
           this.htmlDescription = this.product.description;
           this.getReviewProducts(this.product.id);
-          this.getProductsRelate(this.product.categoryId)
+          this.getProductsRelate(this.product.categoryId);
+
+          debugger;
+          this._svc.setProductRecent(this.product);
         }
         this.spinner.hide();
       },
@@ -149,7 +153,7 @@ export class ProductDetailComponent implements OnInit {
   handleViewDetailProduct(event: any, product: any): void {
     const queryParams: Params = { slug: product.productNameSlug };
     this.rout.navigate(
-      ['chi-tiet'],
+      ['/chi-tiet'],
       {
         relativeTo: this._router,
         queryParams: queryParams,

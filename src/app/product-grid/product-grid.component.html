@@ -5,7 +5,7 @@
         <div class="col-xs-12">
           <ul>
             <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Home</a><span>&raquo;</span></li>
-            <li class=""><a title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']">{{categoryName}}</a></li>
+            <li class=""><a title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']" >{{categoryName}}</a></li>
           </ul>
         </div>
       </div>
@@ -50,7 +50,7 @@
               <div class="view-mode">
                 <ul>
                   <li class="active"> <a [routerLink]="['/danh-muc-san-pham-g']" > <i class="fa fa-th-large"></i> </a> </li>
-                  <li> <a [routerLink]="['/danh-muc-san-pham-l']" [queryParams]="{searchKey: this.searchKey}"> <i class="fa fa-th-list"></i> </a> </li>
+                  <li> <a (click)="onChangeSelectedListAndGridProrudct()"> <i class="fa fa-th-list"></i> </a> </li>
                   <li> <a>({{visibleItems.total}} sản phẩm)</a> </li>
                 </ul>
               </div>
@@ -146,56 +146,7 @@
             </div>
           </div>
         </div>
-        <aside class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">
-          <!-- <div class="block category-sidebar">
-            <div class="sidebar-title">
-              <h3>Categories</h3>
-            </div>
-            <ul class="product-categories">
-              <li class="cat-item current-cat cat-parent"><a [routerLink]="['/danh-muc-san-pham-g']">Women</a>
-                <ul class="children">
-                  <li class="cat-item cat-parent"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Accessories</a>
-                    <ul class="children">
-                      <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Dresses</a></li>
-                      <li class="cat-item cat-parent"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Handbags</a>
-                        <ul  class="children">
-                          <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Beaded Handbags</a></li>
-                          <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Sling bag</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="cat-item cat-parent"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Handbags</a>
-                    <ul class="children">
-                      <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; backpack</a></li>
-                      <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Beaded Handbags</a></li>
-                      <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Fabric Handbags</a></li>
-                      <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Sling bag</a></li>
-                    </ul>
-                  </li>
-                  <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Jewellery</a> </li>
-                  <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Swimwear</a> </li>
-                </ul>
-              </li>
-              <li class="cat-item cat-parent"><a [routerLink]="['/danh-muc-san-pham-g']">Men</a>
-                <ul class="children">
-                  <li class="cat-item cat-parent"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Dresses</a>
-                    <ul class="children">
-                      <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Casual</a></li>
-                      <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Designer</a></li>
-                      <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Evening</a></li>
-                      <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Hoodies</a></li>
-                    </ul>
-                  </li>
-                  <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Jackets</a> </li>
-                  <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']"><i class="fa fa-angle-right"></i>&nbsp; Shoes</a> </li>
-                </ul>
-              </li>
-              <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']">Electronics</a></li>
-              <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']">Furniture</a></li>
-              <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']">KItchen</a></li>
-            </ul>
-          </div> -->
+        <aside class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">     
           <div class="block shop-by-side">
             <div class="sidebar-bar-title">
               <span style="font-size: 20px;">Bộ lọc sản phẩm</span>
@@ -214,7 +165,7 @@
                           <li class="filter-item" *ngFor="let item of group.itemFilterValues">
                             <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionPrice($event, item.filterValueID)" 
                               [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
-                            <label class="textFilter" style="font-size: 13px;" [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
+                            <label class="textFilter" style="font-size: 13px;" [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
                         </ul>
                         <div class="sp">Hoặc nhập giá dưới đây</div>
                         <div class="inputPrice">
@@ -235,8 +186,8 @@
                         [ngClass]="{'filter-body-inner': i == 0, 'filter-body-inner noactive': i != 0}">
                         <ul class="filter-body">
                           <li class="filter-item" *ngFor="let item of group.itemFilterValues">
-                            <input type="checkbox" id="{{item.filterValueID}}" name="cc" class="checkmark"  (change)="changeSelectionKeySearch($event, item.filterValueID)" 
-                            [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
+                            <input type="checkbox" id="{{item.filterValueID}}" class="checkmark"  (change)="changeSelectionKeySearch($event, item.filterValueID)" 
+                            [ngModel]="selectedTextIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
                             <label for="p1"> <span class="button"></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
                         </ul>
                       </div>
@@ -249,7 +200,7 @@
           
           <div class="block sidebar-cart">
             <div class="sidebar-bar-title">
-              <h3>Giỏ hàng của bạn</h3>
+              <span>Giỏ hàng của bạn</span>
             </div>
             <div class="block-content">
               <p class="amount">Có <a [routerLink]="['/gio-hang']">2 sản phẩm</a> trong giỏ.</p>
@@ -289,7 +240,7 @@
               
               <!-- Wrapper for slides -->
               <div class="carousel-inner" role="listbox">
-                <div class="item active"> <img src="../../assets/images/image-banner.jpg" alt="banner"/> 
+                <div class="item active"> <img src="../../assets/images/image-manhinh-banner.jpg" alt="banner"/> 
                   <div class="carousel-caption">
                     <h3><a [routerLink]="['/chi-tiet']"  title=" Sample Product">Sale Up to 50% off</a></h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -301,7 +252,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     <a href="#" class="info">All Collection</a> </div>
                 </div>
-                <div class="item"> <img src="../../assets/images/image-manhinh-banner.jpg" alt="banner"/> 
+                <div class="item"> <img src="../../assets/images/image-banner.jpg" alt="banner"/> 
                   <div class="carousel-caption">
                     <h3><a [routerLink]="['/chi-tiet']" title=" Sample Product">Summer Sale</a></h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -342,18 +293,8 @@
               <h3>Popular Tags</h3>
             </div>
             <div class="tag">
-              <ul>
-                <li><a href="#">Boys</a></li>
-                <li><a href="#">Camera</a></li>
-                <li><a href="#">good</a></li>
-                <li><a href="#">Computers</a></li>
-                <li><a href="#">Phone</a></li>
-                <li><a href="#">clothes</a></li>
-                <li><a href="#">girl</a></li>
-                <li><a href="#">shoes</a></li>
-                <li><a href="#">women</a></li>
-                <li><a href="#">accessoties</a></li>
-                <li><a href="#">View All Tags</a></li>
+              <ul >
+                <li *ngFor="let item of category?.categoryTags"><a href="#">{{item}}</a></li>
               </ul>
             </div>
           </div>

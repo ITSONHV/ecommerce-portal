@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   public listProductSales: any;
   public listProductIsNew: any;
   public listProductIsHot: any;
+  public allMenu : any;
+  public activatedRoute: ActivatedRoute;
   @Input() modalOpen: boolean;
   @Output() modalClose = new EventEmitter();
   public customOptions: OwlOptions = {
@@ -205,6 +207,7 @@ export class HomeComponent implements OnInit {
     this.getProductIsHot();
     this.getProductIsNew();
     this.getTrademark();
+    this.allMenu = JSON.parse(localStorage.getItem('allmenu-app') ?? "");
     this.isLoadComplete = true;
   }
   getProductIsBestSellingPages() {
@@ -304,5 +307,25 @@ export class HomeComponent implements OnInit {
   addToShopingCard(product:ProductModel): void{
     this._svc.addToCart(product);
     console.log(this._svc.getItemsCart);
+  }
+
+  handleMenu(event: any, category: any): void {
+    localStorage.removeItem('category-menu-select');
+    localStorage.setItem('category-menu-select', JSON.stringify(category));
+    const queryParams: Params = { slug: category.urlSlug };
+    this.meta.updateTag({ name: 'description', content: category.seoDescription });
+    this.titleService.setTitle(category.seoTitle);
+    this.meta.updateTag({ name: 'keywords', content: category.seoKeyword });
+    this._svc.categoryName = category.categoryName;
+    this.router.navigate(
+      ['danh-muc-san-pham-g'],
+      {
+
+        relativeTo: this.activatedRoute,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    )
+    event.preventDefault();
   }
 }

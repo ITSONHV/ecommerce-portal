@@ -7,7 +7,7 @@
         <ul>
           <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Home</a><span>&raquo;</span></li>
           <li class=""> <a title="Go to Home Page"
-              [routerLink]="['/danh-muc-san-pham-l']">{{categoryName}}</a><span>&raquo;</span></li>
+              [routerLink]="['/danh-muc-san-pham-l']" >{{categoryName}}</a><span>&raquo;</span></li>
           <li><strong>{{categoryName}}</strong></li>
         </ul>
       </div>
@@ -55,8 +55,9 @@
           <div class="toolbar">
             <div class="view-mode">
               <ul>
-                  <li> <a [routerLink]="['/danh-muc-san-pham-g']"> <i class="fa fa-th-large"></i> </a> </li>
-                <li class="active"> <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{searchKey: this.searchKey}"> <i class="fa fa-th-list"></i> </a> </li>
+                  <li> <a [routerLink]="['/danh-muc-san-pham-g']"  (click)="onChangeSelectedListAndGridProrudct()"> <i class="fa fa-th-large"></i> </a> </li>
+                <li class="active"> <a > <i class="fa fa-th-list"></i> </a> </li>
+                <li> <a>({{visibleItems.total}} sản phẩm)</a> </li>
               </ul>
             </div>
             <div class="sorter">
@@ -214,7 +215,7 @@
         </div>
         <div class="block shop-by-side">
           <div class="sidebar-bar-title">
-            <h3>Lọc sản phẩm theo</h3>
+            <span style="font-size: 20px;">Bộ lọc sản phẩm</span>
           </div>
         </div>
         <div class="">
@@ -233,7 +234,7 @@
                         <li class="filter-item" *ngFor="let item of group.itemFilterValues">
                           <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionPrice($event, item.filterValueID)" 
                             [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
-                          <label [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
+                          <label  style="font-size: 13px;" [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
                       </ul>
                       <div class="sp">Hoặc nhập giá dưới đây</div>
                       <div class="inputPrice">
@@ -258,7 +259,7 @@
                       <ul class="filter-body">
                         <li class="filter-item" *ngFor="let item of group.itemFilterValues">
                           <input type="checkbox" id="{{item.filterValueID}}" name="cc" class="checkmark"  (change)="changeSelectionKeySearch($event, item.filterValueID)" 
-                          [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
+                          [ngModel]="selectedTextIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
                           <label for="p1"> <span class="button"></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
                       </ul>
                     </div>
@@ -270,10 +271,10 @@
         </div>
         <div class="block sidebar-cart">
           <div class="sidebar-bar-title">
-            <h3>My Cart</h3>
+            <span>Giỏ hàng của bạn</span>
           </div>
           <div class="block-content">
-            <p class="amount">There are <a href="shopping_cart.html">2 items</a> in your cart.</p>
+            <p class="amount">Có <a href="shopping_cart.html">2 sản phẩm</a> trong giỏ.</p>
             <ul>
               <li class="item"> <a href="shopping_cart.html" title="Sample Product" class="product-image"><img
                     src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a>
@@ -296,7 +297,7 @@
               </li>
             </ul>
             <div class="summary">
-              <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">$27.99</span> </p>
+              <p class="subtotal"> <span class="label">Tổng tiền:</span> <span class="price">$27.99</span> </p>
             </div>
             <div class="cart-checkout">
               <button class="button button-checkout" title="Submit" type="submit"><span>Thanh toán</span></button>
@@ -347,38 +348,29 @@
         </div>
         <div class="block special-product">
           <div class="sidebar-bar-title">
-            <h3>Special Products</h3>
+            <h3>Sản phẩm ưu đãi</h3>
           </div>
           <div class="block-content">
-            <ul>
+            <ul *ngIf="productSale">
+              <ng-container *ngFor="let item of productSale?.data; let i = index">
               <li class="item">
-                <div class="products-block-left"> <a [routerLink]="['/chi-tiet']" title="Sample Product"
-                    class="product-image"><img src="./../assets/images/products/product-1.jpg"
-                      alt="Sample Product "></a></div>
+                <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  [queryParams]="{slug: item?.productNameSlug}" [title]="item.productName" class="product-image"><img [src]='urlImg + item.imageUrl' alt="Sample Product "></a></div>
                 <div class="products-block-right">
-                  <p class="product-name"> <a [routerLink]="['/chi-tiet']">Lorem ipsum dolor sit amet Consectetur</a>
-                  </p>
-                  <span class="price">$19.99</span>
-                  <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
+                  <p class="product-name"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item?.productNameSlug}">{{item.productName}}</a> </p>
+                  <span class="price">{{item?.promotionPrice | currency: "VND"}}</span>
+                  <div class="rating"> 
+                    <ng-container *ngIf="item.rate >= 0">
+                      <i class="fa fa-star" *ngFor="let rate of counterRate(item.rate)"></i>
+                      <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
+                    </ng-container>
+                  
+                  </div>
                 </div>
               </li>
-              <li class="item">
-                <div class="products-block-left"> <a [routerLink]="['/chi-tiet']" title="Sample Product"
-                    class="product-image"><img src="./../assets/images/products/product-1.jpg"
-                      alt="Sample Product "></a></div>
-                <div class="products-block-right">
-                  <p class="product-name"> <a [routerLink]="['/chi-tiet']">Consectetur utes anet adipisicing elit</a>
-                  </p>
-                  <span class="price">$89.99</span>
-                  <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                </div>
-              </li>
+             </ng-container>       
             </ul>
-            <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']">All Products</a>
+            <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']">Xem thêm</a> </div>
           </div>
-        </div>
         <div class="block popular-tags-area ">
           <div class="sidebar-bar-title">
             <h3>Popular Tags</h3>

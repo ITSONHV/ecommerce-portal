@@ -33,12 +33,15 @@ export class ProductListComponent implements OnInit {
   public selectedTextIndex : any;
   isLoadComplete = false;
   public typeSearch : string;
+  public productSale : any;
   public visibleItems: PaginatedResponse<ProductModel> = {
     items: this.listProduct,
     total: this. totalRecords,
   };
   constructor(private _svc : MainService,private _router: ActivatedRoute,
     @Inject(DOCUMENT) private document: Document ,
+    private router : Router,
+    private activatedRoute: ActivatedRoute,
     ) {
   }
   ngOnInit(): void {
@@ -58,7 +61,7 @@ export class ProductListComponent implements OnInit {
         this.onPageChange(this.pagination);
         this.getGroupSearch(0); // get mặc định all
       }
-
+      this.getProductSales(2);
       this.paginationControl.valueChanges.subscribe(x => {
         this.onPageChange(x);
          // console.log('aa' + x);
@@ -240,4 +243,30 @@ export class ProductListComponent implements OnInit {
     });
     return itemSelectd;
   }
+
+  onChangeSelectedListAndGridProrudct(): void {  
+    this.router.navigate(
+      ['/danh-muc-san-pham-g'],
+      {
+        relativeTo: this.activatedRoute,
+        queryParamsHandling: "preserve" 
+      }
+    )
+
+    this.onPageChange(this.pagination);
+	}
+
+  getProductSales(limit: number){
+    this._svc.getProductIsBestSellingPages(limit).subscribe(
+      (respones: ObjectModel)=>{
+        this.productSale = respones.data;    
+        //this.spinner.hide();
+      },
+      (err) =>{
+        console.log(err);
+        //this.spinner.hide();
+      }
+    );
+  }
+
 }

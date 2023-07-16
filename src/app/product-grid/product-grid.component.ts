@@ -11,6 +11,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PaginatedResponse, PaginationValue } from '../pagination/pagination.component';
 import { DOCUMENT } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-product-grid',
@@ -42,6 +43,37 @@ export class ProductGridComponent implements OnInit  {
   public visibleItems: PaginatedResponse<ProductModel> = {
     items: this.listProduct,
     total: this. totalRecords,
+  };
+  public customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    items:3,
+    dots: false,
+    autoplayTimeout: 3000,
+    autoplaySpeed: 1000,
+    autoplay:true,
+    navSpeed: 700,
+    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+    responsive: {
+      0: {
+        items: 1,
+      },
+      400: {
+        items: 1
+      },
+      640: {
+        items: 1
+      },
+      900: {
+        items: 1
+      },
+      1024: {
+        items: 1
+      }
+    },
+    nav: false
   };
 
   constructor(private _svc : MainService,public _router: ActivatedRoute,
@@ -93,7 +125,7 @@ export class ProductGridComponent implements OnInit  {
 
   //pagination: PaginationValue
   public onPageChange(pagination: any): void {
-    //this.spinner.show();
+    this.spinner.show();
     let currentPage = (pagination.page ?? 1);
     this._svc.getProductListPagings(currentPage,
       pagination.pageSize,
@@ -109,7 +141,7 @@ export class ProductGridComponent implements OnInit  {
           this.listProduct = respones.data.data;
           this.visibleItems = { items: respones.data.data, total: respones.data.total };
           this.isLoadComplete = true;
-          //this.spinner.hide();
+          this.spinner.hide();
           window.scroll(0, 50); // scroll lên 1 tý sau khi change value
         },
         (err) => {
@@ -142,12 +174,15 @@ export class ProductGridComponent implements OnInit  {
   }
 
   getGroupSearch(cateID: number){
+    this.spinner.show();
     this._svc.getGroupSerrchByCategoryID(cateID).subscribe(
       (respones: ObjectModel)=>{
         this.groupSearch = respones.data;
+          this.spinner.hide();
       },
       (err) =>{
-        console.log(err);
+        console.log(err); 
+         this.spinner.hide();
       }
     );
   }
@@ -180,7 +215,7 @@ export class ProductGridComponent implements OnInit  {
 
   changeSelectionPrice(event: any, index: string) {
     this.selectedPriceIndex = event.target.checked ? index : undefined;
-    debugger;
+   
     if(this.selectedPriceIndex === undefined){
       this.minPrice = 0;
       this.maxPrice = 0;
@@ -213,7 +248,20 @@ export class ProductGridComponent implements OnInit  {
     this.onPageChange(this.pagination);
 	}
 
+  onChangeSelectedListAndGridProrudct(): void {  
+    this.router.navigate(
+      ['/danh-muc-san-pham-l'],
+      {
+        relativeTo: this.activatedRoute,
+        queryParamsHandling: "preserve" 
+      }
+    )
+
+    this.onPageChange(this.pagination);
+	}
+
   changeSelectionKeySearch(event: any, index: string) {
+    debugger;
     this.selectedTextIndex = event.target.checked ? index : undefined;
     if(this.selectedTextIndex === undefined){
       this.searchKey = ''; 

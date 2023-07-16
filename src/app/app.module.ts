@@ -33,6 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PaginationComponent } from './pagination/pagination.component';
+import { ProductRecentComponent } from './product-recent/product-recent.component';
  
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     OrderDetailComponent,
     SafePipe,
     ScrollTopComponent,
-    PaginationComponent
+    PaginationComponent,
+    ProductRecentComponent
   ],
   imports: [
     BrowserModule,
