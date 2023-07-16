@@ -1,0 +1,54 @@
+@-webkit-keyframes my {
+	0% { color: #f4f80a; } 
+	50% { color: #ffffff;  } 
+	100% { color: #f4f80a;  } 
+}
+@-moz-keyframes my { 
+	0% { color: #f4f80a;    } 
+	50% { color: #ffffff;  }
+	100% { color: #f4f80a;    } 
+}
+@-o-keyframes my { 
+	0% { color: #f4f80a; } 
+	50% { color: #ffffff; } 
+	100% { color:#f4f80a;   } 
+}
+@keyframes my { 
+	0% { color: #f4f80a;   } 
+	50% { color: #ffffff;}
+	100% { color: #f4f80a;  } 
+} 
+
+@-webkit-keyframes my2 {
+	0% { color: #f80a0a; } 
+	50% { color: #197bb7;  } 
+	100% { color: #f80a0a;  } 
+}
+@-moz-keyframes my2 { 
+	0% { color: #f80a0a;   } 
+	50% { color: #197bb7;  }
+	100% { color: #f80a0a;   } 
+}
+@-o-keyframes my2 { 
+	0% { color: #f80a0a; } 
+	50% { color: #197bb7; } 
+	100% { color:#f80a0a;  } 
+}
+@keyframes my2 { 
+	0% { color: #f80a0a;  } 
+	50% { color: #197bb7; }
+	100% { color: #f80a0a;  } 
+} 
+.title {
+	-webkit-animation: my2 700ms infinite;
+	-moz-animation: my2 700ms infinite; 
+	-o-animation: my2 700ms infinite; 
+	animation: my2 700ms infinite;
+}
+
+.sale-left, .new-right{
+	-webkit-animation: my 700ms infinite;
+	-moz-animation: my 700ms infinite; 
+	-o-animation: my 700ms infinite; 
+	animation: my 700ms infinite;
+}
