@@ -234,7 +234,7 @@
                         <li class="filter-item" *ngFor="let item of group.itemFilterValues">
                           <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionPrice($event, item.filterValueID)" 
                             [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
-                          <label  style="font-size: 13px;" [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
+                          <label [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
                       </ul>
                       <div class="sp">Hoặc nhập giá dưới đây</div>
                       <div class="inputPrice">
