@@ -1,19 +1,19 @@
-@-webkit-keyframes my {
+@-webkit-keyframes mmytitley {
 	0% { color: #f4f80a; } 
 	50% { color: #ffffff;  } 
 	100% { color: #f4f80a;  } 
 }
-@-moz-keyframes my { 
+@-moz-keyframes mytitle { 
 	0% { color: #f4f80a;    } 
 	50% { color: #ffffff;  }
 	100% { color: #f4f80a;    } 
 }
-@-o-keyframes my { 
+@-o-keyframes mytitle { 
 	0% { color: #f4f80a; } 
 	50% { color: #ffffff; } 
 	100% { color:#f4f80a;   } 
 }
-@keyframes my { 
+@keyframes mytitle { 
 	0% { color: #f4f80a;   } 
 	50% { color: #ffffff;}
 	100% { color: #f4f80a;  } 
@@ -47,8 +47,8 @@
 }
 
 .sale-left, .new-right{
-	-webkit-animation: my 700ms infinite;
-	-moz-animation: my 700ms infinite; 
-	-o-animation: my 700ms infinite; 
-	animation: my 700ms infinite;
+	-webkit-animation: mytitle 700ms infinite;
+	-moz-animation: mytitle 700ms infinite; 
+	-o-animation: mytitle 700ms infinite; 
+	animation: mytitle 700ms infinite;
 }
