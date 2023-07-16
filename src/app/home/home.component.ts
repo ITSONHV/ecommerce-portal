@@ -194,7 +194,7 @@ export class HomeComponent implements OnInit {
     private spinner: NgxSpinnerService, 
     public elementRef: ElementRef,
     private meta: Meta,
-    private _router: ActivatedRoute,
+    private _routerActive: ActivatedRoute,
     private router: Router,
     private titleService: Title
     ) {
@@ -288,7 +288,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(
       ['chi-tiet'],
       {
-        relativeTo: this._router,
+        relativeTo: this._routerActive,
         queryParams: queryParams,
         queryParamsHandling: 'merge'
       }
@@ -304,6 +304,5 @@ export class HomeComponent implements OnInit {
   addToShopingCard(product:ProductModel): void{
     this._svc.addToCart(product);
     console.log(this._svc.getItemsCart);
-    alert("đã thêm giõ hàng")
   }
 }
