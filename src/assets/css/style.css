@@ -488,7 +488,7 @@ label {
 }
 /*4.2 header top */
 .header-top {
-	background: #ececec;
+	background:#197bb7;
 	color: #666;
 	font-size: 12px;
 	width: 100%;
@@ -741,7 +741,7 @@ color: #333333;
 	line-height: 34px;
 	padding: 4px 15px 0px;
 	display: inline-block;
-	background: #8d5652;
+	background: #197bb7;
 	border: none;
 	color: #fff;
 	border-left: 0px #e8e6e2 solid;
@@ -749,7 +749,7 @@ color: #333333;
 	right: 0px;
 }
 #search button:hover {
-	background: #8d5652;
+	background: #197bb7;
 	border: none;
 	color: #fff
 }
@@ -3106,12 +3106,12 @@ a.link:hover {
 
 footer {
 	overflow: hidden;
-	color: #999;
-	background: #333;
+	color: #000000;
+	background: #197bb7;
 	font-size: 13px; padding-top:35px;
 }
 footer p {
-	color: #999;
+	color: #000000;
 	line-height: 20px;
 }
 footer h3 {
@@ -3134,7 +3134,7 @@ footer .footer-links ul li {
 }
 footer .footer-links ul li a {
 	transition: all .3s ease-in-out 0s;
-	color: #999;
+	color: #000000;
 }
 footer .footer-links ul li a:hover {
 	transition: all .3s ease-in-out 0s;
@@ -3431,7 +3431,7 @@ nav {
 	position: relative;
 	margin: auto;
 	width: 100%;
-	background: #8d5652;
+	background: #197bb7;
 }
 .jtv-sticky-menu {
 	position: fixed;
@@ -3440,7 +3440,7 @@ nav {
 	display: block;
 	top: 0px;
 	width: 100%;
-	background: #8d5652;
+	background: #197bb7;
 	height: 45px;
 	transition: all .3s ease-out 0s;
 	left: 0px;
@@ -4119,7 +4119,7 @@ html {
 }
 .menu > li > a:hover, .menu > li > a:focus, .menu > li.active > a {
 	text-decoration: none;
-	color: #8d5652;
+	color: #197bb7;
 }
 /* Mega Menu */
 .mega-container {
@@ -4132,7 +4132,7 @@ html {
 	cursor: pointer;
 	display: inline-block;
 	font-size: 28px;
-	background: #8d5652;
+	background: #197bb7;
 	width: 100%;
 	margin-top: -5px;
 }
@@ -4163,7 +4163,7 @@ html {
 .mega-menu-title h3:after {
 	content: "\f038";
 	display: inline-block;
-	background: #8d5652;
+	background: #197bb7;
 	width: 50px;
 	height: 40px;
 	position: absolute;
@@ -4230,8 +4230,8 @@ html {
 	content: "\f0fe";
 }
 .mega-menu-category > .nav > li > a:hover, .mega-menu-category > .nav > li > a:focus, .mega-menu-category > .nav > li.active > a {
-	background-color: #f8f8f8;
-	color: #e83f33;
+	background-color:#aed3eb;
+	color: #f82213;
 }
 .wrap-popup {
 	position: absolute;
@@ -4651,7 +4651,8 @@ button span {
 .breadcrumbs {
 	padding: 8px 0px;
 	margin: auto;
-	font-size: 12px; border-bottom:1px #e5e5e5 solid;
+	font-size: 16px; 
+	border-bottom:1px #e5e5e5 solid;
 }
 .breadcrumbs a {
 	color: #999;

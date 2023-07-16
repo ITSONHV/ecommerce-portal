@@ -1,5 +1,5 @@
 .header-top a {
-    color: #333333;
+    color: #000000;
 }
 .logoImg{
     width: 100% !important; 
@@ -8,4 +8,30 @@
 	height: auto !important;	
     display: block;
     margin: auto;
+}
+@-webkit-keyframes my {
+	0% { color: #f80a0a; } 
+	50% { color: #1ac59a;  } 
+	100% { color: #f80a0a;   } 
+}
+@-moz-keyframes my { 
+	0% { color: #f80a0a;   } 
+	50% { color: #1ac55c;  }
+	100% { color: #f80a0a;   } 
+}
+@-o-keyframes my { 
+	0% { color: #f80a0a; } 
+	50% { color: #c8d367; } 
+	100% { color:#f80a0a;   } 
+}
+@keyframes my { 
+	0% { color: #f80a0a;   } 
+	50% { color: #c8d367; }
+	100% { color: #f80a0a;  } 
+} 
+.phone{
+	-webkit-animation: my 700ms infinite;
+	-moz-animation: my 700ms infinite; 
+	-o-animation: my 700ms infinite; 
+	animation: my 700ms infinite;
 }
