@@ -54,6 +54,7 @@ export class SliderComponent implements OnInit {
   }
 
   getSliderLimitFromService(limit: number) {
+    this.spinner.show();
     this._svc.getSliderLimit(limit).subscribe(
       (respones: ObjectModel) => {
         this.sliders = respones?.data;
