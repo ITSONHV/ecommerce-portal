@@ -1,4 +1,4 @@
-@-webkit-keyframes mmytitley {
+@-webkit-keyframes mytitle {
 	0% { color: #f4f80a; } 
 	50% { color: #ffffff;  } 
 	100% { color: #f4f80a;  } 
@@ -53,7 +53,6 @@
     padding: 20px 180px 20px 20px;
     transition: var(--transition);
 }
-
 .single-categories:before {
     top: 0;
     right: 0;
@@ -66,7 +65,6 @@
     transition: var(--transition);
     clip-path: polygon(100% 0,0% 100%,100% 100%);
 }
-
 .single-categories.bg1:before {
     background-color: #ebf9ea;
 }
@@ -85,18 +83,18 @@
 .single-categories.bg6:before {
     background-color: #fff3ef;
 }
-
 .single-categories img {
     top: -4px;
     right: 35px;
     max-width: 145px;
     position: absolute;
 }
-
-
 .sale-left, .new-right{
 	-webkit-animation: mytitle 700ms infinite;
 	-moz-animation: mytitle 700ms infinite; 
 	-o-animation: mytitle 700ms infinite; 
 	animation: mytitle 700ms infinite;
+}
+.newproduct{
+	margin-top: 0px;
 }
