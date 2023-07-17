@@ -86,6 +86,8 @@ export class ProductDetailComponent implements OnInit {
       (respones: ObjectModel)=>{
         this.product = respones.data;
         if(this.product != null){
+          this._svc.setProductRecent(this.product);
+
           this.meta.updateTag({ name: 'description', content: this.product.seoDescription ?? ""});
           this.titleService.setTitle(this.product.seoTitle ?? "");
           this.meta.updateTag({ name: 'keywords', content: this.product.seoKeyword ?? ""});
@@ -96,9 +98,6 @@ export class ProductDetailComponent implements OnInit {
           this.htmlDescription = this.product.description;
           this.getReviewProducts(this.product.id);
           this.getProductsRelate(this.product.categoryId);
-
-          debugger;
-          this._svc.setProductRecent(this.product);
         }
         this.spinner.hide();
       },

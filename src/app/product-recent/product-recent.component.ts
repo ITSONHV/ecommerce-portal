@@ -17,7 +17,7 @@ export class ProductRecentComponent implements OnInit {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: false,
-    items:6,
+    items:1,
     dots: false,
     autoplayTimeout: 3000,
     autoplaySpeed: 1000,
@@ -38,7 +38,7 @@ export class ProductRecentComponent implements OnInit {
         items: 5
       },
       1024: {
-        items: 45
+        items: 5
       }
     },
     nav: false
@@ -53,8 +53,8 @@ export class ProductRecentComponent implements OnInit {
     ) {
   }
   ngOnInit(): void {
-    debugger;
    this.productRecents = this._svc.getProductRecent();
+   console.log(this.productRecents);
   }
 
   handleViewDetailProduct(event: any, product: any): void {

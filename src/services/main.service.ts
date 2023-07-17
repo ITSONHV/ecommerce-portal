@@ -266,7 +266,7 @@ export class MainService {
               debugger;
 
               if(itemExist == undefined || itemExist.length == 0){
-                prodcutRecents.push(JSON.stringify(product));
+                prodcutRecents.push(product);
                 localStorage.setItem('product-recent', JSON.stringify(prodcutRecents));
               }
         }
@@ -274,8 +274,6 @@ export class MainService {
             this.productRecent.push(product);
             localStorage.setItem('product-recent', JSON.stringify(this.productRecent));
         }
-       
-    
     }
     // lấy product vừa xem
     getProductRecent(){

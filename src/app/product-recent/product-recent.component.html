@@ -1,12 +1,13 @@
 <owl-carousel-o [options]="customOptions">
-  <ng-container style="width: 0px;" *ngFor="let item of productRecents">
+  <ng-container *ngFor="let item of productRecents">
     <ng-template carouselSlide [id]="item.id.toString()">
       <div class="product-item">
         <div class="item-inner">
           <div class="product-thumbnail">
             <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
               (click)="handleViewDetailProduct($event,item)">
-              <figure> <img class="first-img" [src]='urlImg + item.imageUrl' alt="HTML template"> <img class="hover-img" [src]='urlImg + item.imageUrl' alt="HTML template"></figure>
+              <figure> <img class="first-img" [src]='urlImg + item.productImages[0]?.imageUrl' alt="{{item.productName}}"> 
+                <img class="hover-img" [src]='urlImg + item.productImages[0]?.imageUrl' alt="{{item.productName}}"></figure>
               </a> </div>
             <div class="pr-info-area">
               <div class="pr-button">
