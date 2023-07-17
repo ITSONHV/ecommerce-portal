@@ -13,12 +13,11 @@
     border: 1px solid #dddfe6;
     vertical-align: middle;
     text-indent: 17px;
- }
-
-* .product-item{
-    max-width: 195.5px; 
-    max-height: 292px;
-} 
+}
+.product-item{
+    max-width: 178.5px; 
+    max-height: 300px;
+}
 .container{
     margin-bottom: 30px;
 }
