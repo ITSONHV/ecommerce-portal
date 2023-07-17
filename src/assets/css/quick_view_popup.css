@@ -8,7 +8,7 @@
 	z-index: 999;
 }
 #quick_view_popup-wrap {
-	position: absolute;
+	position: fixed;
 	top: 5%;
 	left: 0;
 	z-index: 1101;

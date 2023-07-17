@@ -13,15 +13,21 @@
     border: 1px solid #dddfe6;
     vertical-align: middle;
     text-indent: 17px;
-}
-.product-item{
-    max-width: 178.5px; 
-    max-height: 258px;
-}
+ }
+
+* .product-item{
+    max-width: 195.5px; 
+    max-height: 292px;
+} 
 .container{
     margin-bottom: 30px;
 }
-.owl-item {
+.owl-item .item {
     width: 0px !important; 
     margin-right: 0px !important;
+}
+
+.owl-stage .owl-item .item {
+    display: flex !important; ;
+    align-items: left !important; ;
 }

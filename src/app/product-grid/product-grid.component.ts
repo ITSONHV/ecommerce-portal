@@ -44,37 +44,6 @@ export class ProductGridComponent implements OnInit  {
     items: this.listProduct,
     total: this. totalRecords,
   };
-  public customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: false,
-    items:3,
-    dots: false,
-    autoplayTimeout: 3000,
-    autoplaySpeed: 1000,
-    autoplay:true,
-    navSpeed: 700,
-    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-    responsive: {
-      0: {
-        items: 1,
-      },
-      400: {
-        items: 1
-      },
-      640: {
-        items: 1
-      },
-      900: {
-        items: 1
-      },
-      1024: {
-        items: 1
-      }
-    },
-    nav: false
-  };
 
   constructor(private _svc : MainService,public _router: ActivatedRoute,
     private spinner: NgxSpinnerService, 

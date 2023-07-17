@@ -263,7 +263,7 @@ export class MainService {
             let itemExist = prodcutRecents.filter((item: any) => {
                 return item.id === product.id
               });
-              debugger;
+            
 
               if(itemExist == undefined || itemExist.length == 0){
                 prodcutRecents.push(product);
@@ -276,8 +276,11 @@ export class MainService {
         }
     }
     // lấy product vừa xem
-    getProductRecent(){
-       return JSON.parse(localStorage.getItem("product-recent") ?? "");
+    getProductRecent() {
+        if (localStorage.getItem("product-recent") !== null &&
+            localStorage.getItem("product-recent")?.length != 0) {
+            return JSON.parse(localStorage.getItem("product-recent") ?? "");
+        }
     }
 
     getServerErrorMessage(error: HttpErrorResponse): string {

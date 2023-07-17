@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { environment } from 'src/environments/environment';
@@ -11,18 +11,20 @@ import { MainService } from 'src/services/main.service';
   templateUrl: './product-recent.component.html',
   styleUrls: ['./product-recent.component.css']
 })
-export class ProductRecentComponent implements OnInit {
+export class ProductRecentComponent implements OnInit, AfterViewInit {
   public customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
+    loop: false,
+    mouseDrag: false,
+    touchDrag: false,
     pullDrag: false,
-    items:1,
+    items:5,
+    margin: 0,
     dots: false,
-    autoplayTimeout: 3000,
-    autoplaySpeed: 1000,
-    autoplay: false,
-    navSpeed: 700,
+    stagePadding: 0,
+    // autoplayTimeout: 3000,
+    // autoplaySpeed: 1000,
+    // autoplay: false,
+    // navSpeed: 700,
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
@@ -45,6 +47,7 @@ export class ProductRecentComponent implements OnInit {
   };
   public productRecents : any;
   public urlImg : string = environment.urlImg;
+  public listTagOwlItem : HTMLCollectionOf<Element>;
   
   constructor(private _svc : MainService,private _router: ActivatedRoute,
     @Inject(DOCUMENT) private document: Document ,
@@ -68,6 +71,16 @@ export class ProductRecentComponent implements OnInit {
       }
     )
     event.preventDefault();
+  }
+  
+  ngAfterViewInit(): void {
+    debugger;
+    var items:any  = this.document.getElementsByClassName('owl-item');
+
+    for (let i = 0; i < items.length; i++) {
+      let element = items[i];
+      element.style.width = null;
+  }
   }
 
 }

@@ -1,6 +1,6 @@
 <owl-carousel-o [options]="customOptions">
   <ng-container *ngFor="let item of productRecents">
-    <ng-template carouselSlide [id]="item.id.toString()">
+    <ng-template carouselSlide [id]="item.id.toString()"  style="width: 0px;">
       <div class="product-item">
         <div class="item-inner">
           <div class="product-thumbnail">
@@ -12,7 +12,7 @@
             <div class="pr-info-area">
               <div class="pr-button">
                 <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
+                <!-- <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div> -->
                 <div class="mt-button quick-view"> <a href="quick_view.html"> <i class="fa fa-search"></i> </a> </div>
               </div>
             </div>
@@ -35,7 +35,7 @@
                   </div>
                 </div>
                 <div class="pro-action">
-                  <button type="button" class="add-to-cart"><span> Add to Cart</span> </button>
+                  <button type="button" class="add-to-cart"><span> GIỎ HÀNG</span> </button>
                 </div>
               </div>
             </div>

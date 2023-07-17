@@ -10,7 +10,7 @@
                 <owl-carousel-o [options]="customOptions">
                   <ng-container *ngFor="let slider of sliders;let i = index;">
                     <ng-template carouselSlide [id]=" i.toString()" [width]="slider.width">
-                      <img [src]="urlImg + slider.imageUrl" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner"/>
+                      <a href="{{slider.target}}"> <img [src]="urlImg + slider.imageUrl" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner"/></a>
                       <div class="caption-inner">
                         <!-- 
                           <div class='tp-caption sfb  tp-resizeme ' data-x='370'  data-y='280'  data-endspeed='500'  data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><a href='#' class="buy-btn">Get Started</a> </div> -->
