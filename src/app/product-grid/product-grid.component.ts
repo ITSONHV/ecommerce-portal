@@ -283,6 +283,11 @@ export class ProductGridComponent implements OnInit  {
     }
   }
 
+  addToShopingCard(product:ProductModel): void{
+    this._svc.addToCart(product);
+    console.log(this._svc.getItemsCart);
+  }
+
   ngOnDestroy() {
    
   }

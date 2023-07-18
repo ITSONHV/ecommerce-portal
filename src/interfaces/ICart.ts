@@ -4,4 +4,5 @@ export interface ICart {
     productName: string ;
     quantity : number;
     image:string;
+    productNameSlug : string;
 }

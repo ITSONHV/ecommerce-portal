@@ -13,10 +13,10 @@ import { MainService } from 'src/services/main.service';
 })
 export class ProductRecentComponent implements OnInit, AfterViewInit {
   public customOptions: OwlOptions = {
-    loop: false,
+    loop: true,
     mouseDrag: false,
     touchDrag: false,
-    pullDrag: false,
+    pullDrag: true,
     items:5,
     margin: 0,
     dots: false,
@@ -28,7 +28,7 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
-        items: 3,
+        items: 2,
       },
       400: {
         items: 3
@@ -74,7 +74,6 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
   }
   
   ngAfterViewInit(): void {
-    debugger;
     var items:any  = this.document.getElementsByClassName('owl-item');
 
     for (let i = 0; i < items.length; i++) {

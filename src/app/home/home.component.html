@@ -64,8 +64,6 @@
                             <ng-container *ngIf="item.isHot > 0">
                               <div class="icon-new-label new-right">New</div>
                             </ng-container>
-
-
                             <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
                                 (click)="handleViewDetailProduct($event,item)">
                                 <figure> <img class="first-img" [src]="urlImg + item.imageUrl"
@@ -78,7 +76,7 @@
                                       class="fa fa-heart-o"></i> </a> </div>
                                 <!-- <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i
                                       class="fa fa-link"></i> </a> </div> -->
-                                <div class="mt-button quick-view"> <a (click)="openModalQuickView()"> <i
+                                <div class="mt-button quick-view"> <a (click)="openModalQuickView(item)" > <i
                                       class="fa fa-search"></i> </a> </div>
                               </div>
                             </div>

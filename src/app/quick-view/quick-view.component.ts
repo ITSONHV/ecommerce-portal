@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ObjectModel } from 'src/models/object_paging.model';
 import { MainService } from 'src/services/main.service';
 import { SwalService } from 'src/services/swal.service';
 
@@ -10,9 +11,11 @@ import { SwalService } from 'src/services/swal.service';
   templateUrl: './quick-view.component.html',
   styleUrls: ['./quick-view.component.css']
 })
-export class QuickViewComponent {
+export class QuickViewComponent implements OnInit {
   public quantity = 1;
   modalOpen = true;
+  public imgfirst : string;
+  @Input() product: any;
   @Output() sendEventToParent = new EventEmitter<boolean>();
   public customOptions: OwlOptions = {
     loop: true,
@@ -48,9 +51,50 @@ export class QuickViewComponent {
   };
   constructor(private _svc : MainService,private _router: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private _swal: SwalService
+    private _swal: SwalService,
+    private route: Router,
  ) {
   }
+
+  ngOnInit(): void {
+    this.spinner.show();
+    this._router.queryParams.subscribe(params => {
+      if(!params['pslug'])
+      {
+        this.route.navigate(['/'])// nếu không lấy được params quay lại home
+        this.spinner.hide();
+      }
+      
+      this.getProductbyProductNameSlug(params['pslug']);
+    });
+  }
+
+  getProductbyProductNameSlug(slug : string){
+    this._svc.getProductbyProductNameSlug(slug).subscribe(
+      (respones: ObjectModel)=>{
+        this.product = respones.data;
+        if(this.product != null){
+          // this.meta.updateTag({ name: 'description', content: this.product.seoDescription ?? ""});
+          // this.titleService.setTitle(this.product.seoTitle ?? "");
+          // this.meta.updateTag({ name: 'keywords', content: this.product.seoKeyword ?? ""});
+          
+          this.imgfirst = this.product.productImages[0]?.imageUrl??"";
+          this.product.productImages?.shift();
+          console.log(this.product);
+          // this.htmlContent = this.product.content;
+          // this.htmlDescription = this.product.description;
+          // this.getReviewProducts(this.product.id);
+          // this.getProductsRelate(this.product.categoryId);
+        }
+        this.spinner.hide();
+      },
+      (err) =>{
+        console.log(err);
+        this.spinner.hide();
+      }
+    );
+  }
+
   decreaseQuantity(): void{
     if (!isNaN(this.quantity) && this.quantity > 0) {
       this.quantity--;

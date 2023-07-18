@@ -3,7 +3,7 @@
   <div id="quick_view_popup-outer">
     <div id="quick_view_popup-content">
       <!-- style="width:auto;height:auto;overflow: auto;position:relative;" -->
-      <div class="center-modal">
+      <div *ngIf="product">
         <div class="product-view-area">
           <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
             <div class="icon-sale-label sale-left">Sale</div>
@@ -32,10 +32,10 @@
             <!-- end: more-./../assets/images --> 
             
           </div>
-          <div class="col-xs-12 col-sm-7 col-lg-7 col-md-7">
+          <div *ng class="col-xs-12 col-sm-7 col-lg-7 col-md-7">
             <div class="product-details-area">
               <div class="product-name">
-                <h1>Donec Ac Tempus</h1>
+                <h1>{{product.productName}}</h1>
               </div>
               <div class="price-box">
                 <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $329.99 </span> </p>
@@ -48,34 +48,7 @@
               <div class="short-description">
                 <h2>Quick Overview</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. </p>
-              </div>
-              <div class="product-color-size-area">
-                <div class="color-area">
-                  <h2 class="saider-bar-title">Color</h2>
-                  <div class="color">
-                    <ul>
-                      <li><a href="#"></a></li>
-                      <li><a href="#"></a></li>
-                      <li><a href="#"></a></li>
-                      <li><a href="#"></a></li>
-                      <li><a href="#"></a></li>
-                      <li><a href="#"></a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="size-area">
-                  <h2 class="saider-bar-title">Size</h2>
-                  <div class="size">
-                    <ul>
-                      <li><a href="#">S</a></li>
-                      <li><a href="#">L</a></li>
-                      <li><a href="#">M</a></li>
-                      <li><a href="#">XL</a></li>
-                      <li><a href="#">XXL</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              </div>          
               <div class="product-variation">
                 <form action="#" method="post">
                   <div class="cart-plus-minus">

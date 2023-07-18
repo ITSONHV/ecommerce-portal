@@ -29,12 +29,13 @@ export class ShoppingCartComponent {
     return this.itemsCart.reduce((sum, item) => sum + item.quantity, 0);
   }
   handleViewDetailProduct(event: any, product: any): void {
+    debugger;
     this.meta.updateTag({ name: 'description', content: product.seoDescription ?? ""});
     this.titleService.setTitle(product.seoTitle ?? "");
     this.meta.updateTag({ name: 'keywords', content: product.seoKeyword ?? ""});
     const queryParams: Params = { slug: product.productNameSlug };
     this.router.navigate(
-      ['chi-tiet'],
+      ['/chi-tiet'],
       {
         relativeTo: this._routerActive,
         queryParams: queryParams,

@@ -244,9 +244,10 @@ export class MainService {
             cart = { 
               id: product.id, 
               productName: product.productName, 
-              price: product.price, 
+              price: product.promotionPrice, 
               image: product.imageUrl, 
               quantity:1,
+              productNameSlug : product.productNameSlug
             }
             this.itemsCart.push(cart); 
         }

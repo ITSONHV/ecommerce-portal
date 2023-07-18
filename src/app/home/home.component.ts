@@ -298,8 +298,17 @@ export class HomeComponent implements OnInit {
     )
     event.preventDefault();
   }
-  openModalQuickView() {
+  openModalQuickView(itemProduct: any) {
     this.isShowQuickView = !this.isShowQuickView;
+    const queryParams: Params = { pslug: itemProduct.productNameSlug };
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this._routerActive,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    )
   }
   listenEventFromChild(check: boolean) : void {
     this.isShowQuickView = !this.isShowQuickView;

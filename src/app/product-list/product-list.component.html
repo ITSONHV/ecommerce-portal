@@ -126,7 +126,7 @@
                       [queryParams]="{slug: item.productNameSlug}">Xem thêm</a>
                   </div>
                   <div class="actions">
-                    <button class="button cart-button" title="Add to Cart" type="button"><i
+                    <button class="button cart-button" (click)="addToShopingCard(item)"  title="Add to Cart" type="button"><i
                         class="fa fa-shopping-basket"></i><span>Thêm giỏ hàng</span></button>
                     <ul>
                       <li> <a [routerLink]="['/danh-sach-yeu-thich']"> <i class="fa fa-heart-o"></i><span> Thêm vào yêu
@@ -376,18 +376,8 @@
             <h3>Popular Tags</h3>
           </div>
           <div class="tag">
-            <ul>
-              <li><a href="#">Boys</a></li>
-              <li><a href="#">Camera</a></li>
-              <li><a href="#">good</a></li>
-              <li><a href="#">Computers</a></li>
-              <li><a href="#">Phone</a></li>
-              <li><a href="#">clothes</a></li>
-              <li><a href="#">girl</a></li>
-              <li><a href="#">shoes</a></li>
-              <li><a href="#">women</a></li>
-              <li><a href="#">accessoties</a></li>
-              <li><a href="#">View All Tags</a></li>
+            <ul >
+              <li *ngFor="let item of category?.categoryTags"><a href="#">{{item}}</a></li>
             </ul>
           </div>
         </div>
