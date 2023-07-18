@@ -234,10 +234,10 @@ export class MainService {
                 })
             )
     };
-    addToCart(product: ProductModel) {    
+    addToCart(product: ProductModel, quantity: number) {    
         const index = this.itemsCart.findIndex(item =>item.id == product.id)
         if(index >= 0){
-            this.itemsCart[index].quantity++;
+            this.itemsCart[index].quantity += quantity;
         }
         else{
             var cart:ICart;
@@ -246,7 +246,7 @@ export class MainService {
               productName: product.productName, 
               price: product.promotionPrice, 
               image: product.imageUrl, 
-              quantity:1,
+              quantity: quantity,
               productNameSlug : product.productNameSlug
             }
             this.itemsCart.push(cart); 

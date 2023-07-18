@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { environment } from 'src/environments/environment';
 import { ObjectModel } from 'src/models/object_paging.model';
+import { ProductModel } from 'src/models/product.model';
 import { MainService } from 'src/services/main.service';
 import { SwalService } from 'src/services/swal.service';
 
@@ -11,11 +13,13 @@ import { SwalService } from 'src/services/swal.service';
   templateUrl: './quick-view.component.html',
   styleUrls: ['./quick-view.component.css']
 })
-export class QuickViewComponent implements OnInit {
+export class QuickViewComponent implements OnInit, OnDestroy {
   public quantity = 1;
   modalOpen = true;
   public imgfirst : string;
-  @Input() product: any;
+  public product : any;
+  public urlImg : string = environment.urlImg;
+  @Input() productSlug: string;
   @Output() sendEventToParent = new EventEmitter<boolean>();
   public customOptions: OwlOptions = {
     loop: true,
@@ -58,15 +62,13 @@ export class QuickViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this._router.queryParams.subscribe(params => {
-      if(!params['pslug'])
-      {
-        this.route.navigate(['/'])// nếu không lấy được params quay lại home
-        this.spinner.hide();
-      }
-      
-      this.getProductbyProductNameSlug(params['pslug']);
-    });
+
+    if (!this.productSlug) {
+      this.route.navigate(['/'])// nếu không lấy được params quay lại home
+      this.spinner.hide();
+    }
+
+    this.getProductbyProductNameSlug(this.productSlug);
   }
 
   getProductbyProductNameSlug(slug : string){
@@ -79,8 +81,8 @@ export class QuickViewComponent implements OnInit {
           // this.meta.updateTag({ name: 'keywords', content: this.product.seoKeyword ?? ""});
           
           this.imgfirst = this.product.productImages[0]?.imageUrl??"";
-          this.product.productImages?.shift();
-          console.log(this.product);
+          //this.product.productImages?.shift();
+          //console.log(this.product);
           // this.htmlContent = this.product.content;
           // this.htmlDescription = this.product.description;
           // this.getReviewProducts(this.product.id);
@@ -108,7 +110,7 @@ export class QuickViewComponent implements OnInit {
         'Thông báo',
         'warning',
         'Đóng',
-        document.getElementById('quick_view_popup-overlay')
+        document.getElementById('#quick_view_popup-overlay')
       )
     }
   }
@@ -122,12 +124,39 @@ export class QuickViewComponent implements OnInit {
         'Thông báo',
         'warning',
         'Đóng',
-        document.getElementById('quick_view_popup-overlay')
+        document.getElementById('#quick_view_popup-overlay')
       )
     }
   }
-  handleClickCloseModal(event:any) {
-    this.sendEventToParent.emit(true);
+  handleClickCloseModal(event: any,action:boolean) {
+    console.log(action);
+    this.sendEventToParent.emit (action);
     event.preventDefault();
+  } 
+  
+  addToShopingCard(product:ProductModel): void{
+    if (!isNaN(this.quantity)) {
+      this._svc.addToCart(product, this.quantity);
+    }
+  }
+
+  counterRate(i: number) {
+    return new Array(i);
+  }
+
+  ngOnDestroy(): void {
+    //this.sendEventToParent.emit(true);
+  }
+
+  changeImageLarge(idImage: number){
+    let imageClick : any;
+    this.product.productImages.filter ((item: any) =>{
+       if(item.id === idImage){
+        imageClick =item;
+        return;
+       }
+    });
+    debugger;
+    this.imgfirst = imageClick.imageUrl;
   }
 }

@@ -13,14 +13,12 @@ import { MainService } from 'src/services/main.service';
 })
 export class ProductRecentComponent implements OnInit, AfterViewInit {
   public customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
+    loop: false,
+    mouseDrag: true,
     touchDrag: false,
-    pullDrag: true,
+    pullDrag: false,
     items:5,
-    margin: 0,
-    dots: false,
-    stagePadding: 0,
+    dots: true,
     // autoplayTimeout: 3000,
     // autoplaySpeed: 1000,
     // autoplay: false,

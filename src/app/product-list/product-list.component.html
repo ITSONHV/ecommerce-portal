@@ -369,7 +369,7 @@
               </li>
              </ng-container>       
             </ul>
-            <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']">Xem thêm</a> </div>
+            <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}">Xem thêm</a> </div>
           </div>
         <div class="block popular-tags-area ">
           <div class="sidebar-bar-title">
@@ -377,7 +377,7 @@
           </div>
           <div class="tag">
             <ul >
-              <li *ngFor="let item of category?.categoryTags"><a href="#">{{item}}</a></li>
+              <li *ngFor="let item of category?.categoryTags"><a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{searchKey: item}">{{item}}</a></li>
             </ul>
           </div>
         </div>
@@ -387,3 +387,4 @@
   </div>
 </div>
 <!-- Main Container End -->
+<ngx-spinner [fullScreen] = "true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)" color="#0b499c"></ngx-spinner>

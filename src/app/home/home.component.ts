@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   public listProductIsHot: any;
   public allMenu : any;
   public activatedRoute: ActivatedRoute;
+  public productSlugToChild: string;
   @Input() modalOpen: boolean;
   @Output() modalClose = new EventEmitter();
   public customOptions: OwlOptions = {
@@ -299,22 +300,14 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
   }
   openModalQuickView(itemProduct: any) {
+    this.productSlugToChild = itemProduct.productNameSlug;
     this.isShowQuickView = !this.isShowQuickView;
-    const queryParams: Params = { pslug: itemProduct.productNameSlug };
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this._routerActive,
-        queryParams: queryParams,
-        queryParamsHandling: 'merge'
-      }
-    )
   }
-  listenEventFromChild(check: boolean) : void {
-    this.isShowQuickView = !this.isShowQuickView;
+  listenEventFromChild(check: boolean) : void { 
+    this.isShowQuickView = check;
   }
   addToShopingCard(product:ProductModel): void{
-    this._svc.addToCart(product);
+    this._svc.addToCart(product, 1);
     console.log(this._svc.getItemsCart);
   }
 

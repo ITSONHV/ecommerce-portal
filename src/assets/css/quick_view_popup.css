@@ -9,7 +9,7 @@
 }
 #quick_view_popup-wrap {
 	position: fixed;
-	top: 5%;
+	top: 25%;
 	left: 0;
 	z-index: 1101;
 	outline: none;

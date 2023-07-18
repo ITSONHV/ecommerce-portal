@@ -8,6 +8,7 @@ import { PaginatedResponse, PaginationValue } from '../pagination/pagination.com
 import { FormControl } from '@angular/forms';
 import { ProductModel } from 'src/models/product.model';
 import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-product-list',
@@ -42,6 +43,7 @@ export class ProductListComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document ,
     private router : Router,
     private activatedRoute: ActivatedRoute,
+    private spinner: NgxSpinnerService, 
     ) {
   }
   ngOnInit(): void {
@@ -102,6 +104,7 @@ export class ProductListComponent implements OnInit {
   }
 
   getCategoryBySlug(slug: string){
+    this.spinner.show();
     this._svc.getCategoryBySlug(slug).subscribe(
       (respones: ObjectModel)=>{
         this.category = respones.data;
@@ -110,22 +113,26 @@ export class ProductListComponent implements OnInit {
         }
       },
       (err) =>{
+        this.spinner.hide();
         console.log(err);
       }
     );
   }
 
   getGroupSearch(cateID: number){
+    this.spinner.show();
     this._svc.getGroupSerrchByCategoryID(cateID).subscribe(
       (respones: ObjectModel)=>{
         this.groupSearch = respones.data;
-        if(this.groupSearch != null && this.groupSearch.length > 0)
-        {
-          //this.idClassActive = 'body-inner0';
-        }
+        this.spinner.hide();
+        // if(this.groupSearch != null && this.groupSearch.length > 0)
+        // {
+        //   //this.idClassActive = 'body-inner0';
+        // }
       },
       (err) =>{
         console.log(err);
+        this.spinner.hide();
       }
     );
   }
@@ -159,6 +166,7 @@ export class ProductListComponent implements OnInit {
 
   public onPageChange(pagination: any): void {
     let currentPage = (pagination.page ?? 1);
+    this.spinner.show();
     this._svc.getProductListPagings(currentPage,
       pagination.pageSize,
       this.searchKey,
@@ -174,9 +182,11 @@ export class ProductListComponent implements OnInit {
           this.visibleItems = { items: respones.data.data, total: respones.data.total };
           this.isLoadComplete = true;
           window.scroll(0, 50); // scroll lên 1 tý sau khi change value
+          this.spinner.hide();
         },
         (err) => {
           console.log(err);
+          this.spinner.hide();
         });
   }
 
@@ -260,18 +270,17 @@ export class ProductListComponent implements OnInit {
     this._svc.getProductIsBestSellingPages(limit).subscribe(
       (respones: ObjectModel)=>{
         this.productSale = respones.data;    
-        //this.spinner.hide();
+        this.spinner.hide();
       },
       (err) =>{
         console.log(err);
-        //this.spinner.hide();
+        this.spinner.hide();
       }
     );
   }
 
   addToShopingCard(product:ProductModel): void{
-    this._svc.addToCart(product);
+    this._svc.addToCart(product, 1);
     //console.log(this._svc.getItemsCart);
   }
-
 }

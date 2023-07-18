@@ -21,12 +21,3 @@
 .container{
     margin-bottom: 30px;
 }
-.owl-item .item {
-    width: 0px !important; 
-    margin-right: 0px !important;
-}
-
-.owl-stage .owl-item .item {
-    display: flex !important; ;
-    align-items: left !important; ;
-}

@@ -5,6 +5,8 @@
         <div class="col-xs-12">
           <ul>
             <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Home</a><span>&raquo;</span></li>
+            <li class="" *ngIf="this.categoryParent"><a title="Go to {{this.categoryParent}}" [routerLink]="['/danh-muc-san-pham-g']" >{{this.categoryParent}}</a> <span>&raquo;</span> </li>
+          
             <li class=""><a title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']" >{{categoryName}}</a></li>
           </ul>
         </div>
@@ -44,7 +46,7 @@
           </div>
           <div class="shop-inner">
             <div class="page-title">
-              <h2>{{this.category?.categoryName}}</h2>
+              <h2>{{this.category?.categoryName?? "Tìm kiếm"}}</h2>
             </div>
             <div class="toolbar">
               <div class="view-mode">
@@ -103,8 +105,8 @@
                         <div class="pr-info-area">
                           <div class="pr-button">
                             <div class="mt-button add_to_wishlist"> <a [routerLink]="['/danh-sach-yeu-thich']" routerLinkActive="router-link-active" > <i class="fa fa-heart"></i> </a> </div>
-                            <div class="mt-button add_to_compare"> <a [routerLink]="['/so-sanh']"> <i class="fa fa-signal"></i> </a> </div>
-                            <div class="mt-button quick-view"> <a [routerLink]="['/xem-nhanh']"> <i class="fa fa-search"></i> </a> </div>
+                            <!-- <div class="mt-button add_to_compare"> <a [routerLink]="['/so-sanh']"> <i class="fa fa-signal"></i> </a> </div> -->
+                            <div class="mt-button quick-view"> <a (click)="openModalQuickView(item)"> <i class="fa fa-search"></i> </a> </div>
                           </div>
                         </div>
                       </div>
@@ -286,7 +288,7 @@
                 </li>
                </ng-container>       
               </ul>
-              <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']">Xem thêm</a> </div>
+              <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}">Xem thêm</a> </div>
           </div>
           <div class="block popular-tags-area ">
             <div class="sidebar-bar-title">
@@ -294,7 +296,7 @@
             </div>
             <div class="tag">
               <ul >
-                <li *ngFor="let item of category?.categoryTags"><a href="#">{{item}}</a></li>
+                <li *ngFor="let item of category?.categoryTags"><a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{searchKey: item}">{{item}}</a></li>
               </ul>
             </div>
           </div>
@@ -305,4 +307,5 @@
     </div>
   </div>
   <!-- Main Container End --> 
+  <app-quick-view (sendEventToParent)="listenEventFromChild($event)" *ngIf="isShowQuickView" productSlug="{{this.productSlugToChild}}"></app-quick-view>
   <ngx-spinner [fullScreen] = "true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)" color="#0b499c"></ngx-spinner>

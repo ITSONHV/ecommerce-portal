@@ -25,6 +25,7 @@ export class ProductGridComponent implements OnInit  {
   public urlImg : string = environment.urlImg;
   public urlSlug : any ;
   public categoryName: any ;
+  public categoryParent: any;
   public category: any;
   public groupSearch: any;
   public totalRecords = 0;
@@ -40,6 +41,8 @@ export class ProductGridComponent implements OnInit  {
   public productSale : any;
   public typeSearch : string;
   public form : any;
+  public productSlugToChild: string;
+  public isShowQuickView: boolean;
   public visibleItems: PaginatedResponse<ProductModel> = {
     items: this.listProduct,
     total: this. totalRecords,
@@ -66,9 +69,6 @@ export class ProductGridComponent implements OnInit  {
         this.getCategoryBySlug(this.urlSlug);    
         this.onPageChange(this.pagination);
       }
-      // else if(localStorage.getItem('product-by-category-slug')?.length != 0){
-      //   this.listProduct = JSON.parse(localStorage.getItem('product-by-category-slug') ?? "");
-      // }
       else{      
         this.onPageChange(this.pagination);
         this.getGroupSearch(0); // get mặc định all
@@ -83,9 +83,6 @@ export class ProductGridComponent implements OnInit  {
     })
 
     this.changeValueTypeSearch(this.typeSearch);
-    // this.valueWatcherSubscription = this.form.controls.typeStatus.valueChanges.subscribe(
-    //   ( val: string) => this.changeValueTypeSearch(val)
-    // );
   }
 
   counterRate(i: number) {
@@ -128,9 +125,13 @@ export class ProductGridComponent implements OnInit  {
           this.titleService.setTitle(this.categoryCache.seoTitle);
           this.meta.updateTag({ name: 'keywords', content: this.categoryCache.seoKeyword });
         }
-        // localStorage.removeItem('product-by-category-slug');
-        // localStorage.setItem('product-by-category-slug', JSON.stringify(this.listProduct));
-        if(this.category != null){  
+        if(this.category != null){
+          debugger;
+          this.meta.updateTag({ name: 'description', content: this.category.seoDescription });
+          this.titleService.setTitle(this.category.seoTitle);
+          this.meta.updateTag({ name: 'keywords', content: this.category.seoKeyword });
+          this.categoryName = this.category.categoryName;
+          this.getParentCate(this.category.categoryParent);
           this.getGroupSearch(this.category.id);
         }
         this.spinner.hide();
@@ -284,10 +285,33 @@ export class ProductGridComponent implements OnInit  {
   }
 
   addToShopingCard(product:ProductModel): void{
-    this._svc.addToCart(product);
+    this._svc.addToCart(product, 1);
     console.log(this._svc.getItemsCart);
   }
 
+  listenEventFromChild(check: boolean) : void { 
+    this.isShowQuickView = check;
+  }
+  
+  openModalQuickView(itemProduct: any) {
+    this.productSlugToChild = itemProduct.productNameSlug;
+    this.isShowQuickView = !this.isShowQuickView;
+  }
+
+  getParentCate(idCate:number){
+    if(localStorage.getItem('allmenu-app')){
+      debugger;
+      let menuAll :any = JSON.parse(localStorage.getItem('allmenu-app') ?? "");
+
+      let menuParent: any = menuAll.filter((item: any) => {
+        return item.id == idCate;
+      });
+      if(menuParent && menuParent.length > 0)
+      {
+        this.categoryParent = menuParent[0].categoryName;
+      }
+    }
+  }
   ngOnDestroy() {
    
   }

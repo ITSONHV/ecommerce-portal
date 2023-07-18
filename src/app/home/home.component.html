@@ -61,7 +61,7 @@
                             <ng-container *ngIf="item.rateDiscount > 0">
                               <div class="icon-sale-label sale-left">{{- item.rateDiscount + "%"}}</div>
                             </ng-container>
-                            <ng-container *ngIf="item.isHot > 0">
+                            <ng-container *ngIf="item.isNew > 0">
                               <div class="icon-new-label new-right">New</div>
                             </ng-container>
                             <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
@@ -161,7 +161,7 @@
                                       class="fa fa-heart-o"></i> </a> </div>
                                 <!-- <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i
                                       class="fa fa-link"></i> </a> </div> -->
-                                <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i
+                                <div class="mt-button quick-view"> <a (click)="openModalQuickView(item)"> <i
                                       class="fa fa-search"></i> </a> </div>
                               </div>
                             </div>
@@ -249,7 +249,7 @@
                                       class="fa fa-heart-o"></i> </a> </div>
                                 <!-- <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i
                                       class="fa fa-link"></i> </a> </div> -->
-                                <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i
+                                <div class="mt-button quick-view"> <a (click)="openModalQuickView(item)"> <i
                                       class="fa fa-search"></i> </a> </div>
                               </div>
                             </div>
@@ -343,7 +343,7 @@
                                       class="fa fa-heart-o"></i> </a> </div>
                                 <!-- <div class="mt-button add_to_compare"> <a routerLink="/so-sanh"> <i
                                       class="fa fa-link"></i> </a> </div> -->
-                                <div class="mt-button quick-view"> <a routerLink="/xem-nhanh"> <i
+                                <div class="mt-button quick-view"> <a (click)="openModalQuickView(item)"> <i
                                       class="fa fa-search"></i> </a> </div>
                               </div>
                             </div>
@@ -465,6 +465,6 @@
 
  
 </ng-container>
-<app-quick-view (sendEventToParent)="listenEventFromChild($event)" *ngIf="isShowQuickView"></app-quick-view>
+<app-quick-view (sendEventToParent)="listenEventFromChild($event)" *ngIf="isShowQuickView" productSlug="{{this.productSlugToChild}}"></app-quick-view>
 <ngx-spinner [fullScreen]="true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)"
   color="#0b499c"></ngx-spinner>

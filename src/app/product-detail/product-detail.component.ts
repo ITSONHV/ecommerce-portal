@@ -93,7 +93,7 @@ export class ProductDetailComponent implements OnInit {
           this.meta.updateTag({ name: 'keywords', content: this.product.seoKeyword ?? ""});
           
           this.imgfirst = this.product.productImages[0]?.imageUrl??"";
-          this.product.productImages?.shift();
+          //this.product.productImages?.shift();
           this.htmlContent = this.product.content;
           this.htmlDescription = this.product.description;
           this.getReviewProducts(this.product.id);
@@ -192,5 +192,25 @@ export class ProductDetailComponent implements OnInit {
         'Đóng'
       )
     }
+  }
+
+  addToShopingCard(product:ProductModel): void{
+    if (!isNaN(this.quantity)) {
+      this._svc.addToCart(product, this.quantity);
+    }
+  }
+
+  changeImageLarge(idImage: number){
+    let imageClick : any;
+    this.product.productImages.filter ((item: any) =>{
+       if(item.id === idImage){
+        imageClick =item;
+        return;
+       }
+    });
+    if(imageClick && imageClick !== undefined && imageClick != null){
+      this.imgfirst = imageClick.imageUrl;
+    }
+    
   }
 }
