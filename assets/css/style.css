@@ -81,9 +81,9 @@
 body {
 	background: #fff;
 	color: #333333;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 12px;
-	font-weight: 400;
+	font-family: 'Arial', sans-serif;
+	font-size: 13px;
+	font-weight: 600;
 	line-height: 1.5;
 	text-align: left;
 	-webkit-text-size-adjust: 100%;
@@ -206,10 +206,10 @@ ul.inline, ol.inline {
 }
 ul.inline>li, ol.inline>li {
 	display: inline-block;
-*display:inline;
+	display:inline;
 	padding-right: 5px;
 	padding-left: 5px;
-*zoom:1
+	zoom:1
 }
 ul ul, ol ul {
 	list-style-type: circle
@@ -488,7 +488,7 @@ label {
 }
 /*4.2 header top */
 .header-top {
-	background: #ececec;
+	background:#197bb7;
 	color: #666;
 	font-size: 12px;
 	width: 100%;
@@ -503,10 +503,37 @@ label {
 }
 .welcome-msg {
 	text-align: left;
+	font-size: medium;
 	display: inline-block;
 	padding: 0px 12px 0px 0;
 	margin: 0px;
 	float: left;
+}
+@-webkit-keyframes my {
+	0% { color: #f80a0a; } 
+	50% { color: #1ac59a;  } 
+	100% { color: #f80a0a;   } 
+}
+@-moz-keyframes my { 
+	0% { color: #f80a0a;   } 
+	50% { color: #1ac55c;  }
+	100% { color: #f80a0a;   } 
+}
+@-o-keyframes my { 
+	0% { color: #f80a0a; } 
+	50% { color: #c8d367; } 
+	100% { color:#f80a0a;   } 
+}
+@keyframes my { 
+	0% { color: #f80a0a;   } 
+	50% { color: #c8d367; }
+	100% { color: #f80a0a;  } 
+} 
+.welcome-msg {
+	-webkit-animation: my 700ms infinite;
+	-moz-animation: my 700ms infinite; 
+	-o-animation: my 700ms infinite; 
+	animation: my 700ms infinite;
 }
 .phone {
 	padding: 2px 0px 2px 0;
@@ -714,7 +741,7 @@ color: #333333;
 	line-height: 34px;
 	padding: 4px 15px 0px;
 	display: inline-block;
-	background: #e83f33;
+	background: #197bb7;
 	border: none;
 	color: #fff;
 	border-left: 0px #e8e6e2 solid;
@@ -722,7 +749,7 @@ color: #333333;
 	right: 0px;
 }
 #search button:hover {
-	background: #e83f33;
+	background: #197bb7;
 	border: none;
 	color: #fff
 }
@@ -1355,7 +1382,7 @@ ul#cart-sidebar {
 }
 .jtv-service-area {
 	text-align: left;
-	padding: 25px 0 25px;
+	padding: 0px 0 25px;
 }
 .jtv-service-area .col-md-3 {
 	padding-right: 8px;
@@ -2204,7 +2231,7 @@ a.link:hover {
 ******************************************/
 
 .icon-new-label {
-	font-size: 10px;
+	font-size: 15px;
 	color: #333;
 	text-align: center;
 	display: block;
@@ -2216,8 +2243,8 @@ a.link:hover {
 	margin-top: 0px;
 	margin-left: 0px;
 	background: #fff764;
-	line-height: 10px;
-	border-radius: 2px;
+	line-height: 12px;
+	border-radius: 12px;
 }
 .new-right {
 	right: 6px;
@@ -2230,7 +2257,7 @@ a.link:hover {
 	padding: 4px 8px;
 }
 .icon-sale-label {
-	font-size: 10px;
+	font-size: 15px;
 	color: #fff;
 	text-align: center;
 	display: block;
@@ -2241,8 +2268,8 @@ a.link:hover {
 	margin-top: 0px;
 	margin-left: 0px;
 	background: #e53939;
-	line-height: 10px;
-	border-radius: 2px;
+	line-height: 12px;
+	border-radius: 13px;
 }
 .sale-right {
 	right: 6px;
@@ -2255,7 +2282,7 @@ a.link:hover {
 	padding: 4px 8px;
 }
 .icon-hot-label {
-	font-size: 10px;
+	font-size: 15px;
 	color: #fff;
 	text-align: center;
 	display: block;
@@ -2268,8 +2295,8 @@ a.link:hover {
 	margin-left: 0px;
 	background: #f81c31;
 	border: 1px solid #ec1226;
-	line-height: 10px;
-	border-radius: 3px;
+	line-height: 12px;
+	border-radius: 13px;
 	padding: 3px 8px 5px 8px;
 }
 .hot-right {
@@ -3079,12 +3106,12 @@ a.link:hover {
 
 footer {
 	overflow: hidden;
-	color: #999;
-	background: #333;
+	color: #000000;
+	background: #197bb7;
 	font-size: 13px; padding-top:35px;
 }
 footer p {
-	color: #999;
+	color: #000000;
 	line-height: 20px;
 }
 footer h3 {
@@ -3107,7 +3134,7 @@ footer .footer-links ul li {
 }
 footer .footer-links ul li a {
 	transition: all .3s ease-in-out 0s;
-	color: #999;
+	color: #000000;
 }
 footer .footer-links ul li a:hover {
 	transition: all .3s ease-in-out 0s;
@@ -3404,7 +3431,7 @@ nav {
 	position: relative;
 	margin: auto;
 	width: 100%;
-	background: #e83f33;
+	background: #197bb7;
 }
 .jtv-sticky-menu {
 	position: fixed;
@@ -3413,7 +3440,7 @@ nav {
 	display: block;
 	top: 0px;
 	width: 100%;
-	background: #e83f33;
+	background: #197bb7;
 	height: 45px;
 	transition: all .3s ease-out 0s;
 	left: 0px;
@@ -4092,7 +4119,7 @@ html {
 }
 .menu > li > a:hover, .menu > li > a:focus, .menu > li.active > a {
 	text-decoration: none;
-	color: #e83f33;
+	color: #197bb7;
 }
 /* Mega Menu */
 .mega-container {
@@ -4105,7 +4132,7 @@ html {
 	cursor: pointer;
 	display: inline-block;
 	font-size: 28px;
-	background: #cb2d22;
+	background: #197bb7;
 	width: 100%;
 	margin-top: -5px;
 }
@@ -4136,7 +4163,7 @@ html {
 .mega-menu-title h3:after {
 	content: "\f038";
 	display: inline-block;
-	background: #cb2d22;
+	background: #197bb7;
 	width: 50px;
 	height: 40px;
 	position: absolute;
@@ -4151,14 +4178,14 @@ html {
 }
 
 .mega-menu-category {
-	display: none;
+	/* display: none; */
 	background: #fff;
 	border: 1px solid #e5e5e5;
 	box-shadow: 0 0px 0px 0 rgba(0,0,0,.2);
 }
 .cms-home-page .mega-menu-category {
 	width: 100%;
-	display: inline-block !important;
+	/* display: inline-block !important; */
 }
 .mega-menu-category ul {
 	padding: 0px;
@@ -4173,7 +4200,7 @@ html {
 	padding: 14px 15px;
 	color: #333;
 	background-color: #fff;
-	font-size: 12px;
+	font-size: 13px;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 	font-weight: 400;
@@ -4203,8 +4230,8 @@ html {
 	content: "\f0fe";
 }
 .mega-menu-category > .nav > li > a:hover, .mega-menu-category > .nav > li > a:focus, .mega-menu-category > .nav > li.active > a {
-	background-color: #f8f8f8;
-	color: #e83f33;
+	background-color:#aed3eb;
+	color: #f82213;
 }
 .wrap-popup {
 	position: absolute;
@@ -4424,7 +4451,7 @@ a.ads1 img {
 	margin: 0;
 	padding: 0 14px;
 	vertical-align: middle;
-	width: 110px;
+	width: 140px;
 	border: 1px #e8e8e8 solid;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -4624,7 +4651,8 @@ button span {
 .breadcrumbs {
 	padding: 8px 0px;
 	margin: auto;
-	font-size: 12px; border-bottom:1px #e5e5e5 solid;
+	font-size: 16px; 
+	border-bottom:1px #e5e5e5 solid;
 }
 .breadcrumbs a {
 	color: #999;
@@ -7297,7 +7325,7 @@ label[for="rememberme"] {
 	list-style-type: none; margin-top:18px;
 }
 #message-box-conact{ margin-top:18px;}
-.900-list>li>a {
+	.list>li>a {
 	font-weight: 700;
 	text-transform: uppercase
 }
@@ -7990,7 +8018,7 @@ label[for="rememberme"] {
 .on-sale-product .owl-theme .owl-controls .owl-page {
 	display: inline-block;
 	zoom: 1;
- *display: inline;/*IE7 life-saver */
+ 	display: inline;/*IE7 life-saver */
 }
 .on-sale-product .owl-theme .owl-controls .owl-page span {
 	display: block;
