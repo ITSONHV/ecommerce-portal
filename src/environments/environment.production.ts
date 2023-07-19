@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'dangminhpc.vn/api/',
-    urlImg:""
+    apiUrl:"https://thanhtuandang.bsite.net/api/v1/",
+    urlImg:"https://thanhtuandang.bsite.net/wwwroot/"
 };

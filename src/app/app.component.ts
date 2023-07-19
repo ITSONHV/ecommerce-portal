@@ -6,6 +6,8 @@ import { MenuTopComponent } from './menu-top/menu-top.component';
 import { DOCUMENT } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+import { FacebookService, InitParams } from 'ngx-facebook';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -61,15 +63,21 @@ export class AppComponent implements OnInit  {
   constructor(private _mainsvc: MainService, private activatedRoute: ActivatedRoute,
     private router: Router, 
     @Inject(DOCUMENT) private document: Document,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+
+    private facebookService: FacebookService
+
     ){}
   ngOnInit(): void {
     this.loadMenuToMobile();
-    // this.initFacebookService();
+    this.initFacebookService();
    };
+
   title = 'ecommerce-portal';
+
   private initFacebookService(): void {
-    
+      const initParams: InitParams = { xfbml:true, version:'v3.2'};
+      this.facebookService.init(initParams);
   }
 
   ngAfterViewInit(): void {

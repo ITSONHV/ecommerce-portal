@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
-        items: 1
+        items: 2
       },
       400: {
         items: 3
@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
-        items: 1
+        items: 2
       },
       400: {
         items: 3
@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit {
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
-        items: 1
+        items: 2
       },
       400: {
         items: 3
@@ -142,7 +142,7 @@ export class HomeComponent implements OnInit {
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
-        items: 1
+        items: 2
       },
       400: {
         items: 3
@@ -208,7 +208,17 @@ export class HomeComponent implements OnInit {
     this.getProductIsHot();
     this.getProductIsNew();
     this.getTrademark();
-    this.allMenu = JSON.parse(localStorage.getItem('allmenu-app') ?? "");
+
+    debugger;
+    if (localStorage.getItem("allmenu-app") !== null &&
+      localStorage.getItem("allmenu-app")?.length != 0) {
+      this.allMenu = JSON.parse(localStorage.getItem('allmenu-app') ?? "");
+    } else {
+      console.log("dasdas");
+      this.allMenu = this.getMenu();
+    }
+
+  
     this.isLoadComplete = true;
   }
   getProductIsBestSellingPages() {
@@ -329,5 +339,42 @@ export class HomeComponent implements OnInit {
       }
     )
     event.preventDefault();
+  }
+
+  getMenu() {
+    this._svc.getCategories().subscribe(
+      (data: any) => {
+        let menuObject :any = { ...data }.data;
+        this.allMenu = menuObject.filter((item: any) => {
+          return item.categoryParent == 0 || item.categoryParent == null
+        });
+        let subMenu :any= menuObject.filter((item: any) => {
+          return (item.categoryParent != 0 && item.categoryParent != null)
+        });
+        this.allMenu.forEach((parent: any) => {
+          // Lọc ra các phần tử của mảng con có parentId bằng với id của phần tử hiện tại của mảng cha
+          let children = subMenu.filter((child: any) => child.categoryParent === parent.id);
+          // Gán thuộc tính sub bằng giá trị của thuộc tính value của các phần tử con
+          if (children.length > 0)
+            parent.submenu = children.map((child: any) => child);
+        });
+        if (this.allMenu.length > 0) {
+          if (localStorage.getItem('allmenu-app')?.length != 0) {
+            localStorage.removeItem('allmenu-app');
+            localStorage.setItem('allmenu-app', JSON.stringify(this.allMenu));
+
+            localStorage.removeItem('all-menu-search');
+            localStorage.setItem('all-menu-search', JSON.stringify(menuObject));
+          }
+          else {
+            localStorage.setItem('allmenu-app', JSON.stringify(this.allMenu));
+
+            localStorage.setItem('all-menu-search', JSON.stringify(menuObject));
+
+          }
+        }
+        this.spinner.hide();
+      }
+    )
   }
 }

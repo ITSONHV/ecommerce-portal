@@ -95,3 +95,10 @@
     margin-left: 5px;
     margin-right: 5px;
 }
+
+
+@media only screen and (max-width: 768px) {
+    .single-img-add .sidebar-add-slider{
+        display: none !important;
+    }
+ }

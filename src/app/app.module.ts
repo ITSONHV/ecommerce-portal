@@ -34,7 +34,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ProductRecentComponent } from './product-recent/product-recent.component';
- 
+import { FacebookModule } from 'ngx-facebook/facebook.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,9 +73,12 @@ import { ProductRecentComponent } from './product-recent/product-recent.componen
     BrowserAnimationsModule,
     NgxSpinnerModule,
     FormsModule,
-      MatTableModule,
+    MatTableModule,
     MatPaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+   // FacebookModule.forRoot()
+
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

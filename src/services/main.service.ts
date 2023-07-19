@@ -33,6 +33,52 @@ export class MainService {
                 )
             )
     }
+
+    getCategoriesAndSetLocal(): Observable<ObjectModel> {
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getCategorise)
+            .pipe(
+                mergeMap((response_: any) =>{
+                      debugger;
+                        let result = new ObjectModel();
+                        result = response_;
+                        let menuAll : any = of<ObjectModel>(<ObjectModel>result);
+                       let menuObject = menuAll.data;
+                       let allMenu: any = menuObject.filter((item: any) => {
+                          return item.categoryParent == 0 || item.categoryParent == null
+                        });
+                       let subMenu: any = menuObject.filter((item: any) => {
+                          return (item.categoryParent != 0 && item.categoryParent != null)
+                        });
+                         allMenu.forEach((parent: any) => {
+                          // Lọc ra các phần tử của mảng con có parentId bằng với id của phần tử hiện tại của mảng cha
+                          let children = subMenu.filter((child: any) => child.categoryParent === parent.id);
+                          // Gán thuộc tính sub bằng giá trị của thuộc tính value của các phần tử con
+                          if (children.length > 0)
+                            parent.submenu = children.map((child: any) => child);
+                        });
+                        if (allMenu.length > 0) {
+                          if (localStorage.getItem('allmenu-app')?.length != 0) {
+                            localStorage.removeItem('allmenu-app');
+                            localStorage.setItem('allmenu-app', JSON.stringify(allMenu));
+                
+                            localStorage.removeItem('all-menu-search');
+                            localStorage.setItem('all-menu-search', JSON.stringify(menuObject));
+                          }
+                          else {
+                            localStorage.setItem('allmenu-app', JSON.stringify(allMenu));
+                
+                            localStorage.setItem('all-menu-search', JSON.stringify(menuObject));
+                
+                          }
+                        }
+                        //this.spinner.hide();
+    
+    
+                        return of<ObjectModel>(<ObjectModel>allMenu);
+                 })
+            )
+    }
+
     getCategoryBySlug(slug: string): Observable<ObjectModel> {
         return this.http.get<any>(`${this.urlApi}${AppConfigs.urls.getCategoryBySlug}${slug}`)
             .pipe(
