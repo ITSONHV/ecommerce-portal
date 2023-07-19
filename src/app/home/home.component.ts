@@ -208,7 +208,6 @@ export class HomeComponent implements OnInit {
     this.getProductIsHot();
     this.getProductIsNew();
     this.getTrademark();
-
     if (localStorage.getItem("allmenu-app") !== null &&
       localStorage.getItem("allmenu-app")?.length != 0) {
       this.allMenu = JSON.parse(localStorage.getItem('allmenu-app') ?? "");
