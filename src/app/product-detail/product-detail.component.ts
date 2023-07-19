@@ -159,6 +159,8 @@ export class ProductDetailComponent implements OnInit {
         queryParamsHandling: 'merge'
       }
     )
+
+    window.scrollTo(0, 20);
     event.preventDefault();
   }
   counterRate(i: number) {
@@ -213,4 +215,5 @@ export class ProductDetailComponent implements OnInit {
     }
     
   }
+  
 }

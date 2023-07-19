@@ -12,6 +12,7 @@ import { PaginatedResponse, PaginationValue } from '../pagination/pagination.com
 import { DOCUMENT } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { ICart } from 'src/interfaces/ICart';
 
 @Component({
   selector: 'app-product-grid',
@@ -43,6 +44,7 @@ export class ProductGridComponent implements OnInit  {
   public form : any;
   public productSlugToChild: string;
   public isShowQuickView: boolean;
+  public myCart : ICart[];
   public visibleItems: PaginatedResponse<ProductModel> = {
     items: this.listProduct,
     total: this. totalRecords,
@@ -60,6 +62,7 @@ export class ProductGridComponent implements OnInit  {
     ) {
   }
   ngOnInit(): void {
+    this.myCart = this._svc.getItemsCart();
     this._router.queryParams.subscribe(params => {
       this.urlSlug = params['slug'];
       this.searchKey = params['searchKey'];
@@ -126,7 +129,6 @@ export class ProductGridComponent implements OnInit  {
           this.meta.updateTag({ name: 'keywords', content: this.categoryCache.seoKeyword });
         }
         if(this.category != null){
-          debugger;
           this.meta.updateTag({ name: 'description', content: this.category.seoDescription });
           this.titleService.setTitle(this.category.seoTitle);
           this.meta.updateTag({ name: 'keywords', content: this.category.seoKeyword });
@@ -231,7 +233,6 @@ export class ProductGridComponent implements OnInit  {
 	}
 
   changeSelectionKeySearch(event: any, index: string) {
-    debugger;
     this.selectedTextIndex = event.target.checked ? index : undefined;
     if(this.selectedTextIndex === undefined){
       this.searchKey = ''; 
@@ -300,7 +301,6 @@ export class ProductGridComponent implements OnInit  {
 
   getParentCate(idCate:number){
     if(localStorage.getItem('allmenu-app')){
-      debugger;
       let menuAll :any = JSON.parse(localStorage.getItem('allmenu-app') ?? "");
 
       let menuParent: any = menuAll.filter((item: any) => {
@@ -311,6 +311,14 @@ export class ProductGridComponent implements OnInit  {
         this.categoryParent = menuParent[0].categoryName;
       }
     }
+  }
+
+  sumPriceItemsInCart(){
+    return this.myCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  }
+  removeItemCart(productId: number)
+  {
+      this._svc.removeItemCart(productId);
   }
   ngOnDestroy() {
    
