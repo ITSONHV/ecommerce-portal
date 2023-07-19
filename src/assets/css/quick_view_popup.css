@@ -19,14 +19,14 @@
 	transform: translate(-50%, -50%);
 }
 #quick_view_popup-outer {
-	position: relative;
+	position: relative; 
 	/*width: 100%;*/ width: 800px;
 	height: 100%;
 	background: #fff;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	margin: auto;
+	margin: auto
 }
 #quick_view_popup-content {
 	border-radius: 3px;
@@ -42,8 +42,8 @@
 	cursor: pointer;
 	display: none;
 	position: absolute;
-	right: 0px;
-	top: 0px;
+	right:0px;
+	top: 25px;
 	    z-index: 1103;
     font-size: 25px;
     color: #fff;
@@ -51,6 +51,8 @@
     padding: 0;
     height: 24px;
     line-height: 20px;
+	border-radius: 50%;
+	transform: translate(-50%, -50%); /* Thêm dòng này */
 }
 #quick_view_popup-content .product-view-area .product-name h1 {
 	font-size: 22px;
