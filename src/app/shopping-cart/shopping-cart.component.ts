@@ -29,7 +29,6 @@ export class ShoppingCartComponent {
     return this.itemsCart.reduce((sum, item) => sum + item.quantity, 0);
   }
   handleViewDetailProduct(event: any, product: any): void {
-    debugger;
     this.meta.updateTag({ name: 'description', content: product.seoDescription ?? ""});
     this.titleService.setTitle(product.seoTitle ?? "");
     this.meta.updateTag({ name: 'keywords', content: product.seoKeyword ?? ""});
@@ -44,4 +43,10 @@ export class ShoppingCartComponent {
     )
     event.preventDefault();
   }
+  
+  removeItemCart(productId: number)
+  {
+      this._svc.removeItemCart(productId);
+  }
+  
 }

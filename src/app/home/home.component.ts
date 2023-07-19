@@ -209,7 +209,6 @@ export class HomeComponent implements OnInit {
     this.getProductIsNew();
     this.getTrademark();
 
-    debugger;
     if (localStorage.getItem("allmenu-app") !== null &&
       localStorage.getItem("allmenu-app")?.length != 0) {
       this.allMenu = JSON.parse(localStorage.getItem('allmenu-app') ?? "");
@@ -339,6 +338,10 @@ export class HomeComponent implements OnInit {
       }
     )
     event.preventDefault();
+  }
+
+  addToFavorite(product:ProductModel): void{
+    this._svc.addToFavorite(product);
   }
 
   getMenu() {

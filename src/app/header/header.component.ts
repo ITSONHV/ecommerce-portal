@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   public menuSearch : any;
   public hello = "Đăng Minh Computer chào bạn!";
   public itemsCart = this._svc.getItemsCart();
+  public itemsFavorite = this._svc.getItemsFavorite();
   public totalMoneyItemsCart = this._svc.totalMoney;
   constructor( private router: Router
     , private activatedRoute: ActivatedRoute,
@@ -48,6 +49,10 @@ export class HeaderComponent implements OnInit {
       }
     )
     event.preventDefault();
+  }
+
+  sumItemsInFavorite(): number{
+    return this.itemsFavorite.reduce((sum, item) => sum + 1, 0);
   }
 
   loadMenuSearch(){

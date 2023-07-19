@@ -9,6 +9,8 @@ import { FormControl } from '@angular/forms';
 import { ProductModel } from 'src/models/product.model';
 import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ICart } from 'src/interfaces/ICart';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-list',
@@ -22,6 +24,7 @@ export class ProductListComponent implements OnInit {
   public urlImg : string = environment.urlImg;
   public urlSlug : any ;
   public categoryName: any ;
+  public categoryParent: any;
   public groupSearch: any;
   public category: any;
   public totalRecords = 0;
@@ -35,7 +38,9 @@ export class ProductListComponent implements OnInit {
   isLoadComplete = false;
   public typeSearch : string;
   public productSale : any;
-  public visibleItems: PaginatedResponse<ProductModel> = {
+  public myCart: ICart[];
+  public categoryCache: any ;
+    public visibleItems: PaginatedResponse<ProductModel> = {
     items: this.listProduct,
     total: this. totalRecords,
   };
@@ -43,10 +48,13 @@ export class ProductListComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document ,
     private router : Router,
     private activatedRoute: ActivatedRoute,
-    private spinner: NgxSpinnerService, 
+    private spinner: NgxSpinnerService,
+    private meta: Meta,
+    private titleService: Title,
     ) {
   }
   ngOnInit(): void {
+    this.myCart = this._svc.getItemsCart();
     this._router.queryParams.subscribe(params => {
       this.urlSlug = params['slug'];
       this.searchKey = params['searchKey'];
@@ -56,9 +64,6 @@ export class ProductListComponent implements OnInit {
         this.getCategoryBySlug(this.urlSlug);
         this.onPageChange(this.pagination);
       }
-      // else if(localStorage.getItem('product-by-category-slug')?.length != 0){
-      //   this.listProduct = JSON.parse(localStorage.getItem('product-by-category-slug') ?? "");
-      // }
       else{
         this.onPageChange(this.pagination);
         this.getGroupSearch(0); // get mặc định all
@@ -66,7 +71,6 @@ export class ProductListComponent implements OnInit {
       this.getProductSales(2);
       this.paginationControl.valueChanges.subscribe(x => {
         this.onPageChange(x);
-         // console.log('aa' + x);
        });
     });   
   }
@@ -108,9 +112,20 @@ export class ProductListComponent implements OnInit {
     this._svc.getCategoryBySlug(slug).subscribe(
       (respones: ObjectModel)=>{
         this.category = respones.data;
-        if(this.category != null){  
+        if(this.categoryCache){
+          this.meta.updateTag({ name: 'description', content: this.categoryCache.seoDescription });
+          this.titleService.setTitle(this.categoryCache.seoTitle);
+          this.meta.updateTag({ name: 'keywords', content: this.categoryCache.seoKeyword });
+        }
+        if(this.category != null){
+          this.meta.updateTag({ name: 'description', content: this.category.seoDescription });
+          this.titleService.setTitle(this.category.seoTitle);
+          this.meta.updateTag({ name: 'keywords', content: this.category.seoKeyword });
+          this.categoryName = this.category.categoryName;
+          this.getParentCate(this.category.categoryParent);
           this.getGroupSearch(this.category.id);
         }
+        this.spinner.hide();
       },
       (err) =>{
         this.spinner.hide();
@@ -205,7 +220,6 @@ export class ProductListComponent implements OnInit {
 
   changeSelectionPrice(event: any, index: string) {
     this.selectedPriceIndex = event.target.checked ? index : undefined;
-    debugger;
     if(this.selectedPriceIndex === undefined){
       this.minPrice = 0;
       this.maxPrice = 0;
@@ -279,8 +293,29 @@ export class ProductListComponent implements OnInit {
     );
   }
 
+  getParentCate(idCate:number){
+    if(localStorage.getItem('allmenu-app')){
+      let menuAll :any = JSON.parse(localStorage.getItem('allmenu-app') ?? "");
+
+      let menuParent: any = menuAll.filter((item: any) => {
+        return item.id == idCate;
+      });
+      if(menuParent && menuParent.length > 0)
+      {
+        this.categoryParent = menuParent[0].categoryName;
+      }
+    }
+  }
+
   addToShopingCard(product:ProductModel): void{
     this._svc.addToCart(product, 1);
     //console.log(this._svc.getItemsCart);
+  }
+  sumPriceItemsInCart(){
+    return this.myCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  }
+  removeItemCart(productId: number)
+  {
+      this._svc.removeItemCart(productId);
   }
 }

@@ -156,7 +156,9 @@ export class QuickViewComponent implements OnInit, OnDestroy {
         return;
        }
     });
-    debugger;
-    this.imgfirst = imageClick.imageUrl;
+    if(imageClick && imageClick !== undefined && imageClick != null){
+      this.imgfirst = imageClick.imageUrl;
+    }
+    
   }
 }

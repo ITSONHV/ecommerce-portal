@@ -13,6 +13,7 @@ import { ProductModel } from 'src/models/product.model';
 })
 export class MainService {
     itemsCart: ICart[] = [];
+    itemsFavorite: ProductModel[] = [];
     productRecent: any[] = [];
     totalMoney: number;
     urlApi = environment.apiUrl;
@@ -31,51 +32,6 @@ export class MainService {
                 map(
                     (respone: any) => respone
                 )
-            )
-    }
-
-    getCategoriesAndSetLocal(): Observable<ObjectModel> {
-        return this.http.get<any>(this.urlApi + AppConfigs.urls.getCategorise)
-            .pipe(
-                mergeMap((response_: any) =>{
-                      debugger;
-                        let result = new ObjectModel();
-                        result = response_;
-                        let menuAll : any = of<ObjectModel>(<ObjectModel>result);
-                       let menuObject = menuAll.data;
-                       let allMenu: any = menuObject.filter((item: any) => {
-                          return item.categoryParent == 0 || item.categoryParent == null
-                        });
-                       let subMenu: any = menuObject.filter((item: any) => {
-                          return (item.categoryParent != 0 && item.categoryParent != null)
-                        });
-                         allMenu.forEach((parent: any) => {
-                          // Lọc ra các phần tử của mảng con có parentId bằng với id của phần tử hiện tại của mảng cha
-                          let children = subMenu.filter((child: any) => child.categoryParent === parent.id);
-                          // Gán thuộc tính sub bằng giá trị của thuộc tính value của các phần tử con
-                          if (children.length > 0)
-                            parent.submenu = children.map((child: any) => child);
-                        });
-                        if (allMenu.length > 0) {
-                          if (localStorage.getItem('allmenu-app')?.length != 0) {
-                            localStorage.removeItem('allmenu-app');
-                            localStorage.setItem('allmenu-app', JSON.stringify(allMenu));
-                
-                            localStorage.removeItem('all-menu-search');
-                            localStorage.setItem('all-menu-search', JSON.stringify(menuObject));
-                          }
-                          else {
-                            localStorage.setItem('allmenu-app', JSON.stringify(allMenu));
-                
-                            localStorage.setItem('all-menu-search', JSON.stringify(menuObject));
-                
-                          }
-                        }
-                        //this.spinner.hide();
-    
-    
-                        return of<ObjectModel>(<ObjectModel>allMenu);
-                 })
             )
     }
 
@@ -280,6 +236,7 @@ export class MainService {
                 })
             )
     };
+
     addToCart(product: ProductModel, quantity: number) {    
         const index = this.itemsCart.findIndex(item =>item.id == product.id)
         if(index >= 0){
@@ -300,6 +257,13 @@ export class MainService {
     }
     getItemsCart() { return this.itemsCart; }
     clearItemsCart() { this.itemsCart = []; return this.itemsCart;}
+    removeItemCart(productId: number)
+    {
+        this.itemsCart.forEach((element,index)=>{
+            if(element.id === productId)  this.itemsCart.splice(index,1);
+         });
+         return this.itemsCart;
+    }
 
     // lưu product vừa xem
     setProductRecent(product: any) {
@@ -328,6 +292,26 @@ export class MainService {
             localStorage.getItem("product-recent")?.length != 0) {
             return JSON.parse(localStorage.getItem("product-recent") ?? "");
         }
+    }
+
+
+    /* yêu thích */
+
+    addToFavorite(product: ProductModel) {    
+        debugger;
+        const index = this.itemsFavorite.findIndex(item =>item.id == product.id)
+        if(index == -1){
+            this.itemsFavorite.push(product); 
+        }
+    }
+    getItemsFavorite() { return this.itemsFavorite; }
+    clearItemsFavorite() { this.itemsFavorite = []; return this.itemsFavorite;}
+    removeItemFavorite(productId: number)
+    {
+        this.itemsFavorite.forEach((element,index)=>{
+            if(element.id === productId)  this.itemsFavorite.splice(index,1);
+         });
+         return this.itemsFavorite;
     }
 
     getServerErrorMessage(error: HttpErrorResponse): string {

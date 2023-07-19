@@ -5,10 +5,11 @@
     <div class="row">
       <div class="col-xs-12">
         <ul>
-          <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Home</a><span>&raquo;</span></li>
-          <li class=""> <a title="Go to Home Page"
-              [routerLink]="['/danh-muc-san-pham-l']" >{{categoryName}}</a><span>&raquo;</span></li>
-          <li><strong>{{categoryName}}</strong></li>
+          <li><i aria-hidden="true" class="fa fa-home"></i><span>&nbsp;&raquo;&nbsp;</span> </li>
+            <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Home</a></li>
+            <li class="" *ngIf="this.categoryParent"> <span>&nbsp;&raquo;&nbsp;</span> <a title="Go to {{this.categoryParent}}" [routerLink]="['/danh-muc-san-pham-g']" >{{this.categoryParent}}</a></li>
+          
+            <li class="" *ngIf="this.categoryName"> <span>&nbsp;&raquo;&nbsp;</span> <a title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']" >{{categoryName}}</a></li>
         </ul>
       </div>
     </div>
@@ -274,30 +275,19 @@
             <span>Giỏ hàng của bạn</span>
           </div>
           <div class="block-content">
-            <p class="amount">Có <a href="shopping_cart.html">2 sản phẩm</a> trong giỏ.</p>
-            <ul>
-              <li class="item"> <a href="shopping_cart.html" title="Sample Product" class="product-image"><img
-                    src="./../assets/images/products/product-1.jpg" alt="Sample Product "></a>
+            <p class="amount">Có <a [routerLink]="['/gio-hang']">{{this.myCart.length}} sản phẩm</a> trong giỏ.</p>
+            <ul *ngIf="this.myCart && this.myCart.length > 0" >
+              <li *ngFor="let item of this.myCart" class="item"> 
+                <a [routerLink]="['/gio-hang']" title="{{item.productName}}" class="product-image"><img [src]="urlImg + item.image" alt="{{item.productName}}"></a>
                 <div class="product-details">
-                  <div class="access"> <a href="#" title="Remove This Item" class="remove-cart"><i
-                        class="icon-close"></i></a></div>
-                  <p class="product-name"> <a href="shopping_cart.html">Lorem ipsum dolor sit amet Consectetur</a> </p>
-                  <strong>1</strong> x <span class="price">$19.99</span>
-                </div>
+                  <div class="access"> <a (click)="removeItemCart(item.id)" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a></div>
+                  <p class="product-name"> <a [routerLink]="['gio-hang']">{{item.productName}}</a> </p>
+                  <strong>{{item.quantity}}</strong> x <span class="price">{{item.price  | currency : "VND"}}</span> </div>
               </li>
-              <li class="item last"> <a href="#" title="Sample Product" class="product-image"><img
-                    src="./../assets/images/products/product-1.jpg" alt="Sample Product"></a>
-                <div class="product-details">
-                  <div class="access"> <a href="#" title="Remove This Item" class="remove-cart"><i
-                        class="icon-close"></i></a></div>
-                  <p class="product-name"> <a href="shopping_cart.html">Consectetur utes anet adipisicing elit</a> </p>
-                  <strong>1</strong> x <span class="price">$8.00</span>
-                  <!--access clearfix-->
-                </div>
-              </li>
+              
             </ul>
             <div class="summary">
-              <p class="subtotal"> <span class="label">Tổng tiền:</span> <span class="price">$27.99</span> </p>
+              <p class="subtotal"> <span class="label">Tổng tiền:</span> <span class="price">{{sumPriceItemsInCart() | currency : "VND"}}</span> </p>
             </div>
             <div class="cart-checkout">
               <button class="button button-checkout" title="Submit" type="submit"><span>Thanh toán</span></button>

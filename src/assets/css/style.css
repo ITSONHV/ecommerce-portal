@@ -4958,7 +4958,7 @@ button span {
 	margin-bottom: 10px;
 	padding-bottom: 10px;
 	position: relative;
-	display: inline-block
+	display: inherit
 }
 .sidebar-cart ul li.item img {
 	width: 65px

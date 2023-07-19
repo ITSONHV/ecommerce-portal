@@ -34,37 +34,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="th-delate"><a href="#">X</a></td>
-                    <td class="th-product"><a href="#"><img src="./../assets/images/products/product-1.jpg" alt="cart"></a></td>
-                    <td class="th-details"><h2><a href="#">Lorem Ipsum is simply</a></h2></td>
-                    <td class="th-price">$125.00</td>
-                    <th class="td-add-to-cart"><a href="#"> Add to Cart</a></th>
+                  <tr *ngFor="let item of itemsFavorite">
+                    <td class="th-delate"><a (click)="removeItemFavorite(item.id)">X</a></td>
+                    <td class="th-product"><a (click)="handleViewDetailProduct($event,item)"><img [src]="urlImg + item.imageUrl" alt="cart"></a></td>
+                    <td class="th-details"><h2><a (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a></h2></td>
+                    <td class="th-price">{{item.price | currency:"VND"}}</td>
+                    <th class="td-add-to-cart"><a (click)="addToShopingCard(item)"> Thêm giỏ hàng</a></th>
                   </tr>
-                  <tr>
-                    <td class="th-delate"><a href="#">X</a></td>
-                    <td class="th-product"><a href="#"><img src="./../assets/images/products/product-1.jpg" alt="cart"></a></td>
-                    <td class="th-details"><h2><a href="#">Leo quis molestie</a></h2></td>
-                    <td class="th-price">$99.00</td>
-                    <th class="td-add-to-cart"><a href="#"> Add to Cart</a></th>
-                  </tr>
-                  <tr>
-                    <td class="th-delate"><a href="#">X</a></td>
-                    <td class="th-product"><a href="#"><img src="./../assets/images/products/product-1.jpg" alt="cart"></a></td>
-                    <td class="th-details"><h2><a href="#">Lorem Ipsum is simply</a></h2></td>
-                    <td class="th-price">$179.89</td>
-                    <th class="td-add-to-cart"><a href="#"> Add to Cart</a></th>
-                  </tr>
-                  <tr>
-                    <td class="th-delate"><a href="#">X</a></td>
-                    <td class="th-product"><a href="#"><img src="./../assets/images/products/product-1.jpg" alt="cart"></a></td>
-                    <td class="th-details"><h2><a href="#">Leo quis molestie</a></h2></td>
-                    <td class="th-price">$199.00</td>
-                    <th class="td-add-to-cart"><a href="#"> Add to Cart</a></th>
-                  </tr>
+                 
                 </tbody>
               </table>
-              <a href="checkout.html" class="all-cart">Thêm tất cả vào giỏ hàng</a> </div>
+              <a *ngIf="itemsFavorite.length > 0" href="checkout.html" class="all-cart">Thêm tất cả vào giỏ hàng</a> </div>
           </div>
         </div>
         <!-- <aside class="right sidebar col-sm-3 col-xs-12">

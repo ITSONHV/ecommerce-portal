@@ -13,6 +13,7 @@ import { MainService } from 'src/services/main.service';
 export class SliderComponent implements OnInit {
   public sliders: any;
   public urlImg : string = environment.urlImg;
+  public baseUrl: string = environment.baseUrl;
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -21,10 +22,10 @@ export class SliderComponent implements OnInit {
     items: 4,
     dots: false,
     margin: 10,
-    autoplayTimeout: 3000,
-    autoplaySpeed: 1000,
+    autoplayTimeout: 4000,
+    autoplaySpeed: 3000,
     autoplay: true,
-    navSpeed: 700,
+    navSpeed: 2500,
     navText: ["<a class=\"flex-prev\"><i class=\"fa fa-angle-left\" aria-hidden=\"true\"></i></a>", "<a class=\"flex-next\"><i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i></a>"],
     responsive: {
       0: {

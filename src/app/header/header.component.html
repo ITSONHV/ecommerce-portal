@@ -83,8 +83,8 @@
                         
 
                       </select>
-                      <input #inputSearch  type="text" class="form-control" placeholder="Bạn muốn tìm..." name="search">
-                      <button class="btn-search" type="button" (click)="searchFilter($event,inputSearch.value, cateSelect.value)"><i class="fa fa-search"></i></button>
+                      <input #inputSearch (keydown.enter)="searchFilter($event,inputSearch.value, cateSelect.value)"  type="text" class="form-control" placeholder="Bạn muốn tìm..." name="search">
+                      <button class="btn-search" type="button"  (click)="searchFilter($event,inputSearch.value, cateSelect.value)"><i class="fa fa-search"></i></button>
                     </div>
                   </form>
                 </div>
@@ -94,14 +94,18 @@
               
             </div>
             <div class="col-xs-12 col-sm-4 col-md-3 top-cart">
-              <div class="link-wishlist"> <a [routerLink]="['/danh-sach-yeu-thich']"> <i class="icon-heart icons"></i><span> Yêu thích</span></a> </div>
+              <div class="link-wishlist"> 
+                <a [routerLink]="['/danh-sach-yeu-thich']"> <i class="icon-heart icons"></i><span class="cart-total">{{sumItemsInFavorite()}}</span><span> Yêu thích</span>
+                </a>
+              </div>
               <!-- top cart -->
               <div class="top-cart-contain">
                 <div class="mini-cart">
                   <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#">
                     <div class="cart-icon"><i class="icon-basket-loaded icons"></i><span class="cart-total">{{sumItemsInCart()}}</span></div>
                     <div class="shoppingcart-inner hidden-xs"><span class="cart-title">Giỏ hàng</span> </div>
-                    </a></div>
+                    </a>
+                  </div>
                   <div>
                     <div class="top-cart-content">
                       <div class="block-subtitle hidden">Recently added items</div>
