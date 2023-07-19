@@ -14,14 +14,14 @@
 #mobile-menu {
     position: absolute;
     top: 0;
-    background: #e83f33;
+    background: #197bb7;
     z-index: 99999;
     display: none;
     font-size: 12px;
     line-height: 1.42857;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-right: 2px solid #cb2d22;
+    border-right: 2px solid #197bb7;
 }
 .mobile-menu .expand {
     right: 0;
