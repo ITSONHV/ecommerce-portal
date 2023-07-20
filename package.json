@@ -25,6 +25,7 @@
     "@angular/router": "^16.0.0",
     "animate.css": "^4.1.1",
     "jquery": "^3.7.0",
+    "ngx-cookie-service": "^16.0.0",
     "ngx-facebook": "^3.0.0-0",
     "ngx-owl-carousel-o": "^16.0.0",
     "ngx-spinner": "^16.0.2",

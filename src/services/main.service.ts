@@ -1,5 +1,5 @@
 import { environment } from './../environments/environment';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit, inject } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpResponseBase, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, retry,mergeMap } from 'rxjs/operators';
@@ -8,10 +8,12 @@ import { ObjectModel } from 'src/models/object_paging.model';
 import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
 import { ICart } from 'src/interfaces/ICart';
 import { ProductModel } from 'src/models/product.model';
+import { CookieService } from 'ngx-cookie-service';
+
 @Injectable({
     providedIn: 'root',
 })
-export class MainService {
+export class MainService implements OnInit{
     itemsCart: ICart[] = [];
     itemsFavorite: ProductModel[] = [];
     productRecent: any[] = [];
@@ -20,7 +22,17 @@ export class MainService {
     categoryName : string;
     categoryId : number;
     public isShowMenu = true;
-    constructor(private http: HttpClient) { }
+    public productBestSales :any;
+    constructor(private http: HttpClient,private cookieService: CookieService)
+     {
+        //cookieService = inject(CookieService);
+     }
+
+     ngOnInit(): void {
+        this.getItemsCart();
+        this.getItemsFavorite();
+     }
+
     httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -88,12 +100,19 @@ export class MainService {
                 })
             )
     }
+
+    // các page khác cũng có sài product sale, nên gán biến tránh gọi api nhiều lần
     getProductIsBestSellingPages(limit : number): Observable<ObjectModel> {
+        if(this.productBestSales?.data?.data?.length > 0){
+            return of<ObjectModel>(<ObjectModel>this.productBestSales);
+        }
+
         return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductIsBestSellingPages + `&PageSize=${limit}`)
             .pipe(
                 mergeMap((response_: any) => {
                     let result = new ObjectModel();
                     result = response_;
+                    this.productBestSales = result;
                     return of<ObjectModel>(<ObjectModel>result);
                 })
             )
@@ -226,7 +245,6 @@ export class MainService {
             }
         }
         
-
         return this.http.get<any>(queryUrls)
             .pipe(
                 retry(3), // retry a failed request up to 3 times
@@ -237,10 +255,11 @@ export class MainService {
             )
     };
 
-    addToCart(product: ProductModel, quantity: number) {    
+    addToCart(product: ProductModel, quantity: number) { 
         const index = this.itemsCart.findIndex(item =>item.id == product.id)
         if(index >= 0){
             this.itemsCart[index].quantity += quantity;
+            this.cookieService.set('itemsCart', JSON.stringify(this.itemsCart), {expires: 2});
         }
         else{
             var cart:ICart;
@@ -253,10 +272,20 @@ export class MainService {
               productNameSlug : product.productNameSlug
             }
             this.itemsCart.push(cart); 
+            this.cookieService.set('itemsCart', JSON.stringify(this.itemsCart), {expires: 2});
         }
     }
-    getItemsCart() { return this.itemsCart; }
-    clearItemsCart() { this.itemsCart = []; return this.itemsCart;}
+    getItemsCart() { 
+        if(this.cookieService.get('itemsCart')){
+            const itemCartCookie =  JSON.parse(this.cookieService.get('itemsCart'));
+            this.itemsCart = itemCartCookie;
+        }
+        
+        return this.itemsCart; 
+    }
+    clearItemsCart() {
+         this.itemsCart = [];
+         return this.itemsCart;}
     removeItemCart(productId: number)
     {
         this.itemsCart.forEach((element,index)=>{
@@ -296,23 +325,35 @@ export class MainService {
 
 
     /* yêu thích */
-
-    addToFavorite(product: ProductModel) {    
-        debugger;
+    addToFavorite(product: ProductModel) { 
+           debugger;
         const index = this.itemsFavorite.findIndex(item =>item.id == product.id)
         if(index == -1){
             this.itemsFavorite.push(product); 
+            this.cookieService.delete('itemsFavoriteCookie');
+            this.cookieService.set('itemsFavoriteCookie', JSON.stringify(this.itemsFavorite), {expires: 5});
         }
     }
-    getItemsFavorite() { return this.itemsFavorite; }
+    getItemsFavorite() { 
+        if(this.cookieService.get('itemsFavoriteCookie'))
+        {
+            debugger;
+            const itemsFavoriteCookie =  JSON.parse(this.cookieService.get('itemsFavoriteCookie'));
+            this.itemsFavorite = itemsFavoriteCookie;
+        }
+
+        return this.itemsFavorite; 
+    }
     clearItemsFavorite() { this.itemsFavorite = []; return this.itemsFavorite;}
     removeItemFavorite(productId: number)
     {
         this.itemsFavorite.forEach((element,index)=>{
             if(element.id === productId)  this.itemsFavorite.splice(index,1);
          });
+         this.cookieService.set('itemsFavoriteCookie', JSON.stringify(this.itemsFavorite), {expires: 5});
          return this.itemsFavorite;
     }
+    /* End yêu thích */
 
     getServerErrorMessage(error: HttpErrorResponse): string {
         switch (error.status) {

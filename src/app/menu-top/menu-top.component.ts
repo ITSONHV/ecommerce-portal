@@ -7,6 +7,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import 'jquery';
 import { Meta, Title } from '@angular/platform-browser';
+import { ObjectModel } from 'src/models/object_paging.model';
+import { environment } from 'src/environments/environment';
+import { ProductModel } from 'src/models/product.model';
 @Component({
   selector: 'app-menu-top',
   templateUrl: './menu-top.component.html',
@@ -31,6 +34,10 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
   public isShowMenu = this._mainsvc.isShowMenu;
   public isShowIconMenuMobile = true;
   public allMenu: Array<ICategory> = [];
+  public productSale: any;
+  public urlImage : string = environment.urlImg;
+  public productSlugToChild: string;
+  isShowQuickView = false;
   @Output() sendEventToParent = new EventEmitter<boolean>();
   constructor(private _mainsvc: MainService,
     private router: Router,
@@ -45,6 +52,7 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     this.spinner.show();
     this.categoryName = this._mainsvc.categoryName;
     this.getMenu();
+    this.getProductSales();
     this.isShowMenu = false;
   }
   ngAfterViewInit(): void {
@@ -141,5 +149,33 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
   handleClickMenuMobile() {
     this.isShowIconMenuMobile = !this.isShowIconMenuMobile;
     this.sendEventToParent.emit(this.isShowIconMenuMobile);
+  }
+
+  getProductSales(){
+    this._mainsvc.getProductIsBestSellingPages(6).subscribe(
+      (respones: ObjectModel)=>{
+        this.productSale = respones.data;        
+      },
+      (err) =>{
+        console.log(err);
+      }
+    );
+  }
+  counterRate(i: number) {
+    return new Array(i);
+  } 
+   addToShopingCard(product:ProductModel): void{
+    this._mainsvc.addToCart(product, 1);
+  }
+  addToFavorite(product:ProductModel): void{
+    this._mainsvc.addToFavorite(product);
+  }
+
+  openModalQuickView(itemProduct: any) {
+    this.productSlugToChild = itemProduct.productNameSlug;
+    this.isShowQuickView = !this.isShowQuickView;
+  }
+  listenEventFromChild(check: boolean) : void { 
+    this.isShowQuickView = check;
   }
 }

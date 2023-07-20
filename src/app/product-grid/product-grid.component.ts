@@ -80,7 +80,7 @@ export class ProductGridComponent implements OnInit  {
      this.paginationControl.valueChanges.subscribe(x => {
       this.onPageChange(x);
      });
-     this.getProductSales(2);
+     this.getProductSales(6);
      this.form = this.formBuilder.group({
       typeStatus: ["", Validators.required],
     })

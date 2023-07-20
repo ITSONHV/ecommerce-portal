@@ -76,7 +76,7 @@ export class ProductDetailComponent implements OnInit {
       this.getProductbyProductNameSlug(this.slug)
       this._svc.addToCart
     });
-    this.getProductSales(3);
+    this.getProductSales(6);
   }
   ngAfterViewInit(): void {
     
@@ -140,6 +140,7 @@ export class ProductDetailComponent implements OnInit {
   getProductSales(limit: number){
     this._svc.getProductIsBestSellingPages(limit).subscribe(
       (respones: ObjectModel)=>{
+        debugger;
         this.productSale = respones.data;    
         this.spinner.hide();
       },

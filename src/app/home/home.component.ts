@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   isShowQuickView = false;
   public listProductBestSelling: any;
   public urlImg: string = environment.urlImg;
+  public baseUrl: string = environment.baseUrl;
   public categoryId: any;
   public listTrademark: any;
   public listProductSales: any;
@@ -235,7 +236,7 @@ export class HomeComponent implements OnInit {
 
   getTrademark() {
     this.spinner.show();
-    this._svc.getTrademarkLimit(10).subscribe(
+    this._svc.getTrademarkLimit(25).subscribe(
       (respones: ObjectModel) => {
         this.listTrademark = respones.data;
         this.spinner.hide();

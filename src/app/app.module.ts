@@ -35,6 +35,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ProductRecentComponent } from './product-recent/product-recent.component';
 import { FacebookModule } from 'ngx-facebook/facebook.module';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,7 @@ import { FacebookModule } from 'ngx-facebook/facebook.module';
    // FacebookModule.forRoot()
 
   ],
-  providers: [],
+  providers: [CookieService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
