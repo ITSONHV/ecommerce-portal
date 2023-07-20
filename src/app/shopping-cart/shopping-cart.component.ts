@@ -10,8 +10,6 @@ import { MainService } from 'src/services/main.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent {
-  public itemsCart = this._svc.getItemsCart();
-  public totalMoneyItemsCart = this._svc.totalMoney;
   public urlImg: string = environment.urlImg;
   constructor( private router: Router
     , private activatedRoute: ActivatedRoute,
@@ -21,12 +19,14 @@ export class ShoppingCartComponent {
     private titleService: Title
     ){   
   }
+  getItemCart (){
+    return this._svc.getItemsCart();
+  }
   sumPriceItemsInCart(): number{
-    this.totalMoneyItemsCart = this.itemsCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    return this.totalMoneyItemsCart;
+   return this._svc.getItemsCart().reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
   sumItemsInCart(): number{
-    return this.itemsCart.reduce((sum, item) => sum + item.quantity, 0);
+    return  this._svc.getItemsCart().reduce((sum, item) => sum + item.quantity, 0);
   }
   handleViewDetailProduct(event: any, product: any): void {
     this.meta.updateTag({ name: 'description', content: product.seoDescription ?? ""});

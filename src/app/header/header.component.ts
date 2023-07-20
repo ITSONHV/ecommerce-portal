@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   public urlImg: string = environment.urlImg;
   public menuSearch : any;
   public hello = "Đăng Minh Computer chào bạn!";
-  public itemsCart = this._svc.getItemsCart();
+  //public itemsCart = 
   public itemsFavorite = this._svc.getItemsFavorite();
   public totalMoneyItemsCart = this._svc.totalMoney;
   constructor( private router: Router
@@ -25,12 +25,17 @@ export class HeaderComponent implements OnInit {
   ngOnInit(){
     this.loadMenuSearch();
   }
+
+  getItemCart (){
+    return this._svc.getItemsCart();
+  }
+
   sumPriceItemsInCart(): number{
-    this.totalMoneyItemsCart = this.itemsCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    this.totalMoneyItemsCart = this._svc.getItemsCart().reduce((sum, item) => sum + item.price * item.quantity, 0);
     return this.totalMoneyItemsCart;
   }
   sumItemsInCart(): number{
-    return this.itemsCart.reduce((sum, item) => sum + item.quantity, 0);
+    return this._svc.getItemsCart().reduce((sum, item) => sum + item.quantity, 0);
   }
   searchFilter(event: any, value: string, cateSelect : string) {
     this.searchKey = value;

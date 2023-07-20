@@ -102,14 +102,14 @@
               <div class="top-cart-contain">
                 <div class="mini-cart">
                   <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#">
-                    <div class="cart-icon"><i class="icon-basket-loaded icons"></i><span class="cart-total">{{sumItemsInCart()}}</span></div>
-                    <div class="shoppingcart-inner hidden-xs"><span class="cart-title">Giỏ hàng</span> </div>
+                    <div class="cart-icon"><i class="icon-basket-loaded icons" [routerLink]="['/gio-hang']"></i><span class="cart-total">{{sumItemsInCart()}}</span></div>
+                    <div class="shoppingcart-inner hidden-xs" ><span class="cart-title" [routerLink]="['/gio-hang']">Giỏ hàng</span> </div>
                     </a>
                   </div>
                   <div>
                     <div class="top-cart-content">
                       <div class="block-subtitle hidden">Recently added items</div>
-                      <ul id="cart-sidebar" class="mini-products-list" *ngFor="let item of itemsCart">
+                      <ul id="cart-sidebar" class="mini-products-list" *ngFor="let item of getItemCart()">
                         <li class="item odd"> <a [routerLink]="['/gio-hang']" title="{{item.productName}}" class="product-image"><img [src]="urlImg + item.image" alt="html Template" width="65"></a>
                           <div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
                             <p class="product-name"><a [routerLink]="['/gio-hang']">{{item.productName}}</a> </p>

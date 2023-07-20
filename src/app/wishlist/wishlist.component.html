@@ -36,7 +36,7 @@
                 <tbody>
                   <tr *ngFor="let item of itemsFavorite">
                     <td class="th-delate"><a (click)="removeItemFavorite(item.id)">X</a></td>
-                    <td class="th-product"><a (click)="handleViewDetailProduct($event,item)"><img [src]="urlImg + item.imageUrl" alt="cart"></a></td>
+                    <td class="th-product"><a (click)="handleViewDetailProduct($event,item)"><img [src]="urlImg + item.image" alt="cart"></a></td>
                     <td class="th-details"><h2><a (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a></h2></td>
                     <td class="th-price">{{item.price | currency:"VND"}}</td>
                     <th class="td-add-to-cart"><a (click)="addToShopingCard(item)"> Thêm giỏ hàng</a></th>

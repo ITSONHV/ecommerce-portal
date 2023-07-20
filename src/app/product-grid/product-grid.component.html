@@ -267,7 +267,7 @@
             <div class="block-content">
               <ul *ngIf="productSale">
                 <ng-container *ngFor="let item of productSale?.data; let i = index">
-                <li class="item">
+                <li class="item" *ngIf="i < 3">
                   <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  [queryParams]="{slug: item?.productNameSlug}" [title]="item.productName" class="product-image"><img [src]='urlImg + item.imageUrl' alt="Sample Product "></a></div>
                   <div class="products-block-right">
                     <p class="product-name"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item?.productNameSlug}">{{item.productName}}</a> </p>

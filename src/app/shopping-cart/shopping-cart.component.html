@@ -22,7 +22,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of itemsCart">
+                    <tr *ngFor="let item of getItemCart()">
                       <td class="cart_product"><a (click)="handleViewDetailProduct($event,item)"><img [src]="urlImg + item.image" alt="Product"></a></td>
                       <td class="cart_description"><p class="product-name"><a (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a></p>
                         <!-- <small><a href="#">Color : Red</a></small>

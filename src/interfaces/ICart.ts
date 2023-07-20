@@ -1,3 +1,5 @@
+import { ProductModel } from "src/models/product.model";
+
 export interface ICart {
     id: number;
     price: number;
@@ -6,3 +8,14 @@ export interface ICart {
     image:string;
     productNameSlug : string;
 }
+
+export interface ItemsCart {
+    data: ICart[],
+    expired: number
+}
+
+export interface ItemsFavotire {
+    data: ICart[],
+    expired: number
+}
+

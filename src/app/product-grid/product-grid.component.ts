@@ -287,7 +287,6 @@ export class ProductGridComponent implements OnInit  {
 
   addToShopingCard(product:ProductModel): void{
     this._svc.addToCart(product, 1);
-    console.log(this._svc.getItemsCart);
   }
 
   listenEventFromChild(check: boolean) : void { 

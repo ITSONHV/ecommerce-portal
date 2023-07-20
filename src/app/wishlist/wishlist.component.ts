@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { ICart } from 'src/interfaces/ICart';
 import { ProductModel } from 'src/models/product.model';
 import { MainService } from 'src/services/main.service';
 
@@ -44,8 +45,8 @@ export class WishlistComponent {
       this._svc.removeItemFavorite(productId);
   }
 
-  addToShopingCard(product:ProductModel): void{
-    this._svc.addToCart(product, 1);
+  addToShopingCard(cart: ICart): void{
+    this._svc.addToCartWithCart(cart, 1);
     //console.log(this._svc.getItemsCart);
   }
 }

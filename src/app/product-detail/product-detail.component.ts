@@ -140,7 +140,6 @@ export class ProductDetailComponent implements OnInit {
   getProductSales(limit: number){
     this._svc.getProductIsBestSellingPages(limit).subscribe(
       (respones: ObjectModel)=>{
-        debugger;
         this.productSale = respones.data;    
         this.spinner.hide();
       },

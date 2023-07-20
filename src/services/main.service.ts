@@ -6,16 +6,17 @@ import { catchError, map, retry,mergeMap } from 'rxjs/operators';
 import { AppConfigs } from 'src/app/commons/AppConfigs';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
-import { ICart } from 'src/interfaces/ICart';
+import { ICart, ItemsCart, ItemsFavotire } from 'src/interfaces/ICart';
 import { ProductModel } from 'src/models/product.model';
 import { CookieService } from 'ngx-cookie-service';
+import { AppConsts } from 'src/app/commons/AppConsts';
 
 @Injectable({
     providedIn: 'root',
 })
 export class MainService implements OnInit{
     itemsCart: ICart[] = [];
-    itemsFavorite: ProductModel[] = [];
+    itemsFavorite: ICart[] = [];
     productRecent: any[] = [];
     totalMoney: number;
     urlApi = environment.apiUrl;
@@ -103,9 +104,9 @@ export class MainService implements OnInit{
 
     // các page khác cũng có sài product sale, nên gán biến tránh gọi api nhiều lần
     getProductIsBestSellingPages(limit : number): Observable<ObjectModel> {
-        if(this.productBestSales?.data?.data?.length > 0){
-            return of<ObjectModel>(<ObjectModel>this.productBestSales);
-        }
+        // if(this.productBestSales?.data?.data?.length > 0){
+        //     return of<ObjectModel>(<ObjectModel>this.productBestSales);
+        // }
 
         return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductIsBestSellingPages + `&PageSize=${limit}`)
             .pipe(
@@ -259,7 +260,7 @@ export class MainService implements OnInit{
         const index = this.itemsCart.findIndex(item =>item.id == product.id)
         if(index >= 0){
             this.itemsCart[index].quantity += quantity;
-            this.cookieService.set('itemsCart', JSON.stringify(this.itemsCart), {expires: 2});
+            this.setCartToLocalStorage();
         }
         else{
             var cart:ICart;
@@ -272,25 +273,72 @@ export class MainService implements OnInit{
               productNameSlug : product.productNameSlug
             }
             this.itemsCart.push(cart); 
-            this.cookieService.set('itemsCart', JSON.stringify(this.itemsCart), {expires: 2});
+
+            this.setCartToLocalStorage();
         }
     }
+
+    addToCartWithCart(cart: ICart, quantity: number) { 
+        const index = this.itemsCart.findIndex(item =>item.id == cart.id)
+        if(index >= 0){
+            this.itemsCart[index].quantity += quantity;
+            this.setCartToLocalStorage();
+        }
+        else{
+            this.itemsCart.push(cart); 
+
+            this.setCartToLocalStorage();
+        }
+    }
+
     getItemsCart() { 
-        if(this.cookieService.get('itemsCart')){
-            const itemCartCookie =  JSON.parse(this.cookieService.get('itemsCart'));
-            this.itemsCart = itemCartCookie;
-        }
+        this.getCartToLocalStorage();    
         
-        return this.itemsCart; 
+        return this.itemsCart;
     }
+
     clearItemsCart() {
          this.itemsCart = [];
-         return this.itemsCart;}
+         return this.itemsCart;
+
+    }
     removeItemCart(productId: number)
     {
         this.itemsCart.forEach((element,index)=>{
-            if(element.id === productId)  this.itemsCart.splice(index,1);
+            if(element.id === productId) 
+            {
+                this.itemsCart.splice(index,1);
+                 this.setCartToLocalStorage();
+            }
          });
+         return this.itemsCart;
+    }
+
+    setCartToLocalStorage(){
+        var date = new Date();
+        var cartLocal :ItemsCart;
+        cartLocal = {
+            data : this.itemsCart,
+            expired : date.setDate(date.getDate() + 3)
+        } 
+        localStorage.setItem(btoa(AppConsts.myCart), btoa(JSON.stringify(cartLocal)));
+    }
+
+    getCartToLocalStorage(){
+        if(this.itemsCart && this.itemsCart.length > 0){
+            return this.itemsCart;
+        }
+
+        var key = btoa(AppConsts.myCart);
+        if(localStorage.getItem(key)){
+           let cart =  JSON.parse(atob(localStorage.getItem(key) ?? ""));
+           this.itemsCart = cart.data;
+           var date = new Date().getTime();
+           var dateCart = cart.expired;
+           if(date > dateCart){
+                localStorage.removeItem(key);
+           }
+        }
          return this.itemsCart;
     }
 
@@ -324,33 +372,65 @@ export class MainService implements OnInit{
     }
 
 
+  
+
     /* yêu thích */
+    setFavoriteToLocalStorage(){
+        debugger;
+        var date = new Date();
+        var favoriteLocal :ItemsFavotire;
+        favoriteLocal = {
+            data : this.itemsFavorite,
+            expired : date.setDate(date.getDate() + 5)
+        } 
+        localStorage.setItem(btoa(AppConsts.myFavorite), btoa(JSON.stringify(favoriteLocal)));
+    }
+
+    getFavoriteToLocalStorage(){
+        if(this.itemsFavorite && this.itemsFavorite.length > 0){
+            return this.itemsFavorite;
+        }
+
+        var key = btoa(AppConsts.myFavorite);
+        if(localStorage.getItem(key)){
+           let favorite =  JSON.parse(atob(localStorage.getItem(key) ?? ""));
+           this.itemsFavorite = favorite.data;
+           var date = new Date().getTime();
+           var dateFavorite = favorite.expired;
+           if(date > dateFavorite){
+                localStorage.removeItem(key);
+           }
+        }
+         return this.itemsFavorite;
+    }
     addToFavorite(product: ProductModel) { 
-           debugger;
         const index = this.itemsFavorite.findIndex(item =>item.id == product.id)
         if(index == -1){
-            this.itemsFavorite.push(product); 
-            this.cookieService.delete('itemsFavoriteCookie');
-            this.cookieService.set('itemsFavoriteCookie', JSON.stringify(this.itemsFavorite), {expires: 5});
+            var cart: ICart;
+            cart = {
+                id: product.id,
+                productName: product.productName,
+                price: product.promotionPrice,
+                image: product.imageUrl,
+                quantity: 1,
+                productNameSlug: product.productNameSlug
+            }
+
+            this.itemsFavorite.push(cart); 
+            this.setFavoriteToLocalStorage();
         }
     }
     getItemsFavorite() { 
-        if(this.cookieService.get('itemsFavoriteCookie'))
-        {
-            debugger;
-            const itemsFavoriteCookie =  JSON.parse(this.cookieService.get('itemsFavoriteCookie'));
-            this.itemsFavorite = itemsFavoriteCookie;
-        }
-
-        return this.itemsFavorite; 
+        return this.getFavoriteToLocalStorage();
     }
+
     clearItemsFavorite() { this.itemsFavorite = []; return this.itemsFavorite;}
     removeItemFavorite(productId: number)
     {
         this.itemsFavorite.forEach((element,index)=>{
             if(element.id === productId)  this.itemsFavorite.splice(index,1);
          });
-         this.cookieService.set('itemsFavoriteCookie', JSON.stringify(this.itemsFavorite), {expires: 5});
+         this.setFavoriteToLocalStorage();
          return this.itemsFavorite;
     }
     /* End yêu thích */

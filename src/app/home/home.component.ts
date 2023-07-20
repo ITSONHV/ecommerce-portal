@@ -252,8 +252,6 @@ export class HomeComponent implements OnInit {
     this._svc.getProductBestDiscountPages().subscribe(
       (respones: ObjectModel) => {
         this.listProductSales = respones.data;
-        console.log(this.listProductSales);
-        
       this.spinner.hide();
       },
       (err) => {
@@ -317,7 +315,6 @@ export class HomeComponent implements OnInit {
   }
   addToShopingCard(product:ProductModel): void{
     this._svc.addToCart(product, 1);
-    console.log(this._svc.getItemsCart);
   }
 
   handleMenu(event: any, category: any): void {
