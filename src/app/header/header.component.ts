@@ -65,4 +65,9 @@ export class HeaderComponent implements OnInit {
       this.menuSearch = JSON.parse(localStorage.getItem('all-menu-search') ?? "");
     }
   }
+
+  removeItemCart(productId: number)
+  {
+      this._svc.removeItemCart(productId);
+  }
 }

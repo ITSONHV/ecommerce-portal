@@ -10,6 +10,7 @@ import { ICart, ItemsCart, ItemsFavotire } from 'src/interfaces/ICart';
 import { ProductModel } from 'src/models/product.model';
 import { CookieService } from 'ngx-cookie-service';
 import { AppConsts } from 'src/app/commons/AppConsts';
+import { SwalService, TYPE } from './swal.service';
 
 @Injectable({
     providedIn: 'root',
@@ -24,7 +25,7 @@ export class MainService implements OnInit{
     categoryId : number;
     public isShowMenu = true;
     public productBestSales :any;
-    constructor(private http: HttpClient,private cookieService: CookieService)
+    constructor(private http: HttpClient)
      {
         //cookieService = inject(CookieService);
      }
@@ -370,9 +371,6 @@ export class MainService implements OnInit{
             return JSON.parse(localStorage.getItem("product-recent") ?? "");
         }
     }
-
-
-  
 
     /* yêu thích */
     setFavoriteToLocalStorage(){

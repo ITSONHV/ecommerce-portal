@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { ProductModel } from 'src/models/product.model';
 import { MainService } from 'src/services/main.service';
-import { SwalService } from 'src/services/swal.service';
+import { SwalService, TYPE } from 'src/services/swal.service';
 
 @Component({
   selector: 'app-quick-view',
@@ -136,7 +136,9 @@ export class QuickViewComponent implements OnInit, OnDestroy {
   
   addToShopingCard(product:ProductModel): void{
     if (!isNaN(this.quantity)) {
+      product.imageUrl = product.productImages[0].imageUrl;
       this._svc.addToCart(product, this.quantity);
+      this.showAddCartSuccess();
     }
   }
 
@@ -160,5 +162,18 @@ export class QuickViewComponent implements OnInit, OnDestroy {
       this.imgfirst = imageClick.imageUrl;
     }
     
+  }
+
+  addToFavorite(product:ProductModel): void{
+    product.imageUrl = product.productImages[0].imageUrl;
+    this._svc.addToFavorite(product);
+    this.showAddFavorite()
+  }
+
+  showAddCartSuccess(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào giỏ hàng.", false);
+  }
+  showAddFavorite(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
   }
 }

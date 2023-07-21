@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Meta, Title } from '@angular/platform-browser';
 import { ProductModel } from 'src/models/product.model';
+import { SwalService, TYPE } from 'src/services/swal.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -200,7 +201,8 @@ export class HomeComponent implements OnInit {
     private meta: Meta,
     private _routerActive: ActivatedRoute,
     private router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private _swal: SwalService,
     ) {
   }
   ngOnInit(): void {
@@ -315,6 +317,7 @@ export class HomeComponent implements OnInit {
   }
   addToShopingCard(product:ProductModel): void{
     this._svc.addToCart(product, 1);
+    this.showAddCartSuccess();
   }
 
   handleMenu(event: any, category: any): void {
@@ -339,6 +342,7 @@ export class HomeComponent implements OnInit {
 
   addToFavorite(product:ProductModel): void{
     this._svc.addToFavorite(product);
+    this.showAddCartFavorite();
   }
 
   getMenu() {
@@ -376,5 +380,12 @@ export class HomeComponent implements OnInit {
         this.spinner.hide();
       }
     )
+  }
+
+  showAddCartSuccess(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào giỏ hàng.", false);
+  }
+  showAddCartFavorite(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
   }
 }

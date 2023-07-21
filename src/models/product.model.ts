@@ -24,6 +24,7 @@ export class ProductModel {
         productNameSlug : string;
         rate : number;
         countRate : number;
+        productImages: any;
         productAttributesModel: productAttributesModel[];
 }
 

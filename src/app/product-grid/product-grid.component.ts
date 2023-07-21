@@ -13,6 +13,7 @@ import { DOCUMENT } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ICart } from 'src/interfaces/ICart';
+import { SwalService, TYPE } from 'src/services/swal.service';
 
 @Component({
   selector: 'app-product-grid',
@@ -58,7 +59,8 @@ export class ProductGridComponent implements OnInit  {
     private titleService: Title,
     private activatedRoute: ActivatedRoute,
     private router : Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _swal : SwalService
     ) {
   }
   ngOnInit(): void {
@@ -287,6 +289,7 @@ export class ProductGridComponent implements OnInit  {
 
   addToShopingCard(product:ProductModel): void{
     this._svc.addToCart(product, 1);
+    this.showAddCartSuccess();
   }
 
   listenEventFromChild(check: boolean) : void { 
@@ -319,6 +322,19 @@ export class ProductGridComponent implements OnInit  {
   {
       this._svc.removeItemCart(productId);
   }
+
+  addToFavorite(product:ProductModel): void{
+    this._svc.addToFavorite(product);
+    this.showAddFavorite();
+  }
+  
+  showAddCartSuccess(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào giỏ hàng.", false);
+  }
+  showAddFavorite(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
+  }
+
   ngOnDestroy() {
    
   }

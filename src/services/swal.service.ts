@@ -1,5 +1,14 @@
 import { Injectable } from '@angular/core';
 import Swal, { SweetAlertIcon, SweetAlertOptions, SweetAlertResult } from 'sweetalert2';
+
+export enum TYPE {
+    ERROR='error',
+    SUCCESS='success',
+    WARNING='warning',
+    INFO='info',
+    QUESTION='question'
+  }
+
 @Injectable({
     providedIn: 'root'
 })
@@ -25,4 +34,17 @@ export class SwalService {
         };
         return Swal.fire(options);
     }
+
+    toast(typeIcon : TYPE, text: string, timerProgressBar: boolean = false) {
+       return Swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          icon: typeIcon,
+          timerProgressBar,
+          timer: 1500,
+          title: "<h6 style='color:#3378b9'>" + text + "</h6>"
+        })
+      }  
 }
+

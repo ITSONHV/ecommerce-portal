@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewEncapsulation} from '@angular/core';
 import { DomSanitizer, Meta, SafeResourceUrl, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -7,13 +7,13 @@ import { environment } from 'src/environments/environment';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { ProductModel } from 'src/models/product.model';
 import { MainService } from 'src/services/main.service';
-import { SwalService } from 'src/services/swal.service';
+import { SwalService, TYPE } from 'src/services/swal.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
   public slug: string;
@@ -198,7 +198,11 @@ export class ProductDetailComponent implements OnInit {
 
   addToShopingCard(product:ProductModel): void{
     if (!isNaN(this.quantity)) {
+      debugger;
+      
+      product.imageUrl = product.productImages[0].imageUrl;
       this._svc.addToCart(product, this.quantity);
+      this. showAddCartSuccess();
     }
   }
 
@@ -215,5 +219,17 @@ export class ProductDetailComponent implements OnInit {
     }
     
   }
-  
+
+  addToFavorite(product:ProductModel): void{
+    product.imageUrl = product.productImages[0].imageUrl;
+    this._svc.addToFavorite(product);
+    this.showAddFavorite()
+  }
+
+  showAddCartSuccess(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào giỏ hàng.", false);
+  }
+  showAddFavorite(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
+  }
 }

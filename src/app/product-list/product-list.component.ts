@@ -318,4 +318,8 @@ export class ProductListComponent implements OnInit {
   {
       this._svc.removeItemCart(productId);
   }
+
+  addToFavorite(product:ProductModel): void{
+    this._svc.addToFavorite(product);
+  }
 }

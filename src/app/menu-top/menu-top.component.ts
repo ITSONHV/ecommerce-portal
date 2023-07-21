@@ -10,6 +10,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { environment } from 'src/environments/environment';
 import { ProductModel } from 'src/models/product.model';
+import { SwalService, TYPE } from 'src/services/swal.service';
 @Component({
   selector: 'app-menu-top',
   templateUrl: './menu-top.component.html',
@@ -45,7 +46,8 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     public elementRef: ElementRef,
     private spinner: NgxSpinnerService,
     private meta: Meta,
-    private titleService: Title
+    private titleService: Title,
+    private _swal : SwalService
     ) {
   }
   ngOnInit(): void {
@@ -166,9 +168,11 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
   } 
    addToShopingCard(product:ProductModel): void{
     this._mainsvc.addToCart(product, 1);
+    this.showAddCartSuccess();
   }
   addToFavorite(product:ProductModel): void{
     this._mainsvc.addToFavorite(product);
+    this.showAddCartFavorite();
   }
 
   openModalQuickView(itemProduct: any) {
@@ -177,5 +181,12 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
   }
   listenEventFromChild(check: boolean) : void { 
     this.isShowQuickView = check;
+  }
+
+  showAddCartSuccess(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào giỏ hàng.", false);
+  }
+  showAddCartFavorite(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
   }
 }
