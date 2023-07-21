@@ -109,9 +109,9 @@
                   <div>
                     <div class="top-cart-content">
                       <div class="block-subtitle hidden">Recently added items</div>
-                      <ul id="cart-sidebar" class="mini-products-list" *ngFor="let item of getItemCart()">
-                        <li class="item odd"> <a [routerLink]="['/gio-hang']" title="{{item.productName}}" class="product-image"><img [src]="urlImg + item.image" alt="html Template" width="65"></a>
-                          <div class="product-details"> <a (click)="removeItemCart(item.id)" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
+                      <ul id="cart-sidebar" class="mini-products-list">
+                        <li *ngFor="let item of getItemCart()" class="item odd"> <a [routerLink]="['/gio-hang']" title="{{item.productName}}" class="product-image"><img [src]="urlImg + item.image" alt="html Template" width="65"></a>
+                          <div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
                             <p class="product-name"><a [routerLink]="['/gio-hang']">{{item.productName}}</a> </p>
                             <strong>{{item.quantity}}</strong> x <span class="price">{{item.price | currency:"VND"}}</span> </div>
                         </li>
