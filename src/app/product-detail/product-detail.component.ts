@@ -1,15 +1,15 @@
 import { Component, OnInit ,ViewEncapsulation} from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, Meta, SafeResourceUrl, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { map, mergeMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ObjectModel } from 'src/models/object_paging.model';
+import { ObjectModel, ResponseBase } from 'src/models/object_paging.model';
 import { ProductModel } from 'src/models/product.model';
 import { MainService } from 'src/services/main.service';
 import { SwalService, TYPE } from 'src/services/swal.service';
-import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -27,6 +27,16 @@ export class ProductDetailComponent implements OnInit {
   public quantity = 1 ;
   public reviewsProducts : any;
   public productsRelate : any;
+
+  /* review*/
+  reviewForm: FormGroup = new FormGroup({
+    name: new FormControl(''),
+    content: new FormControl(''),
+    phone: new FormControl(''),
+    rate: new FormControl('5'),
+  });
+  submitted = false;
+
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -63,7 +73,8 @@ export class ProductDetailComponent implements OnInit {
     private _swal: SwalService,
     private rout: Router,
     private meta: Meta,
-    private titleService: Title
+    private titleService: Title,
+    private fb: FormBuilder,
  ) {
   }
   ngOnInit(): void {
@@ -73,10 +84,10 @@ export class ProductDetailComponent implements OnInit {
       if(!params['slug'])
         this.rout.navigate(['/'])// nếu không lấy được params quay lại home
       this.slug = params['slug'];
-      this.getProductbyProductNameSlug(this.slug)
-      this._svc.addToCart
+      this.getProductbyProductNameSlug(this.slug);
     });
     this.getProductSales(6);
+    this.initForm();
   }
   ngAfterViewInit(): void {
     
@@ -231,5 +242,72 @@ export class ProductDetailComponent implements OnInit {
   }
   showAddFavorite(){
     this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
+  }
+
+  initForm() {
+    this.reviewForm = this.fb.group(
+      {
+        name: ['',
+          [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(100)
+          ]
+        ],
+        content: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(250)
+          ]
+        ],
+        phone: [''],
+        rate: ['5']
+      },
+    );
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.reviewForm.controls;
+  }
+
+  onItemChangeRadio(event: any){
+    this.reviewForm.get('rate')?.setValue(event.target.value);
+    event.preventDefault();
+  }
+
+  async onSubmit(): Promise<void> {
+    this.submitted = true;
+
+    if (this.reviewForm.invalid) {
+      return;
+    }
+
+    var dataReq = {
+
+      productID: this.product.id,
+      content:   this.reviewForm.get('content')?.value,
+      rate:   this.reviewForm.get('rate')?.value,
+      nickname:  this.reviewForm.get('name')?.value,
+      phone:  this.reviewForm.get('phone')?.value,
+    };
+    this._svc.addReviewProduct(JSON.stringify(dataReq)).subscribe(
+      (result: ResponseBase)=>{
+        debugger;
+        if (result == null || result.statusCode != 200) {
+          this._swal.toast(TYPE.ERROR, "Đã có lỗi xảy ra, bạn vui lòng thử lại!.", false);;
+       }else{
+   
+          this._swal.toast(TYPE.SUCCESS, "Thêm đánh giá thành công.", false);
+          this.onReset();
+       }
+      }
+    );
+  }
+
+  onReset(): void {
+    this.submitted = false;
+    this.reviewForm.reset();
   }
 }

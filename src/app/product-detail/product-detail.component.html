@@ -55,6 +55,11 @@
               <div class="short-description">
                 <h2>Mô tả</h2>
                 <div [innerHTML]="htmlContent"></div>
+              </div>
+              <div  *ngIf="product?.stock > 0" >
+                <p class="status_stock">
+                  <span class="status status1"><i aria-hidden="true" class="fa fa-circle"></i>Còn hàng</span>
+                </p>
               </div> 
               <div class="product-variation">
                 <form action="#" method="post">
@@ -109,28 +114,29 @@
                 <div id="reviews" class="tab-pane fade">
                   <div class="col-sm-5 col-lg-5 col-md-5">
                     <div class="reviews-content-left">
-                      <div class="review-ratting">
-                        <ng-container *ngIf="!reviewsProducts || reviewsProducts?.length == 0">
-                          <p>Không có đánh giá cho sản phẩm này.</p>
-                        </ng-container>
-                        
-                        <ng-container *ngFor="let review of reviewsProducts">
-                          <p> {{review.content}}</p>
+                      <ng-container *ngIf="!reviewsProducts || reviewsProducts?.length == 0">
+                        <p>Không có đánh giá cho sản phẩm này.</p>
+                      </ng-container>
+                    
+                      <ng-container *ngFor="let review of reviewsProducts; let i = index">
+                        <div [ngClass]=" i % 2 == 0 ? 'review-ratting background-review' : 'review-ratting'">
+                          <p > {{review.content}}</p>
                           <div class="rating"><a>Đánh giá: </a>
-                             <ng-container *ngIf="review.rate >= 0">
-                            <i class="fa fa-star" *ngFor="let rate of counterRate(review.rate)"></i>
-                            <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - review.rate)"></i>
-                          </ng-container>
-                        </div>          
-                            <p class="author"> {{review.name}}<small> {{review.createdDate}}</small> </p>
-                        </ng-container>
-                      </div>                    
+                            <ng-container *ngIf="review.rate >= 0">
+                              <i class="fa fa-star" *ngFor="let rate of counterRate(review.rate)"></i>
+                              <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - review.rate)"></i>
+                            </ng-container>
+                          </div>
+                          <p class="author">Người dùng : {{review.name}}<small> {{review.createdDate}}</small> </p>
+                        </div>
+                      </ng-container>
+                              
                     </div>
                   </div>
                   <div class="col-sm-7 col-lg-7 col-md-7">
                     <div class="reviews-content-right">
                       <h2>Nội dung đánh giá</h2>
-                      <form>
+                      <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
                         <h4>Bạn nghĩ thế nào về sản phẩm này?<em>*</em></h4>
                         <div class="table-responsive reviews-table">
                           <table>
@@ -145,31 +151,53 @@
                               </tr>
                               <tr>
                                 <td>Đánh giá</td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
-                                <td><input type="radio"></td>
+                                <td><input  type="radio" name="review" value="1" (change)="onItemChangeRadio($event)"></td>
+                                <td><input type="radio" name="review" value="2" (change)="onItemChangeRadio($event)"></td>
+                                <td><input type="radio" name="review" value="3" (change)="onItemChangeRadio($event)"></td>
+                                <td><input type="radio" name="review" value="4" (change)="onItemChangeRadio($event)"></td>
+                                <td><input type="radio" name="review" value="5" checked (change)="onItemChangeRadio($event)"></td>
                               </tr>
                             </tbody>
                           </table>
                         </div>
                         <div class="form-area">
+                          
+                          <div class="form-group">
                           <div class="form-element">
-                            <label>Họ và tên <em>*</em></label>
-                            <input type="text">
+                            <label>Bí danh<em>*</em></label>
+                            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">                     
                           </div>
+                          <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                            <div *ngIf="f['name'].errors['required']">Vui lòng nhập bí danh!</div>
+                            <div *ngIf="f['name'].errors['minlength']">Bí danh không được để trống!</div>
+                            <div *ngIf="f['name'].errors['maxlength']">Bí danh vượt quá ký tự cho phép!</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
                           <div class="form-element">
                             <label>Số điện thoại <em></em></label>
-                            <input type="text">
+                            <input type="text" formControlName="phone" >
                           </div>
+                        </div>
+                        <div class="form-group">
                           <div class="form-element">
                             <label>Nội dung <em>*</em></label>
-                            <textarea></textarea>
+                            <textarea type="text" formControlName="content" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['content'].errors }"></textarea>
                           </div>
-                          <div class="buttons-set">
-                            <button class="button submit" title="Submit Review" type="submit"><span><i class="fa fa-thumbs-up"></i> &nbsp;Review</span></button>
+                          <div *ngIf="submitted && f['content'].errors" class="invalid-feedback">
+                            <div *ngIf="f['content'].errors['required']">Vui lòng nhập nội dung đánh giá!</div>
+                            <div *ngIf="f['content'].errors['minlength']">
+                              Nội dung đánh giá không được để trống!
+                            </div>
+                            <div *ngIf="f['content'].errors['maxlength']">
+                              Nội dung đánh giá vượt quá ký tự cho phép!
+                            </div>
                           </div>
+                        </div>
+                        <div class="buttons-set">
+                          <button class="button submit" title="Đánh giá" type="submit" (click)="onSubmit()"><span><i class="fa fa-thumbs-up"></i>
+                              &nbsp;Đánh giá</span></button>
+                        </div>                     
                         </div>
                       </form>
                     </div>

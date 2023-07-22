@@ -7,3 +7,11 @@ export class ObjectModel {
         data : []
     }
 }
+
+
+export class ResponseBase {
+    hasError : boolean;
+    errorMessage : string;
+    errorCode : number;
+    statusCode : number;
+}

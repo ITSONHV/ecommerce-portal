@@ -18,5 +18,10 @@ export const AppConfigs = {
         getReviewProducts : "Product/get-reviews",        
         getGroupSerrchByCategoryID : "filters/category-by-id?CategoryId=",     
         getProductListPaging : "Product/paging",          
+
+
+
+        addReviewProduct : "Product/add-review",          
+    
     }
 }

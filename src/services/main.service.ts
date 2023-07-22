@@ -4,7 +4,7 @@ import { HttpClient, HttpResponse, HttpHeaders, HttpResponseBase, HttpErrorRespo
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, retry,mergeMap } from 'rxjs/operators';
 import { AppConfigs } from 'src/app/commons/AppConfigs';
-import { ObjectModel } from 'src/models/object_paging.model';
+import { ObjectModel, ResponseBase } from 'src/models/object_paging.model';
 import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
 import { ICart, ItemsCart, ItemsFavotire } from 'src/interfaces/ICart';
 import { ProductModel } from 'src/models/product.model';
@@ -432,6 +432,21 @@ export class MainService implements OnInit{
          return this.itemsFavorite;
     }
     /* End yêu thích */
+
+
+    /**/
+    addReviewProduct(data: string): Observable<ResponseBase> { 
+        const headerDict = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Headers': 'Content-Type',
+          }
+        return this.http.post<any>(this.urlApi + AppConfigs.urls.addReviewProduct, data,{  headers: headerDict }).pipe(
+            mergeMap((response_: any) => {
+                return of<ResponseBase>(<ResponseBase>response_);
+            })
+        )
+    }
 
     getServerErrorMessage(error: HttpErrorResponse): string {
         switch (error.status) {

@@ -11,7 +11,7 @@
               <div class="table-responsive">
                 <table class="table table-bordered cart_summary">
                   <thead>
-                    <tr>
+                    <tr class="text-center">
                       <th class="cart_product">Sản phẩm</th>
                       <th>Mô tả</th>
                       <th>Tình trạng</th>
@@ -28,9 +28,9 @@
                         <!-- <small><a href="#">Color : Red</a></small>
                         <small><a href="#">Size : M</a></small></td> -->
                       <td class="availability in-stock"><span class="label">In stock</span></td>
-                      <td class="price"><span>{{item.price | currency:"VND"}}</span></td>
+                      <td class="price" style="color: red;"><span>{{item.price | currency:"VND"}}</span></td>
                       <td class="qty"><input class="form-control input-sm" type="text" value="{{item.quantity}}"></td>
-                      <td class="price"><span>{{item.price * item.quantity | currency:"VND"}}</span></td>
+                      <td class="price" style="color: red;"><span>{{item.price * item.quantity | currency:"VND"}}</span></td>
                       <td class="action"><a (click)="removeItemCart(item.id)"><i class="icon-close"></i></a></td>
                     </tr>                  
                   </tbody>

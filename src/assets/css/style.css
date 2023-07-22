@@ -2446,6 +2446,7 @@ a.link:hover {
 	text-align: center;
 	padding-top: 12px;
 }
+
 .product-item .item-inner .item-info .item-title {
 	font-size: 14px;
 	margin-bottom: 6px;
@@ -2466,8 +2467,11 @@ a.link:hover {
 	padding-bottom: 15px;
 }
 .product-item .item-inner:hover {
-	box-shadow: 0 0 2px #dedede;
-	}
+	 box-shadow: 0 0 2px #dedede; 
+}
+
+
+
 .product-item {
 	margin: 0 12px
 }
@@ -5872,7 +5876,7 @@ ul.products-list .cart-button i {
 	padding: 0px 0px 20px 22px;
 }
 .product-view-area .product-name h1 {
-	font-size: 32px;
+	font-size: 24px;
 	margin: 0 0 10px;
 	text-align: left;
 	line-height: normal;
@@ -5880,7 +5884,10 @@ ul.products-list .cart-button i {
 	letter-spacing: 1px;
 	font-weight: 700;
 	border-bottom: 1px solid #e5e5e5;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
+    display: flex;
+    color: #005ec4;
+    line-height: 35px;
 }
 .product-view-area .short-description {
 	font-size: 12px;
@@ -6555,7 +6562,7 @@ p.note {
 }
 .cart_summary>thead, .cart_summary>tfoot {
 	background: #f8f8f8;
-	font-size: 16px
+	font-size: 16px;
 }
 .cart_summary>tfoot strong {
 	color: #e74c3c
@@ -6644,8 +6651,8 @@ p.note {
 	display: inline-block;
 	font-weight: 600;
 	padding: 6px 10px;
-	width: 108px;
-	border: 1px #eeeeee solid;
+	width: 160px;
+	border: 2px #eeeeee solid;
 	border-radius: 3px;
 	text-transform: uppercase;
 	font-size: 12px;
@@ -6725,23 +6732,27 @@ p.note {
 	width: 100px;
 }
 .wishlist-item table .th-details {
-	width: 35%;
+	width: 28%;
+	vertical-align: middle;
 }
 .wishlist-item table tbody .th-details {
 	text-align: left;
 }
 .wishlist-item table .th-delate {
 	width: 5%;
+	vertical-align: middle;
 }
 .wishlist-item table .th-edit {
 	width: 10%;
 }
 .wishlist-item table .td-add-to-cart {
-	width: 18%;
+	width: 25%;
+		vertical-align: middle;
 }
 .wishlist-item table .th-price {
 	width: 12%;
 	font-weight: 600;
+	vertical-align: middle;
 }
 .wishlist-item table td {
 	border-bottom: 1px solid #e1e1e1;
