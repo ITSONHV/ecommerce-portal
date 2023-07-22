@@ -18,7 +18,7 @@ export const AppConfigs = {
         getReviewProducts : "Product/get-reviews",        
         getGroupSerrchByCategoryID : "filters/category-by-id?CategoryId=",     
         getProductListPaging : "Product/paging",          
-
+        getListBanking : "listbanktranser/all",     
 
 
         addReviewProduct : "Product/add-review",          

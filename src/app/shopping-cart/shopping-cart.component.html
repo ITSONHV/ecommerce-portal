@@ -5,7 +5,12 @@
         <div class="cart">
           
           <div class="page-content page-order"><div class="page-title">
-            <h2>Giỏ hàng</h2>
+            <div class="cart-process">
+              <div class="process active"><span>1. Chọn sản phẩm</span></div>
+              <div class="process active"><span>2. Xác nhận đơn hàng</span></div>
+              <div class="process"><span>3. Thanh toán</span></div>
+            </div>
+            <div class="title">THÔNG TIN SẢN PHẨM</div>
           </div>
             <div class="order-detail-content">
               <div class="table-responsive">
@@ -47,7 +52,9 @@
                   </tfoot>
                 </table>
               </div>
-              <div class="cart_navigation"> <a class="continue-btn" routerLink="/"><i class="fa fa-arrow-left"> </i>&nbsp; Tiếp tục mua hàng</a> <a class="checkout-btn" href="#"><i class="fa fa-check"></i> Thanh toán</a> </div>
+              <div class="cart_navigation"> <a class="continue-btn" routerLink="/"><i class="fa fa-arrow-left"> </i>&nbsp; Tiếp tục mua hàng</a>
+                 <a class="checkout-btn" [routerLink]="['/thanh-toan']" routerLinkActive="router-link-active"><i class="fa fa-check"></i> Xác nhận đơn hàng</a>
+               </div>
             </div>
           </div>
         </div>

@@ -257,6 +257,17 @@ export class MainService implements OnInit{
             )
     };
 
+    getListBanking(): Observable<ObjectModel> {
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getListBanking)
+            .pipe(
+                mergeMap((response_: any) => {
+                    let result = new ObjectModel();
+                    result = response_;
+                    return of<ObjectModel>(<ObjectModel>result);
+                })
+            )
+    }
+
     addToCart(product: ProductModel, quantity: number) { 
         const index = this.itemsCart.findIndex(item =>item.id == product.id)
         if(index >= 0){

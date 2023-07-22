@@ -3,3 +3,72 @@
     
 	text-align: center;
 }
+
+
+.cart-process {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 34px;
+    overflow: hidden;
+}
+ .cart-process .process.active {
+    background-color: #005ec4
+}
+
+.cart-process .process span {
+    font-weight: 700;
+    font-size: 18px;
+    color: #4e4e54;
+    padding: 7px 0;
+    transform: skewX(20deg);
+}
+
+.cart-process .process.active span {
+    color: #fff;
+}
+
+.cart-process .process {
+    flex-grow: 1;
+    width: 33.33%;
+    background: #ededed;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform: skewX(-20deg);
+}
+
+.cart-process .process:first-child:before {
+    content: " ";
+    width: 16px;
+    height: 100%;
+    position: absolute;
+    left: -7px;
+    background: #005ec4;
+    transform: skewX(20deg);
+}
+.cart-process .process:nth-child(2) {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.cart-process .process.active:nth-child(3):before {
+    background: #005ec4
+}
+
+.cart-process .process:nth-child(3):before {
+    content: " ";
+    width: 16px;
+    height: 100%;
+    position: absolute;
+    right: -7px;
+    background: #ededed;
+    transform: skewX(20deg);
+}
+
+.title {
+    font-weight: 700;
+    font-size: 20px !important;
+    color: #29324e;
+}
