@@ -38,6 +38,8 @@ export class MainService implements OnInit{
     httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Headers': 'Content-Type',
         }),
     };
     getCategories(): Observable<HttpResponse<any>> {
@@ -272,6 +274,9 @@ export class MainService implements OnInit{
         const index = this.itemsCart.findIndex(item =>item.id == product.id)
         if(index >= 0){
             this.itemsCart[index].quantity += quantity;
+            if(this.itemsCart[index].quantity <= 0){
+                this.removeItemCart(product.id);
+            }
             this.setCartToLocalStorage();
         }
         else{
@@ -282,7 +287,8 @@ export class MainService implements OnInit{
               price: product.promotionPrice, 
               image: product.imageUrl, 
               quantity: quantity,
-              productNameSlug : product.productNameSlug
+              productNameSlug : product.productNameSlug,
+              content : encodeURIComponent(product.content)
             }
             this.itemsCart.push(cart); 
 
@@ -290,10 +296,24 @@ export class MainService implements OnInit{
         }
     }
 
+    addQuantityToCart(productId: number, quantity: number) { 
+        const index = this.itemsCart.findIndex(item =>item.id == productId)
+        if(index >= 0){
+            this.itemsCart[index].quantity += quantity;
+            if(this.itemsCart[index].quantity <= 0){
+                this.removeItemCart(productId);
+            }
+            this.setCartToLocalStorage();
+        }       
+    }
+
     addToCartWithCart(cart: ICart, quantity: number) { 
         const index = this.itemsCart.findIndex(item =>item.id == cart.id)
         if(index >= 0){
             this.itemsCart[index].quantity += quantity;
+            if(this.itemsCart[index].quantity <= 0){
+                this.removeItemCart(cart.id);
+            }
             this.setCartToLocalStorage();
         }
         else{
@@ -311,6 +331,7 @@ export class MainService implements OnInit{
 
     clearItemsCart() {
          this.itemsCart = [];
+         this.setCartToLocalStorage();
          return this.itemsCart;
 
     }
@@ -422,7 +443,8 @@ export class MainService implements OnInit{
                 price: product.promotionPrice,
                 image: product.imageUrl,
                 quantity: 1,
-                productNameSlug: product.productNameSlug
+                productNameSlug: product.productNameSlug,
+                content : encodeURIComponent(product.content)
             }
 
             this.itemsFavorite.push(cart); 
@@ -447,12 +469,7 @@ export class MainService implements OnInit{
 
     /**/
     addReviewProduct(data: string): Observable<ResponseBase> { 
-        const headerDict = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Access-Control-Allow-Headers': 'Content-Type',
-          }
-        return this.http.post<any>(this.urlApi + AppConfigs.urls.addReviewProduct, data,{  headers: headerDict }).pipe(
+        return this.http.post<any>(this.urlApi + AppConfigs.urls.addReviewProduct, data, this.httpOptions).pipe(
             mergeMap((response_: any) => {
                 return of<ResponseBase>(<ResponseBase>response_);
             })

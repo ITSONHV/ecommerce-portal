@@ -25,9 +25,10 @@
               <div class="process active"><span>2. Xác nhận đơn hàng</span></div>
               <div class="process active"><span>3. Thanh toán</span></div>
             </div>
-            <form id="formdathang" method="post" action="" class="form-checkout">
+            <div *ngIf="getItemCart().length == 0">Bạn đang không có sản phẩm nào trong giỏ hàng.</div>
+            <form id="formdathang" method="post" action="" class="form-checkout" *ngIf="getItemCart().length > 0">
               <div class="group-info"  [formGroup]="infoCustomer">
-                <div class="title">Thông tin khách hàng</div>
+                <div class="title2">Thông tin khách hàng</div>
           
                 <div style="margin-bottom: 16px;"><span style="color: red;">*</span> Trường bắt buộc</div>
                 <div class="input-group"><label for="">Họ tên quý khách <span style="color: red;">*</span></label> <input type="text"

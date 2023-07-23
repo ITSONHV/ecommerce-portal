@@ -7,6 +7,7 @@ export interface ICart {
     quantity : number;
     image:string;
     productNameSlug : string;
+    content : string;
 }
 
 export interface ItemsCart {

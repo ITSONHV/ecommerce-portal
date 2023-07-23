@@ -14,9 +14,9 @@ import { SwalService } from 'src/services/swal.service';
 })
 export class CheckoutComponent implements OnInit {
   listBanks : any;
-
+  cartsPayment : any;
  /* info*/
- infoCustomer: FormGroup = new FormGroup({
+  infoCustomer: FormGroup = new FormGroup({
   name: new FormControl(''),
   email: new FormControl(''),
   phone: new FormControl(''),
@@ -191,5 +191,9 @@ export class CheckoutComponent implements OnInit {
     }
 
     event.preventDefault();
+  }
+
+  getItemCart (){
+    return this._svc.getItemsCart();
   }
 }
