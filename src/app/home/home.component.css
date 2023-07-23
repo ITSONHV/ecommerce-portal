@@ -139,3 +139,41 @@
 .block__header .block__header__title:after {
     right: -8px
 }
+
+@media screen and (max-width: 740px) {
+
+    .block__header {
+        margin-bottom: 40px;
+        background: #dddfe6;
+        height: 11px;
+        position: relative;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .block__header .block__header__title {
+        background: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        color: #29324e;
+        padding-left: 50px;
+        padding-right: 50px;
+        position: relative;
+        margin-top: 10px;
+    }
+
+    .block__header .block__header__title:after,
+    .block__header .block__header__title:before {
+    content: "";
+    height: 11px;
+    width: 11px;
+    background: #fff;
+    -webkit-clip-path: polygon(25% 0,100% 0,75% 100%,0 100%);
+    clip-path: polygon(25% 0,100% 0,75% 100%,0 100%);
+    position: absolute;
+    top: calc(50% - 3.0px)
+    }
+}

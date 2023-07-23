@@ -24,6 +24,9 @@ export class ShoppingCartComponent {
     @Inject(DOCUMENT) private document: Document,
     ){   
   }
+
+
+  
   getItemCart (){
     return this._svc.getItemsCart();
   }
@@ -66,7 +69,6 @@ export class ShoppingCartComponent {
   showDetailProduct(event: any, idDiv: any){
     const idIner = 'detail' + idDiv;
     const idInerItem = 'detailItem' + idDiv;
-    debugger;
     const tag = this.document.getElementById(idIner);
     const tagItem = this.document.getElementById(idInerItem);
     if (tag?.className === 'fa fa-angle-down') {

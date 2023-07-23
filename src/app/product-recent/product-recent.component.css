@@ -21,3 +21,9 @@
 .container{
     margin-bottom: 30px;
 }
+
+.owl-carousel{
+    display: flex !important;  
+    flex-direction: row;   
+    justify-content: left; 
+}

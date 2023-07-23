@@ -73,8 +73,6 @@ export class AppComponent implements OnInit  {
     this.initFacebookService();
    };
 
-  title = 'ecommerce-portal';
-
   private initFacebookService(): void {
       const initParams: InitParams = { xfbml:true, version:'v3.2'};
       this.facebookService.init(initParams);

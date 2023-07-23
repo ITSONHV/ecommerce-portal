@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { environment } from 'src/environments/environment';
@@ -12,33 +12,41 @@ import { MainService } from 'src/services/main.service';
   styleUrls: ['./product-recent.component.css']
 })
 export class ProductRecentComponent implements OnInit, AfterViewInit {
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event : any) {
+
+  // }
+
+
   public customOptions: OwlOptions = {
     loop: false,
     mouseDrag: true,
     touchDrag: false,
     pullDrag: false,
-    items:5,
+    items:1,
     dots: true,
     // autoplayTimeout: 3000,
-    // autoplaySpeed: 1000,
-    // autoplay: false,
-    // navSpeed: 700,
-    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+    // autoplaySpeed: 100000,
+     //autoplay: true,
+    navSpeed: 100000,
+    merge: true,
+    navText: [ '<i class="fa fa-angle-right"></i>',
+      '<i class="fa fa-angle-right"></i>',],
     responsive: {
       0: {
         items: 2,
       },
       400: {
-        items: 3
+        items: 2
       },
       640: {
-        items: 4
+        items: 2
       },
       900: {
-        items: 5
+        items: 4
       },
       1024: {
-        items: 5
+        items: 6
       }
     },
     nav: false
@@ -72,12 +80,17 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
   }
   
   ngAfterViewInit(): void {
+    // let a =  window.innerWidth;
+    // debugger;
+    // if(  window.innerWidth < 480){
+  
+    //   return;
+    // }
     var items:any  = this.document.getElementsByClassName('owl-item');
-
+  
     for (let i = 0; i < items.length; i++) {
       let element = items[i];
-      element.style.width = null;
+      element.style.width = 'auto';
+    }
   }
-  }
-
 }

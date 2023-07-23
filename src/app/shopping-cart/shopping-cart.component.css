@@ -6,14 +6,14 @@
 
 
 .cart {
-    display: flex;
+    display: inline;
     justify-content: space-between
 }
 
 .cart .cart-products {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 382px)
+    /* width: calc(100% - 382px) */
 }
 
 .cart .cart-products .cart-null {
@@ -645,4 +645,89 @@
 }
 .block__header .block__header__title:after {
     right: -8px
+}
+
+
+
+/**/
+
+@media screen and (max-width: 740px) {
+    .cart .cart-products .cart-process .process span {
+        font-weight: 400;
+        font-size: 13px;
+        color: #4e4e54;
+        padding: 7px 0;
+        transform: skewX(20deg)
+    }
+
+    .cart .cart-total-prices {
+        flex-basis: 356px;
+        margin-left: 0px
+    }
+
+    .cart .cart-products .cart-p-item .cart-p-content .cart-p-desc .collapse2 .collapse-header {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        color: #197bb7;
+        font-weight: 600;
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none
+    }
+    
+    .cart .cart-products .cart-p-item .cart-p-content .cart-p-desc .collapse2 .collapse-header i {
+        width: 4px;
+        margin-right: 5px
+    }
+
+    .cart .cart-products .cart-p-item .cart-p-content .cart-p-meta .cart-p-price {
+        width: 80px;
+        text-align: right;
+        font-weight: 600;
+        font-size: 13px;
+        color: #29324e
+    }
+
+    .cart .cart-products .cart-p-item .cart-p-content .cart-p-desc {
+        width: calc(100% - 80px);
+        font-size: 16px;
+        color: #197bb7;
+    }
+
+    
+    .block__header {
+        margin-bottom: 40px;
+        background: #dddfe6;
+        height: 11px;
+        position: relative;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .block__header .block__header__title {
+        background: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        color: #29324e;
+        padding-left: 50px;
+        padding-right: 50px;
+        position: relative;
+        margin-top: 10px;
+    }
+
+    .block__header .block__header__title:after,
+    .block__header .block__header__title:before {
+    content: "";
+    height: 11px;
+    width: 11px;
+    background: #fff;
+    -webkit-clip-path: polygon(25% 0,100% 0,75% 100%,0 100%);
+    clip-path: polygon(25% 0,100% 0,75% 100%,0 100%);
+    position: absolute;
+    top: calc(50% - 3.0px)
+    }
 }
