@@ -3,7 +3,7 @@
 ******************************************/
 
 
-@media only screen and (min-width: 280px) and (max-width: 479px) {
+@media only screen and (min-width: 0px) and (max-width: 480px) {
 #newsletter-popup .modal-dialog {
 	margin: 50px auto;
 	width: 95%;
@@ -422,9 +422,11 @@ footer h3 {
 	text-align: left;
 }
 .product-grid-area .products-grid .item {
-	float: none;
-	margin: 15px auto;
-	width: 90%;
+	/* float: none;
+	margin: 0px auto; */
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 50%;
 }
 .hot-deal {
 	margin-bottom: 15px;
@@ -482,6 +484,21 @@ footer h3 {
 	display: block;
 	width: 160px;
 }
+
+.product-item .item-inner .item-info .item-title a {
+    display: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+    font-size: 13px;
+    font-weight: 450;
+}
+
+.pr-button .mt-button {
+display: none;
+}
+
 .special-block {
 	margin-top: 15px;
 }
@@ -1031,9 +1048,22 @@ ul#cart-sidebar {
 	font-size: 28px
 }
 .product-item .item-inner .item-info .item-title {
-	font-size: 14px;
+	font-size: 12px;
 	padding: 0px 10px
 }
+
+.product-item .item-inner .item-info .item-title a {
+    display: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+    font-size: 13px;
+    font-weight: 500;
+}
+.pr-button .mt-button {
+	display: none;
+	}
 .home-tab .product-item {
 	margin: 0 8px
 }
