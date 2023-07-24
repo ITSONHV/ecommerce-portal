@@ -22,6 +22,6 @@ export const AppConfigs = {
 
 
         addReviewProduct : "Product/add-review",          
-    
+        verifyDataPayment : "payment/verify-data",       
     }
 }

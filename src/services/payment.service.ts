@@ -48,9 +48,9 @@ export class PaymentService implements OnInit{
             )
     };
 
-    /**/
-    addReviewProduct(data: string): Observable<ResponseBase> { 
-        return this.http.post<any>(this.urlApi + AppConfigs.urls.addReviewProduct, data,this.httpOptions).pipe(
+    /*api gọi verify cart*/
+    verifyDataPayment(data: string): Observable<ResponseBase> { 
+        return this.http.post<any>(this.urlApi + AppConfigs.urls.verifyDataPayment, data,this.httpOptions).pipe(
             mergeMap((response_: any) => {
                 return of<ResponseBase>(<ResponseBase>response_);
             })

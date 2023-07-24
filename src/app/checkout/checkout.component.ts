@@ -3,8 +3,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ObjectModel } from 'src/models/object_paging.model';
+import { ObjectModel, ResponseBase } from 'src/models/object_paging.model';
 import { MainService } from 'src/services/main.service';
+import { PaymentService } from 'src/services/payment.service';
 import { SwalService } from 'src/services/swal.service';
 
 @Component({
@@ -42,12 +43,14 @@ export class CheckoutComponent implements OnInit {
     private _swal: SwalService,
     @Inject(DOCUMENT) private document: Document,
     private fb: FormBuilder,
+    private _svcPayment : PaymentService
     ){
 
   }
 
   ngOnInit(){
     this.titleService.setTitle('Thanh toán');
+    this.verifyDataPayment();
     this.getListBanking();
     this.initForm();
   }
@@ -195,5 +198,25 @@ export class CheckoutComponent implements OnInit {
 
   getItemCart (){
     return this._svc.getItemsCart();
+  }
+
+  verifyDataPayment(){
+    debugger;
+    let itemsCart = this._svc.getItemsCart();
+    var listIds = itemsCart.map(item => {
+      return item.id;
+  });
+    this._svcPayment.verifyDataPayment(JSON.stringify({productIds: listIds})).subscribe(
+      (result: ResponseBase)=>{
+        if (result == null || result.statusCode != 200) {
+          debugger;
+         // this._swal.toast(TYPE.ERROR, "Đã có lỗi xảy ra, bạn vui lòng thử lại!.", false);;
+       }else{
+        debugger;
+          // this._swal.toast(TYPE.SUCCESS, "Thêm đánh giá thành công.", false);
+          // this.onReset();
+       }
+      }
+    );
   }
 }

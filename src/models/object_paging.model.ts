@@ -14,4 +14,5 @@ export class ResponseBase {
     errorMessage : string;
     errorCode : number;
     statusCode : number;
+    data: any;
 }
