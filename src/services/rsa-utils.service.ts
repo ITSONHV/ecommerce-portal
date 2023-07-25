@@ -36,67 +36,58 @@ export class RSAService implements OnInit {
     }
 
     encrypt(valueToEncrypt: string): string {
-        debugger;
-        var test = JSON.stringify({ id : 1}); 
-         let random = this.randomString(16);
-         const cer = Forge.pki.certificateFromPem(this.publicKey);
-         const bsa = Forge.pki.publicKeyToPem(cer.publicKey);
-         const publickKey =  Forge.pki.publicKeyFromPem(bsa);
+        var test = JSON.stringify({ id: 1 });
+        let random = this.randomString(16);
+        console.log(random)
 
-        //  var buffer = new Buffer(random);
-         var encrypted = CryptoJS.AES.encrypt(
-            CryptoJS.enc.Utf8.parse(random),
-            this.publicKey,
-           
-         );
+        var res = {
+            HashKey: this.encryptUsingCertificate(random),
+            HashData:this.encryptUsingAES(test, random),
+        };
 
-
-        //  var encrypt = window.btoa(publickKey.encrypt(random));
-
-         var res = {
-            HashKey :btoa( encrypted.toString()),
-            HashData : window.btoa(this.encryptUsingAES256(test, random)),
-         };
-      
-         console.log(res);
+        console.log(res);
         return "";
     }
 
-
-
-    encryptUsingCertificate(keyRandom: string){
-         const rsa = Forge.pki.publicKeyFromPem(this.publicKey);
-         let buffer = new Buffer(keyRandom);
-
-         var encrypted = btoa(rsa.encrypt(keyRandom));
-        return encrypted.toString();
+    encryptUsingCertificate(keyRandom: string) {
+        const cer = Forge.pki.certificateFromPem(this.publicKey);
+        const bsa = Forge.pki.publicKeyToPem(cer.publicKey);
+        const publickKey = Forge.pki.publicKeyFromPem(bsa);
+        var encrypted = publickKey.encrypt(Forge.util.encodeUtf8(keyRandom), 'RSA-OAEP');
+        return btoa(encrypted.toString());
     }
 
-    encryptionAES (data : string,keyRandom: string) {
-        // Encrypt
-        const ciphertext = CryptoJS.AES.encrypt(data, keyRandom);
-        return ciphertext.toString();
-      }
+    encryptUsingAES(data: string, keyRandom: string): any {
+        debugger;
+      // var rawData = btoa(data);
+        //var iv = btoa(keyRandom);
+        //var crypttext = btoa(rawData.substring(16));
 
-      encryptUsingAES256(data : string, keyRandom: string): any {
-        var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(data), keyRandom, {
+        // Decrypt...
+        // var plaintextArray = CryptoJS.AES.decrypt(
+        //     {
+        //         ciphertext: CryptoJS.enc.Base64.parse(crypttext),
+        //         salt: ''
+        //     },
+        //     CryptoJS.enc.Hex.parse(keyRandom),
+        //     { iv: CryptoJS.enc.Base64.parse(iv) }
+        // );
+        //return aaa.toString();
+ // Forge.util.encodeUtf8(keyRandom)
+        var key  = Forge.util.encodeUtf8(keyRandom);
+        var encrypted = CryptoJS.AES.encrypt(Forge.util.encodeUtf8(data), key, {
             keySize: 16,
-            _iv: keyRandom,
+            iv: CryptoJS.enc.Hex.parse(keyRandom),
             mode: CryptoJS.mode.CBC,
-            padding: CryptoJS.pad.NoPadding
+            padding: CryptoJS.pad.Pkcs7
         });
-        return encrypted.toString();
+        return btoa(encrypted.toString());
     }
-
-
-
-
-
 
     randomString(length: number) {
         var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         var result = '';
-        for ( var i = 0; i < length; i++ ) {
+        for (var i = 0; i < length; i++) {
             result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
         }
         return (result);
