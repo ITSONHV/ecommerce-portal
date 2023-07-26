@@ -42,10 +42,19 @@ export class RSAService implements OnInit {
 
         var res = {
             HashKey: this.encryptUsingCertificate(random),
-            HashData:this.encryptUsingAES(test, random),
+            HashData: this.encryptUsingAES(test, random),
         };
+        var res2 = {
+            HashKey: this.encryptUsingCertificate(random),
+            HashData: btoa( this.encryptUsingAES(test, random)),
+        };
+        console.log("res1 " );
 
         console.log(res);
+
+        console.log("res2 " );
+
+        console.log(res2);
         return "";
     }
 
@@ -58,7 +67,25 @@ export class RSAService implements OnInit {
     }
 
     encryptUsingAES(data: string, keyRandom: string): any {
-        debugger;
+
+
+        
+      // var cipher = CryptoJS.
+
+        var encrypted = CryptoJS.AES.encrypt(data, CryptoJS.enc.Base64.parse(keyRandom) , {
+             keySize: 16,
+             iv: CryptoJS.enc.Base64.parse(keyRandom),
+              mode: CryptoJS.mode.CBC,
+              padding: CryptoJS.pad.Pkcs7
+         });
+        
+//   var aa = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
+
+//          return aa;
+
+         return CryptoJS.enc.Base64.parse( encrypted.toString()).toString();
+
+
       // var rawData = btoa(data);
         //var iv = btoa(keyRandom);
         //var crypttext = btoa(rawData.substring(16));
@@ -74,14 +101,19 @@ export class RSAService implements OnInit {
         // );
         //return aaa.toString();
  // Forge.util.encodeUtf8(keyRandom)
-        var key  = Forge.util.encodeUtf8(keyRandom);
-        var encrypted = CryptoJS.AES.encrypt(Forge.util.encodeUtf8(data), key, {
-            keySize: 16,
-            iv: CryptoJS.enc.Hex.parse(keyRandom),
+ debugger;
+ let data2 = Forge.util.encodeUtf8(data);
+    let _iv2 = CryptoJS.enc.Utf8.parse(keyRandom);
+
+    let _iv =  CryptoJS.enc.Base64.parse(Forge.util.encodeUtf8(keyRandom));
+        //var key  = Forge.util.encodeUtf8(keyRandom);
+        var encrypted = CryptoJS.AES.encrypt(data2, _iv2, {
+           // keySize: 128/8,
+            iv: _iv2,
             mode: CryptoJS.mode.CBC,
-            padding: CryptoJS.pad.Pkcs7
+            //padding: CryptoJS.pad.NoPadding
         });
-        return btoa(encrypted.toString());
+        return  encrypted.toString();
     }
 
     randomString(length: number) {
