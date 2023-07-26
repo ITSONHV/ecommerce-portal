@@ -37,7 +37,9 @@ export class RSAService implements OnInit {
 
     encrypt(valueToEncrypt: string): string {
         var test = JSON.stringify({ id: 1 });
-        let random = this.randomString(16);
+        //let random = this.randomString(16);
+
+        let random ='3MBKWOICG9YWLE8T';
         console.log(random)
 
         var res = {
@@ -68,53 +70,61 @@ export class RSAService implements OnInit {
 
     encryptUsingAES(data: string, keyRandom: string): any {
 
-
-        
-      // var cipher = CryptoJS.
-
-        var encrypted = CryptoJS.AES.encrypt(data, CryptoJS.enc.Base64.parse(keyRandom) , {
-             keySize: 16,
-             iv: CryptoJS.enc.Base64.parse(keyRandom),
-              mode: CryptoJS.mode.CBC,
-              padding: CryptoJS.pad.Pkcs7
-         });
-        
-//   var aa = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
-
-//          return aa;
-
-         return CryptoJS.enc.Base64.parse( encrypted.toString()).toString();
+// Fix: Use the Utf8 encoder
+        debugger;
+        var text = Forge.util.encodeUtf8(data);
+        // Fix: Use the Utf8 encoder (or apply in combination with the hex encoder a 32 hex digit key for AES-128)
+        var key =   Forge.util.encodeUtf8(keyRandom);
 
 
-      // var rawData = btoa(data);
-        //var iv = btoa(keyRandom);
-        //var crypttext = btoa(rawData.substring(16));
+        // Fix: Apply padding (e.g. Zero padding). Note that PKCS#7 padding is more reliable and that ECB is insecure
+        var encrypted = CryptoJS.AES.encrypt(text, key,
+            {
+                keySize: 16,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7,
+                iv: this.toWordArray(key)
+            });
+        var encrypted2 = this.toBase64String( encrypted.ciphertext);
+        console.log('encrypted2', encrypted2);
+         return encrypted2;
 
-        // Decrypt...
-        // var plaintextArray = CryptoJS.AES.decrypt(
-        //     {
-        //         ciphertext: CryptoJS.enc.Base64.parse(crypttext),
-        //         salt: ''
-        //     },
-        //     CryptoJS.enc.Hex.parse(keyRandom),
-        //     { iv: CryptoJS.enc.Base64.parse(iv) }
-        // );
-        //return aaa.toString();
- // Forge.util.encodeUtf8(keyRandom)
- debugger;
- let data2 = Forge.util.encodeUtf8(data);
-    let _iv2 = CryptoJS.enc.Utf8.parse(keyRandom);
-
-    let _iv =  CryptoJS.enc.Base64.parse(Forge.util.encodeUtf8(keyRandom));
-        //var key  = Forge.util.encodeUtf8(keyRandom);
-        var encrypted = CryptoJS.AES.encrypt(data2, _iv2, {
-           // keySize: 128/8,
-            iv: _iv2,
-            mode: CryptoJS.mode.CBC,
-            //padding: CryptoJS.pad.NoPadding
-        });
-        return  encrypted.toString();
     }
+
+     encryptAES(input: string, key : string){
+  
+       // var PROTOCOL_AES256 = 2;
+         var secret_key = Forge.util.encodeUtf8(key);
+        // var header = this.toWordArray("AMAZON" + String.fromCharCode(PROTOCOL_AES256));
+         // var iv = CryptoJS.lib.WordArray.random(16);
+         var iv = secret_key;
+
+         var body = CryptoJS.AES.encrypt(input, key,
+             {  
+                mode: CryptoJS.mode.CBC,
+                 iv: this.toWordArray(key),
+                 padding: CryptoJS.pad.Pkcs7,
+                 keySize: 16
+             });
+  
+        // construct the packet
+        // HEADER + IV + BODY
+        // header.concat(iv);
+        // header.concat(body.ciphertext);
+  
+        // encode in base64
+        return this.toBase64String(body.ciphertext);
+      }
+
+    toWordArray(str: string){
+        return CryptoJS.enc.Utf8.parse(str);
+    }
+     toString(words: any){
+        return CryptoJS.enc.Utf8.stringify(words);
+    }
+     toBase64String(words: any){
+        return CryptoJS.enc.Base64.stringify(words);
+      }
 
     randomString(length: number) {
         var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
