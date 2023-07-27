@@ -8,7 +8,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Meta, Title } from '@angular/platform-browser';
 import { ProductModel } from 'src/models/product.model';
 import { SwalService, TYPE } from 'src/services/swal.service';
-import { RSAService } from 'src/services/rsa-utils.service';
+import { EncryptService } from 'src/services/encrypt.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -204,7 +204,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private titleService: Title,
     private _swal: SwalService,
-    private rsaSvc : RSAService
+    private encryptSvc : EncryptService
     ) {
   }
   ngOnInit(): void {
@@ -221,8 +221,6 @@ export class HomeComponent implements OnInit {
       this.allMenu = this.getMenu();
     }
 
-    /* TEST */
-    this.testRsa();
     this.isLoadComplete = true;
   }
   getProductIsBestSellingPages() {
@@ -390,9 +388,5 @@ export class HomeComponent implements OnInit {
   }
   showAddCartFavorite(){
     this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
-  }
-
-  testRsa(){
-    this.rsaSvc.encrypt('');
   }
 }

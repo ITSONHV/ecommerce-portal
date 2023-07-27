@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ProductModel } from 'src/models/product.model';
 import { MainService } from 'src/services/main.service';
 import { SwalService } from 'src/services/swal.service';
+import { ICart } from 'src/interfaces/ICart';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -14,6 +15,7 @@ import { SwalService } from 'src/services/swal.service';
 })
 export class ShoppingCartComponent {
   public urlImg: string = environment.urlImg;
+  public carts : ICart[] = [];
   constructor( private router: Router
     , private activatedRoute: ActivatedRoute,
     public _svc : MainService,
@@ -24,8 +26,6 @@ export class ShoppingCartComponent {
     @Inject(DOCUMENT) private document: Document,
     ){   
   }
-
-
   
   getItemCart (){
     return this._svc.getItemsCart();
@@ -59,7 +59,7 @@ export class ShoppingCartComponent {
 
   clearItemCart()
   {
-      this._svc.clearItemsCart();
+      this._svc.clearItemsCart(this.carts);
   }
 
   addQuantityToShopingCard(productId: number, quantity: number): void{

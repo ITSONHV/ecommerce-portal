@@ -329,8 +329,9 @@ export class MainService implements OnInit{
         return this.itemsCart;
     }
 
-    clearItemsCart() {
+    clearItemsCart(carts: ICart[]) {
          this.itemsCart = [];
+         this.itemsCart = carts;
          this.setCartToLocalStorage();
          return this.itemsCart;
 
