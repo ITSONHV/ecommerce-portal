@@ -42,7 +42,12 @@
               <div class="short-description">
                 <!-- <h2>Quick Overview</h2> -->
                 <p [innerHTML]="product.content"> </p>
-              </div>          
+              </div>
+              <div  *ngIf="product?.stock > 0" >
+                <p class="status_stock">
+                  <span class="status status1"><i aria-hidden="true" class="fa fa-circle"></i>Còn hàng</span>
+                </p>
+              </div>           
               <div class="product-variation">
                 <form action="#" method="post">
                   <div class="cart-plus-minus">

@@ -129,26 +129,22 @@
           <div class="cart-total-prices">
             <div class="cart-prices">
               <div class="title2">THÔNG TIN GIỎ HÀNG</div>
-              <div>Số lượng sản phẩm <span class="p-count">2</span></div>
-              <div>Tổng chi phí <span class="price">10.980.000 đ</span></div>
+              <div>Số lượng sản phẩm <span class="p-count">{{ sumItemsInCartPayment()}}</span></div>
+              <div>Tổng chi phí <span class="price">{{ sumPriceItemsInCartPayment()| currency : "VND"}}</span></div>
               <div style="font-size: 14px; color: rgb(78, 78, 84); font-weight: normal; justify-content: flex-end;">Đã bao gồm
                 VAT (nếu có)</div>
-              <div class="cart-item">
-                <div class="product-name">CPU Intel Core i7 - 11700 8C/16T ( 2.5GHz up to 4.9GHz, 16MB ) Hàng Tray</div>
+              <div class="cart-item" *ngFor="let item of cartsPayment">
+                <div class="product-name">{{item.productName}}</div>
                 <div class="product-content">
                   <div class="collapse">
-                    <div class="collapse-header"(click)="showDetailProduct($event, '')" ><i id="testCall" class="fa fa-angle-right"></i> Chi tiết sản phẩm <!----></div>
-                    <div id="testCallItem" class="collapse-body" style="display: none;">
-                      <div class="short-desc">
-                        <p>- Socket: LGA 1200</p>
-                        <p>- Số nhân: 8</p>
-                        <p>- Số luồng: 16</p>
-                        <p>- Xung nhịp: 2.5 - 4.9 Ghz</p>
-                        <p>- Cache: 16MB</p>
+                    <div class="collapse-header"(click)="showDetailProduct($event, item.id)" ><i id="{{'detail' + item.id}}" class="fa fa-angle-right"></i> Chi tiết sản phẩm <!----></div>
+                    <div id="{{'detailItem' + item.id}}" class="collapse-body" style="display: none;">
+                      <div class="short-desc" [innerHTML]="decodeURIComponent(item.content)">
+         
                       </div>
                     </div>
                   </div> <!---->
-                  <div class="cart-item-price">10.980.000 đ</div>
+                  <div class="cart-item-price">{{item.quantity * item.price | currency : "VND"}}</div>
                 </div>
               </div> <a class="go-checkout" (click)="onSubmit()"><!----> XÁC NHẬN MUA HÀNG</a>
             </div>
