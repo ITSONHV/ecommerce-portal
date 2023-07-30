@@ -1,10 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, Inject, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, HostListener, Input } from '@angular/core';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { environment } from 'src/environments/environment';
+import { ProductModel } from 'src/models/product.model';
 import { MainService } from 'src/services/main.service';
-
+import { SwalService, TYPE } from 'src/services/swal.service';
 
 @Component({
   selector: 'app-product-recent',
@@ -12,45 +13,63 @@ import { MainService } from 'src/services/main.service';
   styleUrls: ['./product-recent.component.css']
 })
 export class ProductRecentComponent implements OnInit, AfterViewInit {
-  // @HostListener('window:resize', ['$event'])
-  // onResize(event : any) {
-
-  // }
-
-
-  public customOptions: OwlOptions = {
-    loop: false,
-    mouseDrag: true,
-    touchDrag: false,
-    pullDrag: false,
-    items:1,
-    dots: true,
-    // autoplayTimeout: 3000,
-    // autoplaySpeed: 100000,
-     //autoplay: true,
-    navSpeed: 100000,
-    merge: true,
-    navText: [ '<i class="fa fa-angle-right"></i>',
-      '<i class="fa fa-angle-right"></i>',],
-    responsive: {
-      0: {
-        items: 2,
+  @Input() listProduct : any;
+  isShowQuickView = false;
+  @Input() isAutoPlay = false;
+  public productSlugToChild: string;
+  slideConfig = {
+    "slidesToShow": 4,
+    "slidesToScroll": 4,
+    "autoplay": false,
+    "autoplaySpeed": 5000,
+    "infinity": true,
+    // "centerMode": true,
+    "pauseOnFocus": true,
+    "pauseOnHover": true,
+    "swipeToSlide": false,
+    // "variableWidth": false,
+    // "enableCenterMode": true,
+    "arrows": true,
+    "responsive": [
+      {
+      "breakpoint": 1024,
+      "settings": {
+        "arrows": false,
+        "centerMode": false,
+        "slidesToShow": 3,
+         "centerPadding": 0,
       },
-      400: {
-        items: 2
-      },
-      640: {
-        items: 2
-      },
-      900: {
-        items: 4
-      },
-      1024: {
-        items: 6
-      }
     },
-    nav: false
+      {
+        "breakpoint": 768,
+        "settings": {
+          "arrows": false,
+          "centerMode": false,
+          "slidesToShow": 2,
+           "centerPadding": 0,
+        },
+      },
+      {
+        "breakpoint": 480,
+        "settings": {
+          "arrows": false,
+          "centerMode": false,
+          "slidesToShow": 2, 
+            "centerPadding": 0,
+        },
+      },
+    ],
   };
+
+  
+
+  slickInit(e :any) {
+    console.log('slick initialized');
+  }
+  
+  ngAfterViewInit(): void {
+  }
+
   public productRecents : any;
   public urlImg : string = environment.urlImg;
   public listTagOwlItem : HTMLCollectionOf<Element>;
@@ -59,11 +78,16 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
     @Inject(DOCUMENT) private document: Document ,
     private router : Router,
     private activatedRoute: ActivatedRoute,
+    
+    private _swal: SwalService,
     ) {
   }
   ngOnInit(): void {
-   this.productRecents = this._svc.getProductRecent();
-   console.log(this.productRecents);
+    if(this.listProduct){
+      this.productRecents =  this.listProduct;
+    }else{
+      this.productRecents = this._svc.getProductRecent();
+    }
   }
 
   handleViewDetailProduct(event: any, product: any): void {
@@ -79,18 +103,29 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
     event.preventDefault();
   }
   
-  ngAfterViewInit(): void {
-    // let a =  window.innerWidth;
-    // debugger;
-    // if(  window.innerWidth < 480){
-  
-    //   return;
-    // }
-    var items:any  = this.document.getElementsByClassName('owl-item');
-  
-    for (let i = 0; i < items.length; i++) {
-      let element = items[i];
-      element.style.width = 'auto';
-    }
+  counterRate(i: number) {
+    return new Array(i);
+  }
+
+  openModalQuickView(itemProduct: any) {
+    this.productSlugToChild = itemProduct.productNameSlug;
+    this.isShowQuickView = !this.isShowQuickView;
+  }
+  listenEventFromChild(check: boolean) : void { 
+    this.isShowQuickView = check;
+  }
+  addToShopingCard(product:ProductModel): void{
+    this._svc.addToCart(product, 1);
+    this.showAddCartSuccess();
+  }
+  addToFavorite(product:ProductModel): void{
+    this._svc.addToFavorite(product);
+    this.showAddCartFavorite();
+  }
+  showAddCartSuccess(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào giỏ hàng.", false);
+  }
+  showAddCartFavorite(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
   }
 }

@@ -45,7 +45,7 @@
               </div>
             </div>
           </div>
-          <div class="shop-inner">
+          <div class="category">
             <div class="page-title">
               <h2>{{this.category?.categoryName?? "Tìm kiếm"}}</h2>
             </div>
@@ -88,61 +88,42 @@
                 </div>
               </div>
             </div>
-            <div class="product-grid-area">
+            <div class="category__content">
             <ng-container
               *ngIf="isLoadComplete && (visibleItems.items.length == 0)">
               <p>Không có sản phẩm nào phù hợp.</p>
             </ng-container>
-              <my-card *ngFor="let item of visibleItems.items">
-              <ul class="products-grid" >
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="icon-new-label new-left">New</div>
-                        <div class="pr-img-area"> <a [title]="item.productName" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">
-                          <figure> <img class="first-img" [src]="[urlImg + item.imageUrl]" alt="HTML template"> <img class="hover-img" src="{{urlImg + item.imageUrl}}" alt="HTML template"></figure>
-                          </a> </div>
-                        <div class="pr-info-area">
-                          <div class="pr-button">
-                            <div class="mt-button add_to_wishlist"> <a (click)="addToFavorite(item)"> <i class="fa fa-heart"></i> </a> </div>
-                            <!-- <div class="mt-button add_to_compare"> <a [routerLink]="['/so-sanh']"> <i class="fa fa-signal"></i> </a> </div> -->
-                            <div class="mt-button quick-view"> <a (click)="openModalQuickView(item)"> <i class="fa fa-search"></i> </a> </div>
-                          </div>
-                        </div>
+            <div class="category__product-list"> 
+              <div class="product-list">
+                <my-card *ngFor="let item of visibleItems.items" class="">
+                  <div class="product">
+                    <div class="percent"><span>-12%</span></div>
+                    <div class="product__thumb"><a
+                      [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
+                        class="product__link"><img [src]='urlImg + item.imageUrl' alt="{{item.productName}}"
+                          alt="{{item.productName}}"></a></div>
+                    <div class="product__bottom">
+                      <div class="product__title"><a
+                        [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
+                          class="product__link">{{item.productName}}</a>
                       </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.productName}}</a> </div>
-                          <div class="item-content">
-                            <div class="rating"> 
-                               <!-- Tạo sao đánh giá -->
-                                <ng-container *ngIf="item.rate >= 0">
-                                  <i class="fa fa-star" *ngFor="let rate of counterRate(item.rate)"></i>
-                                  <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
-                                </ng-container>
-                            </div>
-                            <div class="item-price">
-                              <div class="price-box" *ngIf="item.promotionPrice == 0"> 
-                                <span class="regular-price" > <span class="price">{{item.price | currency: "VND" }}</span> </span> </div>
-                               <ng-container *ngIf="item.promotionPrice > 0">
-                                <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
-                                <p class="old-price"> <span class="price-label">Giá cũ:</span> <span class="price"> {{item.price | currency: "VND" }} </span> </p>
-                              </ng-container>
-                            </div>
-                            <div class="pro-action">
-                              <button type="button" (click)="addToShopingCard(item)" class="add-to-cart"><span><i class="fa fa-shopping-cart"></i>&nbsp;Giỏ hàng</span> </button>
-                            </div>
+                      <div class="product__rate">
+                        <!-- <div class="rate__star" *ngIf="item?.rate >= 0">
+                          <div class="rate_item">
+                            <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item?.rate)"></i>
+                            <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item?.rate)"></i>
+                            <span class="rate__text"> &nbsp;{{item?.countRate}} đánh giá</span>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
+                      <div class="product__price"><span class="price__selling">{{item.promotionPrice | currency: "VND" }}</span> <span class="price__old">{{item.price | currency: "VND" }}</span></div> 
+                      <button type="button" class="add-to-cart" (click)="addToShopingCard(item)"><i class="fa fa-shopping-cart"></i> &nbsp;GIỎ HÀNG</button>
                     </div>
                   </div>
-                </li>
-              </ul>
-            </my-card>
+                </my-card>
+              </div>
             </div>
-           
+          </div>
             <div class="pagination-area" >
               <my-pagination *ngIf="isLoadComplete" [total]="visibleItems.total" [formControl]="paginationControl">
               </my-pagination>

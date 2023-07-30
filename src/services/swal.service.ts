@@ -42,7 +42,7 @@ export class SwalService {
           showConfirmButton: false,
           icon: typeIcon,
           timerProgressBar,
-          timer: 1500,
+          timer: 2200,
           title: "<h6 style='color:#3378b9'>" + text + "</h6>"
         })
       }  

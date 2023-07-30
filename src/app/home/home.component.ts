@@ -31,17 +31,53 @@ export class HomeComponent implements OnInit {
   public productSlugToChild: string;
   @Input() modalOpen: boolean;
   @Output() modalClose = new EventEmitter();
+
+  slideConfigProductSales = {
+    "slidesToShow": 3,
+    "slidesToScroll": 3,
+    "autoplay": false ,
+    "autoplaySpeed": 3000,
+    "infinity": true,
+    "pauseOnFocus": true,
+    "speed" : 3000,
+    "pauseOnHover": true,
+    "swipeToSlide": false,
+    // "variableWidth": false,
+    // "enableCenterMode": true,
+    "arrows": true,
+    "responsive": [
+      {
+        "breakpoint": 768,
+        "settings": {
+          "arrows": false,
+          "centerMode": false,
+          "slidesToShow": 2,
+           "centerPadding": 0,
+        },
+      },
+      {
+        "breakpoint": 480,
+        "settings": {
+          "arrows": false,
+          "centerMode": false,
+          "slidesToShow": 2, 
+            "centerPadding": 0,
+        },
+      },
+    ],
+  };
+
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
-    touchDrag: true,
+    touchDrag: false,
     pullDrag: false,
     items:6,
     dots: false,
     margin:10,
     autoplayTimeout: 3000,
     autoplaySpeed: 1000,
-    autoplay:true,
+    autoplay:  false ,
     navSpeed: 1000,
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
@@ -72,10 +108,14 @@ export class HomeComponent implements OnInit {
     items:6,
     dots: false,
     margin:10,
-    autoplayTimeout: 3000,
-    autoplaySpeed: 2000,
+    autoplayTimeout: 4000,
+    autoplaySpeed: 3000,
     autoplay:true,
-    navSpeed: 2000,
+    navSpeed: 3000,
+    autoplayHoverPause: true,
+    autoWidth:true,
+    autoHeight:true,
+
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
@@ -175,6 +215,8 @@ export class HomeComponent implements OnInit {
     autoplaySpeed: 1000,
     autoplay: true,
     navSpeed: 2000,
+    autoWidth: false,
+    autoHeight: false,
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {

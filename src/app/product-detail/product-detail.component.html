@@ -136,7 +136,7 @@
                   <div class="col-sm-7 col-lg-7 col-md-7">
                     <div class="reviews-content-right">
                       <h2>Nội dung đánh giá</h2>
-                      <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+                      <form [formGroup]="reviewForm">
                         <h4>Bạn nghĩ thế nào về sản phẩm này?<em>*</em></h4>
                         <div class="table-responsive reviews-table">
                           <table>
@@ -204,7 +204,7 @@
                   </div>
                 </div>
                 <div class="tab-pane fade" id="product_video">
-                  <div class="video-detail">
+                  <div class="video-detail" *ngIf="product?.video">
                     <iframe width="100%" height="300" [src]="product?.video | safe "  frameborder="0" allowfullscreen></iframe>
                   </div>
                 </div>
@@ -302,59 +302,41 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="related-product-area">
-          <div class="page-header">
-            <h2>SẢN PHẨM LIÊN QUAN</h2>
+          <div class="block__header">
+            <h2 class="block__header__title">SẢN PHẨM LIÊN QUAN</h2>
           </div>
           <div class="related-products-pro">
             <div class="slider-items-products">
               <div id="related-product-slider" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col4 fadeInUp">
-                  <owl-carousel-o [options]="customOptions">
-                    <ng-container style="width: 0px;" *ngFor="let item of productsRelate">
-                      <ng-template carouselSlide [id]="item.id.toString()">
-                        <div class="product-item">
-                          <div class="item-inner">
-                            <div class="product-thumbnail">
-                              <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                (click)="handleViewDetailProduct($event,item)">
-                                <figure> <img class="first-img" [src]='urlImg + item.imageUrl' alt="HTML template"> <img class="hover-img" [src]='urlImg + item.imageUrl' alt="HTML template"></figure>
-                                </a> </div>
-                              <div class="pr-info-area">
-                                <div class="pr-button">
-                                  <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                                  <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div>
-                                  <div class="mt-button quick-view"> <a href="quick_view.html"> <i class="fa fa-search"></i> </a> </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="item-info">
-                              <div class="info-inner">
-                                <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a> </div>
-                                <div class="item-content">
-                                  <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                  <div class="item-price">
-                                    <div class="price-box"> <span *ngIf="item.promotionPrice == 0" class="regular-price">
-                                        <span class="price">{{item.price | currency: "VND" }}</span> </span>
-                                      <ng-container *ngIf="item.promotionPrice > 0">
-                                        <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span
-                                            class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
-                                        <p class="old-price"> <span class="price-label">Giá cũ:</span> <span
-                                            class="price"> {{item.price | currency: "VND" }} </span> </p>
-                                      </ng-container>
-                                    </div>
-                                  </div>
-                                  <div class="pro-action">
-                                    <button type="button" class="add-to-cart"><span> Giỏ hàng</span> </button>
-                                  </div>
-                                </div>
+                  <ngx-slick-carousel class="carousel home__product" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
+                    <div ngxSlickItem *ngFor="let item of productsRelate" class="slide">
+                      <div class="product">
+                        <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
+                        <div class="product__thumb"><a [routerLink]="['/chi-tiet']"
+                          (click)="handleViewDetailProduct($event,item)"
+                            class="product__link"><img
+                              [src]='urlImg + item.imageUrl'
+                              alt="{{item.productName}}"></a></div>
+                        <div class="product__bottom">
+                          <div class="product__title"><a
+                              href="https://www.tncstore.vn/card-man-hinh-asus-proart-geforce-rtx-4060-ti-oc-edition-16gb-ddr6.html"
+                              class="product__link">{{item.productName}}</a></div>
+                          <div class="product__rate">
+                            <div class="rate__star" *ngIf="item?.rate >= 0">
+                              <div class="rate_item">
+                                <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item?.rate)"></i>
+                                <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item?.rate)"></i>
+                                <span class="rate__text"> &nbsp;{{item?.countRate}} đánh giá</span>
                               </div>
                             </div>
                           </div>
+                          <div class="product__price"><span class="price__selling">{{item.promotionPrice | currency: "VND" }}</span> <span class="price__old">{{item.price | currency: "VND" }}</span></div> <button type="button" class="add-to-cart">GIỎ HÀNG</button>
                         </div>
-                    </ng-template>
-                  </ng-container>
-                  </owl-carousel-o>
+                      </div>
+                  
+                    </div>
+                  </ngx-slick-carousel>
                 </div>
               </div>
             </div>
@@ -370,8 +352,8 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <div class="page-header">
-            <h2>SẢN PHẨM VỪA XEM</h2>
+          <div class="block__header">
+            <h2 class="block__header__title">SẢN PHẨM VỪA XEM</h2>
           </div>
           <div class="slider-items-products">
             <div id="upsell-product-slider" class="product-flexslider hidden-buttons">

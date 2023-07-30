@@ -9,6 +9,7 @@ export class PaymentModel {
     CustomerName:string ;
     CustomerPhone :string ;
     Note :string ;
+    OrderCode : string;
   }
 
   export class ProductOrderRequest{

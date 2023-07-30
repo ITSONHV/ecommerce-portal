@@ -36,6 +36,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { ProductRecentComponent } from './product-recent/product-recent.component';
 import { FacebookModule } from 'ngx-facebook/facebook.module';
 import {CookieService} from 'ngx-cookie-service';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,7 @@ import {CookieService} from 'ngx-cookie-service';
     MatTableModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-
+    SlickCarouselModule
    // FacebookModule.forRoot()
 
   ],
