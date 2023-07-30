@@ -74,7 +74,6 @@ export class CheckoutComponent implements OnInit {
   showDetailProduct(event: any, idDiv: any) {
     const idIner = 'detail' + idDiv;
     const idInerItem = 'detailItem' + idDiv;
-    debugger;
     const tag = this.document.getElementById(idIner);
     const tagItem = this.document.getElementById(idInerItem);
     if (tag?.className === 'fa fa-angle-down') {
@@ -223,7 +222,6 @@ export class CheckoutComponent implements OnInit {
         OrderCode: "Order_" + new Date().getTime()
       };
     }
-    debugger;
     this._svcPayment
       .createPayment(this._encryptSvc.encrypt(JSON.stringify(paymentModel)))
       .subscribe(
@@ -241,7 +239,6 @@ export class CheckoutComponent implements OnInit {
           },
           error: error => {
             if (error.status === 400 && error.error != undefined) {
-              debugger;
               this._swal.toast(TYPE.ERROR, error.error.errorMessage, false);;
             } else 
             { this._swal.toast(TYPE.ERROR, "Đã có lỗi xảy ra, bạn vui lòng thử lại!", false);;

@@ -271,7 +271,6 @@ export class MainService implements OnInit{
     }
 
     addToCart(product: ProductModel, quantity: number) { 
-        debugger;
         const index = this.itemsCart.findIndex(item =>item.id == product.id)
         if(index >= 0){
             this.itemsCart[index].quantity += quantity;
@@ -356,7 +355,6 @@ export class MainService implements OnInit{
             data : this.itemsCart,
             expired : date.setDate(date.getDate() + 3)
         }
-        debugger;
         let a = encodeURI(JSON.stringify(cartLocal));
         localStorage.setItem(btoa(AppConsts.myCart), btoa(a));
     }
@@ -365,7 +363,6 @@ export class MainService implements OnInit{
         if(this.itemsCart && this.itemsCart.length > 0){
             return  this.itemsCart;
         }
-debugger;
         var key = btoa(AppConsts.myCart);
         if(localStorage.getItem(key)){
            let cart =  JSON.parse(decodeURI(atob(localStorage.getItem(key) ?? "")));
@@ -411,7 +408,6 @@ debugger;
 
     /* yêu thích */
     setFavoriteToLocalStorage(){
-        debugger;
         var date = new Date();
         var favoriteLocal :ItemsFavotire;
         favoriteLocal = {

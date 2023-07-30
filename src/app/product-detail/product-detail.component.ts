@@ -260,7 +260,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
 
   addToShopingCard(product:ProductModel): void{
     if (!isNaN(this.quantity)) {
-      debugger;
       
       product.imageUrl = product.productImages[0].imageUrl;
       this._svc.addToCart(product, this.quantity);
