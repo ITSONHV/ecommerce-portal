@@ -24,11 +24,7 @@ AgMBAAE=
     }
 
     encrypt(data: string): string {
-        console.log("data" + data);
-        //var data = JSON.stringify(valueToEncrypt);
         let random = this.randomString(16);
-        console.log(random)
-
         var res = {
             HashKey: this.encryptUsingRSA(random),
             HashData: this.encryptUsingAES(data, random),
@@ -37,9 +33,7 @@ AgMBAAE=
     }
 
     encryptUsingRSA(keyRandom: string) {
-        //const cer = Forge.pki.certificateFromPem(this.publicKey);
         const publickKey = Forge.pki.publicKeyFromPem(this.publicKey);
-        //const publickKey = Forge.pki.publicKeyFromPem(bsa);
         var encrypted = publickKey.encrypt(Forge.util.encodeUtf8(keyRandom));
         return btoa(encrypted.toString());
     }

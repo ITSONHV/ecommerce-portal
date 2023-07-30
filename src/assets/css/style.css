@@ -2424,6 +2424,7 @@ a.link:hover {
 	background: none;
 	opacity: 1;
 }
+
 .pr-button .mt-button a:hover {
 	background: #e83f33;
 	color: #fff;
@@ -2524,7 +2525,7 @@ a.link:hover {
 	margin-left: 5px;
 }
 #best-sale-slider.product-flexslider {
-	margin: 20px -12px
+	margin: 5px -13px
 }
 .best-sale-pro .slider-items-products .owl-buttons .owl-prev {
 	top: 15%
@@ -6419,6 +6420,7 @@ p.note {
 .related-products-pro .product-flexslider {
 	margin-bottom: 0px;
 	margin-top: 2px;
+	padding-bottom: 35px;
 }
 .related-products-pro {
 	margin-top: 0px;
@@ -8170,3 +8172,85 @@ a.jtv-m-logo-img {
 	margin-top: 12px;
 }
 .manufacturers-box{ margin-top:15px;}
+
+
+
+/*block header*/
+.block__header {
+    margin-bottom: 40px;
+    background: #dddfe6;
+    height: 11px;
+    position: relative;
+	text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.block__header .block__header__title {
+    background: #fff;
+    font-weight: 700;
+    font-size: 24px;
+    color: #29324e;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: relative
+}
+
+.block__header .block__header__title:before {
+    left: -8px
+}
+
+.block__header .block__header__title:after,
+.block__header .block__header__title:before {
+    content: "";
+    height: 11px;
+    width: 11px;
+    background: #fff;
+    -webkit-clip-path: polygon(25% 0,100% 0,75% 100%,0 100%);
+    clip-path: polygon(25% 0,100% 0,75% 100%,0 100%);
+    position: absolute;
+    top: calc(50% - -2.0px)
+}
+.block__header .block__header__title:after {
+    right: -8px
+}
+
+@media screen and (max-width: 740px) {
+
+    .block__header {
+        margin-bottom: 40px;
+        background: #dddfe6;
+        height: 11px;
+        position: relative;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .block__header .block__header__title {
+        background: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        color: #29324e;
+        padding-left: 50px;
+        padding-right: 50px;
+        position: relative;
+        margin-top: 10px;
+    }
+
+    .block__header .block__header__title:after,
+    .block__header .block__header__title:before {
+    content: "";
+    height: 11px;
+    width: 11px;
+    background: #fff;
+    -webkit-clip-path: polygon(25% 0,100% 0,75% 100%,0 100%);
+    clip-path: polygon(25% 0,100% 0,75% 100%,0 100%);
+    position: absolute;
+    top: calc(50% - 3.0px)
+    }
+}
+/*end block*/

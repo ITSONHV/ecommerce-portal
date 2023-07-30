@@ -1,47 +1,32 @@
-<owl-carousel-o [options]="customOptions">
-  <ng-container *ngFor="let item of productRecents">
-    <ng-template carouselSlide [id]="item.id.toString()"  style="width: 0px;">
-      <div class="product-item">
-        <div class="item-inner">
-          <div class="product-thumbnail">
-            <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-              (click)="handleViewDetailProduct($event,item)">
-              <figure> <img class="first-img" [src]='urlImg + item.productImages[0]?.imageUrl' alt="{{item.productName}}"> 
-                <img class="hover-img" [src]='urlImg + item.productImages[0]?.imageUrl' alt="{{item.productName}}"></figure>
-              </a> </div>
-            <div class="pr-info-area">
-              <div class="pr-button">
-                <div class="mt-button add_to_wishlist"> <a href="wishlist.html"> <i class="fa fa-heart-o"></i> </a> </div>
-                <!-- <div class="mt-button add_to_compare"> <a href="compare.html"> <i class="fa fa-link"></i> </a> </div> -->
-                <div class="mt-button quick-view"> <a href="quick_view.html"> <i class="fa fa-search"></i> </a> </div>
-              </div>
-            </div>
-          </div>
-          <div class="item-info">
-            <div class="info-inner">
-              <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-              (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a> </div>
-              <div class="item-content">
-                <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                <div class="item-price">
-                  <div class="price-box"> <span *ngIf="item.promotionPrice == 0" class="regular-price">
-                      <span class="price">{{item.price | currency: "VND" }}</span> </span>
-                    <ng-container *ngIf="item.promotionPrice > 0">
-                      <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span
-                          class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
-                      <p class="old-price"> <span class="price-label">Giá cũ:</span> <span
-                          class="price"> {{item.price | currency: "VND" }} </span> </p>
-                    </ng-container>
-                  </div>
-                </div>
-                <div class="pro-action">
-                  <button type="button" class="add-to-cart"><span> GIỎ HÀNG</span> </button>
-                </div>
-              </div>
+<ngx-slick-carousel class="carousel home__product" #slickModal="slick-carousel" [config]="slideConfig"
+  (init)="slickInit($event)">
+  <div ngxSlickItem *ngFor="let item of productRecents" class="slide">
+    <div class="product">
+      <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
+      <div class="product__thumb"><a [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
+          class="product__link"><img [src]='urlImg + item.imageUrl' alt="{{item.productName}}"></a>
+        <div class="pr-button-info-area">
+            <div class="add-to-wish" style="margin-bottom: 14px;" (click)="addToFavorite(item)"> <a> <i class="fa fa-heart-o"></i> </a> </div>
+            <div class="view-quick-view" (click)="openModalQuickView(item)"> <a> <i class="fa fa-search"></i> </a> </div>
+        </div>
+      </div>
+      <div class="product__bottom">
+        <div class="product__title"><a [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
+            class="product__link">{{item.productName}}</a></div>
+        <div class="product__rate">
+          <div class="rate__star" *ngIf="item?.rate >= 0">
+            <div class="rate_item">
+              <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item?.rate)"></i>
+              <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item?.rate)"></i>
+              <span class="rate__text"> &nbsp;{{item?.countRate}} đánh giá</span>
             </div>
           </div>
         </div>
+        <div class="product__price"><span class="price__selling">{{item.promotionPrice | currency: "VND" }}</span> <span
+            class="price__old">{{item.price | currency: "VND" }}</span></div> <button type="button" (click)="addToShopingCard(item)"
+          class="add-to-cart"><i class="fa fa-shopping-cart"></i> &nbsp;GIỎ HÀNG</button>
       </div>
-  </ng-template>
-</ng-container>
-</owl-carousel-o>
+    </div>
+  </div>
+</ngx-slick-carousel>
+<app-quick-view (sendEventToParent)="listenEventFromChild($event)" *ngIf="isShowQuickView" productSlug="{{this.productSlugToChild}}"></app-quick-view>

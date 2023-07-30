@@ -271,6 +271,7 @@ export class MainService implements OnInit{
     }
 
     addToCart(product: ProductModel, quantity: number) { 
+        debugger;
         const index = this.itemsCart.findIndex(item =>item.id == product.id)
         if(index >= 0){
             this.itemsCart[index].quantity += quantity;
@@ -354,18 +355,20 @@ export class MainService implements OnInit{
         cartLocal = {
             data : this.itemsCart,
             expired : date.setDate(date.getDate() + 3)
-        } 
-        localStorage.setItem(btoa(AppConsts.myCart), btoa(JSON.stringify(cartLocal)));
+        }
+        debugger;
+        let a = encodeURI(JSON.stringify(cartLocal));
+        localStorage.setItem(btoa(AppConsts.myCart), btoa(a));
     }
 
     getCartToLocalStorage(){
         if(this.itemsCart && this.itemsCart.length > 0){
-            return this.itemsCart;
+            return  this.itemsCart;
         }
-
+debugger;
         var key = btoa(AppConsts.myCart);
         if(localStorage.getItem(key)){
-           let cart =  JSON.parse(atob(localStorage.getItem(key) ?? ""));
+           let cart =  JSON.parse(decodeURI(atob(localStorage.getItem(key) ?? "")));
            this.itemsCart = cart.data;
            var date = new Date().getTime();
            var dateCart = cart.expired;
@@ -378,6 +381,7 @@ export class MainService implements OnInit{
 
     // lưu product vừa xem
     setProductRecent(product: any) {
+       product.imageUrl = product.productImages[0]?.imageUrl;
         if(localStorage.getItem("product-recent") !== null &&
            localStorage.getItem("product-recent")?.length != 0)
         {

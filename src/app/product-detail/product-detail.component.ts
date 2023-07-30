@@ -1,4 +1,5 @@
-import { Component, OnInit ,ViewEncapsulation} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, Inject, OnInit ,ViewEncapsulation} from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, Meta, SafeResourceUrl, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -15,7 +16,7 @@ import { SwalService, TYPE } from 'src/services/swal.service';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, AfterViewInit {
   public slug: string;
   public product : any;
   public productSale : any;
@@ -37,33 +38,75 @@ export class ProductDetailComponent implements OnInit {
   });
   submitted = false;
 
+  slideConfig = {
+    "slidesToShow": 4,
+    "slidesToScroll": 4,
+    "autoplay": true,
+    "autoplaySpeed": 3000,
+    "infinity": true,
+    "centerMode": false,
+    "pauseOnFocus": true,
+    "pauseOnHover": true,
+    "swipeToSlide": true,
+    "variableWidth": false,
+    "centerPadding": "0px",
+    "arrows": true,
+    "responsive": [
+      {
+        "breakpoint": 960,
+        "settings": {
+          "arrows": false,
+          "centerMode": false,
+          "slidesToShow": 3,
+           "centerPadding": "0px",
+        },
+      },
+      {
+        "breakpoint": 480,
+        "settings": {
+          "arrows": false,
+          "centerMode": false,
+          "slidesToShow": 2, 
+            "centerPadding": "0px",
+        },
+      },
+    ],
+  };
+
+  slickInit(e :any) {
+    console.log('slick initialized');
+  }
+
+
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
-    touchDrag: true,
+    touchDrag: false,
     pullDrag: false,
     items:6,
     dots: false,
     autoplayTimeout: 3000,
     autoplaySpeed: 1000,
-    autoplay:true,
+    autoplay: false,
+    autoWidth: true,
     navSpeed: 700,
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
         items: 2,
+        autoWidth: true,
       },
       400: {
-        items: 3
+        items: 3,autoWidth: true,
       },
       640: {
-        items: 4
+        items: 4,autoWidth: true,
       },
       900: {
-        items: 4
+        items: 4,autoWidth: true,
       },
       1024: {
-        items: 4
+        items: 4,autoWidth: true,
       }
     },
     nav: false
@@ -75,6 +118,7 @@ export class ProductDetailComponent implements OnInit {
     private meta: Meta,
     private titleService: Title,
     private fb: FormBuilder,
+    @Inject(DOCUMENT) private document: Document ,
  ) {
   }
   ngOnInit(): void {
@@ -89,9 +133,16 @@ export class ProductDetailComponent implements OnInit {
     this.getProductSales(6);
     this.initForm();
   }
+
   ngAfterViewInit(): void {
-    
+    //  var items:any  = this.document.getElementsByClassName('slick-track');
+  
+    // for (let i = 0; i < items.length; i++) {
+    //   let element = items[i];
+    //   element.style.float = 'left';
+    // }
   }
+
   getProductbyProductNameSlug(slug : string){
     this._svc.getProductbyProductNameSlug(slug).subscribe(
       (respones: ObjectModel)=>{
@@ -100,7 +151,7 @@ export class ProductDetailComponent implements OnInit {
           this._svc.setProductRecent(this.product);
 
           this.meta.updateTag({ name: 'description', content: this.product.seoDescription ?? ""});
-          this.titleService.setTitle(this.product.seoTitle ?? "");
+          this.titleService.setTitle(this.product.seoTitle ?? "DMC Store");
           this.meta.updateTag({ name: 'keywords', content: this.product.seoKeyword ?? ""});
           
           this.imgfirst = this.product.productImages[0]?.imageUrl??"";
@@ -285,7 +336,6 @@ export class ProductDetailComponent implements OnInit {
     }
 
     var dataReq = {
-
       productID: this.product.id,
       content:   this.reviewForm.get('content')?.value,
       rate:   this.reviewForm.get('rate')?.value,
@@ -294,7 +344,7 @@ export class ProductDetailComponent implements OnInit {
     };
     this._svc.addReviewProduct(JSON.stringify(dataReq)).subscribe(
       (result: ResponseBase)=>{
-        debugger;
+      
         if (result == null || result.statusCode != 200) {
           this._swal.toast(TYPE.ERROR, "Đã có lỗi xảy ra, bạn vui lòng thử lại!.", false);;
        }else{
@@ -305,6 +355,7 @@ export class ProductDetailComponent implements OnInit {
       }
     );
   }
+
 
   onReset(): void {
     this.submitted = false;

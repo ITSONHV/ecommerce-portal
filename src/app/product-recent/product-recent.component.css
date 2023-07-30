@@ -14,16 +14,11 @@
     vertical-align: middle;
     text-indent: 17px;
 }
-.product-item{
+/* .product-item{
     max-width: 178.5px; 
     max-height: 300px;
-}
+} */
 .container{
     margin-bottom: 30px;
 }
 
-.owl-carousel{
-    display: flex !important;  
-    flex-direction: row;   
-    justify-content: left; 
-}

@@ -19,6 +19,7 @@ import { SwalService, TYPE } from 'src/services/swal.service';
 export class CheckoutComponent implements OnInit {
   listBanks: any;
   cartsPayment: ICart[] = [];
+  paymentMethodSelected = 1;
   /* info*/
   infoCustomer: FormGroup = new FormGroup({
     name: new FormControl(''),
@@ -181,19 +182,19 @@ export class CheckoutComponent implements OnInit {
     this.createPayment();
   }
 
-  createPayment(){
+  async createPayment() {
+    this.spinner.show();
     let paymentModel: PaymentModel;
-    let productReqs : ProductOrderRequest[] = [];
-      this.cartsPayment.map(item => {
+    let productReqs: ProductOrderRequest[] = [];
+    this.cartsPayment.map(item => {
 
-        let proReqItem : ProductOrderRequest= {
-          ProductID : item.id,
-          Quantity : item.quantity
-        };
-        productReqs.push(proReqItem);
-      });
- debugger;
-    if(this.useInfoCustomer){
+      let proReqItem: ProductOrderRequest = {
+        ProductID: item.id,
+        Quantity: item.quantity
+      };
+      productReqs.push(proReqItem);
+    });
+    if (this.useInfoCustomer) {
       paymentModel = {
         CustomerPhone: this.f['phone'].value,
         CustomerAddress: this.f['address'].value,
@@ -202,9 +203,10 @@ export class CheckoutComponent implements OnInit {
         ShippingAddress: this.f['address'].value,
         ShippingName: this.f['name'].value,
         ShippingPhone: this.f['phone'].value,
-        PaymentType : 1,
-        Note : '',
-        ProductOrderRequests : productReqs
+        PaymentType: this.paymentMethodSelected,
+        Note: this.fship['note'].value,
+        ProductOrderRequests: productReqs,
+        OrderCode: "Order_" + new Date().getTime()
       };
     } else {
       paymentModel = {
@@ -215,11 +217,39 @@ export class CheckoutComponent implements OnInit {
         ShippingAddress: this.fship['address'].value,
         ShippingName: this.fship['name'].value,
         ShippingPhone: this.fship['phone'].value,
-        PaymentType : 1,
-        Note : '',
-        ProductOrderRequests : productReqs
+        PaymentType: this.paymentMethodSelected,
+        Note: this.fship['note'].value,
+        ProductOrderRequests: productReqs,
+        OrderCode: "Order_" + new Date().getTime()
       };
     }
+    debugger;
+    this._svcPayment
+      .createPayment(this._encryptSvc.encrypt(JSON.stringify(paymentModel)))
+      .subscribe(
+        {
+          next: data => {
+            if (data == null || data.statusCode != 200) {    
+              this._swal.toast(TYPE.ERROR, data.errorMessage, false);;
+            } else {
+              this._svc.clearItemsCart([]);
+              this.cartsPayment = [];
+              this._swal.toast(TYPE.SUCCESS, "Đặt hàng thành công!.", false);       
+            }
+
+            this.spinner.hide();
+          },
+          error: error => {
+            if (error.status === 400 && error.error != undefined) {
+              debugger;
+              this._swal.toast(TYPE.ERROR, error.error.errorMessage, false);;
+            } else 
+            { this._swal.toast(TYPE.ERROR, "Đã có lỗi xảy ra, bạn vui lòng thử lại!", false);;
+            }
+
+            this.spinner.hide();
+        }}
+      );
   }
 
   useInforCustomerToShipping(event: any) {
@@ -281,6 +311,9 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
+  onChangePaymentMethod(method: string) {
+    this.paymentMethodSelected = Number(method);
+  }
   sumPriceItemsInCartPayment(): number {
     return this.cartsPayment.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }

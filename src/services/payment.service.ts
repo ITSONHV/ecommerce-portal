@@ -37,16 +37,9 @@ export class PaymentService implements OnInit{
         }),
     };
 
-    getGroupSerrchByCategoryID(cateID : number): Observable<ObjectModel> {
-        return this.http.get<any>(`${this.urlApi}${AppConfigs.urls.getGroupSerrchByCategoryID}${cateID}`)
-            .pipe(
-                retry(3), // retry a failed request up to 3 times
-                catchError(this.handleError), // then handle the error
-                mergeMap((response_: any) => {
-                    return of<ObjectModel>(<ObjectModel>response_);
-                })
-            )
-    };
+    createPayment(data: string): Observable<ResponseBase> { 
+        return this.http.post<any>(this.urlApi + AppConfigs.urls.createPayment, data,this.httpOptions);
+    }
 
     /*api gọi verify cart*/
     verifyDataPayment(data: string): Observable<ResponseBase> { 
@@ -59,6 +52,9 @@ export class PaymentService implements OnInit{
 
     getServerErrorMessage(error: HttpErrorResponse): string {
         switch (error.status) {
+            case 400: {
+                return `Bad request: ${error.message}`;
+            } 
             case 404: {
                 return `Not Found: ${error.message}`;
             }
@@ -77,14 +73,16 @@ export class PaymentService implements OnInit{
     private handleError(error: HttpErrorResponse) {
         if (error.status === 0) {
           // A client-side or network error occurred. Handle it accordingly.
-          console.error('An error occurred:', error.error);
+          console.log('An error occurred:', error.error);
         } else {
           // The backend returned an unsuccessful response code.
           // The response body may contain clues as to what went wrong.
-          console.error(
+          console.log(
             `Backend returned code ${error.status}, body was: `, error.error);
         }
         // Return an observable with a user-facing error message.
         return throwError(() => new Error('Something bad happened; please try again later.'));
       }
+
+
 }

@@ -109,9 +109,9 @@
               </div> 
               <div class="group-info pay-method">
                 <div class="title2">Hình thức thanh toán</div>
-                <div class="input-group"><input type="radio" value="1" name="pay-method"
+                <div class="input-group"><input #paymentCash type="radio" value="1" name="pay-method" (onchange)="onChangePaymentMethod(paymentCash.value)"
                     checked="checked" class="input-radio"> <label for="">Thanh toán tại nơi giao hàng</label></div>
-                <div class="input-group"><input type="radio" value="2" name="pay-method"
+                <div class="input-group"><input #paymentTransfer type="radio" value="2" name="pay-method" (onchange)="onChangePaymentMethod(paymentTransfer.value)"
                     class="input-radio"> <label for="">Thanh toán bằng chuyển khoản</label></div>
                 <div class="bank-option">
                   <div *ngFor="let item of listBanks">

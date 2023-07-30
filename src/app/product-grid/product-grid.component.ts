@@ -91,6 +91,7 @@ export class ProductGridComponent implements OnInit  {
   }
 
   counterRate(i: number) {
+    
     return new Array(i);
   }
 
@@ -333,6 +334,19 @@ export class ProductGridComponent implements OnInit  {
   }
   showAddFavorite(){
     this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
+  }
+
+  handleViewDetailProduct(event: any, product: any): void {
+    const queryParams: Params = { slug: product.productNameSlug };
+    this.router.navigate(
+      ['/chi-tiet'],
+      {
+        relativeTo: this._router,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    )
+    event.preventDefault();
   }
 
   ngOnDestroy() {
