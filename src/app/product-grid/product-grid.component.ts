@@ -108,11 +108,12 @@ export class ProductGridComponent implements OnInit  {
       this.sortValue,
       this.typeSearch).subscribe(
         (respones: ApiPagingResponse<PagingModel>) => {
-        
+          debugger;
           this.totalRecords = respones.data.total;
           this.listProduct = respones.data.data;
           this.visibleItems = { items: respones.data.data, total: respones.data.total };
           this.isLoadComplete = true;
+          console.log(this.visibleItems);
           this.spinner.hide();
           window.scroll(0, 50); // scroll lên 1 tý sau khi change value
         },

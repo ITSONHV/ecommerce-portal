@@ -1,70 +1,69 @@
 <app-slider></app-slider>
 <!-- service section -->
 <ng-container *ngIf="isLoadComplete">
-  <div class="inner-box">
-    <div class="container">
-      <div class="row">
-          <div class="block__header" style="margin-top: 25px;">
-            <h2 class="block__header__title">ƯU ĐÃI ĐẶC BIỆT</h2>
-          </div>
-        <!-- Banner -->
-        <div class="col-md-4 top-banner hidden-sm">
-          <div class="jtv-banner3">
-            <div class="jtv-banner3-inner" style="text-align: center;">
-              <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
-                  src="../../assets/images/banner_quangcao_uudai.jpg" alt="HTML template"
-                  style="max-height: 338px;height: 338px;"></a>
-              <div class="hover_content">
-                <div class="hover_data">
-        
-                </div>
-              </div>
+  <div class="container">
+    <div class="row">
+      <div class="block__header" style="margin-top: 25px;">
+        <h2 class="block__header__title">ƯU ĐÃI ĐẶC BIỆT</h2>
+      </div>
+      <!-- Banner -->
+      <div class="col-md-4 top-banner hidden-sm">
+        <div class="jtv-banner3">
+          <div class="jtv-banner3-inner" style="text-align: center;">
+            <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
+                src="../../assets/images/banner_quangcao_uudai.jpg" alt="HTML template"
+                style="max-height: 338px;height: 338px;"></a>
+            <div class="hover_content">
             </div>
           </div>
         </div>
-        <!-- Best Sale -->
-        <div class="col-sm-12 col-md-8">      
-            <div class="slider-items-products">
-              <div id="best-sale-slider" class="product-flexslider home__product">
-                      <div *ngIf="this.listProductSales">
-                        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfigProductSales">
-                          <div ngxSlickItem *ngFor="let item of listProductSales.data" class="slide">
-                            <div class="product productDiscount">
-                              <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
-                              <div class="product__thumb"><a [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
-                                  class="product__link"><img [src]='urlImg + item.imageUrl' alt="{{item.productName}}"></a>
-                                <div class="pr-button-info-area">
-                                  <div class="add-to-wish" style="margin-bottom: 14px;" (click)="addToFavorite(item)"> <a> <i
-                                        class="fa fa-heart-o"></i> </a> </div>
-                                  <div class="view-quick-view" (click)="openModalQuickView(item)"> <a> <i class="fa fa-search"></i> </a>
-                                  </div>
-                                </div>
-                              </div>
-                      
-                              <div class="product__bottom">
-                                <div class="product__title"><a [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
-                                    class="product__link">{{item.productName}}</a></div>
-                                <div class="product__rate">
-                                  <div class="rate__star" *ngIf="item?.rate >= 0">
-                                    <div class="rate_item">
-                                      <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item?.rate)"></i>
-                                      <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item?.rate)"></i>
-                                      <span class="rate__text"> &nbsp;{{item?.countRate}} đánh giá</span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="product__price"><span class="price__selling">{{item.promotionPrice | currency: "VND" }}</span>
-                                  <span class="price__old">{{item.price | currency: "VND" }}</span></div> <button type="button"
-                                  (click)="addToShopingCard(item)" class="add-to-cart"><i class="fa fa-shopping-cart"></i> &nbsp;GIỎ
-                                  HÀNG</button>
-                              </div>
-                            </div>
-                          </div>
-                        </ngx-slick-carousel>
+      </div>
+      <!-- Best Sale -->
+      <div class="col-sm-12 col-md-8">
+        <div>
+          <div class="home__product">
+            <div *ngIf="this.listProductSales">
+              <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfigProductSales">
+                <div ngxSlickItem *ngFor="let item of listProductSales.data" class="slide">
+                  <div class="product">
+                    <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
+                    <div class="product__thumb"><a [routerLink]="['/chi-tiet']"
+                        (click)="handleViewDetailProduct($event,item)" class="product__link"><img
+                          [src]='urlImg + item.imageUrl' alt="{{item.productName}}"></a>
+                      <div class="pr-button-info-area">
+                        <div class="add-to-wish" style="margin-bottom: 14px;" (click)="addToFavorite(item)"> <a> <i
+                              class="fa fa-heart-o"></i> </a> </div>
+                        <div class="view-quick-view" (click)="openModalQuickView(item)"> <a> <i
+                              class="fa fa-search"></i> </a>
+                        </div>
                       </div>
-              </div>
+                    </div>
+
+                    <div class="product__bottom">
+                      <div class="product__title"><a [routerLink]="['/chi-tiet']"
+                          (click)="handleViewDetailProduct($event,item)" class="product__link">{{item.productName}}</a>
+                      </div>
+                      <div class="product__rate">
+                        <div class="rate__star" *ngIf="item?.rate >= 0">
+                          <div class="rate_item">
+                            <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item?.rate)"></i>
+                            <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item?.rate)"></i>
+                            <span class="rate__text"> &nbsp;{{item?.countRate}} đánh giá</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product__price"><span class="price__selling">{{item.promotionPrice | currency: "VND"
+                          }}</span>
+                        <span class="price__old">{{item.price | currency: "VND" }}</span>
+                      </div> <button type="button" (click)="addToShopingCard(item)" class="add-to-cart"><i
+                          class="fa fa-shopping-cart"></i> &nbsp;GIỎ
+                        HÀNG</button>
+                    </div>
+                  </div>
+                </div>
+              </ngx-slick-carousel>
             </div>
-         
+          </div>
         </div>
       </div>
     </div>
@@ -72,107 +71,44 @@
 
   <!-- All products-->
   <div class="container">
-    <div class="">
+    <div class="home-tab">
       <div class="block__header">
         <h2 class="block__header__title">SẢN PHẨM BÁN CHẠY</h2>
       </div>
-      <div id="productTabContent" class="">
-        <div class="" id="computer">
-          <!-- <div class="featured-pro"> -->
-          <!-- <div class="slider-items-products"> -->
-          <div id="computer-slider" class="home__product">
-            <!-- <owl-carousel-o [options]="customBestSaleProduct">
-              <ng-container *ngFor="let item of listProductBestSelling?.data">
-                <ng-template carouselSlide [id]="item.id.toString()"> -->
-                  <div *ngIf="this.listProductBestSelling">
-                    <app-product-recent [listProduct]="this.listProductBestSelling?.data" [isAutoPlay]="false"></app-product-recent>
-                  </div>
-                  <!-- <div class="product-item">
-                        <div class="item-inner">
-                          <div class="product-thumbnail">
-                            <div class="icon-new-label new-left">New</div>
-                            <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                (click)="handleViewDetailProduct($event,item)">
-                                <figure> <img class="first-img" img class="first-img" [src]="urlImg + item.imageUrl"
-                                    alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl"
-                                    alt="{{item.productName}}"></figure>
-                              </a> </div>
-                            <div class="pr-info-area">
-                              <div class="pr-button">
-                                <div class="mt-button add_to_wishlist"> <a (click)="addToFavorite(item)"> <i
-                                      class="fa fa-heart-o"></i> </a> </div>
-                                <div class="mt-button quick-view"> <a (click)="openModalQuickView(item)"> <i
-                                      class="fa fa-search"></i> </a> </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                  (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a></div>
-                              <div class="item-content">
-                                <div class="rating">
-                                  <ng-container *ngIf="item.rate >= 0">
-                                    <i class="fa fa-star" *ngFor="let rate of counterRate(item.rate)"></i>
-                                    <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
-                                  </ng-container>
-                                </div>
-                                <div class="item-price">
-                                  <div class="price-box"> <span *ngIf="item.promotionPrice == 0" class="regular-price">
-                                      <span class="price">{{item.price | currency: "VND" }}</span> </span>
-                                    <ng-container *ngIf="item.promotionPrice > 0">
-                                      <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span
-                                          class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
-                                      <p class="old-price"> <span class="price-label">Giá cũ:</span> <span
-                                          class="price"> {{item.price | currency: "VND" }} </span> </p>
-                                    </ng-container>
-                                  </div>
-                                </div>
-                                <div class="pro-action">
-                                  <button type="button" (click)="addToShopingCard(item)" class="add-to-cart"><span><i class="fa fa-shopping-cart"></i>&nbsp;Giỏ hàng</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> 
-                </ng-template>
-              </ng-container>
-            </owl-carousel-o>-->
+      <div>
+        <div>
+          <div>
+            <div *ngIf="this.listProductBestSelling">
+              <app-product-recent [listProduct]="this.listProductBestSelling?.data"
+                [isAutoPlay]="false"></app-product-recent>
+            </div>
           </div>
-          <!-- </div> -->
-          <!-- </div> -->
         </div>
       </div>
     </div>
   </div>
   <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center div-view-extra ">
+    <div class="row home-tab">
+      <div class="col-md-12 text-center" >
         <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 2}" class="but_medium2"><i
             class="fa fa-shopping-cart"></i>&nbsp; XEM THÊM</a>
       </div>
     </div>
   </div>
-  <div class="container newproduct">
+  <div class="container">
     <div class="home-tab">
-      <div class="block__header">
-        <h2 class="block__header__title">SẢN PHẨM MỚI</h2>
-        <!-- <ul class="nav home-nav-tabs home-product-tabs">
-          <li class="active"><a href="#computer" data-toggle="tab" aria-expanded="false">Computer</a></li>
-          <li><a href="#smartphone" data-toggle="tab" aria-expanded="false">Smartphone</a></li>
-          <li><a href="#watches" data-toggle="tab" aria-expanded="false">Watches</a></li>
-          <li><a href="#photo" data-toggle="tab" aria-expanded="false">Photo & Camera</a></li>
-        </ul> -->
-      </div>
-      <div id="productTabContent" class="tab-content">
-        <div class="tab-pane active in" id="computer">
-          <div class="featured-pro">
-            <div class="slider-items-products">
-              <div id="computer-slider" class="product-flexslider hidden-buttons">
-                  <div *ngIf="this.listProductIsNew">
-                    <app-product-recent [listProduct]="this.listProductIsNew.data" [isAutoPlay]="false"></app-product-recent>
-                  </div>
+    <div class="block__header">
+      <h2 class="block__header__title">SẢN PHẨM MỚI</h2>
+    </div>
+  </div>
+    <div>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div *ngIf="this.listProductIsNew">
+                <app-product-recent [listProduct]="this.listProductIsNew.data"
+                  [isAutoPlay]="false"></app-product-recent>
               </div>
             </div>
           </div>
@@ -181,82 +117,27 @@
     </div>
   </div>
   <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center div-view-extra ">
+    <div class="row home-tab">
+      <div class="col-md-12 text-center">
         <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 3}" class="but_medium2"><i
             class="fa fa-shopping-cart"></i>&nbsp; XEM THÊM</a>
       </div>
     </div>
   </div>
-  <div class="container newproduct">
+  <div class="container">
     <div class="home-tab">
-      <div class="block__header">
-        <h2 class="block__header__title">SẢN PHẨM NỔI BẬT</h2>
-      </div>
-      <div id="productTabContent" class="tab-content">
-        <div class="tab-pane active in" id="computer">
-          <div class="featured-pro">
-            <div class="slider-items-products">
-              <div id="computer-slider" class="product-flexslider hidden-buttons">
-                <div *ngIf="this.listProductIsHot">
-                  <app-product-recent [listProduct]="this.listProductIsHot?.data" [isAutoPlay]="false"></app-product-recent>
-                </div>
-                <!-- <owl-carousel-o [options]="customHotProduct">
-                  <ng-container *ngFor="let item of listProductIsHot?.data">
-                    <ng-template carouselSlide [id]="item.id.toString()">
-                      <div class="product-item">
-                        <div class="item-inner">
-                          <div class="product-thumbnail">
-                            <div class="icon-hot-label hot-left">Hot</div>
-                            <div class="pr-img-area"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                (click)="handleViewDetailProduct($event,item)">
-                                <figure> <img class="first-img" img class="first-img" [src]="urlImg + item.imageUrl"
-                                    alt="{{item.productName}}"> <img class="hover-img" [src]="urlImg + item.imageUrl"
-                                    alt="{{item.productName}}"></figure>
-                              </a> </div>
-                            <div class="pr-info-area">
-                              <div class="pr-button">
-                                <div class="mt-button add_to_wishlist"> <a (click)="addToFavorite(item)"> <i
-                                      class="fa fa-heart-o"></i> </a> </div>
-                                <div class="mt-button quick-view"> <a (click)="openModalQuickView(item)"> <i
-                                      class="fa fa-search"></i> </a> </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="{{item.productName}}" [routerLink]="['/chi-tiet']"
-                                  (click)="handleViewDetailProduct($event,item)">{{item.productName}}</a></div>
-                              <div class="item-content">
-                                <div class="rating">
-                                  <ng-container *ngIf="item.rate >= 0">
-                                    <i class="fa fa-star" *ngFor="let rate of counterRate(item.rate)"></i>
-                                    <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
-                                  </ng-container>
-                                </div>
-                                <div class="item-price">
-                                  <div class="price-box"> <span *ngIf="item.promotionPrice == 0" class="regular-price">
-                                      <span class="price">{{item.price | currency: "VND" }}</span> </span>
-                                    <ng-container *ngIf="item.promotionPrice > 0">
-                                      <p class="special-price"> <span class="price-label">Giá khuyến mãi</span> <span
-                                          class="price"> {{item.promotionPrice | currency: "VND" }} </span> </p>
-                                      <p class="old-price"> <span class="price-label">Giá cũ:</span> <span
-                                          class="price"> {{item.price | currency: "VND" }} </span> </p>
-                                    </ng-container>
-                                  </div>
-                                </div>
-                                <div class="pro-action">
-                                  <button type="button" (click)="addToShopingCard(item)" class="add-to-cart"><span><i
-                                        class="fa fa-shopping-cart"></i>&nbsp;Giỏ hàng</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </ng-template>
-                  </ng-container>
-                </owl-carousel-o> -->
+    <div class="block__header">
+      <h2 class="block__header__title">SẢN PHẨM NỔI BẬT</h2>
+    </div>
+  </div>
+    <div>
+      <div>
+        <div>
+          <div>
+            <div class="">
+              <div *ngIf="this.listProductIsHot">
+                <app-product-recent [listProduct]="this.listProductIsHot?.data"
+                  [isAutoPlay]="false"></app-product-recent>
               </div>
             </div>
           </div>
@@ -265,18 +146,16 @@
     </div>
   </div>
   <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center div-view-extra ">
+    <div class="row home-tab">
+      <div class="col-md-12 text-center">
         <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 4}" class="but_medium2"><i
             class="fa fa-shopping-cart"></i>&nbsp; XEM THÊM</a>
       </div>
     </div>
   </div>
-  <div class="container newproduct">
-    <div class="home-tab">
-      <div class="block__header">
-        <h2 class="block__header__title">DANH MỤC SẢN PHẨM</h2>
-      </div>
+  <div class="container">
+    <div class="block__header home-tab">
+      <h2 class="block__header__title">DANH MỤC SẢN PHẨM</h2>
     </div>
     <div class="row" *ngIf="this.allMenu &&this.allMenu != '' ">
       <ng-container *ngFor="let item of allMenu; let i= index; ">
@@ -287,12 +166,10 @@
                   [src]="urlImg + item.imageUrl" alt="{{item.categoryName}}"></a>
               <h4><a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)">{{item.categoryName}}</a>
               </h4>
-              <a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)" class="read-more">Xem
-                ngay</a>
+              <a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)" class="read-more">Xem ngay</a>
             </div>
           </div>
         </div>
-
       </ng-container>
     </div>
   </div>
@@ -303,7 +180,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 col-xs-12 div-view-extra-bottom">
+      <div class="col-md-12 col-xs-12">
         <div class="our-clients">
           <div class="slider-items-products">
             <div id="our-clients-slider" class="product-flexslider hidden-buttons">
@@ -330,7 +207,7 @@
       <h2 class="block__header__title">SẢN PHẨM VỪA XEM</h2>
     </div>
    </div>
-   <div id="productTabContent" class="tab-content">
+   <div id="productTabContent">
     <div class="tab-pane active in" id="computer">
       <div class="featured-pro">
         <div class="slider-items-products">

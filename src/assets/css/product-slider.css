@@ -54,7 +54,7 @@
 .product .product__bottom .product__title {
     padding: 10px;
     margin-bottom: 7px;
-    height: 2.5em;
+    height: 3.5em;
     overflow: hidden
 }
 
@@ -1201,7 +1201,7 @@
     }
 
     .category .category__content .category__product-list .product-list .product .product__rate .rate__star i {
-        font-size: 9px
+        font-size: 13px
     }
 
     .category .category__content .category__product-list .product-list .product .product__rate .rate__text {
@@ -1210,8 +1210,8 @@
 
     .category .category__content .category__product-list .product-list .product .product__price {
         display: flex;
-        flex-direction: column;
-        height: 2em
+        flex-direction: row;
+        height: 2.5em
     }
 
     .category .category__content .category__product-list .product-list .product .product__price .price__selling {
@@ -1276,7 +1276,7 @@
     .product:hover .product__bottom .product__price,.product:hover .product__bottom .product__rate {
         visibility: visible!important;
         opacity: 1!important;
-        height: 2em
+        /* height: 2em */
     }
 
     .product:hover .product__bottom .add-to-cart {
@@ -1293,10 +1293,25 @@
           opacity: 0;
     }
 
-
     .home__product  .product {
-        border: 1px solid #dddfe6;
+        /* border: 1px solid #dddfe6; */
     }
+
+    .home-tab {
+        margin-bottom: 15px;
+        margin-top: 30px;
+        padding: 0;
+        font-size: 14px;
+    }
+
+        .container {
+            width: calc(100% - 28px);
+            overflow: hidden;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
 
     .home__product .product .product__thumb {
         min-height: auto
@@ -1312,7 +1327,7 @@
     }
 
     .home__product  .product .product__rate .rate__star i {
-        font-size: 9px
+        font-size: 13px
     }
 
     .home__product  .product .product__rate .rate__text {
@@ -1322,7 +1337,7 @@
     .home__product  .product .product__price {
         display: flex;
         flex-direction: row;
-        height: 2em
+        height: 2.5em
     }
 
     .home__product  .product .product__price .price__selling {
