@@ -1103,7 +1103,7 @@
 
 
 @media screen and (max-width: 1024px) {
-    
+
     .category .banner--list__cat img {
         margin-top: 50px;
         max-width: 100%
@@ -1255,15 +1255,47 @@
     .home__product {
         border: none
     }
-
-    .home__product  {
+    .home__product {
         /* display: grid;
-        grid-template-columns: 50% 50% */
+            grid-template-columns: 50% 50% */
     }
+
+    /*ẩn khi màn hỉnh nhỏ ko cho howver*/
+    .home__product .product .add-to-cart {
+        display: none
+    }
+
+    .product:hover .product__bottom {
+        background: #fff!important
+    }
+
+    .product:hover .product__bottom .product__link {
+        color: #000!important
+    }
+
+    .product:hover .product__bottom .product__price,.product:hover .product__bottom .product__rate {
+        visibility: visible!important;
+        opacity: 1!important;
+        height: 2em
+    }
+
+    .product:hover .product__bottom .add-to-cart {
+        visibility: hidden;
+        opacity: 0
+    }
+
+    .product:hover .product__thumb .view-quick-view{
+        visibility: hidden;
+           opacity: 0;
+    }
+    .product:hover .product__thumb  .add-to-wish{
+        visibility: hidden;
+          opacity: 0;
+    }
+
 
     .home__product  .product {
         border: 1px solid #dddfe6;
-        margin-right: 5px;
     }
 
     .home__product .product .product__thumb {

@@ -100,8 +100,11 @@
 }
 
 
-/* fix */
-.owl-carousel .owl-item img{
-	display: block !important;
-	width: auto !important;
-}
+@media screen and (max-width: 1024px) {
+
+  
+	  .div-view-extra{
+		margin-top: 25px;
+		  font-size: 14px;
+	  }
+  }
