@@ -25,10 +25,7 @@
     transform: skew(12deg)
 }
 .home__product .product {
-    border-right: 1px solid #dddfe6;
-    border-top: 1px solid #dddfe6;
-    border-bottom: 1px solid #dddfe6;
-    border-left: 1px solid #dddfe6;
+    border: 1px solid #dddfe6;
 }
 .product .product__thumb {
     display: flex;
@@ -1102,6 +1099,8 @@
 
 
 
+
+
 @media screen and (max-width: 1024px) {
 
     .category .banner--list__cat img {
@@ -1304,15 +1303,6 @@
         font-size: 14px;
     }
 
-        .container {
-            width: calc(100% - 28px);
-            overflow: hidden;
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: auto;
-        }
-
     .home__product .product .product__thumb {
         min-height: auto
     }
@@ -1354,4 +1344,30 @@
         width: 55px;
         height: 24px
     }
+
+    
+
+
+    .container-home {
+        width: calc(100% )!important;
+        overflow: hidden!important;
+        /* padding-right: 15px;
+        padding-left: 15px; */
+        margin: auto!important;
+        /* margin-left: auto!important; */
+    }
+
+    .home__product .slick-list .product {
+        border: 1px solid #dddfe6;
+    }
+}
+
+
+
+/*reponsive kaka*/
+.container-home {
+    width: 1110px;
+    margin: auto;
+      padding-right: 10px;
+        padding-left: 10px; 
 }

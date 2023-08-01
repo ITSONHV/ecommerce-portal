@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, Inject, OnInit ,ViewEncapsulation} from '@angular/core';
+import { AfterViewInit, Component, HostListener, Inject, OnInit ,ViewEncapsulation} from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, Meta, SafeResourceUrl, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -17,6 +17,14 @@ import { SwalService, TYPE } from 'src/services/swal.service';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit, AfterViewInit {
+  @HostListener('window:scroll', ['$event']) 
+  doSomething(event: any) {
+    // console.debug("Scroll Event", document.body.scrollTop);
+    // see András Szepesházi's comment below
+    console.debug("Scroll Event", window.pageYOffset );
+  }
+
+
   public slug: string;
   public product : any;
   public productSale : any;
