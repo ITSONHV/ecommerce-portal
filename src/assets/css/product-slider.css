@@ -1252,7 +1252,7 @@
     }
 
     .home__product {
-        border: none
+        border: none;
     }
     .home__product {
         /* display: grid;
@@ -1348,17 +1348,13 @@
     
 
 
-    .container-home {
-        width: calc(100% )!important;
-        overflow: hidden!important;
-        /* padding-right: 15px;
-        padding-left: 15px; */
-        margin: auto!important;
-        /* margin-left: auto!important; */
+    .container {
+        width: calc(100% - 28px);
+        overflow: hidden;
     }
 
     .home__product .slick-list .product {
-        border: 1px solid #dddfe6;
+        /* border: 1px solid #dddfe6; */
     }
 }
 

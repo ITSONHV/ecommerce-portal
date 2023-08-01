@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, HostListener, Inject, OnInit ,ViewEncapsulation} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Inject, NgZone, OnInit ,ViewEncapsulation} from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, Meta, SafeResourceUrl, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -18,13 +18,21 @@ import { SwalService, TYPE } from 'src/services/swal.service';
 })
 export class ProductDetailComponent implements OnInit, AfterViewInit {
   @HostListener('window:scroll', ['$event']) 
-  doSomething(event: any) {
-    // console.debug("Scroll Event", document.body.scrollTop);
-    // see András Szepesházi's comment below
-    console.debug("Scroll Event", window.pageYOffset );
-  }
-
-
+  onScroll(event: any) {  
+    var w = window.innerWidth;
+    let scrollPosition = window.scrollY * w / 1000;
+    if(w > 768)
+      this.displayToolbar_bottom = scrollPosition >=  800;
+    else if(w > 480)
+      this.displayToolbar_bottom = scrollPosition >=  900;
+    else if(w <= 480)
+      this.displayToolbar_bottom = scrollPosition >=  600;
+      
+    this.displayToolbar_Top = window.scrollY >= 1000;
+    console.log(scrollPosition);
+  } 
+  displayToolbar_bottom: boolean;
+  displayToolbar_Top: boolean;
   public slug: string;
   public product : any;
   public productSale : any;
@@ -47,8 +55,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   submitted = false;
 
   slideConfig = {
-    "slidesToShow": 4,
-    "slidesToScroll": 4,
+    "slidesToShow": 3,
+    "slidesToScroll": 3,
     "autoplay": true,
     "autoplaySpeed": 3000,
     "infinity": true,
@@ -61,11 +69,11 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     "arrows": true,
     "responsive": [
       {
-        "breakpoint": 960,
+        "breakpoint": 1024,
         "settings": {
           "arrows": false,
           "centerMode": false,
-          "slidesToShow": 3,
+          "slidesToShow": 2,
            "centerPadding": "0px",
         },
       },
@@ -84,8 +92,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   slickInit(e :any) {
     console.log('slick initialized');
   }
-
-
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -119,6 +125,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     },
     nav: false
   };
+
   constructor(private _svc : MainService,private _router: ActivatedRoute,
     private spinner: NgxSpinnerService, public sanitizer: DomSanitizer,
     private _swal: SwalService,
@@ -126,7 +133,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     private meta: Meta,
     private titleService: Title,
     private fb: FormBuilder,
-    @Inject(DOCUMENT) private document: Document ,
+    @Inject(DOCUMENT) private document: Document 
  ) {
   }
   ngOnInit(): void {
@@ -143,12 +150,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    //  var items:any  = this.document.getElementsByClassName('slick-track');
-  
-    // for (let i = 0; i < items.length; i++) {
-    //   let element = items[i];
-    //   element.style.float = 'left';
-    // }
   }
 
   getProductbyProductNameSlug(slug : string){
