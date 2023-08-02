@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
         "settings": {
           "arrows": false,
           "centerMode": false,
-          "slidesToShow": 3,
+          "slidesToShow": 2,
            "centerPadding": 0,
         },
       },

@@ -132,7 +132,7 @@
 	opacity: .8;
 	height: 40px;
     width: 40px;
-    top: calc(50% - 20px);
+    top: calc(50% - 10px);
 	z-index: 999;
 }
 .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {

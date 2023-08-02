@@ -57,6 +57,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   slideConfig = {
     "slidesToShow": 3,
     "slidesToScroll": 3,
+   
     "autoplay": true,
     "autoplaySpeed": 3000,
     "infinity": true,
