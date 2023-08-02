@@ -17,19 +17,26 @@
   <div class="main-container col2-left-layout">
     <div class="container">
       <div class="row">
-        <div class="col-main col-sm-9 col-xs-12">
+        <div class="col-main col-sm-12 col-xs-12">
           <div class="product-view-area">
             <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
               <div class="icon-sale-label sale-left">Sale</div>
               <div class="large-image"> <a [href]="urlImg + imgfirst" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" [src]="urlImg + imgfirst" alt="products"> </a> </div>
-              <div class="flexslider flexslider-thumb">
-                <owl-carousel-o [options]="customOptions">
+              <div >
+
+                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+                   <div ngxSlickItem  *ngFor="let item of product?.productImages ;  let i = index ;"class="slide">
+                      <li><a (click)="changeImageLarge(item.id)" class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img style="border: 1px solid;" [src]="urlImg + item.imageUrl" alt = "Thumbnail 2"/></a></li>
+                   </div>
+                </ngx-slick-carousel>
+
+                <!-- <owl-carousel-o [options]="customOptions">
                   <ng-container *ngFor="let item of product?.productImages ;  let i = index ;">
                     <ng-template carouselSlide [id]="item.id.toString()">
                       <li><a (click)="changeImageLarge(item.id)" class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img [src]="urlImg + item.imageUrl" alt = "Thumbnail 2"/></a></li>
                     </ng-template>
                   </ng-container>
-                </owl-carousel-o>
+                </owl-carousel-o> -->
               </div>
             </div>
             <div class="col-xs-12 col-sm-7 col-lg-7 col-md-7 product-details-area">
@@ -213,7 +220,7 @@
             </div>
           </div>
         </div>
-        <aside class="right sidebar col-sm-3 col-xs-12">
+        <!-- <aside class="right sidebar col-sm-3 col-xs-12">
           <div class="block shop-by-side">
             <div class="sidebar-bar-title">
               <h3>Shop By</h3>
@@ -289,7 +296,57 @@
               </ul>
             </div>
           </div>
-        </aside>
+        </aside> -->
+      </div>
+    </div>
+    <div class="container" *ngIf="displayToolbar_Top">
+      <div class="pc_toolbar_top active">
+        <div class="container">
+          <div class="pro-info">
+            <div class="product-name">Vỏ Case KENOO ESPORT G362 - Pink</div>
+            <div class="addcart-price">
+              <div class="">
+                Tổng chi phí
+                <div class="price">
+                  <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product?.promotionPrice | currency: "VND"}}</span> </p>
+                  <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">{{product?.price | currency: "VND"}} </span> </p>
+                
+              </div>
+              </div>
+              <div class="add-cart-buttons"><button type="button" (click)="addToShopingCard(product)"
+                  class="btn-add-cart btn-add-cart-2"><svg width="17" style="vertical-align: sub;"
+                  height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
+                    fill="white"></path>
+                </svg>
+                  Thêm vào giỏ
+                </button> <button type="button" [routerLink]="['/gio-hang']" routerLinkActive="router-link-active"  class="btn-add-cart ">
+      
+                  <i class="fa fa-shopping-cart"></i>&nbsp;  Mua hàng </button></div>
+            </div>
+          </div>      
+        </div>
+      </div>
+
+    </div>
+    <div class="container" *ngIf="displayToolbar_bottom">
+      <div class="mb_toolbar_bottom hide-pc active">
+        <div class="mb-product-name">{{product?.productName}}</div>
+        <div class="price">
+            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product?.promotionPrice | currency: "VND"}}</span> </p>
+            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">{{product?.price | currency: "VND"}} </span> </p>
+          
+        </div>
+        <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart-2" (click)="addToShopingCard(product)">
+          <svg width="17" height="18"
+              viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
+                fill="blue"></path>
+            </svg>
+             Thêm vào giỏ</button>
+           <button type="button" class="btn-add-cart " [routerLink]="['/gio-hang']" routerLinkActive="router-link-active" > <i class="fa fa-shopping-cart"></i> &nbsp; Mua hàng </button></div>
       </div>
     </div>
   </div>
@@ -309,34 +366,10 @@
             <div class="slider-items-products">
               <div id="related-product-slider" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col4 fadeInUp">
-                  <ngx-slick-carousel class="carousel home__product" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
-                    <div ngxSlickItem *ngFor="let item of productsRelate" class="slide">
-                      <div class="product">
-                        <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
-                        <div class="product__thumb"><a [routerLink]="['/chi-tiet']"
-                          (click)="handleViewDetailProduct($event,item)"
-                            class="product__link"><img
-                              [src]='urlImg + item.imageUrl'
-                              alt="{{item.productName}}"></a></div>
-                        <div class="product__bottom">
-                          <div class="product__title"><a
-                              href="https://www.tncstore.vn/card-man-hinh-asus-proart-geforce-rtx-4060-ti-oc-edition-16gb-ddr6.html"
-                              class="product__link">{{item.productName}}</a></div>
-                          <div class="product__rate">
-                            <div class="rate__star" *ngIf="item?.rate >= 0">
-                              <div class="rate_item">
-                                <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item?.rate)"></i>
-                                <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item?.rate)"></i>
-                                <span class="rate__text"> &nbsp;{{item?.countRate}} đánh giá</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="product__price"><span class="price__selling">{{item.promotionPrice | currency: "VND" }}</span> <span class="price__old">{{item.price | currency: "VND" }}</span></div> <button type="button" class="add-to-cart">GIỎ HÀNG</button>
-                        </div>
-                      </div>
-                  
-                    </div>
-                  </ngx-slick-carousel>
+                  <div *ngIf="this.productsRelate">
+                    <app-product-recent [listProduct]="this.productsRelate?.data"
+                      [isAutoPlay]="false"></app-product-recent>
+                  </div>
                 </div>
               </div>
             </div>

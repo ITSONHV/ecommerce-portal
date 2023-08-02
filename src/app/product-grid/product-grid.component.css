@@ -534,4 +534,8 @@
 .category .category__content .category__product-list .product-list{
     grid-template-columns: 50% 50%;
 }
+
+.sorter .short-by.page{
+    display: none;
+}
 }

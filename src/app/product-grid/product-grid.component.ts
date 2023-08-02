@@ -35,7 +35,7 @@ export class ProductGridComponent implements OnInit  {
   public maxPrice = 0;
   public searchKey = '';
   public sortValue = 1;
-  public selectedPageSize = 9;
+  public selectedPageSize = 12;
   public selectedPriceIndex : any;
   public selectedTextIndex : any;
   public isLoadComplete = false;
@@ -108,11 +108,11 @@ export class ProductGridComponent implements OnInit  {
       this.sortValue,
       this.typeSearch).subscribe(
         (respones: ApiPagingResponse<PagingModel>) => {
-        
           this.totalRecords = respones.data.total;
           this.listProduct = respones.data.data;
           this.visibleItems = { items: respones.data.data, total: respones.data.total };
           this.isLoadComplete = true;
+          console.log(this.visibleItems);
           this.spinner.hide();
           window.scroll(0, 50); // scroll lên 1 tý sau khi change value
         },

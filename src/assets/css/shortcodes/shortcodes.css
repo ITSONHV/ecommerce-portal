@@ -1298,16 +1298,7 @@ p.error {
 	width: 100%;
 }
 }
-@media screen and (max-width: 740px) {
 
-	.div-view-extra {
-		padding-bottom: 20px;
-	}
-}
-
-.div-view-extra-bottom{
-	padding-bottom: 20px;
-}
 /******************************************
 6. Counters
 ******************************************/

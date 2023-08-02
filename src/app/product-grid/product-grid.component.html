@@ -19,7 +19,7 @@
   <div class="main-container col2-left-layout">
     <div class="container">
       <div class="row">
-        <div class="col-main col-sm-9 col-xs-12 col-sm-push-3">
+        <div class="col-sm-9 col-xs-12 col-sm-push-3">
           <div class="category-description std">
             <div class="slider-items-products">
               <div id="category-desc-slider" class="product-flexslider hidden-buttons">
@@ -68,10 +68,10 @@
                 <div class="short-by page">
                   <label>Hiện thị:</label>
                   <select #pageSizeSelect (change)="onSelectedPageSize(pageSizeSelect.value)">
-                    <option selected="selected">9</option>
-                    <option>18</option>
-                    <option>27</option>
+                    <option selected="selected">12</option>
+                    <option>24</option>
                     <option>36</option>
+                    <option>48</option>
                   </select>
                 </div>
                 <div class="short-by">
@@ -108,13 +108,13 @@
                           class="product__link">{{item.productName}}</a>
                       </div>
                       <div class="product__rate">
-                        <!-- <div class="rate__star" *ngIf="item?.rate >= 0">
+                        <div class="rate__star" *ngIf="item.rate >= 0">
                           <div class="rate_item">
-                            <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item?.rate)"></i>
-                            <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item?.rate)"></i>
+                            <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item.rate)"></i>
+                            <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
                             <span class="rate__text"> &nbsp;{{item?.countRate}} đánh giá</span>
                           </div>
-                        </div> -->
+                        </div>
                       </div>
                       <div class="product__price"><span class="price__selling">{{item.promotionPrice | currency: "VND" }}</span> <span class="price__old">{{item.price | currency: "VND" }}</span></div> 
                       <button type="button" class="add-to-cart" (click)="addToShopingCard(item)"><i class="fa fa-shopping-cart"></i> &nbsp;GIỎ HÀNG</button>

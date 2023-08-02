@@ -1,14 +1,4 @@
 
-/* .productDiscount {
-    max-width: 278px;
-    max-height: 295px;
-}
-
-.productDiscount .product__thumb >  img {
-    max-width: 278px;
-    max-height: 295px;
-} */
-
 .product {
     position: relative;
     overflow: hidden
@@ -35,10 +25,7 @@
     transform: skew(12deg)
 }
 .home__product .product {
-    border-right: 1px solid #dddfe6;
-    border-top: 1px solid #dddfe6;
-    border-bottom: 1px solid #dddfe6;
-    border-left: 1px solid #dddfe6;
+    border: 1px solid #dddfe6;
 }
 .product .product__thumb {
     display: flex;
@@ -64,7 +51,7 @@
 .product .product__bottom .product__title {
     padding: 10px;
     margin-bottom: 7px;
-    height: 2.5em;
+    height: 3.5em;
     overflow: hidden
 }
 
@@ -1108,5 +1095,301 @@
 
 .product-single .add-cart-buttons .btn-add-cart-2:hover svg path {
     stroke: #fa9f2c
+}
+
+
+
+
+
+@media screen and (max-width: 1024px) {
+
+    .category .banner--list__cat img {
+        margin-top: 50px;
+        max-width: 100%
+    }
+
+    .category .block--list__cat .block__content {
+        grid-template-columns: calc(50% - 8px) calc(50% - 8px)!important;
+        grid-gap: 16px
+    }
+
+    .category .block--list__cat .block__content .list__cat__item {
+        width: 100%!important;
+        height: 135px!important
+    }
+
+    .category .block--list__cat .block__content .list__cat__item .item__text {
+        font-size: 12px!important;
+        line-height: 21px!important
+    }
+
+    .category .block--list__cat .block__content .list__cat__item .item__image {
+        width: 80px!important;
+        right: 14px!important
+    }
+
+    .category .mb-button-filter {
+        border: 1px solid #005ec4;
+        padding: 13px 10px;
+        display: flex;
+        justify-content: center;
+        color: #005ec4;
+        font-weight: 700;
+        font-size: 16px;
+        margin-bottom: 25px
+    }
+
+    .category .mb-button-filter i {
+        margin-right: 12px
+    }
+
+    .category .category__content {
+        flex-direction: column
+    }
+
+    .category .category__content .category__product-list {
+        width: 100%!important
+    }
+
+    .category .category__content .category__product-list .list-header .list-header__top {
+        flex-direction: column
+    }
+
+    .category .category__content .category__product-list .list-header .list-header__top .category-name {
+        font-size: 18px;
+        margin-bottom: 18px;
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
+        flex-wrap: wrap;
+        line-height: 27px
+    }
+
+    .category .category__content .category__product-list .list-header .list-header__top .category-name span {
+        margin-left: 0!important
+    }
+
+    .category .category__content .category__product-list .list-header .list-header__top .category-sort {
+        justify-content: space-between;
+        width: 100%
+    }
+
+    .category .category__content .category__product-list .list-header .list-header__bottom {
+        display: none!important
+    }
+
+    .category .category__content .category__product-list .product-list {
+        grid-template-columns: 50% 50%;
+    }
+
+    .category .category__content .category__product-list .product-list .product {
+        border: 1px solid #dddfe6
+    }
+
+    .category .category__content .category__product-list .product-list .product .product__thumb {
+        min-height: auto
+    }
+
+    .category .category__content .category__product-list .product-list .product .product__title a {
+        font-size: 14px;
+        line-height: 21px
+    }
+
+    .category .category__content .category__product-list .product-list .product .product__rate {
+        justify-content: space-between
+    }
+
+    .category .category__content .category__product-list .product-list .product .product__rate .rate__star i {
+        font-size: 13px
+    }
+
+    .category .category__content .category__product-list .product-list .product .product__rate .rate__text {
+        font-size: 12px
+    }
+
+    .category .category__content .category__product-list .product-list .product .product__price {
+        display: flex;
+        flex-direction: row;
+        height: 2.5em
+    }
+
+    .category .category__content .category__product-list .product-list .product .product__price .price__selling {
+        font-size: 16px;
+        margin-bottom: 5px
+    }
+
+    .category .category__content .category__product-list .product-list .product .product__price .price__old {
+        font-size: 12px
+    }
+
+    .category .category__content .category__product-list .product-list .product .percent {
+        font-size: 14px;
+        width: 55px;
+        height: 24px
+    }
+
+    .category .block--list__cat__gp .block__content {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+        grid-row-gap: 0
+    }
+
+    .category .block--list__cat__gp .block__content .cat-item {
+        margin-bottom: 10px
+    }
+
+    .category .block--list__cat__gp .block__content .cat-item img {
+        width: 100%
+    }
+
+    .category .block--list__cat__gp .block__content .cat-item .cat-item__info .desc,.category .block--list__cat__gp .block__content .cat-item .cat-item__info .readmore {
+        display: none
+    }
+
+    .category .category__description .title {
+        font-size: 19px
+    }
+
+    .home__product {
+        border: none;
+    }
+    .home__product {
+        /* display: grid;
+            grid-template-columns: 50% 50% */
+    }
+
+    /*ẩn khi màn hỉnh nhỏ ko cho howver*/
+    .home__product .product .add-to-cart {
+        display: none
+    }
+
+    .product:hover .product__bottom {
+        background: #fff!important
+    }
+
+    .product:hover .product__bottom .product__link {
+        color: #000!important
+    }
+
+    .product:hover .product__bottom .product__price,.product:hover .product__bottom .product__rate {
+        visibility: visible!important;
+        opacity: 1!important;
+        /* height: 2em */
+    }
+
+    .product:hover .product__bottom .add-to-cart {
+        visibility: hidden;
+        opacity: 0
+    }
+
+    .product:hover .product__thumb .view-quick-view{
+        visibility: hidden;
+           opacity: 0;
+    }
+    .product:hover .product__thumb  .add-to-wish{
+        visibility: hidden;
+          opacity: 0;
+    }
+
+    .home__product  .product {
+        /* border: 1px solid #dddfe6; */
+    }
+
+    .home-tab {
+        margin-bottom: 15px;
+        margin-top: 30px;
+        padding: 0;
+        font-size: 14px;
+    }
+
+    .home__product .product .product__thumb {
+        min-height: auto
+    }
+
+    .home__product .product .product__title a {
+        font-size: 14px !important;
+        line-height: 21px !important;
+    }
+
+    .home__product  .product .product__rate {
+        justify-content: space-between !important;
+    }
+
+    .home__product  .product .product__rate .rate__star i {
+        font-size: 13px
+    }
+
+    .home__product  .product .product__rate .rate__text {
+        font-size: 12px
+    }
+
+    .home__product  .product .product__price {
+        display: flex;
+        flex-direction: row;
+        height: 2.5em
+    }
+
+    .home__product  .product .product__price .price__selling {
+        font-size: 15px;
+        margin-bottom: 5px
+    }
+
+    .home__product  .product .product__price .price__old {
+        font-size: 12px
+    }
+
+    .home__product  .product .percent {
+        font-size: 14px;
+        width: 55px;
+        height: 24px
+    }
+
+    
+
+
+    .container {
+        width: calc(100% - 28px);
+        overflow: hidden;
+    }
+
+    .home__product .slick-list .product {
+        /* border: 1px solid #dddfe6; */
+    }
+}
+
+
+
+/*reponsive kaka củ chuối*/
+/* tránh bị mất border*/
+@media screen  and (max-width: 393px)
+{
+    .container {
+        width: calc(100% - 25px);
+    }
+}
+@media screen  and (max-width: 390px)
+{
+    .container {
+        width: calc(100% - 24px);
+    }
+}
+@media screen  and (max-width: 375px)
+{
+    .container {
+        width: calc(100% - 27px);
+    }
+}
+@media screen  and (max-width: 360px)
+{
+    .container {
+        width: calc(100% - 26px);
+    }
+}
+@media screen  and (max-width: 280px)
+{
+    .container {
+        width: calc(100% - 26px);
+    }
 }
 

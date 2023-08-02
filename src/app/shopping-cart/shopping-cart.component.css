@@ -695,6 +695,27 @@
         color: #197bb7;
     }
 
+    .cart .cart-products .cart-p-item .cart-p-content .cart-p-meta .short-desc {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        color: #000
+    }
+    
+    .cart .cart-products.inline .cart-p-remove {
+        width: 92px;
+        height: 30px;
+        background: #fff;
+        border: 1px solid #005ec4;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #197bb7;
+        font-weight: 600;
+        font-size: 12px
+    }
+    
     
     .block__header {
         margin-bottom: 40px;

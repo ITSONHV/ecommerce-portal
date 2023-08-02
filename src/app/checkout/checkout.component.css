@@ -350,6 +350,11 @@
     .cart-total-prices {
          margin-left: 0px; 
     }
+
+    .but_medium2{
+        margin-top: 20px;
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 1024px) {

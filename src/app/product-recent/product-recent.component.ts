@@ -36,7 +36,7 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
       "settings": {
         "arrows": false,
         "centerMode": false,
-        "slidesToShow": 3,
+        "slidesToShow": 2,
          "centerPadding": 0,
       },
     },
