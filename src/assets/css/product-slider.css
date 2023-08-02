@@ -1360,10 +1360,36 @@
 
 
 
-/*reponsive kaka*/
-.container-home {
-    width: 1110px;
-    margin: auto;
-      padding-right: 10px;
-        padding-left: 10px; 
+/*reponsive kaka củ chuối*/
+/* tránh bị mất border*/
+@media screen  and (max-width: 393px)
+{
+    .container {
+        width: calc(100% - 25px);
+    }
 }
+@media screen  and (max-width: 390px)
+{
+    .container {
+        width: calc(100% - 24px);
+    }
+}
+@media screen  and (max-width: 375px)
+{
+    .container {
+        width: calc(100% - 27px);
+    }
+}
+@media screen  and (max-width: 360px)
+{
+    .container {
+        width: calc(100% - 26px);
+    }
+}
+@media screen  and (max-width: 280px)
+{
+    .container {
+        width: calc(100% - 26px);
+    }
+}
+
