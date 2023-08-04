@@ -1,18 +1,19 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, Inject, AfterViewInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, HostListener, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { environment } from 'src/environments/environment';
 import { ProductModel } from 'src/models/product.model';
 import { MainService } from 'src/services/main.service';
 import { SwalService, TYPE } from 'src/services/swal.service';
-
+import { SlickCarouselComponent } from "ngx-slick-carousel";
 @Component({
   selector: 'app-product-recent',
   templateUrl: './product-recent.component.html',
   styleUrls: ['./product-recent.component.css']
 })
 export class ProductRecentComponent implements OnInit, AfterViewInit {
+  @ViewChild("slickModal") slickModal: SlickCarouselComponent;
   @Input() listProduct: any;
   isShowQuickView = false;
   @Input() isAutoPlay = false;
@@ -20,7 +21,7 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
   slideConfig = {
     "slidesToShow": 4,
     "slidesToScroll": 4,
-    "rows": 1,
+     "rows": 1,
     "autoplay": false,
     "autoplaySpeed": 5000,
     "infinity": true,
@@ -31,42 +32,71 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
     // "variableWidth": false,
     // "enableCenterMode": true,
     "arrows": true,
-    "slidesPerRow": 4,
+     "slidesPerRow": 1,
     "responsive": [
       {
         "breakpoint": 1024,
         "settings": {
-          "infinite": true,
-          "arrows": true,
-          "centerMode": false,
           "slidesToShow": 2,
-          "centerPadding": 0,
-          "rows": 2,
           "slidesToScroll": 2,
-          "slidesPerRow": 1
+           "rows": 2,
+          "autoplay": false,
+          "infinity": true,
+          "pauseOnFocus": true,
+          "pauseOnHover": true,
+          "swipeToSlide": false,
+          "arrows": true,
         },
       },
       // {
       //   "breakpoint": 768,
       //   "settings": {
-      //     "arrows": true,
-      //     "centerMode": false,
       //     "slidesToShow": 2,
-      //      "centerPadding": 0,"rows": 2,   "slidesToScroll": 1,
+      //     "slidesToScroll": 2,
+      //      "rows": 2,
+      //     "autoplay": false,
+      //     "infinity": true,
+      //     "pauseOnFocus": true,
+      //     "pauseOnHover": true,
+      //     "swipeToSlide": false,
+      //     "arrows": true,
       //   },
       // },
       // {
       //   "breakpoint": 480,
       //   "settings": {
+      //     "slidesToShow": 2,
+      //     "slidesToScroll": 2,
+      //      "rows": 2,
+      //     "autoplay": false,
+      //     "infinity": true,
+      //     "pauseOnFocus": true,
+      //     "pauseOnHover": true,
+      //     "swipeToSlide": false,
       //     "arrows": true,
-      //     "centerMode": false,
-      //     "slidesToShow": 2, 
-      //       "centerPadding": 0,"rows": 2,   "slidesToScroll": 1,
       //   },
       // },
     ],
   };
 
+  @HostListener('window:resize', ['$event']) 
+  onScroll(event: any) {  
+    console.log("da");
+    if (this.slickModal !== undefined) {
+      if (window.innerWidth > 575) {
+        if (!this.slickModal.initialized) {
+          this.slickModal.initSlick();
+        }
+      } else if (this.slickModal.initialized) {
+        this.slickModal.unslick();
+      }
+   }
+
+    // var w = window.innerWidth;
+    // if(w <= 1024)
+    //   this.slickModal.unslick();
+    // console.log(w);
+  } 
 
 
   slickInit(e: any) {

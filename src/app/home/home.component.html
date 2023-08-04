@@ -75,15 +75,9 @@
       <div class="block__header">
         <h2 class="block__header__title">SẢN PHẨM BÁN CHẠY</h2>
       </div>
-      <div>
-        <div>
-          <div>
             <div *ngIf="this.listProductBestSelling">
               <app-product-recent [listProduct]="this.listProductBestSelling?.data"
                 [isAutoPlay]="false"></app-product-recent>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -102,17 +96,10 @@
     </div>
   </div>
     <div>
-      <div>
-        <div>
-          <div>
-            <div>
+
               <div *ngIf="this.listProductIsNew">
                 <app-product-recent [listProduct]="this.listProductIsNew.data"
                   [isAutoPlay]="false"></app-product-recent>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -130,12 +117,11 @@
       <h2 class="block__header__title">SẢN PHẨM NỔI BẬT</h2>
     </div>
   </div>
-
             <div class="">
               <div *ngIf="this.listProductIsHot">
                 <app-product-recent [listProduct]="this.listProductIsHot?.data"
                   [isAutoPlay]="false"></app-product-recent>
-            
+        
       </div>
     </div>
   </div>

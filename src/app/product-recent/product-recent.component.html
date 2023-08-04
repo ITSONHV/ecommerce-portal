@@ -1,7 +1,7 @@
-<ngx-slick-carousel class="swiper-container swiper-container-initialized swiper-container-horizontal home__product" #slickModal="slick-carousel" [config]="slideConfig"
+
+<ngx-slick-carousel id="slickModal" class="carousel home__product" #slickModal="slick-carousel" [config]="slideConfig"
   (init)="slickInit($event)">
-  <div class="swiper-wrapper">
-  <div ngxSlickItem *ngFor="let item of productRecents" class="swiper-slide">
+  <div ngxSlickItem *ngFor="let item of productRecents" class="slide">
     <div class="product">
       <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
       <div class="product__thumb"><a [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
@@ -29,9 +29,6 @@
       </div>
     </div>
   </div>
-
-</div>
 </ngx-slick-carousel>
-
 
 <app-quick-view (sendEventToParent)="listenEventFromChild($event)" *ngIf="isShowQuickView" productSlug="{{this.productSlugToChild}}"></app-quick-view>
