@@ -642,7 +642,8 @@ label {
 	line-height: normal;
 	display: inline-block;
 	text-align: right;
-	float: right
+	float: right;
+	font-size: 16px;
 }
 .headerlinkmenu ul.links {
 	display: inline-block;
@@ -4653,7 +4654,7 @@ button span {
 21. breadcrumbs
 ******************************************/
 
-.breadcrumbs {
+/* .breadcrumbs {
 	padding: 8px 0px;
 	margin: auto;
 	font-size: 16px; 
@@ -4683,7 +4684,7 @@ button span {
 .breadcrumbs ul li {
 	list-style-type: none;
 	display: inline
-}
+} */
 /******************************************
 22. sidebar
 ******************************************/
@@ -6026,18 +6027,21 @@ ul.products-list .cart-button i {
 	margin-right: 10px
 }
 .cart-plus-minus {
-	display: inline-block;
+	display: flex;
 	float: left;
 	margin-right: 18px
 }
 .product-variation {
-	display: inline-block;
+	display: inline-grid;
 	width: 100%;
 	border-top: 1px #eeeeee solid;
 	border-bottom: 1px #eeeeee solid;
 	padding: 15px 0px;
 	margin-bottom: 15px
 }
+add-cart-buttons
+
+
 .numbers-row {
 	float: left
 }
@@ -8216,7 +8220,7 @@ a.jtv-m-logo-img {
     right: -8px
 }
 
-@media screen and (max-width: 740px) {
+@media screen and (max-width: 1024px) {
 
     .block__header {
         margin-bottom: 40px;

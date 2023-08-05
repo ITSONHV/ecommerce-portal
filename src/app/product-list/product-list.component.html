@@ -3,13 +3,13 @@
 <div class="breadcrumbs">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12">
-        <ul>
-          <li><i aria-hidden="true" class="fa fa-home"></i><span>&nbsp;&raquo;&nbsp;</span> </li>
-            <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Home</a></li>
-            <li class="" *ngIf="this.categoryParent"> <span>&nbsp;&raquo;&nbsp;</span> <a title="Go to {{this.categoryParent}}" [routerLink]="['/danh-muc-san-pham-g']" >{{this.categoryParent}}</a></li>
+      <div class="breadcrumb_dm">
+        <ul class="breadcrumb__list">
+          <li><i aria-hidden="true" class="fa fa-home"></i><span><i aria-hidden="true" class="fa fa-angle-right"></i></span> </li>
+            <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Trang chủ</a></li>
+            <li class="" *ngIf="this.categoryParent"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{this.categoryParent}}" [routerLink]="['/danh-muc-san-pham-g']" >{{this.categoryParent}}</a></li>
           
-            <li class="" *ngIf="this.categoryName"> <span>&nbsp;&raquo;&nbsp;</span> <a title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']" >{{categoryName}}</a></li>
+            <li class="" *ngIf="this.categoryName"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']" >{{categoryName}}</a></li>
         </ul>
       </div>
     </div>

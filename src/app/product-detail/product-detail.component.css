@@ -53,7 +53,16 @@
     background: seashell;
 }
 
-
+@media screen and (max-width: 768px) {
+  
+    .product-variation .add-cart-buttons
+    {
+        display: inline-block !important;
+        justify-content: space-between;
+        margin-top: 12px;  
+    }
+    
+}
 
 /* add gio hang */
 @media screen and (min-width: 1025px) {
@@ -89,7 +98,7 @@
         font-weight: 600;
         font-size: 16px;
         line-height: 21px;
-        color: #005ec4;
+        color: #197bb7;
         margin-bottom: 12px
     }
 
@@ -110,7 +119,7 @@
     .mb_toolbar_bottom .add-cart-buttons .btn-add-cart {
         width: 100%;
         height: 44px;
-        background: #005ec4;
+        background: #197bb7;
         border: none;
         font-weight: 700;
         font-size: 16px;
@@ -143,8 +152,8 @@
 
     .mb_toolbar_bottom .add-cart-buttons .btn-add-cart-2 {
         background: #fff !important;
-        border: 1px solid #005ec4 !important;
-        color: #005ec4 !important;
+        border: 1px solid #197bb7 !important;
+        color: #197bb7 !important;
         margin-top: 10px
     }
 
@@ -156,6 +165,10 @@
 
     .mb_toolbar_bottom .add-cart-buttons .btn-add-cart-2:hover svg path {
         stroke: #fa9f2c
+    }
+
+    .product-view-area .product-name h1 {
+        margin-top: 15px;
     }
 }
 /*pc*/
@@ -183,7 +196,7 @@
     line-height: 24px;
     display: flex;
     align-items: center;
-    color: #005ec4;
+    color: #197bb7;;
     align-self: self-start;
     padding-right: 20px
 }
@@ -208,7 +221,7 @@
 .pc_toolbar_top .pro-info .addcart-price button {
     width: 255px;
     height: 44px;
-    background: #005ec4;
+    background: #197bb7;;
     border: none;
     font-weight: 700;
     font-size: 16px;
@@ -241,7 +254,7 @@
 }
 
 .pc_toolbar_top .actions div.tab.active,.pc_toolbar_top .actions div.tab:hover {
-    border-color: #005ec4
+    border-color: #197bb7;
 }
 
 .pc_toolbar_top .actions div.go-top {
@@ -249,7 +262,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    color: #005ec4
+    color: #197bb7;
 }
 
 .pc_toolbar_top .actions div.go-top i {
@@ -267,4 +280,80 @@
 
 .pc_toolbar_top .add-cart-buttons .btn-add-cart.btn-add-cart-2 {
     margin-left: 8px
+}
+
+
+/* .add-cart-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+} */
+
+.add-cart-buttons {
+    flex-direction: column-reverse
+}
+
+
+.add-cart-buttons .btn-add-cart {
+    width: 100%;
+    height: 44px;
+    background: #197bb7;;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    margin-top: 15px;
+    text-transform: uppercase
+}
+
+ .add-cart-buttons .btn-add-cart.disable {
+    background-color: #ccc!important
+}
+
+.add-cart-buttons .btn-add-cart.preorder {
+    background: #f9495f!important
+}
+
+.add-cart-buttons .btn-add-cart-2 {
+    background: #fff!important;
+    border: 1px solid #197bb7!important;
+    color: #197bb7!important
+}
+
+.add-cart-buttons .btn-add-cart-2:hover {
+    color: #2872c7!important;
+    background-color: #fff!important;
+    border: 1px solid #fa9f2c!important
+}
+
+.add-cart-buttons .btn-add-cart-2:hover svg path {
+    stroke: #fa9f2c
+}
+
+.product-big-image .percent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #f9495f;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    width: 65px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: skew(-12deg);
+    margin-left: -5px
+}
+
+.product-big-image .percent span {
+    transform: skew(12deg)
+}
+
+.product-variation .add-cart-buttons
+{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;  flex-direction: row-reverse;
 }

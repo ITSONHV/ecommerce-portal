@@ -35,3 +35,17 @@
 	-o-animation: my 700ms infinite; 
 	animation: my 700ms infinite;
 }
+
+
+@media only screen and (min-width: 0px) and (max-width: 1024px)
+{
+	.headerlinkmenu {
+		line-height: normal;
+		display: flex;
+		text-align: right;
+		/* float: right */
+		float: none;
+		padding-bottom: 8px;
+		font-size: 14px;
+	}
+}

@@ -17,14 +17,15 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
   @Input() listProduct: any;
   isShowQuickView = false;
   @Input() isAutoPlay = false;
+  isMobile = true;
   public productSlugToChild: string;
   slideConfig = {
     "slidesToShow": 4,
-    "slidesToScroll": 4,
-     "rows": 1,
+    "slidesToScroll": 2,
+    "rows": 1,
     "autoplay": false,
     "autoplaySpeed": 5000,
-    "infinity": true,
+    // "mobileFirst": true,
     // "centerMode": true,
     "pauseOnFocus": true,
     "pauseOnHover": true,
@@ -32,44 +33,17 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
     // "variableWidth": false,
     // "enableCenterMode": true,
     "arrows": true,
-     "slidesPerRow": 1,
+    "slidesPerRow": 1,
     "responsive": [
-      {
-        "breakpoint": 1024,
-        "settings": {
-          "slidesToShow": 2,
-          "slidesToScroll": 2,
-           "rows": 2,
-          "autoplay": false,
-          "infinity": true,
-          "pauseOnFocus": true,
-          "pauseOnHover": true,
-          "swipeToSlide": false,
-          "arrows": true,
-        },
-      },
       // {
-      //   "breakpoint": 768,
+      //   "breakpoint": 1024,
       //   "settings": {
-      //     "slidesToShow": 2,
+      //     "slidesToShow":2,
       //     "slidesToScroll": 2,
+      //     "slidesPerRow": 1,
+
       //      "rows": 2,
       //     "autoplay": false,
-      //     "infinity": true,
-      //     "pauseOnFocus": true,
-      //     "pauseOnHover": true,
-      //     "swipeToSlide": false,
-      //     "arrows": true,
-      //   },
-      // },
-      // {
-      //   "breakpoint": 480,
-      //   "settings": {
-      //     "slidesToShow": 2,
-      //     "slidesToScroll": 2,
-      //      "rows": 2,
-      //     "autoplay": false,
-      //     "infinity": true,
       //     "pauseOnFocus": true,
       //     "pauseOnHover": true,
       //     "swipeToSlide": false,
@@ -79,46 +53,65 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
     ],
   };
 
-  @HostListener('window:resize', ['$event']) 
-  onScroll(event: any) {  
-    console.log("da");
+  slideConfigMobile = {
+    "slidesToShow": 2,
+    "slidesToScroll": 2,
+    "rows": 2,
+    "autoplay": false,
+    "autoplaySpeed": 5000,
+    // "mobileFirst": true,
+    // "centerMode": true,
+    "pauseOnFocus": true,
+    "pauseOnHover": true,
+    "swipeToSlide": false,
+    // "variableWidth": false,
+    // "enableCenterMode": true,
+    "arrows": true,
+    "slidesPerRow": 1,
+    "responsive": [
+
+    ],
+  };
+  constructor(private _svc: MainService, private _router: ActivatedRoute,
+    @Inject(DOCUMENT) private document: Document,
+    private router: Router,
+    private _swal: SwalService, )
+     {
+    this.getScreenSize();
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?: any) {
+    // do cònfig éo được nên đang làm củ chuối vãi ra
     if (this.slickModal !== undefined) {
-      if (window.innerWidth > 575) {
-        if (!this.slickModal.initialized) {
+      if (window.innerWidth <= 1024) {
+        if (this.slickModal.config.rows == 1) {
+          console.log(this.slickModal.config.rows);
+        this.slickModal.unslick();
+        this.slickModal.config = this.slideConfigMobile;
+        this.slickModal.initSlick();
+        }
+      } else {
+        if (this.slickModal.config.rows == 2) {
+          console.log(this.slickModal.config.rows);
+          this.slickModal.unslick();
+          this.slickModal.config = this.slideConfig;
           this.slickModal.initSlick();
         }
-      } else if (this.slickModal.initialized) {
-        this.slickModal.unslick();
       }
-   }
-
-    // var w = window.innerWidth;
-    // if(w <= 1024)
-    //   this.slickModal.unslick();
-    // console.log(w);
-  } 
-
-
-  slickInit(e: any) {
-    console.log('slick initialized');
+    }
   }
 
   ngAfterViewInit(): void {
+   
   }
 
   public productRecents: any;
   public urlImg: string = environment.urlImg;
   public listTagOwlItem: HTMLCollectionOf<Element>;
-
-  constructor(private _svc: MainService, private _router: ActivatedRoute,
-    @Inject(DOCUMENT) private document: Document,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-
-    private _swal: SwalService,
-  ) {
-  }
   ngOnInit(): void {
+    this.isMobile = window.innerWidth <= 1024;
     if (this.listProduct) {
       this.productRecents = this.listProduct;
     } else {
