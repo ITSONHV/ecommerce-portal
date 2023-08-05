@@ -1,178 +1,234 @@
-<div class="breadcrumbs">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <ul>
-            <li class="home"> <a title="Go to Home Page" [routerLink]="['/']" routerLinkActive="router-link-active" >Home</a><span>&raquo;</span></li>
-            <li class="home"> <a [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,product)" routerLinkActive="router-link-active" >Chi tiết</a></li>
-            <li class=""> <a href="shop_grid.html">{{categoryName}}</a><span>&raquo;</span></li>
-            <li><strong>{{product?.productName}}</strong></li>
-          </ul>
-        </div>
-      </div>
+<div class="">
+  <div class="container">
+    <div class="breadcrumb_dm">
+      <ul class="breadcrumb__list">
+        <li><a href="/"><i aria-hidden="true" class="fa fa-home"></i></a> <i aria-hidden="true"
+            class="fa fa-angle-right"></i></li>
+        <li><a [routerLink]="['/']" routerLinkActive="router-link-active">Trang chủ</a> <i aria-hidden="true" class="fa fa-angle-right"></i></li>
+        <li><a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{slug: product?.categorySlug}">{{this.categoryName}}</a> <i aria-hidden="true"
+            class="fa fa-angle-right"></i></li>
+        <li><a >{{product?.productName}}</a></li>
+      </ul>
     </div>
+    <!-- <div class="row">
+      <div class="col-xs-12">
+        <ul>
+          <li class="home"> <a title="Go to Home Page" [routerLink]="['/']"
+              routerLinkActive="router-link-active">Home</a><span>&raquo;</span></li>
+          <li class="home"> <a [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,product)"
+              routerLinkActive="router-link-active">Chi tiết</a></li>
+          <li class=""> <a href="shop_grid.html">{{categoryName}}</a><span>&raquo;</span></li>
+          <li><strong>{{product?.productName}}</strong></li>
+        </ul>
+      </div>
+    </div> -->
   </div>
-  <!-- Breadcrumbs End --> 
-  <!-- Main Container -->
-  <div class="main-container col2-left-layout">
-    <div class="container">
-      <div class="row">
-        <div class="col-main col-sm-12 col-xs-12">
-          <div class="product-view-area">
-            <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
-              <div class="icon-sale-label sale-left">Sale</div>
-              <div class="large-image"> <a [href]="urlImg + imgfirst" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" [src]="urlImg + imgfirst" alt="products"> </a> </div>
-              <div >
+</div>
+<!-- Breadcrumbs End -->
+<!-- Main Container -->
+<div class=" col2-left-layout">
+  <div class="container">
+    <div class="row">
+      <div class="col-main col-sm-12 col-xs-12">
+        <div class="product-view-area">
+          <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-sm-5">
+            <div class="percent" *ngIf="product?.rateDiscount > 0"><span>-{{product.rateDiscount}}%</span></div>
+            <div class="large-image"> <a [href]="urlImg + imgfirst" class="cloud-zoom" id="zoom1"
+                rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" [src]="urlImg + imgfirst"
+                  alt="products"> </a> </div>
+            <div class="slide-images">
+              <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" style="    margin-top: 40px;">
+                <div ngxSlickItem *ngFor="let item of product?.productImages ;  let i = index ;" class="slide">
+                  <li><a (click)="changeImageLarge(item.id)" class='cloud-zoom-gallery'
+                      rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img style="border: 1px solid;"
+                        [src]="urlImg + item.imageUrl" alt="Thumbnail 2" /></a></li>
+                </div>
+              </ngx-slick-carousel>
 
-                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
-                   <div ngxSlickItem  *ngFor="let item of product?.productImages ;  let i = index ;"class="slide">
-                      <li><a (click)="changeImageLarge(item.id)" class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img style="border: 1px solid;" [src]="urlImg + item.imageUrl" alt = "Thumbnail 2"/></a></li>
-                   </div>
-                </ngx-slick-carousel>
-
-                <!-- <owl-carousel-o [options]="customOptions">
+              <!-- <owl-carousel-o [options]="customOptions">
                   <ng-container *ngFor="let item of product?.productImages ;  let i = index ;">
                     <ng-template carouselSlide [id]="item.id.toString()">
                       <li><a (click)="changeImageLarge(item.id)" class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img [src]="urlImg + item.imageUrl" alt = "Thumbnail 2"/></a></li>
                     </ng-template>
                   </ng-container>
                 </owl-carousel-o> -->
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-7 col-lg-7 col-sm-7 product-details-area">
+            <div class="product-name">
+              <h1>{{product?.productName}}</h1>
+            </div>
+            <div class="price-box">
+              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price">
+                  {{product?.promotionPrice | currency: "VND"}}</span> </p>
+              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">{{product?.price
+                  | currency: "VND"}} </span> </p>
+            </div>
+            <div class="ratings">
+              <div class="rating">
+                <!-- <ng-container *ngIf="product?.rate >= 0">
+                  <i class="fa fa-star" *ngFor="let rate of counterRate(product?.rate)"></i>
+                  <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - product?.rate)"></i>
+                </ng-container> -->
+
+                <div class="rate__star" *ngIf="product?.rate >= 0">
+                  <div class="rate_item">
+                    <i class="fa fa-star yellow" *ngFor="let rate of counterRate(product?.rate)"></i>
+                    <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - product?.rate)"></i>
+                    <span class="rate__text"> &nbsp;{{product?.countRate}} đánh giá</span>
+                  </div>
+                </div>
+              </div>
+              <!-- <p class="rating-links"> <a href="#">{{product?.countRate}} Đánh giá</a> <span class="separator"></span>
+  
+              </p> -->
+              <p class="availability in-stock pull-right" *ngIf="product?.guarantee > 0">Bảo hành:
+                <span>{{product.guarantee}} tháng</span>
+              </p>
+            </div>
+            <div class="short-description">
+              <h2>Mô tả</h2>
+              <div [innerHTML]="htmlContent"></div>
+            </div>
+            <div *ngIf="product?.stock > 0">
+              <p class="status_stock">
+                <span class="status status1"><i aria-hidden="true" class="fa fa-circle"></i>Còn hàng</span>
+              </p>
+            </div>
+            <div class="product-variation">
+              <form action="#" method="post">
+                <div class="cart-plus-minus">
+                  <label for="qty">Số lượng:</label>
+                  <div class="numbers-row">
+                    <div (click)="decreaseQuantity()" class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
+                    <input type="text" class="qty" [(ngModel)]="quantity" title="number" min="1" value="1"
+                      maxlength="12" id="qty" name="qty">
+                    <div (click)="increaseQuantity()" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
+                  </div>
+                </div>
+                <!-- <button (click)="addToShopingCard(product)" class="button pro-add-to-cart" title="Thêm vào giỏ" type="button"><span><i class="fa fa-shopping-basket"></i> Thêm vào giỏ</span></button> -->
+              </form>
+              <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart-2"
+                  (click)="addToShopingCard(product)">
+                  <svg width="17" style="vertical-align: sub;" height="18" viewBox="0 0 17 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
+                      fill="blue"></path>
+                  </svg>
+                  Thêm vào giỏ
+                </button> <button type="button" [routerLink]="['/gio-hang']" routerLinkActive="router-link-active"
+                  class="btn-add-cart "><i class="fa fa-shopping-cart"></i>
+
+                  &nbsp; Mua hàng </button>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-7 col-lg-7 col-md-7 product-details-area">
-              <div class="product-name">
-                <h1>{{product?.productName}}</h1>
-              </div>
-              <div class="price-box">
-                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product?.promotionPrice | currency: "VND"}}</span> </p>
-                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">{{product?.price | currency: "VND"}} </span> </p>
-              </div>
-              <div class="ratings">
-                <div class="rating"> 
-                  <ng-container *ngIf="product?.rate >= 0">
-                    <i class="fa fa-star" *ngFor="let rate of counterRate(product?.rate)"></i>
-                    <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - product?.rate)"></i>
-                  </ng-container>
-                 </div>
-                <p class="rating-links"> <a href="#">{{product?.countRate}} Đánh giá</a> <span class="separator"></span>
-                   <!-- <a href="#">Add Your Review</a>  -->
-                  </p>
-                <p class="availability in-stock pull-right" *ngIf="product?.guarantee > 0">Bảo hành: <span>{{product.guarantee}} tháng</span></p>
-              </div>
-              <div class="short-description">
-                <h2>Mô tả</h2>
-                <div [innerHTML]="htmlContent"></div>
-              </div>
-              <div  *ngIf="product?.stock > 0" >
-                <p class="status_stock">
-                  <span class="status status1"><i aria-hidden="true" class="fa fa-circle"></i>Còn hàng</span>
-                </p>
-              </div> 
-              <div class="product-variation">
-                <form action="#" method="post">
-                  <div class="cart-plus-minus">
-                    <label for="qty">Số lượng:</label>
-                    <div class="numbers-row">
-                      <div (click)="decreaseQuantity()" class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
-                      <input type="text" class="qty" [(ngModel)]="quantity" title="number" min="1" value="1" maxlength="12" id="qty" name="qty">
-                      <div (click)="increaseQuantity()" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
-                    </div>
-                  </div>
-                  <button (click)="addToShopingCard(product)" class="button pro-add-to-cart" title="Thêm vào giỏ" type="button"><span><i class="fa fa-shopping-basket"></i> Thêm vào giỏ</span></button>
-                </form>
-              </div>
-              <div class="product-cart-option">
-                <ul>
-                  <li><a (click)="addToFavorite(product)"><i class="fa fa-heart-o"></i><span>Thêm vào yêu thích</span></a></li>
-                  <!-- <li><a href="#"><i class="fa fa-link"></i><span>Đối chiếu</span></a></li>
+
+            <div class="product-cart-option">
+              <ul>
+                <li><a (click)="addToFavorite(product)"><i class="fa fa-heart-o"></i><span>Thêm vào yêu thích</span></a>
+                </li>
+                <!-- <li><a href="#"><i class="fa fa-link"></i><span>Đối chiếu</span></a></li>
                   <li><a href="#"><i class="fa fa-envelope"></i><span>Email to a Friend</span></a></li> -->
+              </ul>
+            </div>
+            <div class="block popular-tags-area " style="margin-top: 10px;">
+              <div class="sidebar-bar-title" >
+                <h3> Tags</h3>
+              </div>
+              <div class="tag">
+                <ul >
+                  <li *ngFor="let item of product?.productTags"><a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{searchKey: item}">{{item}}</a></li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="product-overview-tab">
-            <div class="product-tab-inner">
-              <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
-                <li class="active"> <a href="#custom_tabs" data-toggle="tab">THÔNG SỐ KỸ THUẬT</a> </li>
-                <li > <a href="#description" data-toggle="tab"> CHI TIẾT SẢN PHẨM </a> </li>
-                <li> <a href="#reviews" data-toggle="tab">ĐÁNH GIÁ</a> </li>
-                <li><a href="#product_video" data-toggle="tab">Video</a></li>
-              </ul>
-              <div id="productTabContent" class="tab-content">
+        </div>
+        <div class="product-overview-tab">
+          <div class="product-tab-inner">
+            <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
+              <li class="active"> <a href="#custom_tabs" data-toggle="tab">THÔNG SỐ KỸ THUẬT</a> </li>
+              <li> <a href="#description" data-toggle="tab"> CHI TIẾT SẢN PHẨM </a> </li>
+              <li> <a href="#reviews" data-toggle="tab">ĐÁNH GIÁ</a> </li>
+              <li><a href="#product_video" data-toggle="tab">Video</a></li>
+            </ul>
+            <div id="productTabContent" class="tab-content">
 
-                <div class="tab-pane fade  in active" id="custom_tabs">
-                  <div class="product-tabs-content-inner clearfix">
+              <div class="tab-pane fade  in active" id="custom_tabs">
+                <div class="product-tabs-content-inner clearfix">
                   <!-- Load thông số -->
-                    <table class="table table-bordered">
-                      <ng-container *ngFor="let item of product?.productAttributes">
+                  <table class="table table-bordered">
+                    <ng-container *ngFor="let item of product?.productAttributes">
                       <tr>
                         <td class="att-name"><strong>{{item.attributeName}}</strong></td>
                         <td class="att-value"><a href="#">{{item.attributeValueName}}</a></td>
-                      </tr>          
-                      </ng-container>       
-                    </table>
+                      </tr>
+                    </ng-container>
+                  </table>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="description">
+                <div class="std">
+                  <div [innerHTML]="htmlDescription"></div>
+                </div>
+              </div>
+              <div id="reviews" class="tab-pane fade">
+                <div class="col-sm-5 col-lg-5 col-md-5">
+                  <div class="reviews-content-left">
+                    <ng-container *ngIf="!reviewsProducts || reviewsProducts?.length == 0">
+                      <p>Không có đánh giá cho sản phẩm này.</p>
+                    </ng-container>
+
+                    <ng-container *ngFor="let review of reviewsProducts; let i = index">
+                      <div [ngClass]=" i % 2 == 0 ? 'review-ratting background-review' : 'review-ratting'">
+                        <p> {{review.content}}</p>
+                        <div class="rating"><a>Đánh giá: </a>
+                          <ng-container *ngIf="review.rate >= 0">
+                            <i class="fa fa-star" *ngFor="let rate of counterRate(review.rate)"></i>
+                            <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - review.rate)"></i>
+                          </ng-container>
+                        </div>
+                        <p class="author">Người dùng : {{review.name}}<small> {{review.createdDate}}</small> </p>
+                      </div>
+                    </ng-container>
+
                   </div>
                 </div>
-                <div class="tab-pane fade" id="description">
-                  <div class="std">
-                    <div [innerHTML]="htmlDescription"></div>
-                  </div>
-                </div>
-                <div id="reviews" class="tab-pane fade">
-                  <div class="col-sm-5 col-lg-5 col-md-5">
-                    <div class="reviews-content-left">
-                      <ng-container *ngIf="!reviewsProducts || reviewsProducts?.length == 0">
-                        <p>Không có đánh giá cho sản phẩm này.</p>
-                      </ng-container>
-                    
-                      <ng-container *ngFor="let review of reviewsProducts; let i = index">
-                        <div [ngClass]=" i % 2 == 0 ? 'review-ratting background-review' : 'review-ratting'">
-                          <p > {{review.content}}</p>
-                          <div class="rating"><a>Đánh giá: </a>
-                            <ng-container *ngIf="review.rate >= 0">
-                              <i class="fa fa-star" *ngFor="let rate of counterRate(review.rate)"></i>
-                              <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - review.rate)"></i>
-                            </ng-container>
-                          </div>
-                          <p class="author">Người dùng : {{review.name}}<small> {{review.createdDate}}</small> </p>
-                        </div>
-                      </ng-container>
-                              
-                    </div>
-                  </div>
-                  <div class="col-sm-7 col-lg-7 col-md-7">
-                    <div class="reviews-content-right">
-                      <h2>Nội dung đánh giá</h2>
-                      <form [formGroup]="reviewForm">
-                        <h4>Bạn nghĩ thế nào về sản phẩm này?<em>*</em></h4>
-                        <div class="table-responsive reviews-table">
-                          <table>
-                            <tbody>
-                              <tr>
-                                <th></th>
-                                <th>1 <i class="fa fa-star"></i></th>
-                                <th>2 <i class="fa fa-star"></i></th>
-                                <th>3 <i class="fa fa-star"></i></th>
-                                <th>4 <i class="fa fa-star"></i></th>
-                                <th>5 <i class="fa fa-star"></i></th>
-                              </tr>
-                              <tr>
-                                <td>Đánh giá</td>
-                                <td><input  type="radio" name="review" value="1" (change)="onItemChangeRadio($event)"></td>
-                                <td><input type="radio" name="review" value="2" (change)="onItemChangeRadio($event)"></td>
-                                <td><input type="radio" name="review" value="3" (change)="onItemChangeRadio($event)"></td>
-                                <td><input type="radio" name="review" value="4" (change)="onItemChangeRadio($event)"></td>
-                                <td><input type="radio" name="review" value="5" checked (change)="onItemChangeRadio($event)"></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <div class="form-area">
-                          
-                          <div class="form-group">
+                <div class="col-sm-7 col-lg-7 col-md-7">
+                  <div class="reviews-content-right">
+                    <h2>Nội dung đánh giá</h2>
+                    <form [formGroup]="reviewForm">
+                      <h4>Bạn nghĩ thế nào về sản phẩm này?<em>*</em></h4>
+                      <div class="table-responsive reviews-table">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <th></th>
+                              <th>1 <i class="fa fa-star"></i></th>
+                              <th>2 <i class="fa fa-star"></i></th>
+                              <th>3 <i class="fa fa-star"></i></th>
+                              <th>4 <i class="fa fa-star"></i></th>
+                              <th>5 <i class="fa fa-star"></i></th>
+                            </tr>
+                            <tr>
+                              <td>Đánh giá</td>
+                              <td><input type="radio" name="review" value="1" (change)="onItemChangeRadio($event)"></td>
+                              <td><input type="radio" name="review" value="2" (change)="onItemChangeRadio($event)"></td>
+                              <td><input type="radio" name="review" value="3" (change)="onItemChangeRadio($event)"></td>
+                              <td><input type="radio" name="review" value="4" (change)="onItemChangeRadio($event)"></td>
+                              <td><input type="radio" name="review" value="5" checked
+                                  (change)="onItemChangeRadio($event)"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="form-area">
+
+                        <div class="form-group">
                           <div class="form-element">
                             <label>Bí danh<em>*</em></label>
-                            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">                     
+                            <input type="text" formControlName="name" class="form-control"
+                              [ngClass]="{ 'is-invalid': submitted && f['name'].errors }">
                           </div>
                           <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
                             <div *ngIf="f['name'].errors['required']">Vui lòng nhập bí danh!</div>
@@ -183,13 +239,14 @@
                         <div class="form-group">
                           <div class="form-element">
                             <label>Số điện thoại <em></em></label>
-                            <input type="text" formControlName="phone" >
+                            <input type="text" formControlName="phone">
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="form-element">
                             <label>Nội dung <em>*</em></label>
-                            <textarea type="text" formControlName="content" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['content'].errors }"></textarea>
+                            <textarea type="text" formControlName="content" class="form-control"
+                              [ngClass]="{ 'is-invalid': submitted && f['content'].errors }"></textarea>
                           </div>
                           <div *ngIf="submitted && f['content'].errors" class="invalid-feedback">
                             <div *ngIf="f['content'].errors['required']">Vui lòng nhập nội dung đánh giá!</div>
@@ -202,25 +259,27 @@
                           </div>
                         </div>
                         <div class="buttons-set">
-                          <button class="button submit" title="Đánh giá" type="submit" (click)="onSubmit()"><span><i class="fa fa-thumbs-up"></i>
+                          <button class="button submit" title="Đánh giá" type="submit" (click)="onSubmit()"><span><i
+                                class="fa fa-thumbs-up"></i>
                               &nbsp;Đánh giá</span></button>
-                        </div>                     
                         </div>
-                      </form>
-                    </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="product_video">
-                  <div class="video-detail" *ngIf="product?.video">
-                    <iframe width="100%" height="300" [src]="product?.video | safe "  frameborder="0" allowfullscreen></iframe>
-                  </div>
-                </div>
-               
               </div>
+              <div class="tab-pane fade" id="product_video">
+                <div class="video-detail" *ngIf="product?.video">
+                  <iframe width="100%" height="300" [src]="product?.video | safe " frameborder="0"
+                    allowfullscreen></iframe>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-        <!-- <aside class="right sidebar col-sm-3 col-xs-12">
+      </div>
+      <!-- <aside class="right sidebar col-sm-3 col-xs-12">
           <div class="block shop-by-side">
             <div class="sidebar-bar-title">
               <h3>Shop By</h3>
@@ -297,79 +356,79 @@
             </div>
           </div>
         </aside> -->
-      </div>
     </div>
-    <div class="container" *ngIf="displayToolbar_Top">
-      <div class="pc_toolbar_top active">
-        <div class="container">
-          <div class="pro-info">
-            <div class="product-name">Vỏ Case KENOO ESPORT G362 - Pink</div>
-            <div class="addcart-price">
-              <div class="">
-                Tổng chi phí
-                <div class="price">
-                  <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product?.promotionPrice | currency: "VND"}}</span> </p>
-                  <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">{{product?.price | currency: "VND"}} </span> </p>
-                
+  </div>
+  <div class="container" *ngIf="displayToolbar_Top">
+    <div class="pc_toolbar_top active">
+      <div class="container">
+        <div class="pro-info">
+          <div class="product-name">Vỏ Case KENOO ESPORT G362 - Pink</div>
+          <div class="addcart-price">
+            <div class="">
+              Tổng chi phí
+              <div class="price">
+                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price">
+                    {{product?.promotionPrice | currency: "VND"}}</span> </p>
+                <p class="old-price"> <span class="price-label">Regular Price:</span> <span
+                    class="price">{{product?.price | currency: "VND"}} </span> </p>
+
               </div>
-              </div>
-              <div class="add-cart-buttons"><button type="button" (click)="addToShopingCard(product)"
-                  class="btn-add-cart btn-add-cart-2"><svg width="17" style="vertical-align: sub;"
-                  height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            </div>
+            <div class="add-cart-buttons"><button type="button" (click)="addToShopingCard(product)"
+                class="btn-add-cart btn-add-cart-2"><svg width="17" style="vertical-align: sub;" height="18"
+                  viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
                     fill="white"></path>
                 </svg>
-                  Thêm vào giỏ
-                </button> <button type="button" [routerLink]="['/gio-hang']" routerLinkActive="router-link-active"  class="btn-add-cart ">
-      
-                  <i class="fa fa-shopping-cart"></i>&nbsp;  Mua hàng </button></div>
-            </div>
-          </div>      
+                Thêm vào giỏ
+              </button> <button type="button" [routerLink]="['/gio-hang']" routerLinkActive="router-link-active"
+                class="btn-add-cart "> <i class="fa fa-shopping-cart"></i>&nbsp; Mua hàng </button></div>
+          </div>
         </div>
       </div>
-
     </div>
-    <div class="container" *ngIf="displayToolbar_bottom">
-      <div class="mb_toolbar_bottom hide-pc active">
-        <div class="mb-product-name">{{product?.productName}}</div>
-        <div class="price">
-            <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product?.promotionPrice | currency: "VND"}}</span> </p>
-            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">{{product?.price | currency: "VND"}} </span> </p>
-          
-        </div>
-        <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart-2" (click)="addToShopingCard(product)">
-          <svg width="17" height="18"
-              viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                fill="blue"></path>
-            </svg>
-             Thêm vào giỏ</button>
-           <button type="button" class="btn-add-cart " [routerLink]="['/gio-hang']" routerLinkActive="router-link-active" > <i class="fa fa-shopping-cart"></i> &nbsp; Mua hàng </button></div>
+
+  </div>
+  <div class="container" *ngIf="displayToolbar_bottom">
+    <div class="mb_toolbar_bottom hide-pc active">
+      <div class="mb-product-name">{{product?.productName}}</div>
+      <div class="price">
+        <p class="special-price"> <span class="price-label">Special Price</span> <span class="price">
+            {{product?.promotionPrice | currency: "VND"}}</span> </p>
+        <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">{{product?.price |
+            currency: "VND"}} </span> </p>
+
+      </div>
+      <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart-2"
+          (click)="addToShopingCard(product)">
+          <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
+              fill="blue"></path>
+          </svg>
+          Thêm vào giỏ</button>
+        <button type="button" class="btn-add-cart " [routerLink]="['/gio-hang']" routerLinkActive="router-link-active">
+          <i class="fa fa-shopping-cart"></i> &nbsp; Mua hàng </button>
       </div>
     </div>
   </div>
-  
-  <!-- Main Container End --> 
-  
-  <!-- Related Product Slider -->
-  
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="related-product-area">
-          <div class="block__header">
-            <h2 class="block__header__title">SẢN PHẨM LIÊN QUAN</h2>
-          </div>
-          <div class="related-products-pro">
-            <div class="slider-items-products">
-              <div id="related-product-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col4 fadeInUp">
-                  <div *ngIf="this.productsRelate">
-                    <app-product-recent [listProduct]="this.productsRelate?.data"
-                      [isAutoPlay]="false"></app-product-recent>
-                  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="related-product-area">
+        <div class="block__header">
+          <h2 class="block__header__title">SẢN PHẨM LIÊN QUAN</h2>
+        </div>
+        <div class="related-products-pro">
+          <div class="slider-items-products">
+            <div id="related-product-slider" class="product-flexslider hidden-buttons">
+              <div class="slider-items slider-width-col4 fadeInUp">
+                <div *ngIf="this.productsRelate">
+                  <app-product-recent [listProduct]="this.productsRelate?.data"
+                    [isAutoPlay]="false"></app-product-recent>
                 </div>
               </div>
             </div>
@@ -378,26 +437,24 @@
       </div>
     </div>
   </div>
-  <!-- Related Product Slider End --> 
-  
-  <!-- Upsell Product Slider -->
-  <section class="upsell-product-area">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="block__header">
-            <h2 class="block__header__title">SẢN PHẨM VỪA XEM</h2>
-          </div>
-          <div class="slider-items-products">
-            <div id="upsell-product-slider" class="product-flexslider hidden-buttons">
-              <div class="slider-items slider-width-col4">
-                 <app-product-recent></app-product-recent>
-              </div>
+</div>
+<section class="upsell-product-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="block__header">
+          <h2 class="block__header__title">SẢN PHẨM VỪA XEM</h2>
+        </div>
+        <div class="slider-items-products">
+          <div id="upsell-product-slider" class="product-flexslider hidden-buttons">
+            <div class="slider-items slider-width-col4">
+              <app-product-recent></app-product-recent>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <ngx-spinner [fullScreen] = "true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)" color="#0b499c"></ngx-spinner>
-  
+  </div>
+</section>
+<ngx-spinner [fullScreen]="true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)"
+  color="#0b499c"></ngx-spinner>

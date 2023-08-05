@@ -1,29 +1,31 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, Inject, AfterViewInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, HostListener, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { environment } from 'src/environments/environment';
 import { ProductModel } from 'src/models/product.model';
 import { MainService } from 'src/services/main.service';
 import { SwalService, TYPE } from 'src/services/swal.service';
-
+import { SlickCarouselComponent } from "ngx-slick-carousel";
 @Component({
   selector: 'app-product-recent',
   templateUrl: './product-recent.component.html',
   styleUrls: ['./product-recent.component.css']
 })
 export class ProductRecentComponent implements OnInit, AfterViewInit {
+  @ViewChild("slickModal") slickModal: SlickCarouselComponent;
   @Input() listProduct: any;
   isShowQuickView = false;
   @Input() isAutoPlay = false;
+  isMobile = true;
   public productSlugToChild: string;
   slideConfig = {
     "slidesToShow": 4,
-    "slidesToScroll": 4,
+    "slidesToScroll": 2,
     "rows": 1,
     "autoplay": false,
     "autoplaySpeed": 5000,
-    "infinity": true,
+    // "mobileFirst": true,
     // "centerMode": true,
     "pauseOnFocus": true,
     "pauseOnHover": true,
@@ -31,64 +33,85 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
     // "variableWidth": false,
     // "enableCenterMode": true,
     "arrows": true,
-    "slidesPerRow": 4,
+    "slidesPerRow": 1,
     "responsive": [
-      {
-        "breakpoint": 1024,
-        "settings": {
-          "infinite": true,
-          "arrows": true,
-          "centerMode": false,
-          "slidesToShow": 2,
-          "centerPadding": 0,
-          "rows": 2,
-          "slidesToScroll": 2,
-          "slidesPerRow": 1
-        },
-      },
       // {
-      //   "breakpoint": 768,
+      //   "breakpoint": 1024,
       //   "settings": {
+      //     "slidesToShow":2,
+      //     "slidesToScroll": 2,
+      //     "slidesPerRow": 1,
+
+      //      "rows": 2,
+      //     "autoplay": false,
+      //     "pauseOnFocus": true,
+      //     "pauseOnHover": true,
+      //     "swipeToSlide": false,
       //     "arrows": true,
-      //     "centerMode": false,
-      //     "slidesToShow": 2,
-      //      "centerPadding": 0,"rows": 2,   "slidesToScroll": 1,
-      //   },
-      // },
-      // {
-      //   "breakpoint": 480,
-      //   "settings": {
-      //     "arrows": true,
-      //     "centerMode": false,
-      //     "slidesToShow": 2, 
-      //       "centerPadding": 0,"rows": 2,   "slidesToScroll": 1,
       //   },
       // },
     ],
   };
 
+  slideConfigMobile = {
+    "slidesToShow": 2,
+    "slidesToScroll": 2,
+    "rows": 2,
+    "autoplay": false,
+    "autoplaySpeed": 5000,
+    // "mobileFirst": true,
+    // "centerMode": true,
+    "pauseOnFocus": true,
+    "pauseOnHover": true,
+    "swipeToSlide": false,
+    // "variableWidth": false,
+    // "enableCenterMode": true,
+    "arrows": true,
+    "slidesPerRow": 1,
+    "responsive": [
+
+    ],
+  };
+  constructor(private _svc: MainService, private _router: ActivatedRoute,
+    @Inject(DOCUMENT) private document: Document,
+    private router: Router,
+    private _swal: SwalService, )
+     {
+    this.getScreenSize();
+  }
 
 
-  slickInit(e: any) {
-    console.log('slick initialized');
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?: any) {
+    // do cònfig éo được nên đang làm củ chuối vãi ra
+    if (this.slickModal !== undefined) {
+      if (window.innerWidth <= 1024) {
+        if (this.slickModal.config.rows == 1) {
+          console.log(this.slickModal.config.rows);
+        this.slickModal.unslick();
+        this.slickModal.config = this.slideConfigMobile;
+        this.slickModal.initSlick();
+        }
+      } else {
+        if (this.slickModal.config.rows == 2) {
+          console.log(this.slickModal.config.rows);
+          this.slickModal.unslick();
+          this.slickModal.config = this.slideConfig;
+          this.slickModal.initSlick();
+        }
+      }
+    }
   }
 
   ngAfterViewInit(): void {
+   
   }
 
   public productRecents: any;
   public urlImg: string = environment.urlImg;
   public listTagOwlItem: HTMLCollectionOf<Element>;
-
-  constructor(private _svc: MainService, private _router: ActivatedRoute,
-    @Inject(DOCUMENT) private document: Document,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-
-    private _swal: SwalService,
-  ) {
-  }
   ngOnInit(): void {
+    this.isMobile = window.innerWidth <= 1024;
     if (this.listProduct) {
       this.productRecents = this.listProduct;
     } else {

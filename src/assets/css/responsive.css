@@ -556,18 +556,9 @@ ul.footer-company-links {
 	font-size: 26px;
 }
 .product-view-area .product-name h1 {
-	font-size: 24px;
+	font-size: 22px;
 }
-.availability.in-stock.pull-right {
-	float: left !important;
-	margin-top: 8px;
-	width: 100%;
-	display: inline-block;
-}
-.product-view-area .product-details-area .ratings {
-	margin-bottom: 8px;
-	display: inline-block;
-}
+
 .product-color-size-area .color-area {
 	width: 100%;
 	margin-right: 0px;
@@ -818,12 +809,12 @@ select.cate-dropdown.hidden-xs {
 	width: 100%;
 	margin-bottom: 5px;
 }
-.headerlinkmenu {
+/* .headerlinkmenu {
 	float: right;
 	margin-top: -28px;
 	text-align: right;
 	width: 68%;
-}
+} */
 .headerlinkmenu ul.links a span {
 	border-left: 0px solid #ddd;
 	padding-left: 0;
@@ -1377,16 +1368,8 @@ ul.footer-company-links {
 	padding: 0px;
 	z-index: -9;
 }
-.availability.in-stock.pull-right {
-	float: left !important;
-	margin-top: 8px;
-	width: 100%;
-	display: inline-block;
-}
-.product-view-area .product-details-area .ratings {
-	margin-bottom: 8px;
-	display: inline-block;
-}
+
+
 .col2-left-layout .product-color-size-area .size-area {
 	width: 100%;
 }
@@ -1747,7 +1730,7 @@ button.button.button-clear {
 	width: 52%
 }
 .product-view-area .product-details-area {
-	padding: 12px 0px 0px 0px
+	/* padding: 12px 0px 0px 0px */
 }
 .product-view-area .product-details-area .ratings .rating-links {
 	display: none
@@ -1905,7 +1888,7 @@ footer .footer-contact-item {
 	width: 100%;
 }
 .cart-plus-minus {
-	display: inline-block;
+	display: flex;
 	float: left;
 	margin-right: 18px;
 	margin-bottom: 10px;
@@ -2181,7 +2164,7 @@ footer .footer-links .payment ul li {
 	width: 100%;
 }
 .cart-plus-minus {
-	display: inline-block;
+	display: flex;
 	float: left;
 	margin-right: 18px;
 	margin-bottom: 10px;

@@ -154,10 +154,13 @@ export class MainService implements OnInit{
                 })
             )
     }
-    getProductbyProductNameSlug(slug: string): Observable<ObjectModel> {
-        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductbyProductNameSlug+ `${slug}`)
+    getProductbyProductNameSlug(dataHash: any): Observable<ObjectModel> {
+        var objReq =JSON.parse(dataHash);
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductbyProductNameSlug 
+            + "HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+            + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`)
             .pipe(
-                retry(3), // retry a failed request up to 3 times
+               // retry(3), // retry a failed request up to 3 times
                 catchError(this.handleError), // then handle the error
                 mergeMap((response_: any) => {
                     return of<ObjectModel>(<ObjectModel>response_);

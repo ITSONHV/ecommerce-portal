@@ -208,7 +208,7 @@ export class HomeComponent implements OnInit {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: false,
-    items: 4,
+    items: 8,
     dots: false,
     margin:10,
     autoplayTimeout: 3000,
@@ -220,7 +220,7 @@ export class HomeComponent implements OnInit {
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
       0: {
-        items: 3
+        items: 4
       },
       400: {
         items: 4
@@ -232,7 +232,7 @@ export class HomeComponent implements OnInit {
         items: 6
       },
       1024: {
-        items: 6
+        items: 8
       }
     },
     nav: false

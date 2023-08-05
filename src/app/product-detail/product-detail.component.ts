@@ -9,6 +9,7 @@ import { map, mergeMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ObjectModel, ResponseBase } from 'src/models/object_paging.model';
 import { ProductModel } from 'src/models/product.model';
+import { EncryptService } from 'src/services/encrypt.service';
 import { MainService } from 'src/services/main.service';
 import { SwalService, TYPE } from 'src/services/swal.service';
 @Component({
@@ -29,7 +30,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
       this.displayToolbar_bottom = scrollPosition >=  600;
       
     this.displayToolbar_Top = window.scrollY >= 1000;
-    console.log(scrollPosition);
   } 
   displayToolbar_bottom: boolean;
   displayToolbar_Top: boolean;
@@ -59,12 +59,12 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     "slidesToScroll": 3,
    
     "autoplay": true,
-    "autoplaySpeed": 3000,
+    "autoplaySpeed": 4000,
     "infinity": true,
-    "centerMode": false,
+    "centerMode": true,
     "pauseOnFocus": true,
-    "pauseOnHover": true,
-    "swipeToSlide": true,
+    "pauseOnHover": false,
+    "swipeToSlide": false,
     "variableWidth": false,
     "centerPadding": "0px",
     "arrows": true,
@@ -74,19 +74,11 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
         "settings": {
           "arrows": false,
           "centerMode": false,
-          "slidesToShow": 2,
+          "slidesToShow": 3,
            "centerPadding": "0px",
         },
       },
-      {
-        "breakpoint": 480,
-        "settings": {
-          "arrows": false,
-          "centerMode": false,
-          "slidesToShow": 2, 
-            "centerPadding": "0px",
-        },
-      },
+     
     ],
   };
 
@@ -130,19 +122,20 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   constructor(private _svc : MainService,private _router: ActivatedRoute,
     private spinner: NgxSpinnerService, public sanitizer: DomSanitizer,
     private _swal: SwalService,
-    private rout: Router,
+    private router: Router,
     private meta: Meta,
     private titleService: Title,
     private fb: FormBuilder,
-    @Inject(DOCUMENT) private document: Document 
+    @Inject(DOCUMENT) private document: Document,
+    private _encryptSvc: EncryptService
  ) {
   }
   ngOnInit(): void {
     this.spinner.show();
-    this.categoryName = this._svc.categoryName;
+    //this.categoryName = this._svc.categoryName;
     this._router.queryParams.subscribe(params => {
       if(!params['slug'])
-        this.rout.navigate(['/'])// nếu không lấy được params quay lại home
+        this.router.navigate(['/'])// nếu không lấy được params quay lại home
       this.slug = params['slug'];
       this.getProductbyProductNameSlug(this.slug);
     });
@@ -154,7 +147,9 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   }
 
   getProductbyProductNameSlug(slug : string){
-    this._svc.getProductbyProductNameSlug(slug).subscribe(
+    var request = this._encryptSvc.encrypt(JSON.stringify({slug : slug})) 
+    console.log(request);
+    this._svc.getProductbyProductNameSlug(request).subscribe(
       (respones: ObjectModel)=>{
         this.product = respones.data;
         if(this.product != null){
@@ -168,13 +163,20 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
           //this.product.productImages?.shift();
           this.htmlContent = this.product.content;
           this.htmlDescription = this.product.description;
+          this.categoryName = this.product?.categoryName;
           this.getReviewProducts(this.product.id);
           this.getProductsRelate(this.product.categoryId);
         }
         this.spinner.hide();
       },
       (err) =>{
-        console.log(err);
+        this.router.navigate(
+          ['/not-found'],
+          {
+            relativeTo: this._router,
+            queryParamsHandling: 'merge'
+          }
+        )
         this.spinner.hide();
       }
     );
@@ -223,7 +225,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   }
   handleViewDetailProduct(event: any, product: any): void {
     const queryParams: Params = { slug: product.productNameSlug };
-    this.rout.navigate(
+    this.router.navigate(
       ['/chi-tiet'],
       {
         relativeTo: this._router,

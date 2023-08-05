@@ -37,6 +37,7 @@ import { ProductRecentComponent } from './product-recent/product-recent.componen
 import { FacebookModule } from 'ngx-facebook/facebook.module';
 import {CookieService} from 'ngx-cookie-service';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     MatTableModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    GoogleMapsModule
    // FacebookModule.forRoot()
 
   ],
