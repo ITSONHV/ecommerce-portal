@@ -139,7 +139,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
       this.slug = params['slug'];
       this.getProductbyProductNameSlug(this.slug);
     });
-    this.getProductSales(6);
+   //this.getProductSales(6);
     this.initForm();
   }
 
@@ -148,7 +148,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
 
   getProductbyProductNameSlug(slug : string){
     var request = this._encryptSvc.encrypt(JSON.stringify({slug : slug})) 
-    console.log(request);
     this._svc.getProductbyProductNameSlug(request).subscribe(
       (respones: ObjectModel)=>{
         this.product = respones.data;
@@ -211,18 +210,18 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     );
   }
 
-  getProductSales(limit: number){
-    this._svc.getProductIsBestSellingPages(limit).subscribe(
-      (respones: ObjectModel)=>{
-        this.productSale = respones.data;    
-        this.spinner.hide();
-      },
-      (err) =>{
-        console.log(err);
-        this.spinner.hide();
-      }
-    );
-  }
+  // getProductSales(limit: number){
+  //   this._svc.getProductIsBestSellingPages(limit).subscribe(
+  //     (respones: ObjectModel)=>{
+  //       this.productSale = respones.data;    
+  //       this.spinner.hide();
+  //     },
+  //     (err) =>{
+  //       console.log(err);
+  //       this.spinner.hide();
+  //     }
+  //   );
+  // }
   handleViewDetailProduct(event: any, product: any): void {
     const queryParams: Params = { slug: product.productNameSlug };
     this.router.navigate(

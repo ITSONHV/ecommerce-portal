@@ -97,6 +97,46 @@
     margin-right: 5px;
 }
 
+.special-price .price {
+    font-size: 18px !important;
+}
+.old-price .price {
+    font-size: 18px !important;
+}
+
+.item .product-shop .product-name  a{
+    font-size: 24px;
+    margin: 0 0 10px;
+    text-align: left;
+    line-height: normal;
+    padding-bottom: 8px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    color: #005ec4;
+    line-height: 35px;
+}
+.rate_item .fa-star {
+    color: #fc0;
+}
+.add-cart-buttons .btn-add-cart {
+    width: 50%;
+    height: 44px;
+    background: #197bb7;;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    margin-top: 5px;
+    text-transform: uppercase
+}
+
+@media screen and (max-width: 1024px) {
+    .add-cart-buttons .btn-add-cart  {
+        font-size: 14px;
+    }
+}
 @media screen and (max-width: 600px) {
     .div-to-hide-mobile {
         display: none;

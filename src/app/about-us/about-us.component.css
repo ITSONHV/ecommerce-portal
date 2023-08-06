@@ -1,9 +1,12 @@
 .dm_intro_text {
     margin-top: 48px;
     margin-left: 40px;
+    margin-right: 40px;
     color: #fff;
     font-size: 16px;
     line-height: 24px;
+    text-align: justify;
+    margin-bottom: 10px;
 }
 
 .intro_text_title {
@@ -17,4 +20,42 @@
     display: flex;
     background: #29324e;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .dm_intro_text {
+        margin-top: 48px;
+        margin-left: 40px;
+        margin-right: 40px;
+        color: #fff;
+        font-size: 14px;
+        line-height: 22px;
+        text-align: justify;
+          margin-bottom: 10px;
+    }
+    
+    .intro_text_title {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 16px;
+    } 
+}
+@media screen and (max-width: 768px) {
+
+    .dm_intro_text {
+        margin-top: 48px;
+        margin-left: 40px;
+        color: #fff;
+        font-size: 12px;
+        line-height: 22px;
+    }
+    
+    .intro_text_title {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 16px;
+    } 
 }

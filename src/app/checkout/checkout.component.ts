@@ -272,40 +272,46 @@ export class CheckoutComponent implements OnInit {
   verifyDataPayment() {
     this.spinner.show();
     let itemsCart = this._svc.getItemsCart();
-    var listIds = itemsCart.map(item => {
-      return item.id;
-    });
-
-    this._svcPayment.verifyDataPayment(this._encryptSvc.encrypt(JSON.stringify({ ProductIds: listIds }))).subscribe(
-      (result: ResponseBase) => {
-        if (result == null || result.statusCode != 200) {
-          // this._swal.toast(TYPE.ERROR, "Đã có lỗi xảy ra, bạn vui lòng thử lại!.", false);;
-        } else {
-          for (var val of result.data) {
-            const cartItem = itemsCart.find(item => item.id == val.id)
-            if (cartItem && cartItem !== undefined) {
-
-              var cartAdd: ICart;
-              cartAdd = {
-                id: val.id,
-                productName: val.productName,
-                price: val.promotionPrice,
-                image: cartItem.image,
-                quantity: cartItem.quantity,
-                productNameSlug: val.productNameSlug,
-                content: encodeURIComponent(val.content)
+    if(itemsCart.length > 0)
+    {
+      var listIds = itemsCart.map(item => {
+        return item.id;
+      });
+  
+      this._svcPayment.verifyDataPayment(this._encryptSvc.encrypt(JSON.stringify({ ProductIds: listIds }))).subscribe(
+        (result: ResponseBase) => {
+          if (result == null || result.statusCode != 200) {
+            // this._swal.toast(TYPE.ERROR, "Đã có lỗi xảy ra, bạn vui lòng thử lại!.", false);;
+          } else {
+            for (var val of result.data) {
+              const cartItem = itemsCart.find(item => item.id == val.id)
+              if (cartItem && cartItem !== undefined) {
+  
+                var cartAdd: ICart;
+                cartAdd = {
+                  id: val.id,
+                  productName: val.productName,
+                  price: val.promotionPrice,
+                  image: cartItem.image,
+                  quantity: cartItem.quantity,
+                  productNameSlug: val.productNameSlug,
+                  content: encodeURIComponent(val.content)
+                }
+                this.cartsPayment.push(cartAdd);
               }
-              this.cartsPayment.push(cartAdd);
+            }
+            this.spinner.hide();
+            this._svc.clearItemsCart(this.cartsPayment);
+            if (result.data.length != itemsCart.length) {
+              this._swal.toast(TYPE.SUCCESS, "Thông tin giỏ hàng đã có sự thay đổi!.", false);
             }
           }
-          this.spinner.hide();
-          this._svc.clearItemsCart(this.cartsPayment);
-          if (result.data.length != itemsCart.length) {
-            this._swal.toast(TYPE.SUCCESS, "Thông tin giỏ hàng đã có sự thay đổi!.", false);
-          }
         }
-      }
-    );
+      );
+    }
+    else{
+      this.spinner.hide();
+    }
   }
 
   onChangePaymentMethod(method: string) {

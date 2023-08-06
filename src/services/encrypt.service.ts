@@ -32,6 +32,15 @@ AgMBAAE=
         return JSON.stringify(res);
     }
 
+    encryptNoStringfy(data: string): any {
+        let random = this.randomString(16);
+        var res = {
+            HashKey: this.encryptUsingRSA(random),
+            HashData: this.encryptUsingAES(data, random),
+        };
+        return (res);
+    }
+
     encryptUsingRSA(keyRandom: string) {
         const publickKey = Forge.pki.publicKeyFromPem(this.publicKey);
         var encrypted = publickKey.encrypt(Forge.util.encodeUtf8(keyRandom));
