@@ -3136,7 +3136,7 @@ footer .footer-links ul {
 footer .footer-links ul li {
 	list-style-type: none;
 	padding: 5px 0;
-	font-size: 12px;
+	font-size: 16px;
 }
 footer .footer-links ul li a {
 	transition: all .3s ease-in-out 0s;
@@ -3915,7 +3915,7 @@ transition:all .3s ease-in-out 0s
 	border-color: #e83f33
 }
 .mtmegamenu a.active .title.title_font span {
-	color: #6e0b04
+	/* color: #6e0b04 */
 }
 .custom-menu-bottom img {
 	float: left;
@@ -5570,6 +5570,7 @@ ul.products-list .cart-button i {
 	padding-left: 0;
 	width: 30%;
 	float: left;
+	border: 1px solid #dddfe6;
 }
 .products-list .product-img img {
 	width: 100%

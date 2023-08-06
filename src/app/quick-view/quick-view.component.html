@@ -7,16 +7,23 @@
       <div style="width:auto;height:auto;overflow: auto;position:relative;" >
         <div class="product-view-area">
           <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
-            <div class="icon-sale-label sale-left">Sale</div>
+            <div class="percent" *ngIf="product?.rateDiscount > 0"><span>-{{product.rateDiscount}}%</span></div>
             <div class="large-image"> <a [href]="urlImg + imgfirst" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" [src]="urlImg + imgfirst" alt="products"> </a> </div>
-            <div class="flexslider flexslider-thumb">
-              <owl-carousel-o [options]="customOptions">
+            <div class="">
+              <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" style="    margin-top: 40px;">
+                <div ngxSlickItem *ngFor="let item of product?.productImages ;  let i = index ;" class="slide">
+                  <li><a (click)="changeImageLarge(item.id)" class='cloud-zoom-gallery'
+                      rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img style="border: 1px solid;"
+                        [src]="urlImg + item.imageUrl" alt="Thumbnail 2" /></a></li>
+                </div>
+              </ngx-slick-carousel>
+              <!-- <owl-carousel-o [options]="customOptions">
                 <ng-container *ngFor="let item of product?.productImages ;  let i = index ;">
                   <ng-template carouselSlide [id]="item.id.toString()">
                     <li><a  (click)="changeImageLarge(item.id)" class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img [src]="urlImg + item.imageUrl" alt = "Thumbnail 2"/></a></li>
                   </ng-template>
                 </ng-container>
-              </owl-carousel-o>
+              </owl-carousel-o> -->
             </div>
             <!-- end: more-./../assets/images --> 
             
@@ -58,7 +65,22 @@
                       <div (click)="increaseQuantity()" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
                     </div>
                   </div>
-                  <button (click)="addToShopingCard(product)" class="button pro-add-to-cart" title="Add to Cart" type="button"><span><i class="fa fa-shopping-basket"></i> GIỎ HÀNG</span></button>
+                  <!-- <button (click)="addToShopingCard(product)" class="button pro-add-to-cart" title="Add to Cart" type="button"><span><i class="fa fa-shopping-basket"></i> GIỎ HÀNG</span></button> -->
+                
+                  <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart-2"
+                    (click)="addToShopingCard(product)">
+                    <svg width="17" style="vertical-align: sub;" height="18" viewBox="0 0 17 18" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
+                        fill="blue"></path>
+                    </svg>
+                    Thêm vào giỏ
+                  </button> <button type="button" [routerLink]="['/gio-hang']" routerLinkActive="router-link-active"
+                    class="btn-add-cart "><i class="fa fa-shopping-cart"></i>
+  
+                    &nbsp; Mua hàng </button>
+                </div>
                 </form>
               </div>
               <div class="product-cart-option">

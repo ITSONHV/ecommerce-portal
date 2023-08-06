@@ -14,7 +14,7 @@
               <ul class="links">
                 <li> <span class="phone hidden-sm">Hotline: <a href="tel:+84978691194"> 0978.691.194</a></span></li>
                 <li ><a title="Bảo hành" href="#"><span class="phone">Bảo hành: <a href="tel:+84908708294">0908.708.294</a></span></a></li>
-                <li  class="hidden-xs"><a title="Store Locator" href="#"><span>Vị trí cửa hàng</span></a></li>
+                <li  class="hidden-xs"><a title="Store Locator" href="#"><span>Kiểm tra đơn hàng</span></a></li>
                 <li  class="hidden-xs"><a title="Thanh toán" [routerLink]="['/thanh-toan']"><span>Thanh toán</span></a></li>    
               </ul>
             </div>
@@ -72,7 +72,7 @@
                       <div class="block-subtitle hidden">Recently added items</div>
                       <ul id="cart-sidebar" class="mini-products-list">
                         <li *ngFor="let item of getItemCart()" class="item odd"> <a [routerLink]="['/gio-hang']" title="{{item.productName}}" class="product-image"><img [src]="urlImg + item.image" alt="html Template" width="65"></a>
-                          <div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
+                          <div class="product-details"> <a (click)="removeItemCart(item.id)" title="Remove This Item" class="remove-cart"><i class="pe-7s-trash"></i></a>
                             <p class="product-name"><a [routerLink]="['/gio-hang']">{{item.productName}}</a> </p>
                             <strong>{{item.quantity}}</strong> x <span class="price">{{item.price | currency:"VND"}}</span> </div>
                         </li>

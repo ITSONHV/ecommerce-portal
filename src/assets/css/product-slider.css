@@ -4,7 +4,7 @@
     overflow: hidden
 }
 
-.product .percent {
+.product .percent, .product-img .percent{
     position: absolute;
     left: 0;
     top: 0;
@@ -18,10 +18,11 @@
     align-items: center;
     justify-content: center;
     transform: skew(-12deg);
-    margin-left: -5px
+    margin-left: -5px;
+    z-index: 1111;
 }
 
-.product .percent span {
+.product .percent span, .product-img .percent  span{
     transform: skew(12deg)
 }
 .home__product .product {

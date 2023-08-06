@@ -11,6 +11,7 @@ import { ProductModel } from 'src/models/product.model';
 import { CookieService } from 'ngx-cookie-service';
 import { AppConsts } from 'src/app/commons/AppConsts';
 import { SwalService, TYPE } from './swal.service';
+import { EncryptService } from './encrypt.service';
 
 @Injectable({
     providedIn: 'root',
@@ -25,7 +26,7 @@ export class MainService implements OnInit{
     categoryId : number;
     public isShowMenu = true;
     public productBestSales :any;
-    constructor(private http: HttpClient)
+    constructor(private http: HttpClient, private _encrypt : EncryptService)
      {
         //cookieService = inject(CookieService);
      }
@@ -62,8 +63,11 @@ export class MainService implements OnInit{
             )
     }
     
-    getProductPages(): Observable<ObjectModel> {
-        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPages)
+    getProductPages(): Observable<ObjectModel> {   
+        var objReq = this._encrypt.encryptNoStringfy("");
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPages  
+        + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+        + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`)
             .pipe(
                 mergeMap((response_: any) => {
                     let result = new ObjectModel();
@@ -73,7 +77,10 @@ export class MainService implements OnInit{
             )
     }
     getProductBestDiscountPages(): Observable<ObjectModel> {
-        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductBestDiscountPages)
+        var objReq = this._encrypt.encryptNoStringfy(JSON.stringify({IsBestDiscount : 1}));
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPages
+        + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+        + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`)
             .pipe(
                 mergeMap((response_: any) => {
                     let result = new ObjectModel();
@@ -84,7 +91,10 @@ export class MainService implements OnInit{
     }
 
     getProductIsHotPages(): Observable<ObjectModel> {
-        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductIsHotPages)
+        var objReq = this._encrypt.encryptNoStringfy(JSON.stringify({ IsHot : 1}));
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPages
+            + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+            + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`)
             .pipe(
                 mergeMap((response_: any) => {
                     let result = new ObjectModel();
@@ -95,7 +105,10 @@ export class MainService implements OnInit{
     }
 
     getProductIsNewPages(): Observable<ObjectModel> {
-        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductIsNewPages)
+        var objReq = this._encrypt.encryptNoStringfy(JSON.stringify({ IsNew : 1}));
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPages
+            + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+            + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`)
             .pipe(
                 mergeMap((response_: any) => {
                     let result = new ObjectModel();
@@ -105,13 +118,11 @@ export class MainService implements OnInit{
             )
     }
 
-    // các page khác cũng có sài product sale, nên gán biến tránh gọi api nhiều lần
     getProductIsBestSellingPages(limit : number): Observable<ObjectModel> {
-        // if(this.productBestSales?.data?.data?.length > 0){
-        //     return of<ObjectModel>(<ObjectModel>this.productBestSales);
-        // }
-
-        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductIsBestSellingPages + `&PageSize=${limit}`)
+        var objReq = this._encrypt.encryptNoStringfy(JSON.stringify({ IsBestSelling : 1, PageSize: limit}));    
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPages
+        + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+        + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`)
             .pipe(
                 mergeMap((response_: any) => {
                     let result = new ObjectModel();
@@ -123,7 +134,11 @@ export class MainService implements OnInit{
     }
 
     getProductPagesByCategoryId(categoryId: number): Observable<ObjectModel> {
-        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPagesbyCategoryId + `${categoryId}`)
+        var objReq = this._encrypt.encryptNoStringfy(JSON.stringify({ CategoryId : categoryId}));    
+        
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPages
+            + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+            + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`)
             .pipe(
                 mergeMap((response_: any) => {
                     let result = new ObjectModel();
@@ -133,7 +148,10 @@ export class MainService implements OnInit{
             )
     }
     getProductPagesByCategorySlug(slug: string): Observable<ObjectModel> {
-        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPagesbyCategorySlug+ `${slug}`)
+        var objReq = this._encrypt.encryptNoStringfy(JSON.stringify({ UrlCategorySlug : slug}));    
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPages + 
+        + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+        + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`)
             .pipe(
                 mergeMap((response_: any) => {
                     let result = new ObjectModel();
@@ -213,37 +231,38 @@ export class MainService implements OnInit{
 
     getProductListPagings(page: number, pageSize: number, keySearch: string, minPrice: number, maxPrice: number, slugCate: string, sortValue : number, typeStatus : string)
     : Observable<ApiPagingResponse<PagingModel>> {
-        let queryUrls = `${this.urlApi}${AppConfigs.urls.getProductListPaging}` 
-        + "?page=" + `${page}` 
-        + "&pageSize=" + `${pageSize}` 
-        + "&minPrice=" + `${minPrice}` 
-        + "&maxPrice=" + `${maxPrice}` 
-        + "&sortValue=" + `${sortValue}`;
-        
+        var rawReq : any = {};
+        let queryUrls = `${this.urlApi}${AppConfigs.urls.getProductPages}`;
+        rawReq.Page = page;
+        rawReq.PageSize = pageSize;
+        rawReq.MinPrice = minPrice;
+        rawReq.MaxPrice = maxPrice;
+        rawReq.SortValue = sortValue;
+
         if(keySearch != undefined && keySearch !== ''){
-            queryUrls += "&productName=" + `${keySearch}` ;
+            rawReq.ProductName = keySearch;
         }
 
         if(slugCate != undefined && slugCate != null && slugCate !== ''){
-            queryUrls += "&UrlCategorySlug=" + `${slugCate}` ;
+            rawReq.UrlCategorySlug = slugCate;
         }
         // 0 tất cả , 1 uu đãi, 2 bán chạy, 3 mới, nổi bậc 4
         if(typeStatus !== undefined  && typeStatus !=null ){
             switch(typeStatus){
                 case "1": {
-                    queryUrls += "&IsBestDiscount=1" ;
+                    rawReq.IsBestDiscount = 1;
                     break;
                 } 
                 case "2": {
-                    queryUrls += "&IsBestSelling=1";
+                    rawReq.IsBestSelling = 1;
                     break;
                 } 
                 case "3": {
-                    queryUrls += "&IsNew=1" ;
+                    rawReq.IsNew = 1;
                     break;
                 }
                 case "4": {
-                    queryUrls += "&IsHot=1" ;
+                    rawReq.IsHot = 1;
                     break;
                 }
                 default:{
@@ -251,10 +270,12 @@ export class MainService implements OnInit{
                 }
             }
         }
-        
+        var objReq = this._encrypt.encryptNoStringfy(JSON.stringify(rawReq));     
+        queryUrls = queryUrls + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+                 + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`;      
         return this.http.get<any>(queryUrls)
             .pipe(
-                retry(3), // retry a failed request up to 3 times
+                //retry(3), // retry a failed request up to 3 times
                 catchError(this.handleError), // then handle the error
                 mergeMap((response_: any) => {
                     return of<ApiPagingResponse<PagingModel>>(<ApiPagingResponse<PagingModel>>response_);
@@ -274,29 +295,35 @@ export class MainService implements OnInit{
     }
 
     addToCart(product: ProductModel, quantity: number) { 
-        const index = this.itemsCart.findIndex(item =>item.id == product.id)
-        if(index >= 0){
-            this.itemsCart[index].quantity += quantity;
-            if(this.itemsCart[index].quantity <= 0){
-                this.removeItemCart(product.id);
+        try {
+            const index = this.itemsCart.findIndex(item => item.id == product.id)
+            if (index >= 0) {
+                this.itemsCart[index].quantity += quantity;
+                if (this.itemsCart[index].quantity <= 0) {
+                    this.removeItemCart(product.id);
+                }
+                this.setCartToLocalStorage();
             }
-            this.setCartToLocalStorage();
-        }
-        else{
-            var cart:ICart;
-            cart = { 
-              id: product.id, 
-              productName: product.productName, 
-              price: product.promotionPrice, 
-              image: product.imageUrl, 
-              quantity: quantity,
-              productNameSlug : product.productNameSlug,
-              content : encodeURIComponent(product.content)
-            }
-            this.itemsCart.push(cart); 
+            else {
+                var cart: ICart;
+                cart = {
+                    id: product.id,
+                    productName: product.productName,
+                    price: product.promotionPrice,
+                    image: product.imageUrl,
+                    quantity: quantity,
+                    productNameSlug: product.productNameSlug,
+                    content: encodeURIComponent(product.content)
+                }
+                this.itemsCart.push(cart);
 
+                this.setCartToLocalStorage();
+            }
+        } catch {
+            console.log("err add card");
+            this.itemsCart = [];
             this.setCartToLocalStorage();
-        }
+        }     
     }
 
     addQuantityToCart(productId: number, quantity: number) { 
@@ -356,7 +383,7 @@ export class MainService implements OnInit{
         var cartLocal :ItemsCart;
         cartLocal = {
             data : this.itemsCart,
-            expired : date.setDate(date.getDate() + 3)
+            expired : date.setDate(date.getDate() + 2)
         }
         let a = encodeURI(JSON.stringify(cartLocal));
         localStorage.setItem(btoa(AppConsts.myCart), btoa(a));
@@ -381,32 +408,67 @@ export class MainService implements OnInit{
 
     // lưu product vừa xem
     setProductRecent(product: any) {
-       product.imageUrl = product.productImages[0]?.imageUrl;
-        if(localStorage.getItem("product-recent") !== null &&
-           localStorage.getItem("product-recent")?.length != 0)
-        {
-            let prodcutRecents = JSON.parse(localStorage.getItem("product-recent") ?? "");
-            let itemExist = prodcutRecents.filter((item: any) => {
-                return item.id === product.id
-              });
-            
-
-              if(itemExist == undefined || itemExist.length == 0){
-                prodcutRecents.push(product);
-                localStorage.setItem('product-recent', JSON.stringify(prodcutRecents));
-              }
+        try{
+            product.imageUrl = product.productImages[0]?.imageUrl;
+            if (localStorage.getItem("product-recent") !== null &&
+                localStorage.getItem("product-recent")?.length != 0) {
+                var obj = JSON.parse(localStorage.getItem("product-recent") ?? "");
+                let prodcutRecents = obj.data;
+                let itemExist = prodcutRecents.filter((item: any) => {
+                    return item.id === product.id
+                });
+    
+                if (itemExist == undefined || itemExist.length == 0) {
+                    prodcutRecents.push(product);
+                    localStorage.setItem('product-recent', JSON.stringify(prodcutRecents));
+    
+                    var date = new Date();
+                    var proRecent: any;
+                    proRecent = {
+                        data: prodcutRecents,
+                        expired: date.setDate(date.getDate() + 1)
+                    }
+                    let a = JSON.stringify(proRecent);
+                    localStorage.setItem('product-recent', a);
+                }
+            }
+            else {
+                this.productRecent.push(product);
+                var date = new Date();
+                var proRecent: any;
+                proRecent = {
+                    data: this. productRecent,
+                    expired: date.setDate(date.getDate() + 1)
+                }
+                let a = JSON.stringify(proRecent);
+                localStorage.setItem('product-recent', a);
+            }
         }
-        else{
-            this.productRecent.push(product);
-            localStorage.setItem('product-recent', JSON.stringify(this.productRecent));
+        catch
+        {
+            console.log("recent err");
+            localStorage.removeItem('product-recent');
         }
     }
     // lấy product vừa xem
     getProductRecent() {
-        if (localStorage.getItem("product-recent") !== null &&
+        try{
+            if (localStorage.getItem("product-recent") !== null &&
             localStorage.getItem("product-recent")?.length != 0) {
-            return JSON.parse(localStorage.getItem("product-recent") ?? "");
+            var obj = JSON.parse(localStorage.getItem("product-recent") ?? "");
+            var date = new Date().getTime();
+            var dateProductRecent = obj.expired;
+            if(date > dateProductRecent){
+                 localStorage.removeItem('product-recent');
+            }
+            return obj.data ?? "";
         }
+        }catch{
+
+            console.log("recent err");
+            localStorage.removeItem('product-recent');
+        }
+        
     }
 
     /* yêu thích */
@@ -415,7 +477,7 @@ export class MainService implements OnInit{
         var favoriteLocal :ItemsFavotire;
         favoriteLocal = {
             data : this.itemsFavorite,
-            expired : date.setDate(date.getDate() + 5)
+            expired : date.setDate(date.getDate() + 2)
         } 
         localStorage.setItem(btoa(AppConsts.myFavorite), btoa(JSON.stringify(favoriteLocal)));
     }

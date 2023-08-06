@@ -1,0 +1,34 @@
+.item-fb {
+    float: right;
+    background: #3C5B9B !important;
+    width: 45px;
+    height: 50px;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.item-shoppe {
+    float: right;
+    background: #FD9F13 !important;
+    width: 45px;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-content: center;
+    height: 50px;
+}
+
+.item-root-shoppe {
+    padding: none;
+    padding-bottom: 9px !important;
+}
+
+.product .product__bottom .product__title {
+
+    height: 4.5em !important;
+}
+.menu-item .product {
+    border: 1px solid #dddfe6 !important;
+}

@@ -146,7 +146,7 @@
                   </div> <!---->
                   <div class="cart-item-price">{{item.quantity * item.price | currency : "VND"}}</div>
                 </div>
-              </div> <a class="go-checkout" (click)="onSubmit()"><!----> XÁC NHẬN MUA HÀNG</a>
+              </div> <a  [ngClass]="getItemCart().length == 0 ? 'go-checkout disable': 'go-checkout' "(click)="onSubmit()"><!----> XÁC NHẬN MUA HÀNG</a>
             </div>
           </div>
         </aside>

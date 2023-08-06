@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { ProductModel } from 'src/models/product.model';
+import { EncryptService } from 'src/services/encrypt.service';
 import { MainService } from 'src/services/main.service';
 import { SwalService, TYPE } from 'src/services/swal.service';
 
@@ -21,6 +22,35 @@ export class QuickViewComponent implements OnInit, OnDestroy {
   public urlImg : string = environment.urlImg;
   @Input() productSlug: string;
   @Output() sendEventToParent = new EventEmitter<boolean>();
+
+  slideConfig = {
+    "slidesToShow": 3,
+    "slidesToScroll": 3,
+   
+    "autoplay": true,
+    "autoplaySpeed": 4000,
+    "infinity": true,
+    "centerMode": true,
+    "pauseOnFocus": true,
+    "pauseOnHover": false,
+    "swipeToSlide": false,
+    "variableWidth": false,
+    "centerPadding": "0px",
+    "arrows": true,
+    "responsive": [
+      {
+        "breakpoint": 1024,
+        "settings": {
+          "arrows": false,
+          "centerMode": false,
+          "slidesToShow": 3,
+           "centerPadding": "0px",
+        },
+      },
+     
+    ],
+  };
+
   public customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -57,6 +87,7 @@ export class QuickViewComponent implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService,
     private _swal: SwalService,
     private route: Router,
+    private _encryptSvc: EncryptService,
  ) {
   }
 
@@ -72,7 +103,9 @@ export class QuickViewComponent implements OnInit, OnDestroy {
   }
 
   getProductbyProductNameSlug(slug : string){
-    this._svc.getProductbyProductNameSlug(slug).subscribe(
+    var request = this._encryptSvc.encrypt(JSON.stringify({slug : slug})) 
+
+    this._svc.getProductbyProductNameSlug(request).subscribe(
       (respones: ObjectModel)=>{
         this.product = respones.data;
         if(this.product != null){
@@ -163,6 +196,21 @@ export class QuickViewComponent implements OnInit, OnDestroy {
     }
     
   }
+
+  // goToCheckout(event: any, product: any): void {
+  //   // const queryParams: Params = { };
+  //   this._router.navigate(
+  //     ['/chi-tiet'],
+  //     {
+  //       // relativeTo: this._router,
+  //       // queryParams: queryParams,
+  //       queryParamsHandling: 'merge'
+  //     }
+  //   )
+
+  //   window.scrollTo(0, 20);
+  //   event.preventDefault();
+  // }
 
   addToFavorite(product:ProductModel): void{
     product.imageUrl = product.productImages[0].imageUrl;

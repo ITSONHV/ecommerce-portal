@@ -338,7 +338,7 @@ export class HomeComponent implements OnInit {
   }
   handleViewDetailProduct(event: any, product: any): void {
     this.meta.updateTag({ name: 'description', content: product.seoDescription ?? ""});
-    this.titleService.setTitle(product.seoTitle ?? "");
+    this.titleService.setTitle("DM Computer");
     this.meta.updateTag({ name: 'keywords', content: product.seoKeyword ?? ""});
     const queryParams: Params = { slug: product.productNameSlug };
     this.router.navigate(

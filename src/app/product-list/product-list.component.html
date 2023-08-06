@@ -5,11 +5,15 @@
     <div class="row">
       <div class="breadcrumb_dm">
         <ul class="breadcrumb__list">
-          <li><i aria-hidden="true" class="fa fa-home"></i><span><i aria-hidden="true" class="fa fa-angle-right"></i></span> </li>
-            <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Trang chủ</a></li>
-            <li class="" *ngIf="this.categoryParent"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{this.categoryParent}}" [routerLink]="['/danh-muc-san-pham-g']" >{{this.categoryParent}}</a></li>
-          
-            <li class="" *ngIf="this.categoryName"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']" >{{categoryName}}</a></li>
+          <li><i aria-hidden="true" class="fa fa-home"></i><span><i aria-hidden="true"
+                class="fa fa-angle-right"></i></span> </li>
+          <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Trang chủ</a></li>
+          <li class="" *ngIf="this.categoryParent"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a
+              title="Go to {{this.categoryParent}}" [routerLink]="['/danh-muc-san-pham-g']">{{this.categoryParent}}</a>
+          </li>
+
+          <li class="" *ngIf="this.categoryName"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a
+              title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']">{{categoryName}}</a></li>
         </ul>
       </div>
     </div>
@@ -56,40 +60,40 @@
           <div class="toolbar">
             <div class="view-mode">
               <ul>
-                  <li> <a [routerLink]="['/danh-muc-san-pham-g']"  (click)="onChangeSelectedListAndGridProrudct()"> <i class="fa fa-th-large"></i> </a> </li>
-                <li class="active"> <a > <i class="fa fa-th-list"></i> </a> </li>
+                <li> <a [routerLink]="['/danh-muc-san-pham-g']" (click)="onChangeSelectedListAndGridProrudct()"> <i
+                      class="fa fa-th-large"></i> </a> </li>
+                <li class="active"> <a> <i class="fa fa-th-list"></i> </a> </li>
                 <li> <a>({{visibleItems.total}} sản phẩm)</a> </li>
               </ul>
             </div>
             <div class="sorter">
               <div class="short-by">
                 <label>Sắp xếp:</label>
-               <select #sortSelecte (change)="onSelectedSort(sortSelecte.value)">
-                    <option selected="selected" value="1">Giá tăng dần</option>
-                    <option value="2">Giá giảm dần</option>
+                <select #sortSelecte (change)="onSelectedSort(sortSelecte.value)">
+                  <option selected="selected" value="1">Giá tăng dần</option>
+                  <option value="2">Giá giảm dần</option>
                 </select>
               </div>
               <div class="short-by page">
                 <label>Hiện thị:</label>
                 <select #pageSizeSelect (change)="onSelectedPageSize(pageSizeSelect.value)">
-                  <option selected="selected">9</option>
-                  <option>18</option>
-                  <option>27</option>
+                  <option selected="selected">12</option>
+                  <option>24</option>
                   <option>36</option>
+                  <option>48</option>
                 </select>
               </div>
             </div>
           </div>
           <div class="product-list-area">
             <ul class="products-list" id="products-list">
-              <ng-container
-              *ngIf="isLoadComplete && (visibleItems.items.length == 0)">
-              <p>Không có sản phẩm nào phù hợp.</p>
-             </ng-container>
+              <ng-container *ngIf="isLoadComplete && (visibleItems.items.length == 0)">
+                <p>Không có sản phẩm nào phù hợp.</p>
+              </ng-container>
 
               <li class="item" *ngFor="let item of visibleItems.items">
                 <div class="product-img">
-                  <div class="icon-sale-label sale-left">Sale</div>
+                  <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
                   <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}"
                     [title]="item.productName">
                     <figure> <img class="small-image" src="{{urlImg + item.imageUrl}}" alt="{{item.productName}}">
@@ -97,22 +101,16 @@
                   </a>
                 </div>
                 <div class="product-shop">
-                  <h2 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}"
-                      [title]="item.productName">{{item.productName}}</a></h2>
-                  <div class="ratings">
-                    <div class="rating">
-                      <!-- Tạo sao đánh giá -->
-                      <ng-container *ngIf="item.rate >= 0">
-                        <i class="fa fa-star" *ngFor="let rate of counterRate(item.rate)"></i>
+                  <h1 class="product-name"><a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}"
+                      [title]="item.productName">{{item.productName}}</a></h1>
+                  <div class="product__rate">
+                    <div class="rate__star" *ngIf="item.rate >= 0">
+                      <div class="rate_item">
+                        <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item.rate)"></i>
                         <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
-                      </ng-container>
+                        <span class="rate__text"> &nbsp;{{item?.countRate}} đánh giá</span>
+                      </div>
                     </div>
-                    <p class="rating-links">
-                      <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item.productNameSlug}">{{item.countRate}}
-                        Đánh giá</a>
-                      <!-- <span class="separator">|</span>  -->
-                      <!-- <a href="#review-form">Add Your Review</a> -->
-                    </p>
                   </div>
                   <div class="price-box">
                     <p class="special-price"> <span class="price-label"></span> <span
@@ -127,13 +125,23 @@
                       [queryParams]="{slug: item.productNameSlug}">Xem thêm</a>
                   </div>
                   <div class="actions">
-                    <button class="button cart-button" (click)="addToShopingCard(item)"  title="Add to Cart" type="button"><i
-                        class="fa fa-shopping-basket"></i><span>Thêm giỏ hàng</span></button>
+                    <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart"
+                      (click)="addToShopingCard(item)">
+                      <svg width="17" style="vertical-align: sub;" height="18" viewBox="0 0 17 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
+                          fill="white"></path>
+                      </svg>
+                      Thêm vào giỏ
+                    </button>
                     <ul>
-                      <li> <a [routerLink]="['/danh-sach-yeu-thich']"> <i class="fa fa-heart-o"></i><span> Thêm vào yêu
+                      <li class=""> <a [routerLink]="['/danh-sach-yeu-thich']"> <i class="fa fa-heart-o"></i><span> Thêm vào yêu
                             thích</span> </a> </li>
                       <!-- <li> <a [routerLink]="['/so-sanh']"> <i class="fa fa-link"></i><span> Add to Compare</span> </a> </li> -->
                     </ul>
+                    </div>
+                    
                   </div>
                 </div>
               </li>
@@ -223,45 +231,54 @@
           <div class="block-content">
             <div *ngIf="isLoadComplete">
               <ng-container *ngFor="let group of groupSearch; let i = index;">
-                 <!-- 0 là search text 1 là search price -->
+                <!-- 0 là search text 1 là search price -->
                 <ng-container *ngIf="group.typeSearch == 1">
-                  
+
                   <div class="block-filter">
                     <div class="filter-header" (click)="handleClickGroupSearch($event, i.toString())">
-                      <a>{{group.filterDisplayText}} </a><i class="fa fa-angle-right"></i></div>
+                      <a>{{group.filterDisplayText}} </a><i class="fa fa-angle-right"></i>
+                    </div>
                     <div [attr.id]="'body-inner' + i"
                       [ngClass]="{'filter-body-inner': i == 0, 'filter-body-inner noactive': i != 0}">
                       <ul class="filter-body">
                         <li class="filter-item" *ngFor="let item of group.itemFilterValues">
-                          <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionPrice($event, item.filterValueID)" 
-                            [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
-                          <label [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span class="button" ></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
+                          <input type="checkbox" id="{{item.filterValueID}}" class="checkmark"
+                            (change)="changeSelectionPrice($event, item.filterValueID)"
+                            [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl />
+                          <label [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldName" ngDefaultControl
+                            for="p1" (click)="changeSelectionPrice($event, item.filterValueID)"> <span
+                              class="button"></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span>
+                          </label>
                       </ul>
                       <div class="sp">Hoặc nhập giá dưới đây</div>
                       <div class="inputPrice">
 
-                        <input #inputMinPrice  type="number" class="" placeholder="" name="minPrice" maxlength="10" min="0"  [(ngModel)]="minPrice">
-                        <input #inputMaxPrice  type="number" class="" placeholder="" name="maxPrice" maxlength="10" min="0" [(ngModel)]="maxPrice">
+                        <input #inputMinPrice type="number" class="" placeholder="" name="minPrice" maxlength="10"
+                          min="0" [(ngModel)]="minPrice">
+                        <input #inputMaxPrice type="number" class="" placeholder="" name="maxPrice" maxlength="10"
+                          min="0" [(ngModel)]="maxPrice">
                       </div>
-                      <div style="margin-top: 15px;"><a type="button" (click)="this.onPageChange(this.pagination);" class="but_ok_2"><i class="fa fa-check"></i>&nbsp; Áp dụng</a></div>
-                      
+                      <div style="margin-top: 15px;"><a type="button" (click)="this.onPageChange(this.pagination);"
+                          class="but_ok_2"><i class="fa fa-check"></i>&nbsp; Áp dụng</a></div>
+
                     </div>
                   </div>
-                  
-                </ng-container>
-               
 
+                </ng-container>
                 <ng-container *ngIf="group.typeSearch == 0">
                   <div class="block-filter">
                     <div class="filter-header" (click)="handleClickGroupSearch($event, i.toString())">
-                      <a>{{group.filterDisplayText}} </a><i class="fa fa-angle-right"></i></div>
+                      <a>{{group.filterDisplayText}} </a><i class="fa fa-angle-right"></i>
+                    </div>
                     <div [attr.id]="'body-inner' + i"
                       [ngClass]="{'filter-body-inner': i == 0, 'filter-body-inner noactive': i != 0}">
                       <ul class="filter-body">
                         <li class="filter-item" *ngFor="let item of group.itemFilterValues">
-                          <input type="checkbox" id="{{item.filterValueID}}" name="cc" class="checkmark"  (change)="changeSelectionKeySearch($event, item.filterValueID)" 
-                          [ngModel]="selectedTextIndex === item.filterValueID" name="fieldName" ngDefaultControl/>
-                          <label for="p1"> <span class="button"></span> &nbsp; {{item.filterValueDisplayText}}<span class="count"></span> </label>
+                          <input type="checkbox" id="{{item.filterValueID}}" name="cc" class="checkmark"
+                            (change)="changeSelectionKeySearch($event, item.filterValueID)"
+                            [ngModel]="selectedTextIndex === item.filterValueID" name="fieldName" ngDefaultControl />
+                          <label for="p1"> <span class="button"></span> &nbsp; {{item.filterValueDisplayText}}<span
+                              class="count"></span> </label>
                       </ul>
                     </div>
                   </div>
@@ -276,18 +293,22 @@
           </div>
           <div class="block-content">
             <p class="amount">Có <a [routerLink]="['/gio-hang']">{{this.myCart.length}} sản phẩm</a> trong giỏ.</p>
-            <ul *ngIf="this.myCart && this.myCart.length > 0" >
-              <li *ngFor="let item of this.myCart" class="item"> 
-                <a [routerLink]="['/gio-hang']" title="{{item.productName}}" class="product-image"><img [src]="urlImg + item.image" alt="{{item.productName}}"></a>
+            <ul *ngIf="this.myCart && this.myCart.length > 0">
+              <li *ngFor="let item of this.myCart" class="item">
+                <a [routerLink]="['/gio-hang']" title="{{item.productName}}" class="product-image"><img
+                    [src]="urlImg + item.image" alt="{{item.productName}}"></a>
                 <div class="product-details">
-                  <div class="access"> <a (click)="removeItemCart(item.id)" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a></div>
+                  <div class="access"> <a (click)="removeItemCart(item.id)" title="Remove This Item"
+                      class="remove-cart"><i class="icon-close"></i></a></div>
                   <p class="product-name"> <a [routerLink]="['gio-hang']">{{item.productName}}</a> </p>
-                  <strong>{{item.quantity}}</strong> x <span class="price">{{item.price  | currency : "VND"}}</span> </div>
+                  <strong>{{item.quantity}}</strong> x <span class="price">{{item.price | currency : "VND"}}</span>
+                </div>
               </li>
-              
+
             </ul>
             <div class="summary">
-              <p class="subtotal"> <span class="label">Tổng tiền:</span> <span class="price">{{sumPriceItemsInCart() | currency : "VND"}}</span> </p>
+              <p class="subtotal"> <span class="label">Tổng tiền:</span> <span class="price">{{sumPriceItemsInCart() |
+                  currency : "VND"}}</span> </p>
             </div>
             <div class="cart-checkout">
               <button class="button button-checkout" title="Submit" type="submit"><span>Thanh toán</span></button>
@@ -343,31 +364,36 @@
           <div class="block-content">
             <ul *ngIf="productSale">
               <ng-container *ngFor="let item of productSale?.data; let i = index">
-              <li class="item">
-                <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  [queryParams]="{slug: item?.productNameSlug}" [title]="item.productName" class="product-image"><img [src]='urlImg + item.imageUrl' alt="Sample Product "></a></div>
-                <div class="products-block-right">
-                  <p class="product-name"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item?.productNameSlug}">{{item.productName}}</a> </p>
-                  <span class="price">{{item?.promotionPrice | currency: "VND"}}</span>
-                  <div class="rating"> 
-                    <ng-container *ngIf="item.rate >= 0">
-                      <i class="fa fa-star" *ngFor="let rate of counterRate(item.rate)"></i>
-                      <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
-                    </ng-container>
-                  
+                <li class="item">
+                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"
+                      [queryParams]="{slug: item?.productNameSlug}" [title]="item.productName"
+                      class="product-image"><img [src]='urlImg + item.imageUrl' alt="Sample Product "></a></div>
+                  <div class="products-block-right">
+                    <p class="product-name"> <a [routerLink]="['/chi-tiet']"
+                        [queryParams]="{slug: item?.productNameSlug}">{{item.productName}}</a> </p>
+                    <span class="price">{{item?.promotionPrice | currency: "VND"}}</span>
+                    <div class="rating">
+                      <ng-container *ngIf="item.rate >= 0">
+                        <i class="fa fa-star" *ngFor="let rate of counterRate(item.rate)"></i>
+                        <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
+                      </ng-container>
+
+                    </div>
                   </div>
-                </div>
-              </li>
-             </ng-container>       
+                </li>
+              </ng-container>
             </ul>
-            <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}">Xem thêm</a> </div>
+            <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}">Xem thêm</a>
           </div>
+        </div>
         <div class="block popular-tags-area ">
           <div class="sidebar-bar-title">
             <h3>Popular Tags</h3>
           </div>
           <div class="tag">
-            <ul >
-              <li *ngFor="let item of category?.categoryTags"><a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{searchKey: item}">{{item}}</a></li>
+            <ul>
+              <li *ngFor="let item of category?.categoryTags"><a [routerLink]="['/danh-muc-san-pham-g']"
+                  [queryParams]="{searchKey: item}">{{item}}</a></li>
             </ul>
           </div>
         </div>
@@ -377,4 +403,5 @@
   </div>
 </div>
 <!-- Main Container End -->
-<ngx-spinner [fullScreen] = "true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)" color="#0b499c"></ngx-spinner>
+<ngx-spinner [fullScreen]="true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)"
+  color="#0b499c"></ngx-spinner>

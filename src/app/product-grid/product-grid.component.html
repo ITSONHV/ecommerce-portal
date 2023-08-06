@@ -95,7 +95,7 @@
               <div class="product-list">
                 <my-card *ngFor="let item of visibleItems.items" class="">
                   <div class="product">
-                    <div class="percent"><span>-12%</span></div>
+                    <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
                     <div class="product__thumb"><a
                       [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
                         class="product__link"><img [src]='urlImg + item.imageUrl' alt="{{item.productName}}"

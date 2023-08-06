@@ -10,9 +10,11 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
 export class FooterComponent implements OnInit  {
   public urlLogo ="./../assets/images/logo.jpg";
 //   @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow | undefined;
+public categories : any = [];
  public items : number[] = [1, 2, 3, 4];
   constructor() {}
   ngOnInit(): void {
+    this.getCate ();
   }
 
   // slideConfig = {
@@ -59,6 +61,10 @@ export class FooterComponent implements OnInit  {
 // openInfoWindow(marker: MapMarker) {
 //     if (this.infoWindow != undefined) this.infoWindow.open(marker);
 // }
-
-
+ getCate (){
+  if (localStorage.getItem('allmenu-app')?.length != 0) {
+    //localStorage.removeItem('allmenu-app');
+    this.categories = JSON.parse(localStorage.getItem('allmenu-app')??"");
+  }
+ }
 }

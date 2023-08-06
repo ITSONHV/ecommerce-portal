@@ -183,6 +183,19 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     this.isShowQuickView = check;
   }
 
+  handleViewDetailProduct(event: any, product: any): void {
+    const queryParams: Params = { slug: product.productNameSlug };
+    this.router.navigate(
+      ['/chi-tiet'],
+      {
+        //relativeTo: this._router,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    )
+    event.preventDefault();
+  }
+
   showAddCartSuccess(){
     this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào giỏ hàng.", false);
   }
