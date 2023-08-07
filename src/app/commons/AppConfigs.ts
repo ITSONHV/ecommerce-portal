@@ -4,6 +4,7 @@ export const AppConfigs = {
         getExpense:'/expense',
         getCategorise:'category/all',
         getCategoryBySlug:'category/by-slug?slug=',
+        getCategoryChildBySlug:'category/child-by-parent?slug=',
         getProductPages : "Product/paging",
         getProductbyProductNameSlug : "Product/by-slug?",
         getProductbyProductId : "ProductProduct/by-id?id=",

@@ -10,10 +10,10 @@
     </ul>
 </div>
 <div id="page" [style.left]="isShowMenu ? '250px' : '0px'">
-    <app-header></app-header>
-    <app-menu-top (sendEventToParent)="listenEventFromChild($event)" ></app-menu-top>
+    <app-header  *ngIf="showSidebar"></app-header>
+    <app-menu-top  *ngIf="showSidebar" (sendEventToParent)="listenEventFromChild($event)" ></app-menu-top>
     <router-outlet (activate)="onActivate($event)"></router-outlet>
-    <app-footer></app-footer>
+    <app-footer  *ngIf="showSidebar"></app-footer>
 </div>
 <div id="fb-customer-chat" class="fb-customerchat"
      page_id="105807499246972">

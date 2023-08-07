@@ -132,15 +132,29 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     this.titleService.setTitle(category.seoTitle);
     this.meta.updateTag({ name: 'keywords', content: category.seoKeyword });
     this._mainsvc.categoryName = category.categoryName;
-    this.router.navigate(
-      ['danh-muc-san-pham-g'],
-      {
-
-        relativeTo: this.activatedRoute,
-        queryParams: queryParams,
-        queryParamsHandling: 'merge'
-      }
-    )
+    
+    // cấu hình pc
+    if(category.UrlCategorySlug === 'xay-dung-cau-hinh' || category.id == 1)
+    {
+      this.router.navigate(
+        ['xay-dung-cau-hinh'],
+        {
+          relativeTo: this.activatedRoute,
+          queryParams: null,
+          queryParamsHandling: 'merge'
+        }
+      )
+    }else{
+      this.router.navigate(
+        ['danh-muc-san-pham-g'],
+        {
+          relativeTo: this.activatedRoute,
+          queryParams: queryParams,
+          queryParamsHandling: 'merge'
+        }
+      )
+    }
+    this.isShowMenu = !this.isShowMenu;
     event.preventDefault();
   }
   checkRouterHome(): boolean {

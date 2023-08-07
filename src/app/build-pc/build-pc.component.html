@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="breadcrumb_dm">
+    <ul class="breadcrumb__list">
+      <li><a href="/"><i aria-hidden="true" class="fa fa-home"></i></a> <i aria-hidden="true"
+          class="fa fa-angle-right"></i></li>
+      <li><a [routerLink]="['/']" routerLinkActive="router-link-active">Trang chủ</a> <i aria-hidden="true" class="fa fa-angle-right"></i></li>
+      <li><a >Xây dựng cấu hình</a></li>
+      <!-- <li><a >{{product?.productName}}</a></li> -->
+    </ul>
+  </div>
+  <div class="block__header home-tab">
+    <h2 class="block__header__title">LỰA CHỌN CÔNG VIỆC</h2>
+  </div>
+  <div class="row" *ngIf="this.allMenu && this.allMenu != '' ">
+    <ng-container *ngFor="let item of allMenu; let i= index; ">
+      <div class="col-lg-6 col-sm-6" *ngIf="i < 10" (click)="gotoGrid(item)">
+        <div class="">
+          <div style="height: 144px;" ngClass="{{'single-categories '+ 'bg'+ i}}">
+            <a  ><img
+                [src]="urlImg + item.imageUrl" alt="{{item.categoryName}}"></a>
+            <h3 class=""><a><span ngClass="{{'color'+ i}}">{{item.categoryName}}</span></a>
+            </h3>
+            <h5 class=""><span filter-content="">{{item.content}}</span>
+            </h5>
+            <a  class="read-more" ngClass="{{'color'+ i}}">Xem thêm</a>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+   
+  </div>
+</div>
+<ngx-spinner [fullScreen]="true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)"
+  color="#0b499c"></ngx-spinner>

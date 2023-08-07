@@ -11,6 +11,7 @@ import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ICart } from 'src/interfaces/ICart';
 import { Meta, Title } from '@angular/platform-browser';
+import { SwalService, TYPE } from 'src/services/swal.service';
 
 @Component({
   selector: 'app-product-list',
@@ -18,7 +19,7 @@ import { Meta, Title } from '@angular/platform-browser';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  public pagination : PaginationValue = { page: 1, pageSize: 9};
+  public pagination : PaginationValue = { page: 1, pageSize: 12};
   public paginationControl = new FormControl(this.pagination);
   public listProduct : any = [] ;
   public urlImg : string = environment.urlImg;
@@ -32,7 +33,7 @@ export class ProductListComponent implements OnInit {
   public maxPrice = 0;
   public searchKey = '';
   public sortValue = 1;
-  public selectedPageSize = 9;
+  public selectedPageSize = 12;
   public selectedPriceIndex : any;
   public selectedTextIndex : any;
   isLoadComplete = false;
@@ -50,7 +51,8 @@ export class ProductListComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private meta: Meta,
-    private titleService: Title,
+    private titleService: Title, 
+      private _swal : SwalService
     ) {
   }
   ngOnInit(): void {
@@ -309,6 +311,7 @@ export class ProductListComponent implements OnInit {
 
   addToShopingCard(product:ProductModel): void{
     this._svc.addToCart(product, 1);
+    this.showAddCartSuccess();
     //console.log(this._svc.getItemsCart);
   }
   sumPriceItemsInCart(){
@@ -321,5 +324,13 @@ export class ProductListComponent implements OnInit {
 
   addToFavorite(product:ProductModel): void{
     this._svc.addToFavorite(product);
+    this. showAddCartFavorite();
+  }
+
+  showAddCartSuccess(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào giỏ hàng.", false);
+  }
+  showAddCartFavorite(){
+    this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
   }
 }
