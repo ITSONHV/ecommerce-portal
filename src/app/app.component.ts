@@ -1,5 +1,5 @@
 import { Component, HostListener, Inject, OnInit,ViewChild  } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { MainService } from 'src/services/main.service';
 import { MenuTopComponent } from './menu-top/menu-top.component';
 
@@ -17,6 +17,9 @@ export class AppComponent implements OnInit  {
   isShowMenu = false;
   isShowIconMenuChild = false;
   allMenu : any;
+  showHeader = true;
+  showSidebar = true;
+  showFooter = true;
   @HostListener('window:resize', ['$event'])
   onResize(event : any) {
     // Lấy chiều rộng và chiều cao của cửa sổ
@@ -71,6 +74,13 @@ export class AppComponent implements OnInit  {
   ngOnInit(): void {
     this.loadMenuToMobile();
     this.initFacebookService();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+         this.showHeader = this.activatedRoute?.firstChild?.snapshot.data?.['showHeader'] !== false ?? false;
+        // this.showSidebar = this.activatedRoute.firstChild.snapshot.data.showSidebar !== false;
+        // this.showFooter = this.activatedRoute.firstChild.snapshot.data.showFooter !== false;
+      }
+    });
    };
 
   private initFacebookService(): void {

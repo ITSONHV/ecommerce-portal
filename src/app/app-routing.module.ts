@@ -15,6 +15,7 @@ import { ProductGridComponent } from './product-grid/product-grid.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { BuildPCComponent } from './build-pc/build-pc.component';
 
 const routes: Routes = [
   { path: '', 
@@ -77,7 +78,11 @@ const routes: Routes = [
     path: 'not-found',
     component: NotFoundComponent
   },
-  { path: '**', redirectTo: '/' },
+   {
+    path: 'xay-dung-cau-hinh',
+    component: BuildPCComponent
+  },
+  // { path: '**', redirectTo: '/' },
 ];
 
 @NgModule({

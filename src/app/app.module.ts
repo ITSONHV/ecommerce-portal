@@ -38,6 +38,9 @@ import { FacebookModule } from 'ngx-facebook/facebook.module';
 import {CookieService} from 'ngx-cookie-service';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { BuildPCComponent } from './build-pc/build-pc.component';
+import { AdminRoutingModule } from 'src/admin/admin-routing.module';
+import { AdminComponent } from 'src/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,11 @@ import { GoogleMapsModule } from '@angular/google-maps';
     SafePipe,
     ScrollTopComponent,
     PaginationComponent,
-    ProductRecentComponent
+    ProductRecentComponent,
+    BuildPCComponent,
+
+    //
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +87,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatPaginatorModule,
     ReactiveFormsModule,
     SlickCarouselModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    AdminRoutingModule
    // FacebookModule.forRoot()
 
   ],
