@@ -62,6 +62,17 @@ export class MainService implements OnInit{
                 })
             )
     }
+
+    getCategoryChildBySlug(slug: string): Observable<ObjectModel> {
+        return this.http.get<any>(`${this.urlApi}${AppConfigs.urls.getCategoryChildBySlug}${slug}`)
+            .pipe(
+                mergeMap((response_: any) => {
+                    let result = new ObjectModel();
+                    result = response_;
+                    return of<ObjectModel>(<ObjectModel>result);
+                })
+            )
+    }
     
     getProductPages(): Observable<ObjectModel> {   
         var objReq = this._encrypt.encryptNoStringfy("");
