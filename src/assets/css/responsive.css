@@ -195,9 +195,7 @@ ul#cart-sidebar {
 	width: 100%;
 	margin: 12px 0px 0px;
 }
-#search .input-group {
-	width: 100%;
-}
+
 #search input {
 	width: 81%;
 	padding-left: 8px;
@@ -777,9 +775,7 @@ footer .footer-contact {
 	width: 100%;
 	margin: 10px 0px;
 }
-#search .input-group {
-	width: 100%;
-}
+
 #search input {
 	width: 58%;
 	padding-left: 8px;
@@ -1799,9 +1795,7 @@ button.button.button-clear {
 	margin-right: 0px;
 	margin-top: 22px;
 }
-#search .input-group {
-	width: 100%;
-}
+
 .top-cart-contain {
 	margin-left: 4px;
 }

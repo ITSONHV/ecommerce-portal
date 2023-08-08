@@ -1,4 +1,4 @@
-<div [ngStyle]="isShowMenu ?  cssOpenMenuMobile : cssCloseMenuMobile" id="mobile-menu">
+<div  *ngIf="showHeader" [ngStyle]="isShowMenu ?  cssOpenMenuMobile : cssCloseMenuMobile" id="mobile-menu">
     <ul class="mobile-menu" *ngFor="let itemParen of allMenu">
         <li>
             <span (click)="clickIconShow(itemParen)" class="expand fa " [ngClass]="{'fa-plus':!itemParen.isExpanded,'fa-minus open':itemParen.isExpanded}" style="padding-bottom: 12.1px; padding-top: 12.1px;"></span>
@@ -15,7 +15,7 @@
     <router-outlet (activate)="onActivate($event)"></router-outlet>
     <app-footer  *ngIf="showHeader"></app-footer>
 </div>
-<div id="fb-customer-chat" class="fb-customerchat"
+<div  *ngIf="showHeader" id="fb-customer-chat" class="fb-customerchat"
      page_id="105807499246972">
 </div>
 <scroll-top></scroll-top>

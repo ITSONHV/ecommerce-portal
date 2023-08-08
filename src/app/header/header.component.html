@@ -14,7 +14,7 @@
               <ul class="links">
                 <li> <span class="phone hidden-sm">Hotline: <a href="tel:+84978691194"> 0978.691.194</a></span></li>
                 <li ><a title="Bảo hành" href="#"><span class="phone">Bảo hành: <a href="tel:+84908708294">0908.708.294</a></span></a></li>
-                <li  class="hidden-xs"><a title="Store Locator" href="#"><span>Kiểm tra đơn hàng</span></a></li>
+                <li  class="hidden-xs"><a title="Store Locator"  [routerLink]="['/lich-su-mua-hang']"><span>Kiểm tra đơn hàng</span></a></li>
                 <li  class="hidden-xs"><a title="Thanh toán" [routerLink]="['/thanh-toan']"><span>Thanh toán</span></a></li>    
               </ul>
             </div>
@@ -59,6 +59,9 @@
                 <a [routerLink]="['/danh-sach-yeu-thich']"> <i class="icon-heart icons"></i><span class="cart-total">{{sumItemsInFavorite()}}</span><span> Yêu thích</span>
                 </a>
               </div>
+              <div class="btn_search_mobile" > 
+                <button class="btn-search" type="button"  (click)="showSearchMobile()"><i class="fa fa-search"></i></button>
+              </div>
               <!-- top cart -->
               <div class="top-cart-contain">
                 <div class="mini-cart">
@@ -86,6 +89,11 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div *ngIf="this.isShowSearchMobile" class="col-xs-12 col-sm-4 col-md-3 header-search-mobile">
+              <div class="searchbox">
+                <input type="text" name="search" autocomplete="off" placeholder="Bạn cần tìm ..." #inputSearch (keydown.enter)="searchFilter($event,inputSearch.value,'')" >
+                <button type="submit" class="mobile-button-search"><i class="fa fa-search" (click)="searchFilter($event,inputSearch.value, '')"></i></button> <!----></div>
             </div>
           </div>
         </div>

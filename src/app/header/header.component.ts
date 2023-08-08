@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   //public itemsCart = 
   public itemsFavorite = this._svc.getItemsFavorite();
   public totalMoneyItemsCart = this._svc.totalMoney;
+  public isShowSearchMobile = false;
   constructor( private router: Router
     , private activatedRoute: ActivatedRoute,
     public _svc : MainService
@@ -43,6 +44,8 @@ export class HeaderComponent implements OnInit {
     if(cateSelect !== undefined && cateSelect != null && cateSelect != '')
     {
       queryParams = { slug: cateSelect, searchKey: this.searchKey };
+    }else{
+      queryParams = { slug: null, typeStatus : null, searchKey: this.searchKey };
     }
 
     this.router.navigate(
@@ -69,5 +72,9 @@ export class HeaderComponent implements OnInit {
   removeItemCart(productId: number)
   {
       this._svc.removeItemCart(productId);
+  }
+
+  showSearchMobile(){
+    this.isShowSearchMobile = !this.isShowSearchMobile;
   }
 }

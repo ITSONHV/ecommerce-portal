@@ -2,11 +2,12 @@
   
  <div class="breadcrumbs">
     <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <ul>
-            <li class="home"> <a title="Go to Home Page" href="index.html">Home</a><span>&raquo;</span></li>
-            <li><strong>Orders List</strong></li>
+      <div class="container">
+        <div class="breadcrumb_dm">
+          <ul class="breadcrumb__list">
+            <li><i aria-hidden="true" class="fa fa-home"></i><span><i aria-hidden="true" class="fa fa-angle-right"></i></span> </li>
+            <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Trang chủ</a></li>
+            <li class="" > <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a>Lịch sử mua hàng</a></li>
           </ul>
         </div>
       </div>
@@ -20,147 +21,47 @@
         <div class="col-main col-sm-9 col-xs-12">
           <div class="my-account">
             <div class="page-title">
-              <h2>Orders List</h2>
+              <h2>Lịch sử</h2>
             </div>
+            <!-- #inputSearch (keydown.enter)="searchFilter($event,inputSearch.value, cateSelect.value)"  -->
+            <div class="order-search">
+              <h5>Số điện thoại</h5>
+              <div class="searchbox">
+                <input #inputSearch (keydown.enter)="getOrderByPhone(inputSearch.value)"  type="number" class="form-control" placeholder="Bạn muốn tìm..." name="search">
+                <button class="mobile-button-search" type="button" (click)="getOrderByPhone(inputSearch.value)" ><i class="fa fa-search"></i></button>
+              </div> 
+            </div>
+            
             <div class="orders-list table-responsive"> 
               <!--orders list table-->
               <table class="table table-bordered cart_summary table-striped">
                 <thead>
                   <tr> 
                     <!--titles for td-->
-                    <th>Order Number</th>
-                    <th>Order Date</th>
-                    <th>Order Status</th>
-                    <th>Total</th>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày</th>
+                    <th>Trạng thái</th>
+                    <th>Tổng tiền</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr> 
+                <tbody *ngIf="listOrder?.length > 0">
+                  <tr *ngFor="let item of listOrder"> 
                     <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#12345</a></td>
+                    <td data-title="Order Number"><a href="order_details.html" class="order-number">{{item.orderCode}}</a></td>
                     <!--order date-->
-                    <td data-title="Order Date">2017-02-13</td>
+                    <td data-title="Order Date">{{item.createdDate.toLocaleString()}}</td>
                     <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
+                    <td data-title="Order Status">{{getNameStatus(item.status)}}</td>
                     <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$79.00</span></td>
+                    <td data-title="Total"><span class="order-total">{{item.totalAmount}}</span></td>
                   </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#67895</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-03-25</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$99.00</span></td>
-                  </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#54321</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-04-10</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$89.00</span></td>
-                  </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#12345</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-02-13</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$79.00</span></td>
-                  </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#67895</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-03-25</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$99.00</span></td>
-                  </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#54321</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-04-10</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$89.00</span></td>
-                  </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#12345</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-02-13</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$79.00</span></td>
-                  </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#67895</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-03-25</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$99.00</span></td>
-                  </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#54321</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-04-10</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$89.00</span></td>
-                  </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#12345</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-02-13</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$79.00</span></td>
-                  </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#67895</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-03-25</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$99.00</span></td>
-                  </tr>
-                  <tr> 
-                    <!--order number-->
-                    <td data-title="Order Number"><a href="order_details.html" class="order-number">#54321</a></td>
-                    <!--order date-->
-                    <td data-title="Order Date">2017-04-10</td>
-                    <!--order status-->
-                    <td data-title="Order Status">Confirmed by ShopMart</td>
-                    <!--quanity-->
-                    <td data-title="Total"><span class="order-total">$89.00</span></td>
-                  </tr>
+                  
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-        <aside class="right sidebar col-sm-3 col-xs-12">
+        <!-- <aside class="right sidebar col-sm-3 col-xs-12">
           <div class="sidebar-account block">
             <div class="sidebar-bar-title">
               <h3>My Account</h3>
@@ -196,7 +97,7 @@
               </div>
             </div>
           </div>
-        </aside>
+        </aside> -->
       </div>
     </div>
   </section>

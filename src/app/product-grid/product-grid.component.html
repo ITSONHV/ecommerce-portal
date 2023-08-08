@@ -87,11 +87,10 @@
               </div>
             </div>
             <div class="category__content">
-            <ng-container
-              *ngIf="isLoadComplete && (visibleItems.items.length == 0)">
+            <ng-container *ngIf="isLoadComplete && (visibleItems.items.length == 0)">
               <p>Không có sản phẩm nào phù hợp.</p>
             </ng-container>
-            <div class="category__product-list"> 
+            <div class="category__product-list" *ngIf="isLoadComplete && (visibleItems.items.length > 0)"> 
               <div class="product-list">
                 <my-card *ngFor="let item of visibleItems.items" class="">
                   <div class="product">
