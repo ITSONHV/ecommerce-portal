@@ -43,7 +43,10 @@
               </div>
             </div>
           </div>
+         
           <div class="category">
+             <div class="mb-button-filter hide-pc"><i class="fa fa-filter"></i>Lọc Sản Phẩm
+             </div>
             <div class="page-title">
               <h2>{{this.category?.categoryName?? "Tìm kiếm"}}</h2>
             </div>
@@ -276,7 +279,57 @@
        
           <div class="offer-banner div-to-hide-mobile"><img src="../../assets/images/image-banner.jpg" alt="banner"></div>
         </aside>
-      </div>
+
+        <div class="mb_sidebar_filter">
+          <aside id="column-left" class="category__sidebar">
+            <div class="sidebar__title">Bộ lọc sản phẩm
+              <div class="mb-hide-filter hide-pc"><i class="fal fa-times"></i></div>
+            </div>
+            <div class="sidebar__wrapper">
+              <div class="block-filter">
+                <div class="filter-header">Hãng sản xuất <i class="far fa-angle-down"></i></div>
+                <div class="filter-body">
+                  <div id="brand-filter-container" class="filter-body-inner">
+                    <div class="find-filter-wrap"><input type="text" placeholder="Tìm hãng sản xuất"> <i
+                        class="fal fa-search"></i></div>
+                    <div class="filter-item"><label><input type="radio" name="manufacturer" value="36"> <span
+                          class="checkmark"></span> <span class="label">TNC Gaming</span></label></div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-filter">
+                <div class="filter-header">Phân Khúc PC Đồ Họa <i class="far fa-angle-down"></i></div>
+                <div class="filter-body">
+                  <div class="filter-body-inner">
+                    <div class="filter-item"><label><input type="radio" name="group_attribute_33" mode="attribute" group-id="33"
+                          value="33-194"> <span class="checkmark"></span> <span class="label">PC từ 5 - 8 Triệu</span></label>
+                    </div>
+                    <div class="filter-item"><label><input type="radio" name="group_attribute_33" mode="attribute" group-id="33"
+                          value="33-196" checked="checked"> <span class="checkmark"></span> <span class="label">PC từ 9 - 15
+                          Triệu</span></label></div>
+                    <div class="filter-item"><label><input type="radio" name="group_attribute_33" mode="attribute" group-id="33"
+                          value="33-198"> <span class="checkmark"></span> <span class="label">PC từ 16 - 20 Triệu</span></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="block-filter">
+                <div class="filter-header">Renda CPU <i class="far fa-angle-down"></i></div>
+                <div class="filter-body">
+                  <div class="filter-body-inner">
+                    <div class="filter-item"><label><input type="radio" name="group_attribute_39" mode="attribute" group-id="39"
+                          value="39-263" checked="checked"> <span class="checkmark"></span> <span class="label">Renda Intel Core
+                          i5</span></label></div>
+                    <div class="filter-item"><label><input type="radio" name="group_attribute_39" mode="attribute" group-id="39"
+                          value="39-265"> <span class="checkmark"></span> <span class="label">Renda Intel Core i7</span></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="apply-cancel-filter"><button>Áp dụng</button> <button>Hủy</button></div>
+          </aside>
+        </div></div>
     </div>
   </div>
   <!-- Main Container End --> 
