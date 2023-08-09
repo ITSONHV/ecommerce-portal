@@ -45,7 +45,7 @@
           </div>
          
           <div class="category">
-             <div class="mb-button-filter hide-pc"><i class="fa fa-filter"></i>Lọc Sản Phẩm
+             <div class="mb-button-filter hide-pc" (click)="openSearchMobile()"><i class="fa fa-filter"></i>Lọc Sản Phẩm
              </div>
             <div class="page-title">
               <h2>{{this.category?.categoryName?? "Tìm kiếm"}}</h2>
@@ -131,7 +131,7 @@
           </div>
         </div>
         <aside class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">     
-          <div class="block shop-by-side">
+          <div class="block shop-by-side hide-mobile">
             <div class="sidebar-bar-title">
               <span style="font-size: 20px;">Bộ lọc sản phẩm</span>
             </div>
@@ -207,7 +207,7 @@
             </div>
           </div>
          
-          <div class="single-img-add sidebar-add-slider ">
+          <div class="single-img-add sidebar-add-slider hide-mobile">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"> 
               <!-- Indicators -->
               <ol class="carousel-indicators">
@@ -268,7 +268,7 @@
           </div>
           <div class="block popular-tags-area ">
             <div class="sidebar-bar-title">
-              <h3>Popular Tags</h3>
+              <h3>Tags</h3>
             </div>
             <div class="tag">
               <ul >
@@ -277,59 +277,75 @@
             </div>
           </div>
        
-          <div class="offer-banner div-to-hide-mobile"><img src="../../assets/images/image-banner.jpg" alt="banner"></div>
-        </aside>
 
-        <div class="mb_sidebar_filter">
-          <aside id="column-left" class="category__sidebar">
-            <div class="sidebar__title">Bộ lọc sản phẩm
-              <div class="mb-hide-filter hide-pc"><i class="fal fa-times"></i></div>
+          <div class="offer-banner div-to-hide-mobile hide-mobile"><img src="../../assets/images/image-banner.jpg" alt="banner"></div>
+        </aside>
+        <div class="category searchMobile hidden-pc" id="searchMobile">
+          <div class="category__content">
+            <div class="mb_sidebar_filter">
+              <aside id="column-left" class="category__sidebar">
+                <div class="sidebar__title">Bộ lọc sản phẩm
+                  <div class="mb-hide-filter hide-pc" (click)="closeSearchMobile()"><i class="fa fa-times"></i></div>
+                </div>
+                <div class="sidebar__wrapper">
+                  <div *ngIf="isLoadComplete">
+                    <ng-container *ngFor="let group of groupSearch; let i = index;">
+                      <ng-container *ngIf="group.typeSearch == 1">
+                      <div class="block-filter">
+                        <div class="filter-header" (click)="handleClickGroupSearchMobile($event, i.toString())"> {{group.filterDisplayText}} 
+                          <i  [attr.id]="'body-inner-m-angle' + i"  class="fa fa-angle-right"></i>
+                        </div>
+                        <div [attr.id]="'body-inner-m' + i" [ngClass]="{'': i == 0, 'noactive': i != 0}">
+                        <div class="filter-body">
+                          <div class="filter-body-inner">
+                            <div class="filter-item" *ngFor="let item of group.itemFilterValues">
+                              <label>
+                                <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionPriceMobile($event, item.filterValueID)" 
+                                [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldNamePrice" ngDefaultControl> <span class="checkmark"></span> <span class="label">{{item.filterValueDisplayText}}</span>
+                                </label>
+                            </div>
+                            <div class="sp">Hoặc nhập giá dưới đây</div>
+                            <div class="inputPrice">                          
+                              <input #inputMinPrice type="number" class="" placeholder="" name="minPrice" maxlength="10" min="0"
+                                [(ngModel)]="minPrice">
+                              <input #inputMaxPrice type="number" class="" placeholder="" name="maxPrice" maxlength="10" min="0"
+                                [(ngModel)]="maxPrice">
+                            </div>
+                          </div>
+                        </div>
+                       </div>
+                      </div>
+                      </ng-container>
+                      <ng-container *ngIf="group.typeSearch == 0">
+                        <div class="block-filter">
+                          <div class="filter-header" (click)="handleClickGroupSearchMobile($event, i.toString())"> {{group.filterDisplayText}} 
+                            <i  [attr.id]="'body-inner-m-angle' + i"  class="fa fa-angle-right"></i>
+                          </div>
+                          <div [attr.id]="'body-inner-m' + i" [ngClass]="{'': i == 0, 'noactive': i != 0}">
+                          <div class="filter-body">
+                            <div class="filter-body-inner">
+                              <div class="filter-item" *ngFor="let item of group.itemFilterValues">
+                                <label>
+                                  <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionKeySearchMobile($event, item.filterValueID)" 
+                                  [ngModel]="selectedTextIndex === item.filterValueID" name="fieldName" ngDefaultControl> <span class="checkmark"></span> <span class="label">{{item.filterValueDisplayText}}</span>
+                                  </label>
+                              </div>                          
+                            </div>
+                          </div>
+                         </div>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </div> 
+                </div>
+                <div class="apply-cancel-filter" (click)="this.onPageChange(this.pagination);"><button>Áp dụng</button> 
+                <button  (click)="closeSearchMobile()">Hủy</button></div>
+              </aside>
             </div>
-            <div class="sidebar__wrapper">
-              <div class="block-filter">
-                <div class="filter-header">Hãng sản xuất <i class="far fa-angle-down"></i></div>
-                <div class="filter-body">
-                  <div id="brand-filter-container" class="filter-body-inner">
-                    <div class="find-filter-wrap"><input type="text" placeholder="Tìm hãng sản xuất"> <i
-                        class="fal fa-search"></i></div>
-                    <div class="filter-item"><label><input type="radio" name="manufacturer" value="36"> <span
-                          class="checkmark"></span> <span class="label">TNC Gaming</span></label></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-filter">
-                <div class="filter-header">Phân Khúc PC Đồ Họa <i class="far fa-angle-down"></i></div>
-                <div class="filter-body">
-                  <div class="filter-body-inner">
-                    <div class="filter-item"><label><input type="radio" name="group_attribute_33" mode="attribute" group-id="33"
-                          value="33-194"> <span class="checkmark"></span> <span class="label">PC từ 5 - 8 Triệu</span></label>
-                    </div>
-                    <div class="filter-item"><label><input type="radio" name="group_attribute_33" mode="attribute" group-id="33"
-                          value="33-196" checked="checked"> <span class="checkmark"></span> <span class="label">PC từ 9 - 15
-                          Triệu</span></label></div>
-                    <div class="filter-item"><label><input type="radio" name="group_attribute_33" mode="attribute" group-id="33"
-                          value="33-198"> <span class="checkmark"></span> <span class="label">PC từ 16 - 20 Triệu</span></label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-filter">
-                <div class="filter-header">Renda CPU <i class="far fa-angle-down"></i></div>
-                <div class="filter-body">
-                  <div class="filter-body-inner">
-                    <div class="filter-item"><label><input type="radio" name="group_attribute_39" mode="attribute" group-id="39"
-                          value="39-263" checked="checked"> <span class="checkmark"></span> <span class="label">Renda Intel Core
-                          i5</span></label></div>
-                    <div class="filter-item"><label><input type="radio" name="group_attribute_39" mode="attribute" group-id="39"
-                          value="39-265"> <span class="checkmark"></span> <span class="label">Renda Intel Core i7</span></label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="apply-cancel-filter"><button>Áp dụng</button> <button>Hủy</button></div>
-          </aside>
-        </div></div>
+          </div>
+        </div>
+       
+      </div>
     </div>
   </div>
   <!-- Main Container End --> 

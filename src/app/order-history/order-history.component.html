@@ -53,7 +53,7 @@
                     <!--order status-->
                     <td data-title="Order Status">{{getNameStatus(item.status)}}</td>
                     <!--quanity-->
-                    <td data-title="Total"><span class="order-total">{{item.totalAmount}}</span></td>
+                    <td data-title="Total"><span class="order-total">{{item.totalAmount | currency: "VND"}}</span></td>
                   </tr>
                   
                 </tbody>
@@ -61,15 +61,15 @@
             </div>
           </div>
         </div>
-        <!-- <aside class="right sidebar col-sm-3 col-xs-12">
+        <aside class="right sidebar col-sm-3 col-xs-12">
           <div class="sidebar-account block">
             <div class="sidebar-bar-title">
-              <h3>My Account</h3>
+              <h3>Liên hệ Fanpage </h3>
             </div>
-            <div class="block-content">
+           <div class="block-content">
               <ul>
-                <li><a>Account Dashboard</a></li>
-                <li><a href="#">Account Information</a></li>
+                <li><a href="https://www.facebook.com/dangminhpc70">Đăng Minh Computer</a></li>
+                  <!--<li><a href="#">Account Information</a></li>
                 <li><a href="#">Address Book</a></li>
                 <li><a href="#">My Orders</a></li>
                 <li><a href="#">Billing Agreements</a></li>
@@ -78,11 +78,11 @@
                 <li><a href="#">My Tags</a></li>
                 <li class="current"><a href="#">My Wishlist</a></li>
                 <li><a href="#">My Downloadable</a></li>
-                <li class="last"><a href="#">Newsletter Subscriptions</a></li>
+                <li class="last"><a href="#">Newsletter Subscriptions</a></li> -->
               </ul>
             </div>
           </div>
-          <div class="compare block">
+           <!--<div class="compare block">
             <div class="sidebar-bar-title">
               <h3>Compare Products (2)</h3>
             </div>
@@ -96,8 +96,8 @@
                 <button type="submit" title="Submit" class="button button-clear"> <span> Clear All</span></button>
               </div>
             </div>
-          </div>
-        </aside> -->
+          </div> -->
+        </aside>
       </div>
     </div>
   </section>

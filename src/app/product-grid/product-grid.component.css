@@ -557,7 +557,9 @@
 }
 
 /*mobile lọc*/
-
+.category .mb-button-filter{
+    display: none;
+}
 .mb_sidebar_filter {
     position: fixed;
     top: 0;
@@ -627,4 +629,30 @@
 
 .mb_sidebar_filter .apply-cancel-filter button:last-child {
     color: #005ec4
+}
+
+.searchMobile{
+    display: none ;
+}
+
+.filter-item  .label {
+    color: #1a2948;
+    cursor: pointer;
+    font-size: 16px;
+}
+.hidden-pc{
+    visibility: hidden;
+}
+@media screen and (max-width: 768px) {
+    .category .mb-button-filter{
+        display: flex !important;
+        align-items: center;
+    }
+
+     .hide-mobile{
+        display: none !important;
+    } 
+    .hidden-pc{
+        visibility: visible ;
+    }
 }
