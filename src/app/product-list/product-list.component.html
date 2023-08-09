@@ -53,9 +53,14 @@
             </div>
           </div>
         </div>
+        <div class="category">
+          <div class="mb-button-filter hide-pc" (click)="openSearchMobile()"><i class="fa fa-filter"></i>Lọc Sản Phẩm
+          </div>
+        </div>
+  
         <div class="shop-inner">
           <div class="page-title">
-            <h2>{{categoryName}}</h2>
+            <h2>{{categoryName ?? "Tìm kiếm"}}</h2>
           </div>
           <div class="toolbar">
             <div class="view-mode">
@@ -222,12 +227,12 @@
             <li class="cat-item"><a [routerLink]="['/danh-muc-san-pham-g']">KItchen</a></li>
           </ul>
         </div>
-        <div class="block shop-by-side">
+        <div class="block shop-by-side hide-mobile">
           <div class="sidebar-bar-title">
             <span style="font-size: 20px;">Bộ lọc sản phẩm</span>
           </div>
         </div>
-        <div class="">
+        <div class="hide-mobile">
           <div class="block-content">
             <div *ngIf="isLoadComplete">
               <ng-container *ngFor="let group of groupSearch; let i = index;">
@@ -399,6 +404,70 @@
         </div>
         <div class="offer-banner div-to-hide-mobile"><img src="./../assets/images/offer-banner.jpg" alt="banner"></div>
       </aside>
+      <div class="category searchMobile hidden-pc" id="searchMobile">
+        <div class="category__content">
+          <div class="mb_sidebar_filter">
+            <aside id="column-left" class="category__sidebar">
+              <div class="sidebar__title">Bộ lọc sản phẩm
+                <div class="mb-hide-filter hide-pc" (click)="closeSearchMobile()"><i class="fa fa-times"></i></div>
+              </div>
+              <div class="sidebar__wrapper">
+                <div *ngIf="isLoadComplete">
+                  <ng-container *ngFor="let group of groupSearch; let i = index;">
+                    <ng-container *ngIf="group.typeSearch == 1">
+                    <div class="block-filter">
+                      <div class="filter-header" (click)="handleClickGroupSearchMobile($event, i.toString())"> {{group.filterDisplayText}} 
+                        <i  [attr.id]="'body-inner-m-angle' + i"  class="fa fa-angle-right"></i>
+                      </div>
+                      <div [attr.id]="'body-inner-m' + i" [ngClass]="{'': i == 0, 'noactive': i != 0}">
+                      <div class="filter-body">
+                        <div class="filter-body-inner">
+                          <div class="filter-item" *ngFor="let item of group.itemFilterValues">
+                            <label>
+                              <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionPriceMobile($event, item.filterValueID)" 
+                              [ngModel]="selectedPriceIndex === item.filterValueID" name="fieldNamePrice" ngDefaultControl> <span class="checkmark"></span> <span class="label">{{item.filterValueDisplayText}}</span>
+                              </label>
+                          </div>
+                          <div class="sp">Hoặc nhập giá dưới đây</div>
+                          <div class="inputPrice">                          
+                            <input #inputMinPrice type="number" class="" placeholder="" name="minPrice" maxlength="10" min="0"
+                              [(ngModel)]="minPrice">
+                            <input #inputMaxPrice type="number" class="" placeholder="" name="maxPrice" maxlength="10" min="0"
+                              [(ngModel)]="maxPrice">
+                          </div>
+                        </div>
+                      </div>
+                     </div>
+                    </div>
+                    </ng-container>
+                    <ng-container *ngIf="group.typeSearch == 0">
+                      <div class="block-filter">
+                        <div class="filter-header" (click)="handleClickGroupSearchMobile($event, i.toString())"> {{group.filterDisplayText}} 
+                          <i  [attr.id]="'body-inner-m-angle' + i"  class="fa fa-angle-right"></i>
+                        </div>
+                        <div [attr.id]="'body-inner-m' + i" [ngClass]="{'': i == 0, 'noactive': i != 0}">
+                        <div class="filter-body">
+                          <div class="filter-body-inner">
+                            <div class="filter-item" *ngFor="let item of group.itemFilterValues">
+                              <label>
+                                <input type="checkbox" id="{{item.filterValueID}}" class="checkmark" (change)="changeSelectionKeySearchMobile($event, item.filterValueID)" 
+                                [ngModel]="selectedTextIndex === item.filterValueID" name="fieldName" ngDefaultControl> <span class="checkmark"></span> <span class="label">{{item.filterValueDisplayText}}</span>
+                                </label>
+                            </div>                          
+                          </div>
+                        </div>
+                       </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </div> 
+              </div>
+              <div class="apply-cancel-filter" (click)="this.onPageChange(this.pagination);"><button>Áp dụng</button>
+              <button (click)="closeSearchMobile()">Hủy</button></div>
+            </aside>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

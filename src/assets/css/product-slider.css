@@ -19,7 +19,7 @@
     justify-content: center;
     transform: skew(-12deg);
     margin-left: -5px;
-    z-index: 1111;
+    z-index: 999;
 }
 
 .product .percent span, .product-img .percent  span{
@@ -465,6 +465,13 @@
         width: calc(100% - 1px);
     }
 
+    .breadcrumb_dm .breadcrumb__list li .fa-angle-right {
+        color: #99a0ad;
+        margin-left: 8px !important;
+        margin-right: 8px !important;
+        font-size: 14px !important
+    }
+
     /*mobile 2 slide bị hở*/
     #slickModal .slick-list .slick-track .slick-slide > div:first-child{
         margin-bottom: -7px;
@@ -479,6 +486,13 @@
     width: calc(100% - 1px);
 }
 
+@media screen  and (max-width: 768px)
+{
+    .main-container {
+        min-height: 350px;
+        padding: 0px 0 0px !important;
+    }
+}
 
 /*reponsive kaka củ chuối*/
 /* tránh bị mất border*/

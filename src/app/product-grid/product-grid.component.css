@@ -101,6 +101,22 @@
     .single-img-add .sidebar-add-slider{
         display: none !important;
     }
+
+ .category .mb-button-filter {
+        border: 1px solid #005ec4;
+        padding: 13px 10px;
+        display: flex;
+        justify-content: center;
+        color: #005ec4;
+        font-weight: 700;
+        font-size: 16px;
+        margin-bottom: 25px
+    }
+
+    .category .mb-button-filter i {
+        margin-right: 12px
+    }
+
  }
  @media screen and (max-width: 600px) {
     .div-to-hide-mobile {
@@ -538,4 +554,105 @@
 .sorter .short-by.page{
     display: none;
 }
+}
+
+/*mobile lọc*/
+.category .mb-button-filter{
+    display: none;
+}
+.mb_sidebar_filter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    overflow: auto
+}
+
+.mb_sidebar_filter .category__sidebar {
+    background: #fff;
+    width: calc(100% - 0px)!important;
+    padding-left: 15px;
+    padding-right: 15px;
+    z-index: 9999999;
+    position: fixed;
+    top: 105px;
+    left: 0;
+    height: calc(100% - 201px);
+}
+
+.mb_sidebar_filter .category__sidebar .sidebar__wrapper {
+    max-height: calc(100% - 58px);
+    overflow: auto
+}
+
+.mb_sidebar_filter:after {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.6);
+    z-index: 8
+}
+
+.mb_sidebar_filter .apply-cancel-filter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999999;
+    width: calc(100% - 0px);
+    background: #fff;
+    text-align: center;
+    padding: 16px 15px 36px;
+    display: flex;
+    justify-content: space-between
+}
+
+.mb_sidebar_filter .apply-cancel-filter button {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    border: 1px solid #005ec4;
+    color: #fff;
+    width: 50%;
+    height: 44px
+}
+
+.mb_sidebar_filter .apply-cancel-filter button:first-child {
+    background-color: #005ec4;
+    margin-right: 12px
+}
+
+.mb_sidebar_filter .apply-cancel-filter button:last-child {
+    color: #005ec4
+}
+
+.searchMobile{
+    display: none ;
+}
+
+.filter-item  .label {
+    color: #1a2948;
+    cursor: pointer;
+    font-size: 16px;
+}
+.hidden-pc{
+    visibility: hidden;
+}
+@media screen and (max-width: 768px) {
+    .category .mb-button-filter{
+        display: flex !important;
+        align-items: center;
+    }
+
+     .hide-mobile{
+        display: none !important;
+    } 
+    .hidden-pc{
+        visibility: visible ;
+    }
 }

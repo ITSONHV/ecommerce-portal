@@ -97,6 +97,7 @@ export class ProductGridComponent implements OnInit  {
 
   //pagination: PaginationValue
   public onPageChange(pagination: any): void {
+    this.closeSearchMobile();
     this.spinner.show();
     let currentPage = (pagination.page ?? 1);
     this._svc.getProductListPagings(currentPage,
@@ -352,4 +353,79 @@ export class ProductGridComponent implements OnInit  {
   ngOnDestroy() {
    
   }
+
+  /*bộ lọc mobile*/ 
+  closeSearchMobile(): void {
+    const tag = this.document.getElementById('searchMobile');
+    if (tag) {
+      tag.classList.add('searchMobile');
+    }
+  }
+  openSearchMobile(): void {
+    const tag = this.document.getElementById('searchMobile');
+    if (tag) {
+      tag.classList.remove('searchMobile');
+    }
+    
+  }
+
+  handleClickGroupSearchMobile
+  (event: any, idDiv: any): void {
+    const idIner = 'body-inner-m' + idDiv;
+    const idAngle = 'body-inner-m-angle' + idDiv;
+  
+    const tag = this.document.getElementById(idIner);
+    const tagItem = this.document.getElementById(idAngle);
+    if (tag?.classList.contains('noactive')) {
+      tag.classList.remove('noactive');
+      //tag.classList.add('filter-body-inner');
+      if (tagItem?.className === 'fa fa-angle-right') {
+        tagItem.className = 'fa fa-angle-down';
+      } 
+    } else {
+      //tag?.classList.remove('filter-body-inner');
+      tag?.classList.add('noactive');
+      if (tagItem?.className === 'fa fa-angle-down') {
+        tagItem.className = 'fa fa-angle-right';
+      }
+    }
+    event.preventDefault();
+  }
+
+  changeSelectionPriceMobile(event: any, index: string) {
+    debugger;
+    this.selectedPriceIndex = event.target.checked ? index : undefined;
+    if(this.selectedPriceIndex === undefined){
+      this.minPrice = 0;
+      this.maxPrice = 0;
+      //this.onPageChange(this.pagination);
+    }else{
+      let itemSelectd = this.getItemFromGroupSearch(index);
+      if(itemSelectd && itemSelectd !== undefined && itemSelectd != null){
+        this.minPrice = itemSelectd.minPrice;
+        this.maxPrice = itemSelectd.maxPrice;
+        //this.onPageChange(this.pagination);
+      }
+    }
+    
+    event.preventDefault();
+  }
+
+  changeSelectionKeySearchMobile(event: any, index: string) {
+    debugger;
+    this.selectedTextIndex = event.target.checked ? index : undefined;
+    if(this.selectedTextIndex === undefined){
+      this.searchKey = ''; 
+       //this.onPageChange(this.pagination);
+    }else{
+      let itemSelectd = this.getItemFromGroupSearch(index);
+      if(itemSelectd && itemSelectd !== undefined && itemSelectd != null){
+        this.searchKey = itemSelectd.filterSearchKey;
+        //this.onPageChange(this.pagination);
+      }
+    }
+  
+    event.preventDefault();
+  }
 }
+

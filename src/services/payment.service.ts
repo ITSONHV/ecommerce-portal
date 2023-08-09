@@ -8,6 +8,7 @@ import { ObjectModel, ResponseBase } from 'src/models/object_paging.model';
 import { ICart, ItemsCart, ItemsFavotire } from 'src/interfaces/ICart';
 import { ProductModel } from 'src/models/product.model';
 import { AppConsts } from 'src/app/commons/AppConsts';
+import { EncryptService } from './encrypt.service';
 
 @Injectable({
     providedIn: 'root',
@@ -22,7 +23,7 @@ export class PaymentService implements OnInit{
     categoryId : number;
     public isShowMenu = true;
     public productBestSales :any;
-    constructor(private http: HttpClient)
+    constructor(private http: HttpClient,private _encrypt : EncryptService)
      {
      }
 
@@ -49,6 +50,21 @@ export class PaymentService implements OnInit{
             })
         )
     }
+
+    getOrderByPhone(phone: string): Observable<ObjectModel> {
+        var objReq =  this._encrypt.encryptNoStringfy(JSON.stringify({Phone : phone}));
+        console.log(objReq);
+        return this.http.get<any>(this.urlApi + AppConfigs.urls.getOrderByPhone 
+            + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+            + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`)
+            .pipe(
+               // retry(3), // retry a failed request up to 3 times
+                catchError(this.handleError), // then handle the error
+                mergeMap((response_: any) => {
+                    return of<ObjectModel>(<ObjectModel>response_);
+                })
+            )
+    };
 
     getServerErrorMessage(error: HttpErrorResponse): string {
         switch (error.status) {
