@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { MainService } from 'src/services/main.service';
@@ -272,11 +272,13 @@ export class ProductListComponent implements OnInit {
   }
 
   onChangeSelectedListAndGridProrudct(): void {  
+    let queryParams: Params = { viewMode: 'grid' };
     this.router.navigate(
       ['/danh-muc-san-pham-g'],
       {
         relativeTo: this.activatedRoute,
-        queryParamsHandling: "preserve" 
+        queryParams : queryParams,
+        queryParamsHandling: "merge" 
       }
     )
 
@@ -376,7 +378,6 @@ export class ProductListComponent implements OnInit {
   }
 
   changeSelectionPriceMobile(event: any, index: string) {
-    debugger;
     this.selectedPriceIndex = event.target.checked ? index : undefined;
     if(this.selectedPriceIndex === undefined){
       this.minPrice = 0;
@@ -395,7 +396,6 @@ export class ProductListComponent implements OnInit {
   }
 
   changeSelectionKeySearchMobile(event: any, index: string) {
-    debugger;
     this.selectedTextIndex = event.target.checked ? index : undefined;
     if(this.selectedTextIndex === undefined){
       this.searchKey = ''; 

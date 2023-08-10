@@ -285,7 +285,7 @@
             <div class="mb_sidebar_filter">
               <aside id="column-left" class="category__sidebar">
                 <div class="sidebar__title">Bộ lọc sản phẩm
-                  <div class="mb-hide-filter hide-pc" (click)="closeSearchMobile()"><i class="fa fa-times"></i></div>
+                  <div class="mb-hide-filter hide-pc" (click)="closeSearchMobileEvent($event)"><i class="fa fa-times"></i></div>
                 </div>
                 <div class="sidebar__wrapper">
                   <div *ngIf="isLoadComplete">
@@ -338,8 +338,9 @@
                     </ng-container>
                   </div> 
                 </div>
-                <div class="apply-cancel-filter" (click)="this.onPageChange(this.pagination);"><button>Áp dụng</button> 
-                <button  (click)="closeSearchMobile()">Hủy</button></div>
+                <div class="apply-cancel-filter" >
+                <button (click)="this.onPageChange(this.pagination);">Áp dụng</button> 
+                <button (click)="closeSearchMobile()">Hủy</button></div>
               </aside>
             </div>
           </div>

@@ -26,7 +26,7 @@ export class BuildPCComponent {
     this.spinner.show();
     this._svc.getCategoryChildBySlug('xay-dung-cau-hinh').subscribe(
       (data: any) => {
-        debugger;
+
         let menuObject :any = { ...data }.data;
         this.allMenu = menuObject;
         this.spinner.hide();

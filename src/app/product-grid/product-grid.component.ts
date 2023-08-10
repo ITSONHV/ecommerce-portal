@@ -225,11 +225,13 @@ export class ProductGridComponent implements OnInit  {
 	}
 
   onChangeSelectedListAndGridProrudct(): void {  
+    let queryParams: Params = { viewMode: 'list' };
     this.router.navigate(
       ['/danh-muc-san-pham-l'],
       {
         relativeTo: this.activatedRoute,
-        queryParamsHandling: "preserve" 
+        queryParams : queryParams,
+        queryParamsHandling: "merge" 
       }
     )
 
@@ -361,6 +363,15 @@ export class ProductGridComponent implements OnInit  {
       tag.classList.add('searchMobile');
     }
   }
+  closeSearchMobileEvent(event: any): void { event.preventDefault();
+    const tag = this.document.getElementById('searchMobile');
+    if (tag) {
+      tag.classList.add('searchMobile');
+    }
+    console.log('dasdasdsd');
+   
+    return;
+  }
   openSearchMobile(): void {
     const tag = this.document.getElementById('searchMobile');
     if (tag) {
@@ -393,7 +404,7 @@ export class ProductGridComponent implements OnInit  {
   }
 
   changeSelectionPriceMobile(event: any, index: string) {
-    debugger;
+
     this.selectedPriceIndex = event.target.checked ? index : undefined;
     if(this.selectedPriceIndex === undefined){
       this.minPrice = 0;
@@ -412,7 +423,6 @@ export class ProductGridComponent implements OnInit  {
   }
 
   changeSelectionKeySearchMobile(event: any, index: string) {
-    debugger;
     this.selectedTextIndex = event.target.checked ? index : undefined;
     if(this.selectedTextIndex === undefined){
       this.searchKey = ''; 
