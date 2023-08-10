@@ -48,7 +48,7 @@ AgMBAAE=
     }
 
     encryptUsingAES(data: string, keyRandom: string): any {
-        var text = Forge.util.encodeUtf8(data);
+        var text = data;
         var key = Forge.util.encodeUtf8(keyRandom);
         var encrypted = CryptoJS.AES.encrypt(text, this.toWordArray(key),
             {

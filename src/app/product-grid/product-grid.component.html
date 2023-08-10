@@ -184,7 +184,7 @@
           
           <div class="block sidebar-cart">
             <div class="sidebar-bar-title">
-              <span>Giỏ hàng của bạn</span>
+              <h3>Giỏ hàng của bạn</h3>
             </div>
             <div class="block-content">
               <p class="amount">Có <a [routerLink]="['/gio-hang']">{{this.myCart.length}} sản phẩm</a> trong giỏ.</p>
@@ -202,7 +202,7 @@
                 <p class="subtotal"> <span class="label">Tổng tiền:</span> <span class="price">{{sumPriceItemsInCart() | currency : "VND"}}</span> </p>
               </div>
               <div class="cart-checkout">
-                <button class="button button-checkout" title="Submit" type="submit"><span>Thanh toán</span></button>
+                <button class="button button-checkout" title="Submit" type="submit" [routerLink]="['/gio-hang']"><span>Thanh toán</span></button>
               </div>
             </div>
           </div>

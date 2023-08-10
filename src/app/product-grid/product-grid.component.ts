@@ -21,7 +21,7 @@ import { SwalService, TYPE } from 'src/services/swal.service';
   styleUrls: ['./product-grid.component.css']
 })
 export class ProductGridComponent implements OnInit  {
-  public pagination : PaginationValue = { page: 1, pageSize: 9};
+  public pagination : PaginationValue = { page: 1, pageSize: 12};
   public paginationControl = new FormControl(this.pagination);
   public listProduct : any = [] ;
   public urlImg : string = environment.urlImg;
@@ -90,8 +90,7 @@ export class ProductGridComponent implements OnInit  {
     this.changeValueTypeSearch(this.typeSearch);
   }
 
-  counterRate(i: number) {
-    
+  counterRate(i: number) { 
     return new Array(i);
   }
 
@@ -111,9 +110,10 @@ export class ProductGridComponent implements OnInit  {
         (respones: ApiPagingResponse<PagingModel>) => {
           this.totalRecords = respones.data.total;
           this.listProduct = respones.data.data;
-          this.visibleItems = { items: respones.data.data, total: respones.data.total };
+          this.visibleItems = 
+          
+          { items: respones.data.data, total: respones.data.total };
           this.isLoadComplete = true;
-          console.log(this.visibleItems);
           this.spinner.hide();
           window.scroll(0, 50); // scroll lên 1 tý sau khi change value
         },

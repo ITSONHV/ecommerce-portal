@@ -251,7 +251,7 @@ export class MainService implements OnInit{
         rawReq.SortValue = sortValue;
 
         if(keySearch != undefined && keySearch !== ''){
-            rawReq.ProductName = keySearch;
+            rawReq.ProductName = decodeURI(keySearch);
         }
 
         if(slugCate != undefined && slugCate != null && slugCate !== ''){
