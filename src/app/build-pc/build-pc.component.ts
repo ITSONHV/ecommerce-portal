@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgxSpinnerService, Spinner } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
+import { CommonService } from 'src/services/common.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
@@ -12,7 +13,9 @@ import { MainService } from 'src/services/main.service';
 export class BuildPCComponent {
   allMenu :any;
   public urlImg: string = environment.urlImg;
-  constructor(private _svc: MainService,  private router: Router, private activatedRoute: ActivatedRoute, private spinner: NgxSpinnerService,
+  constructor(private _svc: MainService,  private router: Router
+    , private activatedRoute: ActivatedRoute, private spinner: NgxSpinnerService,
+    private _commonService : CommonService
     )
   {
     
@@ -34,15 +37,7 @@ export class BuildPCComponent {
     )
   }
 
-  gotoGrid(item: any){
-    const queryParams: Params = { slug: item.urlSlug };
-    this.router.navigate(
-      ['danh-muc-san-pham-g'],
-      {
-        // relativeTo:'',
-        queryParams: queryParams,
-        queryParamsHandling: 'merge'
-      }
-    )
+  redirecUrl(event: any, cate: string, searchKey: string){
+    this._commonService.redirectRouter(event, searchKey, cate);
   }
 }

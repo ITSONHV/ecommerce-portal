@@ -12,6 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ICart } from 'src/interfaces/ICart';
 import { Meta, Title } from '@angular/platform-browser';
 import { SwalService, TYPE } from 'src/services/swal.service';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-product-list',
@@ -52,7 +53,8 @@ export class ProductListComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private meta: Meta,
     private titleService: Title, 
-      private _swal : SwalService
+    private _swal : SwalService,
+    private _commonService: CommonService
     ) {
   }
   ngOnInit(): void {
@@ -307,7 +309,7 @@ export class ProductListComponent implements OnInit {
       });
       if(menuParent && menuParent.length > 0)
       {
-        this.categoryParent = menuParent[0].categoryName;
+        this.categoryParent = menuParent[0];
       }
     }
   }
@@ -409,5 +411,9 @@ export class ProductListComponent implements OnInit {
     }
   
     event.preventDefault();
+  }
+
+  redirecUrl(event: any, cate: string, searchKey: string){
+    this._commonService.redirectRouter(event, searchKey, cate);
   }
 }

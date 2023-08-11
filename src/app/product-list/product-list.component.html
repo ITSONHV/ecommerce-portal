@@ -9,11 +9,11 @@
                 class="fa fa-angle-right"></i></span> </li>
           <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Trang chủ</a></li>
           <li class="" *ngIf="this.categoryParent"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a
-              title="Go to {{this.categoryParent}}" [routerLink]="['/danh-muc-san-pham-g']">{{this.categoryParent}}</a>
+              title="Go to {{this.categoryParent}}"(click)="redirecUrl($event,this.categoryParent.urlSlug, '')">{{this.categoryParent.categoryName}}</a>
           </li>
 
-          <li class="" *ngIf="this.categoryName"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a
-              title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']">{{categoryName}}</a></li>
+          <li class="" *ngIf="this.category"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a
+              title="Go to {{this.category.categoryName}}" (click)="redirecUrl($event,this.category.urlSlug, '')">{{this.category.categoryName}}</a></li>
         </ul>
       </div>
     </div>

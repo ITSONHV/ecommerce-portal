@@ -5,9 +5,9 @@
           <ul class="breadcrumb__list">
             <li><i aria-hidden="true" class="fa fa-home"></i><span><i aria-hidden="true" class="fa fa-angle-right"></i></span> </li>
             <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Trang chủ</a></li>
-            <li class="" *ngIf="this.categoryParent"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{this.categoryParent}}" [routerLink]="['/danh-muc-san-pham-g']" >{{this.categoryParent}}</a></li>
+            <li class="" *ngIf="this.categoryParent"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{this.categoryParent.categoryName}}" (click)="redirecUrl($event,this.categoryParent.urlSlug, '')" >{{this.categoryParent.categoryName}}</a></li>
           
-            <li class="" *ngIf="this.categoryName"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']" >{{categoryName}}</a></li>
+            <li class="" *ngIf="this.categoryName"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{this.category.categoryName}}" (click)="redirecUrl($event,this.category.urlSlug, '')">{{this.category.categoryName}}</a></li>
           </ul>
         </div>
       </div>
@@ -99,12 +99,12 @@
                   <div class="product">
                     <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
                     <div class="product__thumb"><a
-                      [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
+                      [routerLink]="['/chi-tiet']" (click)="redirectRouterDetailProduct($event,item.productNameSlug)"
                         class="product__link"><img [src]='urlImg + item.imageUrl' alt="{{item.productName}}"
                           alt="{{item.productName}}"></a></div>
                     <div class="product__bottom">
                       <div class="product__title"><a
-                        [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
+                        [routerLink]="['/chi-tiet']" (click)="redirectRouterDetailProduct($event,item.productNameSlug)"
                           class="product__link">{{item.productName}}</a>
                       </div>
                       <div class="product__rate">

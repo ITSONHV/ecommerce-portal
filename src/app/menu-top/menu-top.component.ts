@@ -134,6 +134,7 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     this._mainsvc.categoryName = category.categoryName;
     
     // cấu hình pc
+    debugger;
     if(category.UrlCategorySlug === 'xay-dung-cau-hinh' || category.id == 1)
     {
       this.router.navigate(

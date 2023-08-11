@@ -9,6 +9,7 @@ import { map, mergeMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ObjectModel, ResponseBase } from 'src/models/object_paging.model';
 import { ProductModel } from 'src/models/product.model';
+import { CommonService } from 'src/services/common.service';
 import { EncryptService } from 'src/services/encrypt.service';
 import { MainService } from 'src/services/main.service';
 import { SwalService, TYPE } from 'src/services/swal.service';
@@ -127,7 +128,8 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     private titleService: Title,
     private fb: FormBuilder,
     @Inject(DOCUMENT) private document: Document,
-    private _encryptSvc: EncryptService
+    private _encryptSvc: EncryptService,
+    private _commonService: CommonService
  ) {
   }
   ngOnInit(): void {
@@ -210,32 +212,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     );
   }
 
-  // getProductSales(limit: number){
-  //   this._svc.getProductIsBestSellingPages(limit).subscribe(
-  //     (respones: ObjectModel)=>{
-  //       this.productSale = respones.data;    
-  //       this.spinner.hide();
-  //     },
-  //     (err) =>{
-  //       console.log(err);
-  //       this.spinner.hide();
-  //     }
-  //   );
-  // }
-  handleViewDetailProduct(event: any, product: any): void {
-    const queryParams: Params = { slug: product.productNameSlug };
-    this.router.navigate(
-      ['/chi-tiet'],
-      {
-        relativeTo: this._router,
-        queryParams: queryParams,
-        queryParamsHandling: 'merge'
-      }
-    )
-
-    window.scrollTo(0, 20);
-    event.preventDefault();
-  }
   counterRate(i: number) {
     return new Array(i);
   }
@@ -366,9 +342,16 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     );
   }
 
-
   onReset(): void {
     this.submitted = false;
     this.reviewForm.reset();
+  }
+
+  redirecUrl(event: any, cate: string, searchKey: string){
+    this._commonService.redirectRouter(event, searchKey, cate);
+  }
+
+  redirectRouterDetailProduct(event: any, searchKey: string){
+    this._commonService.redirectRouterDetailProduct(event, searchKey);
   }
 }

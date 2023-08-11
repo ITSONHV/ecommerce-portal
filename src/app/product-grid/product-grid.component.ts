@@ -14,6 +14,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ICart } from 'src/interfaces/ICart';
 import { SwalService, TYPE } from 'src/services/swal.service';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-product-grid',
@@ -60,7 +61,8 @@ export class ProductGridComponent implements OnInit  {
     private activatedRoute: ActivatedRoute,
     private router : Router,
     private formBuilder: FormBuilder,
-    private _swal : SwalService
+    private _swal : SwalService,
+    private _commonService : CommonService
     ) {
   }
   ngOnInit(): void {
@@ -314,7 +316,7 @@ export class ProductGridComponent implements OnInit  {
       });
       if(menuParent && menuParent.length > 0)
       {
-        this.categoryParent = menuParent[0].categoryName;
+        this.categoryParent = menuParent[0];
       }
     }
   }
@@ -436,6 +438,14 @@ export class ProductGridComponent implements OnInit  {
     }
   
     event.preventDefault();
+  }
+
+  redirecUrl(event: any, cate: string, searchKey: string){
+    this._commonService.redirectRouter(event, searchKey, cate);
+  }
+
+  redirectRouterDetailProduct(event: any, searchKey: string){
+    this._commonService.redirectRouterDetailProduct(event, searchKey);
   }
 }
 
