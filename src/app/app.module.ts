@@ -73,7 +73,7 @@ import { AdminComponent } from 'src/admin/admin.component';
     BuildPCComponent,
 
     //
-    AdminComponent
+    //AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +88,7 @@ import { AdminComponent } from 'src/admin/admin.component';
     ReactiveFormsModule,
     SlickCarouselModule,
     GoogleMapsModule,
-    AdminRoutingModule
+    //AdminRoutingModule
    // FacebookModule.forRoot()
 
   ],
