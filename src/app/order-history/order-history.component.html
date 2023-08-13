@@ -49,7 +49,7 @@
                     <!--order number-->
                     <td data-title="Order Number"><a href="order_details.html" class="order-number">{{item.orderCode}}</a></td>
                     <!--order date-->
-                    <td data-title="Order Date">{{item.createdDate.toLocaleString()}}</td>
+                    <td data-title="Order Date">{{item.createdDate | date:'yyyy-MM-dd'}}</td>
                     <!--order status-->
                     <td data-title="Order Status">{{getNameStatus(item.status)}}</td>
                     <!--quanity-->
@@ -79,7 +79,60 @@
                 <li class="current"><a href="#">My Wishlist</a></li>
                 <li><a href="#">My Downloadable</a></li>
                 <li class="last"><a href="#">Newsletter Subscriptions</a></li> -->
-              </ul>
+              </ul><div class="cart-info">
+                <div class="info">
+                  <div class="info-item"><svg style="margin-right: 10px;"
+                 width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z"
+                        fill="#27AE60"></path>
+                      <path
+                        d="M7.74909 10.7374L6.01159 8.99993L5.41992 9.58743L7.74909 11.9166L12.7491 6.9166L12.1616 6.3291L7.74909 10.7374Z"
+                        fill="white" stroke="white"></path>
+                    </svg><a style="vertical-align: super;">Hỗ trợ trả góp 0%, trả trước 0đ</a>
+                  </div>
+                  <div class="info-item"><svg style="margin-right: 10px;" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z"
+                        fill="#27AE60"></path>
+                      <path
+                        d="M7.74909 10.7374L6.01159 8.99993L5.41992 9.58743L7.74909 11.9166L12.7491 6.9166L12.1616 6.3291L7.74909 10.7374Z"
+                        fill="white" stroke="white"></path>
+                    </svg><a style="vertical-align: super;">Hoàn tiền 200% khi phát hiện hàng giả</a>
+                  </div>
+                  <div class="info-item"><svg style="margin-right: 10px;" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z"
+                        fill="#27AE60"></path>
+                      <path
+                        d="M7.74909 10.7374L6.01159 8.99993L5.41992 9.58743L7.74909 11.9166L12.7491 6.9166L12.1616 6.3291L7.74909 10.7374Z"
+                        fill="white" stroke="white"></path>
+                    </svg><a style="vertical-align: super;">Giao hàng nhanh 3H nội thành Tây Ninh</a>
+                  </div>
+                  <div class="info-item"><svg style="margin-right: 10px;" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z"
+                        fill="#27AE60"></path>
+                      <path
+                        d="M7.74909 10.7374L6.01159 8.99993L5.41992 9.58743L7.74909 11.9166L12.7491 6.9166L12.1616 6.3291L7.74909 10.7374Z"
+                        fill="white" stroke="white"></path>
+                    </svg> <a style="vertical-align: super;">Giao hàng từ 5 - 7 ngày toàn quốc</a>
+                  </div>
+                  <div class="info-item"><svg style="margin-right: 10px;" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z"
+                        fill="#27AE60"></path>
+                      <path
+                        d="M7.74909 10.7374L6.01159 8.99993L5.41992 9.58743L7.74909 11.9166L12.7491 6.9166L12.1616 6.3291L7.74909 10.7374Z"
+                        fill="white" stroke="white"></path>
+                    </svg><a style="vertical-align: super;">Đội ngũ kĩ thuật hỗ trợ online 7/7</a> 
+                  </div>
+                </div>
+                <div class="bank"><a href=""><img src="../../assets/images/tien-mat.jpg" alt=""></a> <a
+                    href=""><img src="../../assets/images/internet-bank.jpg" alt=""></a> <a href=""><img
+                      src="../../assets/images/master-card.png" alt=""></a> <a href=""><img
+                      src="../../assets/images/visa.jpg" alt=""></a></div>
+              </div>
             </div>
           </div>
            <!--<div class="compare block">

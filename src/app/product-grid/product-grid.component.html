@@ -5,9 +5,9 @@
           <ul class="breadcrumb__list">
             <li><i aria-hidden="true" class="fa fa-home"></i><span><i aria-hidden="true" class="fa fa-angle-right"></i></span> </li>
             <li class="home"> <a title="Go to Home Page" [routerLink]="['/']">Trang chủ</a></li>
-            <li class="" *ngIf="this.categoryParent"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{this.categoryParent}}" [routerLink]="['/danh-muc-san-pham-g']" >{{this.categoryParent}}</a></li>
+            <li class="" *ngIf="this.categoryParent"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{this.categoryParent?.categoryName}}" (click)="redirecUrl($event,this.categoryParent?.urlSlug, '')" >{{this.categoryParent?.categoryName}}</a></li>
           
-            <li class="" *ngIf="this.categoryName"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{categoryName}}" [routerLink]="['/danh-muc-san-pham-g']" >{{categoryName}}</a></li>
+            <li class="" *ngIf="this.categoryName"> <span><i aria-hidden="true" class="fa fa-angle-right"></i></span> <a title="Go to {{this.category?.categoryName}}" (click)="redirecUrl($event,this.category?.urlSlug, '')">{{this.category?.categoryName}}</a></li>
           </ul>
         </div>
       </div>
@@ -99,12 +99,12 @@
                   <div class="product">
                     <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
                     <div class="product__thumb"><a
-                      [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
+                     (click)="redirectRouterDetailProduct($event,item.productNameSlug)"
                         class="product__link"><img [src]='urlImg + item.imageUrl' alt="{{item.productName}}"
                           alt="{{item.productName}}"></a></div>
                     <div class="product__bottom">
                       <div class="product__title"><a
-                        [routerLink]="['/chi-tiet']" (click)="handleViewDetailProduct($event,item)"
+                      (click)="redirectRouterDetailProduct($event,item.productNameSlug)"
                           class="product__link">{{item.productName}}</a>
                       </div>
                       <div class="product__rate">
@@ -184,7 +184,7 @@
           
           <div class="block sidebar-cart">
             <div class="sidebar-bar-title">
-              <span>Giỏ hàng của bạn</span>
+              <h3>Giỏ hàng của bạn</h3>
             </div>
             <div class="block-content">
               <p class="amount">Có <a [routerLink]="['/gio-hang']">{{this.myCart.length}} sản phẩm</a> trong giỏ.</p>
@@ -202,7 +202,7 @@
                 <p class="subtotal"> <span class="label">Tổng tiền:</span> <span class="price">{{sumPriceItemsInCart() | currency : "VND"}}</span> </p>
               </div>
               <div class="cart-checkout">
-                <button class="button button-checkout" title="Submit" type="submit"><span>Thanh toán</span></button>
+                <button class="button button-checkout" title="Submit" type="submit" [routerLink]="['/gio-hang']"><span>Thanh toán</span></button>
               </div>
             </div>
           </div>
@@ -249,9 +249,9 @@
               <ul *ngIf="productSale">
                 <ng-container *ngFor="let item of productSale?.data; let i = index">
                 <li class="item" *ngIf="i < 3">
-                  <div class="products-block-left"> <a [routerLink]="['/chi-tiet']"  [queryParams]="{slug: item?.productNameSlug}" [title]="item.productName" class="product-image"><img [src]='urlImg + item.imageUrl' alt="Sample Product "></a></div>
+                  <div class="products-block-left"> <a (click)="redirectRouterDetailProduct($event, item.productNameSlug)" [title]="item.productName" class="product-image"><img [src]='urlImg + item.imageUrl' alt="Sample Product "></a></div>
                   <div class="products-block-right">
-                    <p class="product-name"> <a [routerLink]="['/chi-tiet']" [queryParams]="{slug: item?.productNameSlug}">{{item.productName}}</a> </p>
+                    <p class="product-name"> <a  (click)="redirectRouterDetailProduct($event, item.productNameSlug)">{{item.productName}}</a> </p>
                     <span class="price">{{item?.promotionPrice | currency: "VND"}}</span>
                     <div class="rating"> 
                       <ng-container *ngIf="item.rate >= 0">
@@ -264,7 +264,7 @@
                 </li>
                </ng-container>       
               </ul>
-              <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}">Xem thêm</a> </div>
+              <a class="link-all" [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1,}">Xem thêm</a> </div>
           </div>
           <div class="block popular-tags-area ">
             <div class="sidebar-bar-title">
@@ -272,7 +272,9 @@
             </div>
             <div class="tag">
               <ul >
-                <li *ngFor="let item of category?.categoryTags"><a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{searchKey: item}">{{item}}</a></li>
+                <li *ngFor="let item of category?.categoryTags">
+                  <a (click)="redirecUrl($event, '', item)" >{{item}}</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -285,7 +287,7 @@
             <div class="mb_sidebar_filter">
               <aside id="column-left" class="category__sidebar">
                 <div class="sidebar__title">Bộ lọc sản phẩm
-                  <div class="mb-hide-filter hide-pc" (click)="closeSearchMobile()"><i class="fa fa-times"></i></div>
+                  <div class="mb-hide-filter hide-pc" (click)="closeSearchMobileEvent($event)"><i class="fa fa-times"></i></div>
                 </div>
                 <div class="sidebar__wrapper">
                   <div *ngIf="isLoadComplete">
@@ -338,8 +340,9 @@
                     </ng-container>
                   </div> 
                 </div>
-                <div class="apply-cancel-filter" (click)="this.onPageChange(this.pagination);"><button>Áp dụng</button> 
-                <button  (click)="closeSearchMobile()">Hủy</button></div>
+                <div class="apply-cancel-filter" >
+                <button (click)="this.onPageChange(this.pagination);">Áp dụng</button> 
+                <button (click)="closeSearchMobile()">Hủy</button></div>
               </aside>
             </div>
           </div>

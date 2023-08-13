@@ -30,7 +30,7 @@ import {
   export class PaginationComponent
     implements OnInit, OnChanges, ControlValueAccessor
   {
-    @Input() value: PaginationValue = { page: 1, pageSize: 9};
+    @Input() value: PaginationValue = { page: 1, pageSize: 12};
     @Input() total = 10;
     @Input() visibleRangeLength = 5;
     // @Input() pageSizes: number[] = [18, 27, 36, 45];
@@ -61,10 +61,9 @@ import {
       this.updateVisiblePages();
     }
   
-    ngOnChanges(changes: SimpleChanges): void { 
-        
-        //if (changes.total || changes.value) this.updateTotalPages();
-        this.updateTotalPages();
+    ngOnChanges(changes: SimpleChanges): void {   
+      
+        this.updateTotalPages();  this.updateVisiblePages();
     }
   
     public selectPage(page: number): void {

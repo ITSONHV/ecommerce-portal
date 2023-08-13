@@ -603,7 +603,7 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 999999;
+    z-index: 9999;
     width: calc(100% - 0px);
     background: #fff;
     text-align: center;
@@ -654,5 +654,25 @@
     } 
     .hidden-pc{
         visibility: visible ;
+    }
+
+
+
+    .sidebar-bar-title {
+        color: #4e1414;
+        margin: auto;
+        font-size: 16px;
+        font-weight: 600; border-bottom:1px solid #e5e5e5;
+        margin-top: 20px;
+    }
+    .sidebar-bar-title h3 {
+        font-size: 16px;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid #e83f33;
+        display: inline-block;
+        margin-bottom: -1px;
+        padding-bottom: 8px;
+        font-weight: 600;
+    
     }
 }

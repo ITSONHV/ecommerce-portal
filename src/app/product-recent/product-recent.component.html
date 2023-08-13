@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="product__price"><span class="price__selling">{{item.promotionPrice | currency: "VND" }}</span> <span
-            class="price__old">{{item.price | currency: "VND" }}</span></div> <button type="button" (click)="addToShopingCard(item)"
+            class="price__old">{{item.price | currency: "VND":'symbol' }}</span></div> <button type="button" (click)="addToShopingCard(item)"
           class="add-to-cart"><i class="fa fa-shopping-cart"></i> &nbsp;GIỎ HÀNG</button>
       </div>
     </div>

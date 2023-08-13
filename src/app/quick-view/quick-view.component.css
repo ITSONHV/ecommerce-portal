@@ -92,3 +92,20 @@
 .add-cart-buttons .btn-add-cart-2:hover svg path {
     stroke: #fa9f2c
 }
+
+
+.product-view-area .product-name h1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
+
+.product-view-area .short-description p{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 7; /* number of lines to show */
+            line-clamp: 7; 
+    -webkit-box-orient: vertical;
+}

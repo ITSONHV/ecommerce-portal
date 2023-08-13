@@ -341,7 +341,7 @@
 @media screen and (max-width: 1024px) {
   .cart-process .process span {
         font-weight: 400;
-        font-size: 13px;
+        font-size: 12px;
         color: #4e4e54;
         padding: 7px 0;
         transform: skewX(20deg)

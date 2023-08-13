@@ -14,6 +14,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ICart } from 'src/interfaces/ICart';
 import { SwalService, TYPE } from 'src/services/swal.service';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-product-grid',
@@ -21,7 +22,7 @@ import { SwalService, TYPE } from 'src/services/swal.service';
   styleUrls: ['./product-grid.component.css']
 })
 export class ProductGridComponent implements OnInit  {
-  public pagination : PaginationValue = { page: 1, pageSize: 9};
+  public pagination : PaginationValue = { page: 1, pageSize: 12};
   public paginationControl = new FormControl(this.pagination);
   public listProduct : any = [] ;
   public urlImg : string = environment.urlImg;
@@ -60,7 +61,8 @@ export class ProductGridComponent implements OnInit  {
     private activatedRoute: ActivatedRoute,
     private router : Router,
     private formBuilder: FormBuilder,
-    private _swal : SwalService
+    private _swal : SwalService,
+    private _commonService : CommonService
     ) {
   }
   ngOnInit(): void {
@@ -90,8 +92,7 @@ export class ProductGridComponent implements OnInit  {
     this.changeValueTypeSearch(this.typeSearch);
   }
 
-  counterRate(i: number) {
-    
+  counterRate(i: number) { 
     return new Array(i);
   }
 
@@ -111,9 +112,10 @@ export class ProductGridComponent implements OnInit  {
         (respones: ApiPagingResponse<PagingModel>) => {
           this.totalRecords = respones.data.total;
           this.listProduct = respones.data.data;
-          this.visibleItems = { items: respones.data.data, total: respones.data.total };
+          this.visibleItems = 
+          
+          { items: respones.data.data, total: respones.data.total };
           this.isLoadComplete = true;
-          console.log(this.visibleItems);
           this.spinner.hide();
           window.scroll(0, 50); // scroll lên 1 tý sau khi change value
         },
@@ -225,11 +227,13 @@ export class ProductGridComponent implements OnInit  {
 	}
 
   onChangeSelectedListAndGridProrudct(): void {  
+    let queryParams: Params = { viewMode: 'list' };
     this.router.navigate(
       ['/danh-muc-san-pham-l'],
       {
         relativeTo: this.activatedRoute,
-        queryParamsHandling: "preserve" 
+        queryParams : queryParams,
+        queryParamsHandling: "merge" 
       }
     )
 
@@ -312,7 +316,7 @@ export class ProductGridComponent implements OnInit  {
       });
       if(menuParent && menuParent.length > 0)
       {
-        this.categoryParent = menuParent[0].categoryName;
+        this.categoryParent = menuParent[0];
       }
     }
   }
@@ -361,6 +365,15 @@ export class ProductGridComponent implements OnInit  {
       tag.classList.add('searchMobile');
     }
   }
+  closeSearchMobileEvent(event: any): void { event.preventDefault();
+    const tag = this.document.getElementById('searchMobile');
+    if (tag) {
+      tag.classList.add('searchMobile');
+    }
+    console.log('dasdasdsd');
+   
+    return;
+  }
   openSearchMobile(): void {
     const tag = this.document.getElementById('searchMobile');
     if (tag) {
@@ -393,7 +406,7 @@ export class ProductGridComponent implements OnInit  {
   }
 
   changeSelectionPriceMobile(event: any, index: string) {
-    debugger;
+
     this.selectedPriceIndex = event.target.checked ? index : undefined;
     if(this.selectedPriceIndex === undefined){
       this.minPrice = 0;
@@ -412,7 +425,6 @@ export class ProductGridComponent implements OnInit  {
   }
 
   changeSelectionKeySearchMobile(event: any, index: string) {
-    debugger;
     this.selectedTextIndex = event.target.checked ? index : undefined;
     if(this.selectedTextIndex === undefined){
       this.searchKey = ''; 
@@ -426,6 +438,14 @@ export class ProductGridComponent implements OnInit  {
     }
   
     event.preventDefault();
+  }
+
+  redirecUrl(event: any, cate: string, searchKey: string){
+    this._commonService.redirectRouter(event, searchKey, cate);
+  }
+
+  redirectRouterDetailProduct(event: any, searchKey: string){
+    this._commonService.redirectRouterDetailProduct(event, searchKey);
   }
 }
 

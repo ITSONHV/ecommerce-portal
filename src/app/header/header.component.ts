@@ -48,8 +48,15 @@ export class HeaderComponent implements OnInit {
       queryParams = { slug: null, typeStatus : null, searchKey: this.searchKey };
     }
 
+    let viewMode = '';
+    this.activatedRoute.queryParams.forEach(params => {
+      if(params['viewMode'])
+        viewMode = params['viewMode'];
+    });
+    let page = (viewMode === '' || viewMode ==='grid') ? 'danh-muc-san-pham-g' : 'danh-muc-san-pham-l';
+
     this.router.navigate(
-      ['danh-muc-san-pham-g'],
+    [ "" + page+ ""],
       {
         relativeTo: this.activatedRoute,
         queryParams: queryParams,

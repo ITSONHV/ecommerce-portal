@@ -33,3 +33,14 @@
 button i {
     font-size: 20px;
 }
+
+.cart-info .info{
+    /* display: flex; */
+    align-items: center;
+    margin-bottom: 8px;
+}
+.cart-info .info .info-item{
+    /* display: flex; */
+    align-items: center;
+    margin-bottom: 8px;
+}

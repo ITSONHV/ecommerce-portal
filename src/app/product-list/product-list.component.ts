@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ObjectModel } from 'src/models/object_paging.model';
 import { MainService } from 'src/services/main.service';
@@ -12,6 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ICart } from 'src/interfaces/ICart';
 import { Meta, Title } from '@angular/platform-browser';
 import { SwalService, TYPE } from 'src/services/swal.service';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-product-list',
@@ -52,7 +53,8 @@ export class ProductListComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private meta: Meta,
     private titleService: Title, 
-      private _swal : SwalService
+    private _swal : SwalService,
+    private _commonService: CommonService
     ) {
   }
   ngOnInit(): void {
@@ -272,11 +274,13 @@ export class ProductListComponent implements OnInit {
   }
 
   onChangeSelectedListAndGridProrudct(): void {  
+    let queryParams: Params = { viewMode: 'grid' };
     this.router.navigate(
       ['/danh-muc-san-pham-g'],
       {
         relativeTo: this.activatedRoute,
-        queryParamsHandling: "preserve" 
+        queryParams : queryParams,
+        queryParamsHandling: "merge" 
       }
     )
 
@@ -305,7 +309,7 @@ export class ProductListComponent implements OnInit {
       });
       if(menuParent && menuParent.length > 0)
       {
-        this.categoryParent = menuParent[0].categoryName;
+        this.categoryParent = menuParent[0];
       }
     }
   }
@@ -376,7 +380,6 @@ export class ProductListComponent implements OnInit {
   }
 
   changeSelectionPriceMobile(event: any, index: string) {
-    debugger;
     this.selectedPriceIndex = event.target.checked ? index : undefined;
     if(this.selectedPriceIndex === undefined){
       this.minPrice = 0;
@@ -395,7 +398,6 @@ export class ProductListComponent implements OnInit {
   }
 
   changeSelectionKeySearchMobile(event: any, index: string) {
-    debugger;
     this.selectedTextIndex = event.target.checked ? index : undefined;
     if(this.selectedTextIndex === undefined){
       this.searchKey = ''; 
@@ -409,5 +411,12 @@ export class ProductListComponent implements OnInit {
     }
   
     event.preventDefault();
+  }
+
+  redirecUrl(event: any, cate: string, searchKey: string){
+    this._commonService.redirectRouter(event, searchKey, cate);
+  }
+  redirectRouterDetailProduct(event: any, searchKey: string){
+    this._commonService.redirectRouterDetailProduct(event, searchKey);
   }
 }

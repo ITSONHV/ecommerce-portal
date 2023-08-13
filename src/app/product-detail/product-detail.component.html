@@ -5,7 +5,7 @@
         <li><a href="/"><i aria-hidden="true" class="fa fa-home"></i></a> <i aria-hidden="true"
             class="fa fa-angle-right"></i></li>
         <li><a [routerLink]="['/']" routerLinkActive="router-link-active">Trang chủ</a> <i aria-hidden="true" class="fa fa-angle-right"></i></li>
-        <li><a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{slug: product?.categorySlug}">{{this.categoryName}}</a> <i aria-hidden="true"
+        <li><a (click)="redirecUrl($event,product?.categorySlug ?? '', '')">{{this.categoryName}}</a> <i aria-hidden="true"
             class="fa fa-angle-right"></i></li>
         <li><a >{{product?.productName}}</a></li>
       </ul>

@@ -79,7 +79,8 @@
     font-size: 14px;
     -webkit-text-decoration-line: line-through;
     text-decoration-line: line-through;
-    color: #99a0ad
+    color: #99a0ad;
+    margin-left: 5px;
 }
 
 .product .product__bottom .add-to-cart {
@@ -492,6 +493,7 @@
         min-height: 350px;
         padding: 0px 0 0px !important;
     }
+
 }
 
 /*reponsive kaka củ chuối*/
