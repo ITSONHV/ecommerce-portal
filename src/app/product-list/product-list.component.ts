@@ -416,4 +416,7 @@ export class ProductListComponent implements OnInit {
   redirecUrl(event: any, cate: string, searchKey: string){
     this._commonService.redirectRouter(event, searchKey, cate);
   }
+  redirectRouterDetailProduct(event: any, searchKey: string){
+    this._commonService.redirectRouterDetailProduct(event, searchKey);
+  }
 }

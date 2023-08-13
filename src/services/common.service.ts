@@ -47,7 +47,6 @@ export class CommonService implements OnInit {
                 queryParams= {...queryParams, viewMode: 'grid'}
             }
         });
-        debugger;
         let page = (viewMode === '' || viewMode === 'grid') ? 'danh-muc-san-pham-g' : 'danh-muc-san-pham-l';
 
         this.router.navigate(

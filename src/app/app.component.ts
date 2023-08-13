@@ -119,7 +119,7 @@ export class AppComponent implements OnInit  {
     this._mainsvc.categoryName = category.categoryName;
 
     // cấu hình pc
-    if(category.UrlCategorySlug === 'xay-dung-cau-hinh' || category.id == 1)
+    if(category.UrlSlug === 'xay-dung-cau-hinh' || category.id == 1)
     {
       this.router.navigate(
         ['xay-dung-cau-hinh'],
@@ -141,7 +141,7 @@ export class AppComponent implements OnInit  {
       )
     }
 
-    this.isShowMenu = !this.isShowMenu;
+    this.listenEventFromChild(true);
     event.preventDefault();
   }
   onActivate(event: any) {
