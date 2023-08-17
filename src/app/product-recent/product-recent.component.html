@@ -7,7 +7,7 @@
           class="product__link"><img [src]='urlImg + item.imageUrl' alt="{{item.productName}}"></a>
         <div class="pr-button-info-area">
             <div class="add-to-wish" style="margin-bottom: 14px;" (click)="addToFavorite(item)"> <a> <i class="fa fa-heart-o"></i> </a> </div>
-            <div class="view-quick-view" (click)="openModalQuickView(item)"> <a> <i class="fa fa-search"></i> </a> </div>
+            <div class="view-quick-view" (click)="getProductbyProductNameSlug(item.productNameSlug)"> <a data-toggle="modal" data-target="#exampleModalCenter"> <i class="fa fa-search"></i> </a> </div>
         </div>
       </div>
       <div class="product__bottom">
@@ -29,5 +29,106 @@
     </div>
   </div>
 </ngx-slick-carousel>
-
+<!-- Modal -->
+<div *ngIf="checkLoadData" class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="scrollbar" style="display: contents;">
+          <div style="display: block;" id="quick_view_popup-wrap">
+            <div id="quick_view_popup-outer">
+              <div id="quick_view_popup-content">
+                <div style="width:auto;height:auto;overflow: auto;position:relative;">
+                  <div class="product-view-area">
+                    <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
+                      <!-- <div class="icon-sale-label sale-left">Sale</div> -->
+                      <div class="percent" *ngIf="product?.rateDiscount > 0"><span>-{{product.rateDiscount}}%</span></div>
+                    <div class="large-image"> <a [href]="urlImg + imgfirst" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" [src]="urlImg + imgfirst" alt="products"> </a> </div>
+                    <div class="">
+                      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfigQuickView" style="margin-top: 40px;">
+                        <div ngxSlickItem *ngFor="let item of product?.productImages ;  let i = index ;" class="slide">
+                          <li><a (click)="changeImageLarge(item.id)" class='cloud-zoom-gallery'
+                              rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img style="border: 1px solid;"
+                                [src]="urlImg + item.imageUrl" alt="Thumbnail 2" /></a></li>
+                        </div>
+                      </ngx-slick-carousel>
+                    </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7 col-lg-7 col-md-7">
+                      <div class="product-details-area">
+                        <div class="product-name">
+                          <h1>{{product.productName}}</h1>
+                        </div>
+                        <div class="price-box">
+                          <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> {{product?.promotionPrice | currency: "VND"}} </span> </p>
+                          <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> {{product?.price | currency: "VND"}}  </span> </p>
+                        </div>
+                        <div class="ratings">
+                          <div class="rating">
+                            <ng-container *ngIf="product?.rate >= 0">
+                              <i class="fa fa-star" *ngFor="let rate of counterRate(product?.rate)"></i>
+                              <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - product?.rate)"></i>
+                            </ng-container>
+                          </div>
+                          <p class="availability in-stock pull-right" *ngIf="product?.guarantee > 0">Bảo hành: <span>{{product.guarantee}} tháng</span></p>
+                        </div>
+                        <div class="short-description">
+                          <p [innerHTML]="product.content"> </p>
+                        </div>
+                        <div  *ngIf="product?.stock > 0" >
+                          <p class="status_stock">
+                            <span class="status status1"><i aria-hidden="true" class="fa fa-circle"></i>Còn hàng</span>
+                          </p>
+                        </div>   
+                        <div class="product-variation">
+                          <form action="#" method="post">
+                            <div class="cart-plus-minus">
+                              <label for="qty">Quantity:</label>
+                              <div class="numbers-row">
+                                <div (click)="decreaseQuantity()"  class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
+                                <input type="number" class="qty" title="Qty" [(ngModel)]="quantity" value="1" min="1" maxlength="12" id="qty" name="qty">
+                                <div (click)="increaseQuantity()" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
+                              </div>
+                            </div>
+                            <!-- <button (click)="addToShopingCard(product)" class="button pro-add-to-cart" title="Add to Cart" type="button"><span><i class="fa fa-shopping-basket"></i> GIỎ HÀNG</span></button> -->
+                          
+                            <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart-2"
+                              (click)="addToShopingCard(product)">
+                              <svg width="17" style="vertical-align: sub;" height="18" viewBox="0 0 17 18" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
+                                  fill="blue"></path>
+                              </svg>
+                              Thêm vào giỏ
+                            </button> <button type="button" data-dismiss="modal" [routerLink]="['/gio-hang']" routerLinkActive="router-link-active"
+                              class="btn-add-cart "><i class="fa fa-shopping-cart"></i>
+            
+                              &nbsp; Mua hàng </button>
+                          </div>
+                          </form>
+                        </div>
+                        <div class="product-cart-option">
+                          <ul>
+                            <li><a  (click)="addToFavorite(product)"><i class="fa fa-heart"></i><span>Thêm vào yêu thích</span></a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <app-quick-view (sendEventToParent)="listenEventFromChild($event)" *ngIf="isShowQuickView" productSlug="{{this.productSlugToChild}}"></app-quick-view>
