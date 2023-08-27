@@ -40,7 +40,7 @@
               <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" style="    margin-top: 40px;">
                 <div ngxSlickItem *ngFor="let item of product?.productImages ;  let i = index ;" class="slide">
                   <li><a (click)="changeImageLarge(item.id)" class='cloud-zoom-gallery'
-                      rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img style="border: 1px solid;"
+                      rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img style="border: 1px groove #f1e9ec;"
                         [src]="urlImg + item.imageUrl" alt="Thumbnail 2" /></a></li>
                 </div>
               </ngx-slick-carousel>
