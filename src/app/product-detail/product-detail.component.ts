@@ -38,7 +38,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   public product : any;
   public productSale : any;
   public urlImg : string = environment.urlImg;
-  public imgfirst : string;
+  public imgfirst : string = "";
   public categoryName = "";
   public htmlContent = '';
   public htmlDescription = '';
@@ -148,7 +148,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
   }
 
-  getProductbyProductNameSlug(slug : string){
+ getProductbyProductNameSlug(slug : string){
     var request = this._encryptSvc.encrypt(JSON.stringify({slug : slug})) 
     this._svc.getProductbyProductNameSlug(request).subscribe(
       (respones: ObjectModel)=>{
@@ -160,7 +160,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
           this.titleService.setTitle(this.product.seoTitle ?? "DMC Store");
           this.meta.updateTag({ name: 'keywords', content: this.product.seoKeyword ?? ""});
           
-          this.imgfirst = this.product.productImages[0]?.imageUrl??"";
+          this.imgfirst = this.product.productImages[0]?.imageUrl ?? "";
           //this.product.productImages?.shift();
           this.htmlContent = this.product.content;
           this.htmlDescription = this.product.description;
