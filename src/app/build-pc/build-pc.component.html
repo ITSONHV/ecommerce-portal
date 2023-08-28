@@ -13,10 +13,10 @@
   </div>
   <div class="row" *ngIf="this.allMenu && this.allMenu != '' ">
     <ng-container *ngFor="let item of allMenu; let i= index; ">
-      <div class="col-lg-6 col-sm-6" *ngIf="i < 10" (click)="redirecUrl( $event,item.urlSlug, '')">
+      <div style="cursor: pointer;" class="col-lg-6 col-sm-6" *ngIf="i < 10" (click)="redirecUrl( $event,item.urlSlug, '')">
         <div class="">
           <div style="height: 144px;" ngClass="{{'single-categories '+ 'bg'+ i}}">
-            <a  ><img
+            <a ><img
                 [src]="urlImg + item.imageUrl" alt="{{item.categoryName}}"></a>
             <h3 class=""><a><span ngClass="{{'color'+ i}}">{{item.categoryName}}</span></a>
             </h3>
