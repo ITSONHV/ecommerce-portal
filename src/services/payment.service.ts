@@ -52,7 +52,7 @@ export class PaymentService implements OnInit{
     }
 
     getOrderByPhone(phone: string): Observable<ObjectModel> {
-        var objReq =  this._encrypt.encryptNoStringfy(JSON.stringify({Phone : phone}));
+        var objReq =  this._encrypt.encryptNoStringfy(JSON.stringify({SearchKey : phone}));
         console.log(objReq);
         return this.http.get<any>(this.urlApi + AppConfigs.urls.getOrderByPhone 
             + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`

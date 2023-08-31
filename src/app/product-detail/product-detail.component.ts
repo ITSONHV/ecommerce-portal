@@ -324,7 +324,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     var dataReq = {
       productID: this.product.id,
       content:   this.reviewForm.get('content')?.value,
-      rate:   this.reviewForm.get('rate')?.value,
+      rate:   this.reviewForm.get('rate')?.value ?? '5',
       nickname:  this.reviewForm.get('name')?.value,
       phone:  this.reviewForm.get('phone')?.value,
     };
