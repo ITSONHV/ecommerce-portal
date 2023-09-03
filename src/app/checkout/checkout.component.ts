@@ -232,7 +232,14 @@ export class CheckoutComponent implements OnInit {
             } else {
               this._svc.clearItemsCart([]);
               this.cartsPayment = [];
-              this._swal.toast(TYPE.SUCCESS, "Đặt hàng thành công!.", false);       
+
+              this._swal.Swal(
+                '',
+                'Đặt hàng thành công, mã đơn hàng của bạn: ' + data.data,
+                'success',
+                'Đóng'
+              )
+              //this._swal.toast(TYPE.SUCCESS, "Đặt hàng thành công!.", false);       
             }
 
             this.spinner.hide();

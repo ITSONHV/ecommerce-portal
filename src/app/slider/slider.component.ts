@@ -68,4 +68,13 @@ export class SliderComponent implements OnInit {
     );
   }
   
+  getUrl(url: string){
+    if(url != '')
+    {
+
+      return  `${this.baseUrl}${url}`
+    }
+  
+  return '#';
+  }
 }

@@ -25,9 +25,9 @@
             </div>
             <!-- #inputSearch (keydown.enter)="searchFilter($event,inputSearch.value, cateSelect.value)"  -->
             <div class="order-search">
-              <h5>Số điện thoại</h5>
+              <h5>Số điện thoại/ Mã đơn</h5>
               <div class="searchbox">
-                <input #inputSearch (keydown.enter)="getOrderByPhone(inputSearch.value)"  type="number" class="form-control" placeholder="Bạn muốn tìm..." name="search">
+                <input #inputSearch (keydown.enter)="getOrderByPhone(inputSearch.value)"  type="text" class="form-control" placeholder="Bạn muốn tìm..." name="search">
                 <button class="mobile-button-search" type="button" (click)="getOrderByPhone(inputSearch.value)" ><i class="fa fa-search"></i></button>
               </div> 
             </div>

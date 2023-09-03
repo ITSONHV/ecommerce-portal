@@ -9,12 +9,12 @@
 /* @import url('src/assets/css/flexslider.css'); */
 /* @import url('src/assets/css/jquery-ui.css'); */
 /* @import url('src/assets/css/revolution-slider.css'); */
-/* @import url('src/assets/css/quick_view_popup.css'); */
+@import url('src/assets/css/quick_view_popup.css');
 /* @import url('src/assets/css/blog.css'); */
 @import url('src/assets/css/shortcode.css');
 @import url('src/assets/css/shortcodes/shortcodes.css');
-/* @import url('src/assets/css/shortcodes/featured-box.css');
-@import url('src/assets/css/shortcodes/pricing-table.css');
+ @import url('src/assets/css/shortcodes/featured-box.css');
+/*@import url('src/assets/css/shortcodes/pricing-table.css');
 @import url('src/assets/css/shortcodes/tooltip.css');
 @import url('src/assets/css/shortcodes/post.css'); */
 @import url('src/assets/css/style.css');

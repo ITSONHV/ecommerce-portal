@@ -88,7 +88,6 @@ import { AdminComponent } from 'src/admin/admin.component';
     ReactiveFormsModule,
     SlickCarouselModule,
     GoogleMapsModule,
-    AdminRoutingModule
    // FacebookModule.forRoot()
 
   ],

@@ -82,7 +82,7 @@ const routes: Routes = [
     path: 'xay-dung-cau-hinh',
     component: BuildPCComponent
   },
-   { path: '*', redirectTo: '/not-found' },
+   { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({
