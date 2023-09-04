@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   public listTrademark: any;
   public listProductSales: any;
   public listProductIsNew: any;
+  public headerBanner: any;
   public listProductIsHot: any;
   public allMenu : any;
   public activatedRoute: ActivatedRoute;
@@ -255,6 +256,7 @@ export class HomeComponent implements OnInit {
     this.getProductIsHot();
     this.getProductIsNew();
     this.getTrademark();
+    this.getBanners();
     if (localStorage.getItem("allmenu-app") !== null &&
       localStorage.getItem("allmenu-app")?.length != 0) {
       this.allMenu = JSON.parse(localStorage.getItem('allmenu-app') ?? "");
@@ -429,5 +431,15 @@ export class HomeComponent implements OnInit {
   }
   showAddCartFavorite(){
     this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
+  }
+  getBanners(){
+    this.spinner.show();
+    this._svc.getBanners(1).subscribe(
+      (data: any)=>{
+        this.headerBanner = data?.data[0];
+        console.log(this.headerBanner);
+        
+      }
+    )
   }
 }

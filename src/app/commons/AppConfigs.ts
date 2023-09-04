@@ -13,7 +13,7 @@ export const AppConfigs = {
         getReviewProducts : "Product/get-reviews",        
         getGroupSerrchByCategoryID : "filters/category-by-id?CategoryId=",  
         getListBanking : "listbanktranser/all",     
-
+        getBanners : "Banners/limit?limit=",     
 
         addReviewProduct : "Product/add-review",          
         verifyDataPayment : "payment/verify-data",    

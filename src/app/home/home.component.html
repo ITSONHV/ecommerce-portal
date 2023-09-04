@@ -11,7 +11,7 @@
         <div class="jtv-banner3">
           <div class="jtv-banner3-inner" style="text-align: center;">
             <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
-                src="../../assets/images/banner_quangcao_uudai.jpg" alt="HTML template"
+                [src]="(headerBanner) && (urlImg + headerBanner.pathImage)" alt="HTML template"
                 style="max-height: 338px;height: 338px;"></a>
             <div class="hover_content">
             </div>

@@ -552,6 +552,13 @@ export class MainService implements OnInit{
             })
         )
     }
+    getBanners(limit: number): Observable<ResponseBase> { 
+        return this.http.get<any>(`${this.urlApi}${AppConfigs.urls.getBanners}${limit}`).pipe(
+            mergeMap((response_: any) => {
+                return of<ResponseBase>(<ResponseBase>response_);
+            })
+        )
+    }
 
     getServerErrorMessage(error: HttpErrorResponse): string {
         switch (error.status) {

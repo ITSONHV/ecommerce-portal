@@ -58,7 +58,7 @@
           <ul class="hidden-xs">
             <li class="mt-root demo_custom_link_cms">
               <div class="mt-root-item"><a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['']">
-                  <div class="title title_font"><span class="title-text">Home</span></div>
+                  <div class="title title_font"><span class="title-text"><i class="fa fa-home" aria-hidden="true"></i> &nbsp; Home</span></div>
                 </a></div>
             </li>
             <!-- <li class="mt-root">
@@ -135,7 +135,7 @@
             </li>
             <li class="mt-root">
               <div class="mt-root-item"><a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/gioi-thieu']">
-                  <div class="title title_font"><span class="title-text">Giới thiệu</span></div>
+                  <div class="title title_font"><span class="title-text"><i class="fa fa-id-card-o" aria-hidden="true"></i> &nbsp; Giới thiệu</span></div>
                 </a></div>
             </li>
             <!-- <li class="mt-root demo_custom_link_cms">
@@ -159,7 +159,7 @@
             </li> -->
             <li class="mt-root">
               <div class="mt-root-item">
-                <div class="title title_font"><span class="title-text">Bán chạy nhất</span></div>
+                <div class="title title_font"><span class="title-text"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp;  Bán chạy nhất</span></div>
               </div>
               <ul class="menu-items col-xs-12" *ngIf="this.productSale">
                 <li *ngFor="let item of productSale.data; let i=  index" class="menu-item depth-1 product menucol-1-3 withimage">
