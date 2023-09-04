@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   slideConfigProductSales = {
     "slidesToShow": 3,
     "slidesToScroll": 3,
-    "autoplay": false ,
+    "autoplay": true ,
     "autoplaySpeed": 3000,
     "infinity": true,
     "pauseOnFocus": true,

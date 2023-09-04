@@ -1,4 +1,4 @@
-<div *ngIf="showHeader" [ngStyle]="isShowMenu ?  cssOpenMenuMobile : cssCloseMenuMobile" id="mobile-menu">
+<div [ngStyle]="isShowMenu ?  cssOpenMenuMobile : cssCloseMenuMobile" id="mobile-menu">
     <ul class="mobile-menu" *ngFor="let itemParen of allMenu">
         <li>
             <span (click)="clickIconShow(itemParen)" class="expand fa "
@@ -14,12 +14,13 @@
     </ul>
 </div>
 <div id="page" [style.left]="isShowMenu ? '250px' : '0px'">
-    <app-header *ngIf="showHeader"></app-header>
-    <app-menu-top *ngIf="showHeader" (sendEventToParent)="listenEventFromChild($event)"></app-menu-top>
+    <app-header ></app-header>
+    <app-menu-top (sendEventToParent)="listenEventFromChild($event)"></app-menu-top>
     <router-outlet (activate)="onActivate($event)"></router-outlet>
-    <app-footer *ngIf="showHeader"></app-footer>
+    <app-footer ></app-footer>
 </div>
-<div *ngIf="showHeader" id="fb-customer-chat" class="fb-customerchat" page_id="105807499246972">
+<div id="fb-customer-chat" class="fb-customerchat" page_id="105807499246972">
+ 
 </div>
 <scroll-top></scroll-top>
 <ngx-spinner [fullScreen]="true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)"

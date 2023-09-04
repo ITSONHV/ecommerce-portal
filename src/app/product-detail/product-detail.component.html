@@ -427,7 +427,7 @@
             <div id="related-product-slider" class="product-flexslider hidden-buttons">
               <div class="slider-items slider-width-col4 fadeInUp">
                 <div *ngIf="this.productsRelate">
-                  <app-product-recent [listProduct]="this.productsRelate?.data"
+                  <app-product-recent [listProduct]="this.productsRelate"
                     [isAutoPlay]="false"></app-product-recent>
                 </div>
               </div>
@@ -448,7 +448,7 @@
         <div class="slider-items-products">
           <div id="upsell-product-slider" class="product-flexslider hidden-buttons">
             <div class="slider-items slider-width-col4">
-              <app-product-recent></app-product-recent>
+              <app-product-recent [listProduct]="undefined" [isAutoPlay]="false"></app-product-recent>
             </div>
           </div>
         </div>

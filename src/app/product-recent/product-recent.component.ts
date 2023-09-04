@@ -148,6 +148,7 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
   public listTagOwlItem: HTMLCollectionOf<Element>;
   ngOnInit(): void {
     this.isMobile = window.innerWidth <= 1024;
+    debugger;
     if (this.listProduct) {
       this.productRecents = this.listProduct;
     } else {

@@ -2,11 +2,12 @@ import { Component, HostListener, Inject, OnInit,ViewChild  } from '@angular/cor
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { MainService } from 'src/services/main.service';
 import { MenuTopComponent } from './menu-top/menu-top.component';
-
 import { DOCUMENT } from '@angular/common';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { environment } from 'src/environments/environment';
 import { FacebookService, InitParams } from 'ngx-facebook';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit  {
   showHeader = true;
   showSidebar = true;
   showFooter = true;
+  public pageId = environment.pageId;
   @HostListener('window:resize', ['$event'])
   onResize(event : any) {
     // Lấy chiều rộng và chiều cao của cửa sổ
@@ -74,13 +76,11 @@ export class AppComponent implements OnInit  {
   ngOnInit(): void {
     this.loadMenuToMobile();
     this.initFacebookService();
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-         this.showHeader = this.activatedRoute?.firstChild?.snapshot.data?.['showHeader'] ?? true;
-        // this.showSidebar = this.activatedRoute.firstChild.snapshot.data.showSidebar !== false;
-        // this.showFooter = this.activatedRoute.firstChild.snapshot.data.showFooter !== false;
-      }
-    });
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //      this.showHeader = this.activatedRoute?.firstChild?.snapshot.data?.['showHeader'] ?? true;
+    //   }
+    // });
    };
 
   private initFacebookService(): void {
