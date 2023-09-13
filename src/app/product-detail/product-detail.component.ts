@@ -199,7 +199,6 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     this._svc.getProductPagesByCategoryId(categoryId).subscribe(
       (respones: ObjectModel)=>{
         if(respones.hasOwnProperty("data")){
-          debugger;
           const products = {...respones.data} as any;  
           this.productsRelate = products.data;
           console.log('rl',this.productsRelate);

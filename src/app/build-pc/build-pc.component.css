@@ -201,3 +201,61 @@
         font-size: 12px;    margin-bottom: 10px;
     }
   }
+
+
+
+
+  /*************/
+
+  .table tr td.att-name {
+    width: 255px;
+    height: 46px;
+    background: #f0f3fc;
+}
+
+.table tr td {
+    border: 1px solid #dddfe6;
+    vertical-align: middle;
+    text-indent: 17px;
+}
+
+.add-cart-buttons {
+    flex-direction: column-reverse
+}
+
+
+.add-cart-buttons .btn-add-cart {
+    width: 35%;
+    height: 35px;
+    background: #197bb7;;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    margin-top: 0px;
+    /* text-transform: uppercase */
+}
+
+ .add-cart-buttons .btn-add-cart.disable {
+    background-color: #ccc!important
+}
+
+.add-cart-buttons .btn-add-cart.preorder {
+    background: #f9495f!important
+}
+
+.add-cart-buttons .btn-add-cart-2 {
+    background: #fff!important;
+    border: 1px solid #197bb7!important;
+    color: #197bb7!important
+}
+
+.add-cart-buttons .btn-add-cart-2:hover {
+    color: #2872c7!important;
+    background-color: #fff!important;
+    border: 1px solid #fa9f2c!important
+}
+
+.add-cart-buttons .btn-add-cart-2:hover svg path {
+    stroke: #fa9f2c
+}

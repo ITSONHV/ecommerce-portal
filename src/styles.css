@@ -22,4 +22,4 @@
 
 @import url('src/assets/css/product-slider.css');
 @import url('src/assets/css/cart.css');
-
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';

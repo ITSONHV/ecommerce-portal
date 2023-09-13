@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgxSpinnerService, Spinner } from 'ngx-spinner';
 import { environment } from 'src/environments/environment';
 import { CommonService } from 'src/services/common.service';
 import { MainService } from 'src/services/main.service';
-
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AddBuildPCModalComponent } from './components/add-build-pc-modal.component';
 @Component({
   selector: 'app-build-pc',
   templateUrl: './build-pc.component.html',
@@ -15,10 +16,31 @@ export class BuildPCComponent {
   public urlImg: string = environment.urlImg;
   constructor(private _svc: MainService,  private router: Router
     , private activatedRoute: ActivatedRoute, private spinner: NgxSpinnerService,
-    private _commonService : CommonService
+    private _commonService : CommonService,
+    private dialog: MatDialog
     )
   {
     
+  }
+
+  showChooseProduct(code: any) {
+    this.Openpopup(code, 'Edit Customer', AddBuildPCModalComponent);
+  }
+
+  Openpopup(code: any, title: any,component:any) {
+    var _popup = this.dialog.open(component, {
+      width: '80%',
+      enterAnimationDuration: '1000ms',
+      exitAnimationDuration: '1000ms',
+      data: {
+        title: title,
+        code: code
+      }
+    });
+    _popup.afterClosed().subscribe(item => {
+      // console.log(item)
+      //this.loadcustomer();
+    })
   }
 
   ngOnInit(): void {

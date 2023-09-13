@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
-    apiUrl:"https://thanhtuandang.bsite.net/api/v1/",
-    urlImg:"https://thanhtuandang.bsite.net/wwwroot/",
-    baseUrl: "https://ecommerce-computer-test.firebaseapp.com/",
+    apiUrl:"https://thanhtuandang-001-site1.ctempurl.com/api/api/v1/",
+    urlImg:"https://thanhtuandang-001-site1.ctempurl.com/api/wwwroot/",
+    baseUrl: "https://thanhtuandang-001-site1.ctempurl.com/",
     pageId: "105807499246972"
 };

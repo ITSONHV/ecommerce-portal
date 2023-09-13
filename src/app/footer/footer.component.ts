@@ -14,7 +14,7 @@ public categories : any = [];
  public items : number[] = [1, 2, 3, 4];
   constructor() {}
   ngOnInit(): void {
-    this.getCate ();
+    this.getCate();
   }
 
   // slideConfig = {
@@ -62,7 +62,9 @@ public categories : any = [];
 //     if (this.infoWindow != undefined) this.infoWindow.open(marker);
 // }
  getCate (){
-  if (localStorage.getItem('allmenu-app')?.length != 0) {
+  debugger;
+
+  if (localStorage.getItem('allmenu-app')) {
     //localStorage.removeItem('allmenu-app');
     this.categories = JSON.parse(localStorage.getItem('allmenu-app')??"");
   }

@@ -95,6 +95,11 @@
                 <span class="status status1"><i aria-hidden="true" class="fa fa-circle"></i>Còn hàng</span>
               </p>
             </div>
+            <div *ngIf="product?.stock <= 0">
+              <p class="status_stock">
+                <span class="status status1" ><i aria-hidden="true" class="fa fa-circle"></i> <a href="https://www.facebook.com/dangminhpc70/?ref=embed_page">Giá liên hệ</a></span>
+              </p>
+            </div>
             <div class="product-variation">
               <form action="#" method="post">
                 <div class="cart-plus-minus">

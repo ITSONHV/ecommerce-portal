@@ -39,8 +39,8 @@ import {CookieService} from 'ngx-cookie-service';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { BuildPCComponent } from './build-pc/build-pc.component';
-import { AdminRoutingModule } from 'src/admin/admin-routing.module';
-import { AdminComponent } from 'src/admin/admin.component';
+import { AddBuildPCModalComponent } from './build-pc/components/add-build-pc-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -71,9 +71,9 @@ import { AdminComponent } from 'src/admin/admin.component';
     PaginationComponent,
     ProductRecentComponent,
     BuildPCComponent,
+    AddBuildPCModalComponent,
 
     //
-    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -88,8 +88,8 @@ import { AdminComponent } from 'src/admin/admin.component';
     ReactiveFormsModule,
     SlickCarouselModule,
     GoogleMapsModule,
-   // FacebookModule.forRoot()
-
+    // FacebookModule.forRoot()
+    MatDialogModule
   ],
   providers: [CookieService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -148,7 +148,6 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
   public listTagOwlItem: HTMLCollectionOf<Element>;
   ngOnInit(): void {
     this.isMobile = window.innerWidth <= 1024;
-    debugger;
     if (this.listProduct) {
       this.productRecents = this.listProduct;
     } else {
@@ -161,7 +160,6 @@ export class ProductRecentComponent implements OnInit, AfterViewInit {
     this._svc.getProductbyProductNameSlug(request).subscribe(
       (respones: ObjectModel)=>{
         this.product = respones.data;
-        debugger
         if(this.product != null){
           // this.meta.updateTag({ name: 'description', content: this.product.seoDescription ?? ""});
           // this.titleService.setTitle(this.product.seoTitle ?? "");
