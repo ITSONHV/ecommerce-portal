@@ -437,9 +437,16 @@ export class HomeComponent implements OnInit {
     this.spinner.show();
     this._svc.getBanners(1).subscribe(
       (data: any)=>{
-        this.headerBanner = data?.data[0];
+        if(data.data.length > 0){
+            data.data.filter((item : any) => {
+            if(item.position.toLowerCase() === "top"){
+              this.headerBanner = item;
+            }
+            if(item.position.toLowerCase() ==="left"){}
+            if(item.position.toLowerCase() ==="right"){}
+          })
+        }
         console.log(this.headerBanner);
-        
       }
     )
   }

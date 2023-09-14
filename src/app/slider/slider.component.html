@@ -5,11 +5,11 @@
         <div style="min-height: 450px;" class="col-md-3 col-sm-3 col-xs-3 banner-left hidden-xs">
           <!-- <img src="./../assets/images/banner-left.jpg" alt="banner"> -->
         </div>
-        <div style="min-height: 450px;" class="col-sm-9 col-md-9 col-lg-9 col-xs-9 jtv-slideshow">
+        <div class="col-sm-9 col-md-9 col-lg-9 col-xs-9 jtv-slideshow">
           <div id="jtv-slideshow">
-            <div style="min-height: 450px;" id='rev_slider_4_wrapper' class='rev_slider_wrapper fullwidthbanner-container' >
-              <div style="min-height: 450px;" id='rev_slider_4' class='rev_slider fullwidthabanner'>
-                <owl-carousel-o style="min-height: 450px;" [options]="customOptions">
+            <div  id='rev_slider_4_wrapper' class='rev_slider_wrapper fullwidthbanner-container' >
+              <div  id='rev_slider_4' class='rev_slider fullwidthabanner'>
+                <owl-carousel-o  [options]="customOptions">
                   <ng-container *ngFor="let slider of sliders;let i = index;">
                     <ng-template carouselSlide [id]=" i.toString()" [width]="slider.width">
                       <a href="{{getUrl(slider.url)}}"> <img style="min-height: 400px;" [src]="urlImg + slider.imageUrl" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner"/></a>
