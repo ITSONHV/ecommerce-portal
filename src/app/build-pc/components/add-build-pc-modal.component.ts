@@ -2,42 +2,54 @@ import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { catchError, delay, finalize, first, tap } from 'rxjs/operators';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { SwalService, TYPE } from 'src/services/swal.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { PaginatedResponse } from 'src/app/pagination/pagination.component';
+import { PaginatedResponse, PaginationValue } from 'src/app/pagination/pagination.component';
 import { ProductModel } from 'src/models/product.model';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
+import { MainService } from 'src/services/main.service';
 
 
 @Component({
   selector: 'app-build-pc-modal',
   templateUrl: './add-build-pc-modal.component.html',
-  styleUrls: []
+  styleUrls: ['add-build-pc-modal.component.css']
 })
 export class AddBuildPCModalComponent implements OnInit, OnDestroy {
-
+  public pagination: PaginationValue = { page: 1, pageSize: 20 };
+  public paginationControl = new FormControl(this.pagination);
   isLoading = false;
   subscriptions: Subscription[] = [];
-  public fileReview : any;
+  public fileReview: any;
   inputdata: any;
   editdata: any;
-
+  public minPrice = 0;
+  public maxPrice = 0;
+  public searchKey = '';
   closemessage = 'closed using directive';
-
-  public listProduct : any = [] ;
+  public urlImg : string = environment.urlImg;
+  public listProduct: any = [];
   public totalRecords = 0;
   public visibleItems: PaginatedResponse<ProductModel> = {
     items: this.listProduct,
-    total: this. totalRecords,
+    total: this.totalRecords,
   };
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<AddBuildPCModalComponent>, private fb: FormBuilder,) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<AddBuildPCModalComponent>, private fb: FormBuilder,
+    private spinner: NgxSpinnerService,private _svc : MainService,
+  ) {
 
   }
   formGroup: FormGroup;
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.loadForm();
+    this.onPageChange(this.pagination);
+    this.paginationControl.valueChanges.subscribe(x => {
+      this.onPageChange(x);
+    });
   }
 
   loadForm() {
@@ -56,8 +68,35 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
     this.isLoading = true;
   }
 
-  
-  closepopup(){
+  public onPageChange(pagination: any): void {
+    //this.closeSearchMobile();
+    let currentPage = (pagination.page ?? 1);
+    this.spinner.show();
+    this._svc.getProductListPagings(currentPage,
+      pagination.pageSize,
+      this.searchKey,
+      this.minPrice ?? 0,
+      this.maxPrice ?? 0,
+      '',
+       1,
+      '0').subscribe(
+        (respones: ApiPagingResponse<PagingModel>) => {
+
+          this.totalRecords = respones.data.total;
+          this.listProduct = respones.data.data;
+          this.visibleItems = { items: respones.data.data, total: respones.data.total };
+          this.isLoading = true;
+          window.scroll(0, 50); // scroll lên 1 tý sau khi change value
+          this.spinner.hide();
+        },
+        (err: any) => {
+          console.log(err);
+          this.spinner.hide();
+        });
+  }
+
+
+  closepopup() {
     this.ref.close();
   }
 
