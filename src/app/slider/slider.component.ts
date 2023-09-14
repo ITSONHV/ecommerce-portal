@@ -44,7 +44,7 @@ export class SliderComponent implements OnInit {
         items: 1
       }
     },
-    nav: true
+    nav: false
   }
   constructor(private _svc: MainService,
     private spinner: NgxSpinnerService, 
