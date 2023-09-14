@@ -6,7 +6,7 @@
         </div>
         <span class="mm-label">DANH MỤC SẢN PHẨM</span>
       </div>
-      <div (click)="toggleHandle($event)" (mouseenter)="isShowMenu = true" (mouseleave)="isShowMenu = false" class="col-md-3 col-sm-3 mega-container hidden-xs">
+      <div (click)="toggleHandle($event)" class="col-md-3 col-sm-3 mega-container hidden-xs">
         <div class="navleft-container">
           <div class="mega-menu-title">
             <h3><span>DANH MỤC SẢN PHẨM</span></h3>
@@ -14,7 +14,7 @@
           <!-- Shop by category -->
           <div class="mega-menu-category" [style.display]="isShowMenu ? 'block' : 'none'" id="mega-menu-category" *ngFor="let item of allMenu">
             <ul class="nav">
-              <li (mouseleave)="item.active = false" [ngClass]="{'active': item.active}" (mouseenter)="item.active = true"><a (click)="handleMenu($event,item)" [routerLink]="['/danh-muc-san-pham-g']">{{item.categoryName}}</a>
+              <li (mouseleave)="item.active = false " [ngClass]="{'active': item.active}" (mouseenter)="item.active = true"><a (click)="handleMenu($event,item)" [routerLink]="['/danh-muc-san-pham-g']">{{item.categoryName}}</a>
                 <div class="wrap-popup">
                 <div [@fadeInOut]="item.active ? 'in' : 'out'" [ngStyle]="{'display': item.active && item.submenu ? 'block' : 'none'}" class="popup">
                   <div class="row" *ngFor="let item of item.submenu" >

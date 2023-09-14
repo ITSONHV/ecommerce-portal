@@ -54,8 +54,18 @@ export class MenuTopComponent implements OnInit, AfterViewInit {
     this.spinner.show();
     this.categoryName = this._mainsvc.categoryName;
     this.getMenu();
+    this.router.events.subscribe((val) => {
+      if(val instanceof NavigationEnd) {
+         if(val.url !=='/' && val.url !== '' && val.url !=='/home'){
+           this.isShowMenu = false;
+         }
+         else{
+           this.isShowMenu = true;
+         }
+      }
+   });
     this.getProductSales();
-    this.isShowMenu = false;
+    //this.isShowMenu = false;
   }
   ngAfterViewInit(): void {
     this.activatedRoute.url.subscribe(url => console.log(url))
