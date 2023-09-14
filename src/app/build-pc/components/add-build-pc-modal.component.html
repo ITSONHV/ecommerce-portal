@@ -1,16 +1,147 @@
 <form [formGroup]="formGroup" >
   <!-- <h1 mat-dialog-title>{{inputdata.title}}</h1> -->
   <div mat-dialog-content>
-     <!-- <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input formControlName="name" matInput>
-     </mat-form-field> -->
-dasdasdsad
+    <div class="container">
+      <div class="row">
+        <div class="col-main col-sm-9 col-xs-12 col-sm-push-3">
+          <div class="category-description std">
+            <div class="slider-items-products">
+              <div id="category-desc-slider" class="product-flexslider hidden-buttons">
+                <div class="slider-items slider-width-col1 owl-carousel owl-theme">
   
-  </div>
+                  <!-- Item -->
+                  <div class="item"> <a href="#x"><img alt="HTML template"
+                        src="./../assets/images/cat-slider-img1.jpg"></a>
+                    <div class="inner-info">
+                      <div class="cat-img-title"> <span>Best Product 2017</span>
+                        <h2 class="cat-heading"><strong>SUMMER COLLECTION</strong></h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                        <a class="info" href="#">Shop Now</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Item -->
+  
+                  <!-- Item -->
+                  <div class="item"> <a href="#x"><img alt="HTML template"
+                        src="./../assets/images/cat-slider-img2.jpg"></a> </div>
+  
+                  <!-- End Item -->
+  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="category">
+            <!-- <div class="mb-button-filter hide-pc" (click)="openSearchMobile()"><i class="fa fa-filter"></i>Lọc Sản Phẩm -->
+            </div>
+          </div>
+    
+          <div class="shop-inner">
+            <div class="page-title">
+              <!-- <h2>{{categoryName ?? "Tìm kiếm"}}</h2> -->
+            </div>
+            <div class="toolbar">
+              <!-- <div class="view-mode">
+                <ul>
+                  <li> <a [routerLink]="['/danh-muc-san-pham-g']" (click)="onChangeSelectedListAndGridProrudct()"> <i
+                        class="fa fa-th-large"></i> </a> </li>
+                  <li class="active"> <a> <i class="fa fa-th-list"></i> </a> </li>
+                  <li> <a>({{visibleItems.total}} sản phẩm)</a> </li>
+                </ul>
+              </div> -->
+              <!-- <div class="sorter">
+                <div class="short-by">
+                  <label>Sắp xếp:</label>
+                  <select #sortSelecte (change)="onSelectedSort(sortSelecte.value)">
+                    <option selected="selected" value="1">Giá tăng dần</option>
+                    <option value="2">Giá giảm dần</option>
+                  </select>
+                </div>
+                <div class="short-by page">
+                  <label>Hiện thị:</label>
+                  <select #pageSizeSelect (change)="onSelectedPageSize(pageSizeSelect.value)">
+                    <option selected="selected">12</option>
+                    <option>24</option>
+                    <option>36</option>
+                    <option>48</option>
+                  </select>
+                </div>
+              </div> -->
+            </div>
+            <div class="product-list-area">
+              <ul class="products-list" id="products-list">
+                <!-- <ng-container *ngIf="isLoadComplete && (visibleItems.items.length == 0)">
+                  <p>Không có sản phẩm nào phù hợp.</p>
+                </ng-container> -->
+  
+                <li class="item" *ngFor="let item of visibleItems.items">
+                  <div class="product-img">
+                    <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
+                    <a 
+                      [title]="item.productName">
+                      <!-- <figure> <img class="small-image" src="{{urlImg + item.imageUrl}}" alt="{{item.productName}}">
+                      </figure> -->
+                    </a>
+                  </div>
+                  <div class="product-shop"> 
+                    <h1 class="product-name"><a 
+                        [title]="item.productName">{{item.productName}}</a></h1>
+                    <!-- <div class="product__rate">
+                      <div class="rate__star" *ngIf="item.rate >= 0">
+                        <div class="rate_item">
+                          <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item.rate)"></i>
+                          <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
+                          <span class="rate__text"> &nbsp;{{item?.countRate}} đánh giá</span>
+                        </div>
+                      </div>
+                    </div> -->
+                    <div class="price-box">
+                      <p class="special-price"> <span class="price-label"></span> <span
+                          class="price">{{item.promotionPrice | currency: "VND"}}</span> </p>
+                      <p class="old-price" *ngIf="item.promotionPrice !== 0"> <span class="price-label"></span> <span
+                          class="price">{{item.price | currency: "VND" }} </span> </p>
+                    </div>
+                    <div class="desc std">
+                      <p [innerHTML]="item.content">
+                      </p>
+                      <a class="link-learn" title="Xem thêm">Xem thêm</a>
+                    </div>
+                    <div class="actions">
+                      <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart"
+                        >
+                        <svg width="17" style="vertical-align: sub;" height="18" viewBox="0 0 17 18" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
+                            fill="white"></path>
+                        </svg>
+                        Thêm vào giỏ
+                      </button>
+                      <ul>
+                        <li class=""> <a [routerLink]="['/danh-sach-yeu-thich']"> <i class="fa fa-heart-o"></i><span> Thêm vào yêu
+                              thích</span> </a> </li>
+                        <!-- <li> <a [routerLink]="['/so-sanh']"> <i class="fa fa-link"></i><span> Add to Compare</span> </a> </li> -->
+                      </ul>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="pagination-area">
+              <!-- <my-pagination *ngIf="isLoadComplete" [total]="visibleItems.total" [formControl]="paginationControl">
+              </my-pagination> -->
+            </div>
+          </div>
+        </div>
+   
+      </div>
+    </div>
   <div mat-dialog-actions>
       <button mat-raised-button type="submit" color="primary">Save</button>
-    <!-- <a (click)="closepopup()" mat-raised-button color="warn">Close</a> -->
+    <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
     <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
   </div>
   </form>

@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { SwalService, TYPE } from 'src/services/swal.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { PaginatedResponse } from 'src/app/pagination/pagination.component';
+import { ProductModel } from 'src/models/product.model';
 
 
 @Component({
@@ -18,11 +20,18 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
   isLoading = false;
   subscriptions: Subscription[] = [];
   public fileReview : any;
-
-
-   inputdata: any;
+  inputdata: any;
   editdata: any;
-  closemessage = 'closed using directive'
+
+  closemessage = 'closed using directive';
+
+  public listProduct : any = [] ;
+  public totalRecords = 0;
+  public visibleItems: PaginatedResponse<ProductModel> = {
+    items: this.listProduct,
+    total: this. totalRecords,
+  };
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<AddBuildPCModalComponent>, private fb: FormBuilder,) {
 
   }
@@ -48,7 +57,9 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
   }
 
   
-  
+  closepopup(){
+    this.ref.close();
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sb => sb.unsubscribe());
