@@ -160,6 +160,7 @@
 .product .product__thumb .add-to-wish > a> i,
 .product .product__thumb .view-quick-view >a >i{
     font-size: large;
+    cursor: pointer;
 }
 
 .product .product__thumb .view-quick-view {
