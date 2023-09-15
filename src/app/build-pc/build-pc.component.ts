@@ -29,15 +29,15 @@ export class BuildPCComponent {
 
   Openpopup(code: any, title: any,component:any) {
     var _popup = this.dialog.open(component, {
-      width: '60%',
-      height: '90%',
+      width: '80%',
+      height: '80%',
       enterAnimationDuration: '500ms',
       exitAnimationDuration: '500ms',
       data: {
         title: title,
         code: code
       },
-
+      
     });
     _popup.afterClosed().subscribe(item => {
        console.log("1245")

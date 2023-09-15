@@ -9,16 +9,16 @@
   </div>
 <div mat-dialog-content>
     <div class="main-container col2-left-layout">
-      <div class="container">
+      <div class="fixActionRow">
         <div class="row">
           <div class="col-main col-xs-12">
             <div class="category-description std">
             </div>
 
             <div class="shop-inner">
-              <div class="page-title">
-                <!-- <h2>{{categoryName ?? "Tìm kiếm"}}</h2> -->
-              </div>
+              <!-- <div class="page-title">
+                <h2>{{categoryName ?? "Tìm kiếm"}}</h2>
+              </div> -->
               <!-- <div class="toolbar">
                 <div class="view-mode">
                   <ul>
@@ -57,8 +57,8 @@
                     <div class="product-img">
                       <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
                       <a  [title]="item.productName">
-                        <figure> <img class="small-image" src="{{urlImg + item.imageUrl}}" alt="{{item.productName}}">
-                        </figure>
+                        <img class="small-image" src="{{urlImg + item.imageUrl}}" alt="{{item.productName}}">
+                        
                       </a>
                     </div>
                     <div class="product-shop">
@@ -78,12 +78,12 @@
                         <p class="old-price" *ngIf="item.promotionPrice !== 0"> <span class="price-label"></span> <span
                             class="price">{{item.price | currency: "VND" }} </span> </p>
                       </div>
-                      <div class="desc std">
+                      <!-- <div class="desc std">
                         <p [innerHTML]="item.content">
                         </p>
-                        <!-- <a class="link-learn" title="Xem thêm"
-                          (click)="redirectRouterDetailProduct($event, item.productNameSlug)">Xem thêm</a> -->
-                      </div>
+                        <a class="link-learn" title="Xem thêm"
+                          (click)="redirectRouterDetailProduct($event, item.productNameSlug)">Xem thêm</a>
+                      </div> -->
                       <div class="actions">
                         <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart">
                             <svg width="17" style="vertical-align: sub;" height="18" viewBox="0 0 17 18" fill="none"
@@ -114,12 +114,12 @@
       </div>
     </div>
   </div>
-<div mat-dialog-actions>
-  <div class="pagination-area">
-    <my-pagination *ngIf="isLoading" [total]="visibleItems.total" [formControl]="paginationControl">
-    </my-pagination>
-  </div>
+<!-- <div mat-dialog-actions>
+ 
+</div> -->
+<div class="pagination-area">
+  <my-pagination *ngIf="isLoading" [total]="visibleItems.total" [formControl]="paginationControl">
+  </my-pagination>
 </div>
-
 <ngx-spinner [fullScreen]="true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)"
   color="#0b499c"></ngx-spinner>
