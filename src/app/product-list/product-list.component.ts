@@ -397,6 +397,7 @@ export class ProductListComponent implements OnInit {
     event.preventDefault();
   }
 
+
   changeSelectionKeySearchMobile(event: any, index: string) {
     this.selectedTextIndex = event.target.checked ? index : undefined;
     if(this.selectedTextIndex === undefined){

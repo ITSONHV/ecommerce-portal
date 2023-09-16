@@ -11,6 +11,7 @@ import { ProductModel } from 'src/models/product.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiPagingResponse, PagingModel } from 'src/models/paging.model';
 import { MainService } from 'src/services/main.service';
+import { CommonService } from 'src/services/common.service';
 
 
 @Component({
@@ -24,13 +25,11 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
   isLoading = false;
   subscriptions: Subscription[] = [];
   public fileReview: any;
-  inputdata: any;
-  editdata: any;
   public minPrice = 0;
   public maxPrice = 0;
   public searchKey = '';
   closemessage = 'closed using directive';
-  public urlImg : string = environment.urlImg;
+  public urlImg: string = environment.urlImg;
   public listProduct: any = [];
   public totalRecords = 0;
   public visibleItems: PaginatedResponse<ProductModel> = {
@@ -39,7 +38,7 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
   };
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<AddBuildPCModalComponent>, private fb: FormBuilder,
-    private spinner: NgxSpinnerService,private _svc : MainService,
+    private spinner: NgxSpinnerService, private _svc: MainService, private commonSvc: CommonService
   ) {
 
   }
@@ -78,7 +77,7 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
       this.minPrice ?? 0,
       this.maxPrice ?? 0,
       '',
-       1,
+      1,
       '0').subscribe(
         (respones: ApiPagingResponse<PagingModel>) => {
 
@@ -94,7 +93,11 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
           this.spinner.hide();
         });
   }
-
+  addToBuildPC(product: ProductModel): void {
+    this.commonSvc.addToBuidPC(this.data.code, 1, product);
+    //this. showAddCartFavorite();
+    this.closepopup();
+  }
 
   closepopup() {
     this.ref.close();

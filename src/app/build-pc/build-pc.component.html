@@ -12,249 +12,92 @@
   <div class="block__header home-tab">
     <h2 class="block__header__title">LỰA CHỌN CẤU HÌNH</h2>
   </div>
-   
-    <div class="add-cart-buttons">
-      <button type="button"  routerLinkActive="router-link-active"
-        class="refresh-build"> <i class="fa fa-refresh" style="margin-left: 15px;"></i>  Xây dựng lại
-      </button>
-    </div>
 
+  <div class="add-cart-buttons">
+    <button type="button" routerLinkActive="router-link-active" class="refresh-build"> <i class="fa fa-refresh"
+        style="margin-left: 15px;"></i> Xây dựng lại
+    </button>
+    <div>Chi phí dự tính: {{sumPriceItemsInBuildPC() | currency: "VND"}}</div>
+  </div>
+  
 
   <div class="product-tabs-content-inner clearfix">
-    <!-- Load thông số -->
     <table class="table table-bordered">
+      <ng-container *ngFor="let item of listIdBuildPC">
       <tr>
-        <td class="att-name"><strong> 1. Chọn Mainboard</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Chọn Mainboard
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 2. Chọn CPU</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Chọn CPU
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 3. Chọn Ram</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Chọn Ram
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 4. Ổ cứng SSD</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Ổ cứng SSD
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 5. Ổ cứng HDD</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Ổ cứng HDD
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 6. Chọn PSU - Nguồn máy tính</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Chọn PSU - Nguồn máy tính
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 7. Chọn VGA - Card màn hình</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Chọn VGA - Card màn hình
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 8. Case - Thùng máy</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Case - Thùng máy
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 9. Màn hình máy tính</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Màn hình máy tính
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 10. Chọn tản nhiệt CPU</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Chọn tản nhiệt CPU
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 11. Bàn phím máy tính</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Bàn phím máy tính
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 12. Chuột máy tính</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp;  Chuột máy tính
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 13. Tai nghe</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; 13. Tai nghe
-            </button>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="att-name"><strong> 14. Fan Case</strong></td>
-        <td class="att-value">
-          <div class="add-cart-buttons">
-            <button type="button" (click)="showChooseProduct(1)" routerLinkActive="router-link-active"
-              class="btn-add-cart "><svg width="17" style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                  fill="white"></path>
-              </svg> &nbsp; &nbsp; Fan Case
-            </button>
-          </div>
-        </td>
-      </tr>
+          <td class="att-name"><strong> {{item}}. {{getNameBuidPC(item)}}</strong></td>
+          <td class="att-value">
+            <ng-container *ngIf="getItemBuildPC(item)">
+              <div class="col-sm-3 col-xs-4 col-md-2 img">
+                <div class="product-img">
+                  <a [title]="getItemBuildPC(item).productName">
+                    <img class="small-image" src="{{urlImg + getItemBuildPC(item).image}}"
+                      alt="{{getItemBuildPC(item).productName}}">
+                  </a>
+                </div>
+              </div>
+              <div class="col-sm-9 col-xs-8 col-md-10">
+                <div class="product-shop">
+                  <h4 class="product-name"><a
+                      [title]="getItemBuildPC(item).productName">{{getItemBuildPC(item).productName}}</a>
+                  </h4>
+                  <div class="price-box">
+                    <p class="special-price"> <span class="price-label"></span> <span class="price"> Giá:
+                        {{getItemBuildPC(item).promotionPrice | currency: "VND"}}</span> </p>
+                    <!-- <p class="old-price" *ngIf="getItemBuildPC(1).promotionPrice !== 0"> <span class="price-label"></span>
+                      <span class="price">{{getItemBuildPC(1).price | currency: "VND" }} </span> </p> -->
+                  </div>
+                  <div>
+                    <a class="product-code" [title]="getItemBuildPC(item).productCode">Mã sản phẩm:
+                      {{getItemBuildPC(item).productCode}}</a>
+                  </div>
+                  <div class="cart-p-actions">
+                    <div class="cart-p-qty">
+                      Số lượng: &nbsp;&nbsp;
+                      <!-- (click)="decreaseQuantity()"  (click)="addQuantityToShopingCard(item.id, -1)"        (click)="addQuantityToShopingCard(item.id, 1)"   (click)="removeItemCart(item.id)"-->
+                      <span class="qty-decrease">-</span>
+                      <input type="number" class="qty-input" value="{{getItemBuildPC(item).quantity}}">
+                      <span class="qty-increase">+</span>
+                    </div>
+                    <div class="cart-p-remove"  (click)="removeItemBuildPC(item)">
+                      <svg width="13" height="15" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.5 5H3.16667H16.5" stroke="#005EC4" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round"></path>
+                        <path
+                          d="M5.66602 4.99984V3.33317C5.66602 2.89114 5.84161 2.46722 6.15417 2.15466C6.46673 1.8421 6.89066 1.6665 7.33268 1.6665H10.666C11.108 1.6665 11.532 1.8421 11.8445 2.15466C12.1571 2.46722 12.3327 2.89114 12.3327 3.33317V4.99984M14.8327 4.99984V16.6665C14.8327 17.1085 14.6571 17.5325 14.3445 17.845C14.032 18.1576 13.608 18.3332 13.166 18.3332H4.83268C4.39065 18.3332 3.96673 18.1576 3.65417 17.845C3.34161 17.5325 3.16602 17.1085 3.16602 16.6665V4.99984H14.8327Z"
+                          stroke="#005EC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M7.33398 9.1665V14.1665" stroke="#005EC4" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round"></path>
+                        <path d="M10.666 9.1665V14.1665" stroke="#005EC4" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round"></path>
+                      </svg>
+                      XOÁ
+                    </div>
+                  </div>
+                  <div class="actions">
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="!getItemBuildPC(item)">
+              <div class="add-cart-buttons">
+                <button type="button" (click)="showChooseProduct(item, getNameBuidPC(item))"
+                  routerLinkActive="router-link-active" class="btn-add-cart "><svg width="17"
+                    style="vertical-align: sub;margin-left: 15px;" height="18" viewBox="0 0 17 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
+                      fill="white"></path>
+                  </svg> &nbsp; &nbsp; {{getNameBuidPC(item)}}
+                </button>
+              </div>
+            </ng-container>
+          </td>
+        </tr>
+        </ng-container>
+    
     </table>
   </div>
-
-
-  <!-- <div class="row" *ngIf="this.allMenu && this.allMenu != '' ">
-    <ng-container *ngFor="let item of allMenu; let i= index; ">
-      <div style="cursor: pointer;" class="col-lg-6 col-sm-6" *ngIf="i < 10" (click)="redirecUrl( $event,item.urlSlug, '')">
-        <div class="">
-          <div style="height: 144px;" ngClass="{{'single-categories '+ 'bg'+ i}}">
-            <a ><img
-                [src]="urlImg + item.imageUrl" alt="{{item.categoryName}}"></a>
-            <h3 class=""><a><span ngClass="{{'color'+ i}}">{{item.categoryName}}</span></a>
-            </h3>
-            <h5 class="content-build-category"><span filter-content="">{{item.content}}</span>
-            </h5>
-            <a  class="read-more" ngClass="{{'color'+ i}}">Xem thêm</a>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-   
-  </div> -->
 </div>
 <ngx-spinner [fullScreen]="true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)"
   color="#0b499c"></ngx-spinner>

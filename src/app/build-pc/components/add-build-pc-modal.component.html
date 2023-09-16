@@ -1,25 +1,23 @@
-
-  
-
-  <div mat-dialog-actions>
-    <h1 mat-dialog-title>{{data.title}}</h1>
-    <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
-   
-    <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
-  </div>
+<div class="top-actions-dialog" mat-dialog-actions>
+  <h4 class="header-title">{{data.title}}</h4>
+  <form action="/search">
+    <input height="auto" width="auto" autocomplete="off" type="text" name="q" placeholder="Tìm kiếm sản phẩm">
+  </form>
+  <a (click)="closepopup()" mat-raised-button color="warn"><i class="fa fa-window-close"></i></a>
+</div>
 <div mat-dialog-content>
-    <div class="main-container col2-left-layout">
-      <div class="fixActionRow">
-        <div class="row">
-          <div class="col-main col-xs-12">
-            <div class="category-description std">
-            </div>
+  <div class="main-container col2-left-layout">
+    <div class="">
+      <div class="row">
+        <div class="col-main col-xs-12">
+          <div class="category-description std">
+          </div>
 
-            <div class="shop-inner">
-              <!-- <div class="page-title">
+          <div class="shop-inner">
+            <!-- <div class="page-title">
                 <h2>{{categoryName ?? "Tìm kiếm"}}</h2>
               </div> -->
-              <!-- <div class="toolbar">
+            <!-- <div class="toolbar">
                 <div class="view-mode">
                   <ul>
                     <li> <a [routerLink]="['/danh-muc-san-pham-g']" (click)="onChangeSelectedListAndGridProrudct()"> <i
@@ -47,23 +45,23 @@
                   </div>
                 </div>
               </div> -->
-              <div class="product-list-area">
-                <ul class="products-list" id="products-list">
-                  <ng-container *ngIf="isLoading && (visibleItems.items.length == 0)">
-                    <p>Không có sản phẩm nào phù hợp.</p>
-                  </ng-container>
+            <div class="product-list-area">
+              <ul class="products-list" id="products-list">
+                <ng-container *ngIf="isLoading && (visibleItems.items.length == 0)">
+                  <p>Không có sản phẩm nào phù hợp.</p>
+                </ng-container>
 
-                  <li class="item" *ngFor="let item of visibleItems.items">
-                    <div class="product-img">
-                      <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
-                      <a  [title]="item.productName">
-                        <img class="small-image" src="{{urlImg + item.imageUrl}}" alt="{{item.productName}}">
-                        
-                      </a>
-                    </div>
-                    <div class="product-shop">
-                      <h1 class="product-name"><a [title]="item.productName">{{item.productName}}</a></h1>
-                      <!-- <div class="product__rate">
+                <li class="item" *ngFor="let item of visibleItems.items">
+                  <div class="product-img">
+                    <div class="percent" *ngIf="item.rateDiscount > 0"><span>-{{item.rateDiscount}}%</span></div>
+                    <a [title]="item.productName">
+                      <img class="small-image" src="{{urlImg + item.imageUrl}}" alt="{{item.productName}}">
+
+                    </a>
+                  </div>
+                  <div class="product-shop">
+                    <h1 class="product-name"><a [title]="item.productName">{{item.productName}}</a></h1>
+                    <!-- <div class="product__rate">
                         <div class="rate__star" *ngIf="item.rate >= 0">
                           <div class="rate_item">
                             <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item.rate)"></i>
@@ -72,48 +70,38 @@
                           </div>
                         </div>
                       </div> -->
-                      <div class="price-box">
-                        <p class="special-price"> <span class="price-label"></span> <span
-                            class="price">{{item.promotionPrice | currency: "VND"}}</span> </p>
-                        <p class="old-price" *ngIf="item.promotionPrice !== 0"> <span class="price-label"></span> <span
-                            class="price">{{item.price | currency: "VND" }} </span> </p>
-                      </div>
-                      <!-- <div class="desc std">
-                        <p [innerHTML]="item.content">
-                        </p>
-                        <a class="link-learn" title="Xem thêm"
-                          (click)="redirectRouterDetailProduct($event, item.productNameSlug)">Xem thêm</a>
-                      </div> -->
-                      <div class="actions">
-                        <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart">
-                            <svg width="17" style="vertical-align: sub;" height="18" viewBox="0 0 17 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <path
-                                d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                                fill="white"></path>
-                            </svg>
-                            Chọn
-                          </button>
-                          <ul>
-                            <li class=""> <a [routerLink]="['/danh-sach-yeu-thich']"> <i
-                                  class="fa fa-heart-o"></i><span> Thêm vào yêu
-                                  thích</span> </a> </li>
-                            <!-- <li> <a [routerLink]="['/so-sanh']"> <i class="fa fa-link"></i><span> Add to Compare</span> </a> </li> -->
-                          </ul>
-                        </div>
+                    <div class="price-box">
 
+                      <p class="special-price"> <span class="price-label"></span> <span class="price"> Giá:
+                          {{item.promotionPrice | currency: "VND"}}</span> </p>
+                      <p class="old-price" *ngIf="item.promotionPrice !== 0"> <span class="price-label"></span> <span
+                          class="price">{{item.price | currency: "VND" }} </span> </p>
+                    </div>
+                    <a class="product-code" [title]="item.productCode">Mã sản phẩm: {{item.productCode}}</a>
+                    <div class="actions">
+
+                      <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart" (click)="addToBuildPC(item)">
+                          <svg width="13" style="vertical-align: sub;" height="16" viewBox="0 0 17 18" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
+                              fill="white"></path>
+                          </svg>
+                          Chọn
+                        </button>
                       </div>
                     </div>
-                  </li>
-                </ul>
-              </div>
-              
+                  </div>
+                </li>
+              </ul>
             </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 <!-- <div mat-dialog-actions>
  
 </div> -->
