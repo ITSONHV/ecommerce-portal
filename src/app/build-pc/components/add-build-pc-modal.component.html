@@ -61,23 +61,16 @@
                   </div>
                   <div class="product-shop">
                     <h1 class="product-name"><a [title]="item.productName">{{item.productName}}</a></h1>
-                    <!-- <div class="product__rate">
-                        <div class="rate__star" *ngIf="item.rate >= 0">
-                          <div class="rate_item">
-                            <i class="fa fa-star yellow" *ngFor="let rate of counterRate(item.rate)"></i>
-                            <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - item.rate)"></i>
-                            <span class="rate__text"> &nbsp;{{item?.countRate}} đánh giá</span>
-                          </div>
-                        </div>
-                      </div> -->
                     <div class="price-box">
-
                       <p class="special-price"> <span class="price-label"></span> <span class="price"> Giá:
                           {{item.promotionPrice | currency: "VND"}}</span> </p>
                       <p class="old-price" *ngIf="item.promotionPrice !== 0"> <span class="price-label"></span> <span
                           class="price">{{item.price | currency: "VND" }} </span> </p>
                     </div>
-                    <a class="product-code" [title]="item.productCode">Mã sản phẩm: {{item.productCode}}</a>
+                    <div>
+
+                      <a class="product-code" [title]="item.productCode">Mã sản phẩm: {{item.productCode}}</a>
+                    </div>
                     <div class="actions">
 
                       <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart" (click)="addToBuildPC(item)">

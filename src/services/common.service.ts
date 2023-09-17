@@ -131,6 +131,13 @@ export class CommonService implements OnInit {
          return this.itemBuildPC;
     }
 
+    clearItemBuildPC(builds: IBuildPC[]) {
+        this.itemBuildPC = [];
+        this.itemBuildPC = builds;
+        this.setBuildPCToLocalStorage();
+        return this.itemBuildPC;
+   }
+
     setBuildPCToLocalStorage(){
         var date = new Date();
         var buidPCLocal : ItemsBuildPC;

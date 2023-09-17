@@ -13,33 +13,44 @@
     <h2 class="block__header__title">LỰA CHỌN CẤU HÌNH</h2>
   </div>
 
-  <div class="add-cart-buttons">
-    <button type="button" routerLinkActive="router-link-active" class="refresh-build"> <i class="fa fa-refresh"
-        style="margin-left: 15px;"></i> Xây dựng lại
-    </button>
-    <div>Chi phí dự tính: {{sumPriceItemsInBuildPC() | currency: "VND"}}</div>
-  </div>
-  
+  <div class="row">
+    <div class=" col-xs-6">
+      <div class="add-cart-buttons">
+        <button type="button" (click)="clearItemBuildPC()" class="refresh-build"> <i class="fa fa-refresh"
+            style="margin-left: 15px;"></i> Xây dựng lại
+        </button>
 
+      </div>
+    </div>
+
+    <div class="col-xs-6 total-price">
+      <div class="price-box">
+        <p class="special-price" style="float: right;"> Chi phí dự tính: <span class="price">
+            {{sumPriceItemsInBuildPC() | currency: "VND"}}</span>
+        </p>
+      </div>
+    </div>
+  </div>
   <div class="product-tabs-content-inner clearfix">
     <table class="table table-bordered">
       <ng-container *ngFor="let item of listIdBuildPC">
-      <tr>
+        <tr>
           <td class="att-name"><strong> {{item}}. {{getNameBuidPC(item)}}</strong></td>
           <td class="att-value">
             <ng-container *ngIf="getItemBuildPC(item)">
               <div class="col-sm-3 col-xs-4 col-md-2 img">
-                <div class="product-img">
+                <div class="product-img"
+                  (click)="redirectRouterDetailProduct($event, getItemBuildPC(item).productNameSlug)">
                   <a [title]="getItemBuildPC(item).productName">
                     <img class="small-image" src="{{urlImg + getItemBuildPC(item).image}}"
                       alt="{{getItemBuildPC(item).productName}}">
                   </a>
                 </div>
               </div>
-              <div class="col-sm-9 col-xs-8 col-md-10">
+              <div class="col-sm-9 col-xs-8 col-md-10" style="text-indent: 0px;">
                 <div class="product-shop">
-                  <h4 class="product-name"><a
-                      [title]="getItemBuildPC(item).productName">{{getItemBuildPC(item).productName}}</a>
+                  <h4 class="product-name"><a [title]="getItemBuildPC(item).productName"
+                      (click)="redirectRouterDetailProduct($event, getItemBuildPC(item).productNameSlug)">{{getItemBuildPC(item).productName}}</a>
                   </h4>
                   <div class="price-box">
                     <p class="special-price"> <span class="price-label"></span> <span class="price"> Giá:
@@ -51,30 +62,17 @@
                     <a class="product-code" [title]="getItemBuildPC(item).productCode">Mã sản phẩm:
                       {{getItemBuildPC(item).productCode}}</a>
                   </div>
-                  <div class="cart-p-actions">
-                    <div class="cart-p-qty">
-                      Số lượng: &nbsp;&nbsp;
-                      <!-- (click)="decreaseQuantity()"  (click)="addQuantityToShopingCard(item.id, -1)"        (click)="addQuantityToShopingCard(item.id, 1)"   (click)="removeItemCart(item.id)"-->
-                      <span class="qty-decrease">-</span>
-                      <input type="number" class="qty-input" value="{{getItemBuildPC(item).quantity}}">
-                      <span class="qty-increase">+</span>
+
+                  <div class="qty">
+                    <div class="qty-select">
+                      <span class="">Số lượng : </span>
+                      <input class="qty-selected__change" type="number" min="1" max="100"
+                        value="{{getItemBuildPC(item).quantity}}">
+                      <span class="special-price"> = <strong class="price">{{(getItemBuildPC(item).quantity *
+                          getItemBuildPC(item).promotionPrice) | currency : "VND"}}</strong> </span>
                     </div>
-                    <div class="cart-p-remove"  (click)="removeItemBuildPC(item)">
-                      <svg width="13" height="15" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.5 5H3.16667H16.5" stroke="#005EC4" stroke-width="2" stroke-linecap="round"
-                          stroke-linejoin="round"></path>
-                        <path
-                          d="M5.66602 4.99984V3.33317C5.66602 2.89114 5.84161 2.46722 6.15417 2.15466C6.46673 1.8421 6.89066 1.6665 7.33268 1.6665H10.666C11.108 1.6665 11.532 1.8421 11.8445 2.15466C12.1571 2.46722 12.3327 2.89114 12.3327 3.33317V4.99984M14.8327 4.99984V16.6665C14.8327 17.1085 14.6571 17.5325 14.3445 17.845C14.032 18.1576 13.608 18.3332 13.166 18.3332H4.83268C4.39065 18.3332 3.96673 18.1576 3.65417 17.845C3.34161 17.5325 3.16602 17.1085 3.16602 16.6665V4.99984H14.8327Z"
-                          stroke="#005EC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M7.33398 9.1665V14.1665" stroke="#005EC4" stroke-width="2" stroke-linecap="round"
-                          stroke-linejoin="round"></path>
-                        <path d="M10.666 9.1665V14.1665" stroke="#005EC4" stroke-width="2" stroke-linecap="round"
-                          stroke-linejoin="round"></path>
-                      </svg>
-                      XOÁ
-                    </div>
-                  </div>
-                  <div class="actions">
+                    <div class="remove-build"><a class="btn-remove__build" (click)="removeItemBuildPC(item)"><i
+                          class="fa fa-trash"></i></a></div>
                   </div>
                 </div>
               </div>
@@ -94,9 +92,34 @@
             </ng-container>
           </td>
         </tr>
-        </ng-container>
-    
+
+      </ng-container>
+      <tr>
+        <td class="att-name"></td>
+        <td class="att-value">
+          <p class="special-price total-buildpc-price"> Chi phí dự tính: <span class="price">
+              {{sumPriceItemsInBuildPC() | currency: "VND"}}</span>
+          </p>
+
+        </td>
+      </tr>
     </table>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="">
+          <button type="button" class="add-to-card" style="float: right;padding-right: 20px;padding-left: 20px;">
+            <a>THÊM VÀO GIỎ HÀNG</a>
+          </button>
+        </div>
+      </div>
+      <div class=" col-xs-6">
+        <div class="add-cart-buttons">
+          <a type="button" class="add-to-card-lienhe" href="https://www.facebook.com/dangminhpc70/?ref=embed_page"
+            style="float: left;padding-right: 20px;padding-left: 20px;"><a class="">LIÊN HỆ TƯ VẤN</a>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <ngx-spinner [fullScreen]="true" type="ball-scale-multiple" bdColor="rgba(220, 237, 255, 0.8)"

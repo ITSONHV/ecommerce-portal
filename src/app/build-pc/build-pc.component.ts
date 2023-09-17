@@ -42,6 +42,7 @@ export class BuildPCComponent {
     });
     _popup.afterClosed().subscribe(item => {
       //this.loadcustomer();
+      this.buildPC = this._commonService.getBuildPCFromLocalStorage();
     })
   }
 
@@ -53,20 +54,26 @@ export class BuildPCComponent {
   getItemBuildPC(id: number): any {
     return this.buildPC.find(item => item.id == id);
   }
-  sumPriceItemsInBuildPC(): number{
+  sumPriceItemsInBuildPC(): number {
     return this._commonService.getBuildPCFromLocalStorage().reduce((sum, item) => sum + item.price * item.quantity, 0);
-   }
+  }
 
-   removeItemBuildPC(id: number){
+  removeItemBuildPC(id: number) {
     return this._commonService.removeItemBuildPC(id);
-   }
+  }
+  clearItemBuildPC() {
+    this._commonService.clearItemBuildPC([]);
 
+    this.buildPC = this._commonService.getBuildPCFromLocalStorage();
+  }
 
   redirecUrl(event: any, cate: string, searchKey: string) {
     this._commonService.redirectRouter(event, searchKey, cate);
   }
 
-
+  redirectRouterDetailProduct(event: any, searchKey: string) {
+    this._commonService.redirectRouterDetailProduct(event, searchKey);
+  }
 
   getNameBuidPC(id: number): string {
     switch (id) {
