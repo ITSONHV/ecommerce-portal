@@ -68,24 +68,24 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
   }
 
   public onPageChange(pagination: any): void {
-    //this.closeSearchMobile();
     let currentPage = (pagination.page ?? 1);
     this.spinner.show();
-    this._svc.getProductListPagings(currentPage,
+    this._svc.getProductListForBuildPC(currentPage,
       pagination.pageSize,
       this.searchKey,
       this.minPrice ?? 0,
       this.maxPrice ?? 0,
       '',
       1,
-      '0').subscribe(
+      '0',
+      this.data.code).subscribe(
         (respones: ApiPagingResponse<PagingModel>) => {
 
           this.totalRecords = respones.data.total;
           this.listProduct = respones.data.data;
           this.visibleItems = { items: respones.data.data, total: respones.data.total };
           this.isLoading = true;
-          window.scroll(0, 50); // scroll lên 1 tý sau khi change value
+          //window.scroll(0, 50); // scroll lên 1 tý sau khi change value
           this.spinner.hide();
         },
         (err: any) => {

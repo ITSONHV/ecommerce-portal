@@ -7,6 +7,7 @@ import { MainService } from 'src/services/main.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddBuildPCModalComponent } from './components/add-build-pc-modal.component';
 import { IBuildPC } from 'src/interfaces/IBuildPC';
+import { ICart } from 'src/interfaces/ICart';
 @Component({
   selector: 'app-build-pc',
   templateUrl: './build-pc.component.html',
@@ -19,7 +20,8 @@ export class BuildPCComponent {
   constructor(private _svc: MainService, private router: Router
     , private activatedRoute: ActivatedRoute, private spinner: NgxSpinnerService,
     private _commonService: CommonService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private commonSvc: CommonService
   ) {
 
   }
@@ -32,6 +34,8 @@ export class BuildPCComponent {
     var _popup = this.dialog.open(component, {
       width: 'auto',
       height: 'auto',
+      minHeight: '800px',
+      minWidth: '800px',
       enterAnimationDuration: '500ms',
       exitAnimationDuration: '500ms',
       data: {
@@ -41,13 +45,11 @@ export class BuildPCComponent {
 
     });
     _popup.afterClosed().subscribe(item => {
-      //this.loadcustomer();
       this.buildPC = this._commonService.getBuildPCFromLocalStorage();
     })
   }
 
   ngOnInit(): void {
-    //this.getChildBuildPC();
     this.buildPC = this._commonService.getBuildPCFromLocalStorage();
   }
 
@@ -61,10 +63,38 @@ export class BuildPCComponent {
   removeItemBuildPC(id: number) {
     return this._commonService.removeItemBuildPC(id);
   }
+
   clearItemBuildPC() {
     this._commonService.clearItemBuildPC([]);
-
     this.buildPC = this._commonService.getBuildPCFromLocalStorage();
+  }
+
+  onChangeQuantityItemBuildPC(code :number, event: any){
+    debugger;
+    this.commonSvc.addQuantiyuBuidPC(code, event.target.value);
+  }
+
+  addItemBuildToCard() {
+    this.buildPC.forEach(element => {
+      var card : ICart ={
+        content : element.content,
+        id : element.productid,
+        image : element.image,
+        price : element.promotionPrice,
+        quantity : element.quantity,
+        productNameSlug : element.productNameSlug,
+        productName : element.productName
+      }
+      this._svc.addToCartWithCart(card,element.quantity);
+    });
+
+    this.router.navigate(
+      ['/gio-hang'],
+      {
+        relativeTo: this.activatedRoute,
+        queryParamsHandling: 'merge'
+      }
+    )
   }
 
   redirecUrl(event: any, cate: string, searchKey: string) {

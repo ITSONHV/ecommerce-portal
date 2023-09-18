@@ -91,7 +91,7 @@ export class CommonService implements OnInit {
         try {
             const index = this.itemBuildPC.findIndex(item => item.id == enumSelect)
             if (index >= 0) {
-                this.itemBuildPC[index].quantity += quantity;
+                this.itemBuildPC[index].quantity = quantity;
                 if (this.itemBuildPC[index].quantity <= 0) {
                     this.removeItemBuildPC(enumSelect);
                 }
@@ -108,11 +108,29 @@ export class CommonService implements OnInit {
                     quantity: quantity,
                     productNameSlug: product.productNameSlug,
                     productCode : product.productCode,
-                    promotionPrice : product.promotionPrice
+                    promotionPrice : product.promotionPrice,
+                    content : encodeURIComponent(product.content)
                 }
                 this.itemBuildPC.push(pc);
                 this.setBuildPCToLocalStorage();
             }
+        } catch {
+            console.log("err add card");
+            this.itemBuildPC = [];
+        }     
+    }
+
+    addQuantiyuBuidPC(enumSelect: number, quantity: number) { 
+        try {
+            const index = this.itemBuildPC.findIndex(item => item.id == enumSelect)
+            if (index >= 0) {
+                this.itemBuildPC[index].quantity = quantity;
+                if (this.itemBuildPC[index].quantity <= 0) {
+                    this.removeItemBuildPC(enumSelect);
+                }
+                this.setBuildPCToLocalStorage();
+            }
+
         } catch {
             console.log("err add card");
             this.itemBuildPC = [];

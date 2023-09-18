@@ -8,6 +8,7 @@ export interface IBuildPC {
     productNameSlug : string;
     productCode : string;
     productid: number;
+    content: string;
 }
 
 export interface ItemsBuildPC {

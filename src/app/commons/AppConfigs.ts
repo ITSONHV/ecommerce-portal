@@ -18,6 +18,7 @@ export const AppConfigs = {
         addReviewProduct : "Product/add-review",          
         verifyDataPayment : "payment/verify-data",    
         createPayment : "payment",   
-        getOrderByPhone : "payment/paging",            
+        getOrderByPhone : "payment/paging",
+        getProductPageForBuildPC : "buildpc/product/paging",                  
     }
 }

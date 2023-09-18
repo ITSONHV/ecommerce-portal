@@ -66,8 +66,8 @@
                   <div class="qty">
                     <div class="qty-select">
                       <span class="">Số lượng : </span>
-                      <input class="qty-selected__change" type="number" min="1" max="100"
-                        value="{{getItemBuildPC(item).quantity}}">
+                      <input #quantity class="qty-selected__change" type="number" min="1" max="100"
+                        value="{{getItemBuildPC(item).quantity}}" (change)="onChangeQuantityItemBuildPC(item, $event )">
                       <span class="special-price"> = <strong class="price">{{(getItemBuildPC(item).quantity *
                           getItemBuildPC(item).promotionPrice) | currency : "VND"}}</strong> </span>
                     </div>
@@ -107,7 +107,7 @@
     <div class="row">
       <div class="col-xs-6">
         <div class="">
-          <button type="button" class="add-to-card" style="float: right;padding-right: 20px;padding-left: 20px;">
+          <button type="button" class="add-to-card" style="float: right;padding-right: 20px;padding-left: 20px;" (click)="addItemBuildToCard()">
             <a>THÊM VÀO GIỎ HÀNG</a>
           </button>
         </div>

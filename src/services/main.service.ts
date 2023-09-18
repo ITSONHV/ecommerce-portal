@@ -294,6 +294,62 @@ export class MainService implements OnInit{
             )
     };
 
+    getProductListForBuildPC(page: number, pageSize: number, keySearch: string, minPrice: number, maxPrice: number, slugCate: string, sortValue : number, typeStatus : string
+        , buidPCID : number)
+    : Observable<ApiPagingResponse<PagingModel>> {
+        var rawReq : any = {};
+        let queryUrls = `${this.urlApi}${AppConfigs.urls.getProductPageForBuildPC}`;
+        rawReq.Page = page;
+        rawReq.PageSize = pageSize;
+        rawReq.MinPrice = minPrice;
+        rawReq.MaxPrice = maxPrice;
+        rawReq.SortValue = sortValue;
+        rawReq.BuildPCID = buidPCID;
+
+        if(keySearch != undefined && keySearch !== ''){
+            rawReq.ProductName = decodeURI(keySearch);
+        }
+
+        if(slugCate != undefined && slugCate != null && slugCate !== ''){
+            rawReq.UrlCategorySlug = slugCate;
+        }
+        // 0 tất cả , 1 uu đãi, 2 bán chạy, 3 mới, nổi bậc 4
+        if(typeStatus !== undefined  && typeStatus !=null ){
+            switch(typeStatus){
+                case "1": {
+                    rawReq.IsBestDiscount = 1;
+                    break;
+                } 
+                case "2": {
+                    rawReq.IsBestSelling = 1;
+                    break;
+                } 
+                case "3": {
+                    rawReq.IsNew = 1;
+                    break;
+                }
+                case "4": {
+                    rawReq.IsHot = 1;
+                    break;
+                }
+                default:{
+    
+                }
+            }
+        }
+        var objReq = this._encrypt.encryptNoStringfy(JSON.stringify(rawReq));     
+        queryUrls = queryUrls + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
+                 + "&HashData=" + `${encodeURIComponent(objReq.HashData)}`;      
+        return this.http.get<any>(queryUrls)
+            .pipe(
+                //retry(3), // retry a failed request up to 3 times
+                catchError(this.handleError), // then handle the error
+                mergeMap((response_: any) => {
+                    return of<ApiPagingResponse<PagingModel>>(<ApiPagingResponse<PagingModel>>response_);
+                })
+            )
+    };
+
     getListBanking(): Observable<ObjectModel> {
         return this.http.get<any>(this.urlApi + AppConfigs.urls.getListBanking)
             .pipe(
