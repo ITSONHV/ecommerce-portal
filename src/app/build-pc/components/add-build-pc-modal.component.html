@@ -1,9 +1,28 @@
-<div class="top-actions-dialog" mat-dialog-actions>
-  <h4 class="header-title">{{data.title}}</h4>
-  <form action="/search">
-    <input height="auto" width="auto" autocomplete="off" type="text" name="q" placeholder="Tìm kiếm sản phẩm">
-  </form>
-  <a (click)="closepopup()" mat-raised-button color="warn"><i class="fa fa-window-close"></i></a>
+<div class="" >
+  <!-- <div class="col-sm-4 col-xs-4">
+    <h4 class="header-title">{{data.title}}</h4>
+  </div>
+  <div class="col-sm-7 col-xs-7">
+    <form action="/search">
+      <input height="auto" width="auto" autocomplete="off" type="text" name="q" placeholder="Tìm kiếm sản phẩm">
+    </form>
+  </div>
+  <div class="col-sm-1 col-xs-1">
+    <a (click)="closepopup()" mat-raised-button color="warn"><i class="fa fa-window-close"></i></a>
+  </div>
+  -->
+
+  <div class="coll-build__search">
+    <h4 class="header-title">{{data.title}}</h4>
+		<div class="pc-search__form">
+			<form action="/search">
+				<input type="hidden" name="type" value="product">
+				<input required="" autocomplete="off" type="text" name="q" placeholder="Tìm kiếm sản phẩm">
+			</form>
+		</div>
+    <a (click)="closepopup()" ><i class="fa fa-window-close"></i></a>
+	</div>
+ 
 </div>
 <div mat-dialog-content>
   <div class="main-container col2-left-layout">
@@ -14,37 +33,7 @@
           </div>
 
           <div class="shop-inner">
-            <!-- <div class="page-title">
-                <h2>{{categoryName ?? "Tìm kiếm"}}</h2>
-              </div> -->
-            <!-- <div class="toolbar">
-                <div class="view-mode">
-                  <ul>
-                    <li> <a [routerLink]="['/danh-muc-san-pham-g']" (click)="onChangeSelectedListAndGridProrudct()"> <i
-                          class="fa fa-th-large"></i> </a> </li>
-                    <li class="active"> <a> <i class="fa fa-th-list"></i> </a> </li>
-                    <li> <a>({{visibleItems.total}} sản phẩm)</a> </li>
-                  </ul>
-                </div>
-                <div class="sorter">
-                  <div class="short-by">
-                    <label>Sắp xếp:</label>
-                    <select #sortSelecte (change)="onSelectedSort(sortSelecte.value)">
-                      <option selected="selected" value="1">Giá tăng dần</option>
-                      <option value="2">Giá giảm dần</option>
-                    </select>
-                  </div>
-                  <div class="short-by page">
-                    <label>Hiện thị:</label>
-                    <select #pageSizeSelect (change)="onSelectedPageSize(pageSizeSelect.value)">
-                      <option selected="selected">12</option>
-                      <option>24</option>
-                      <option>36</option>
-                      <option>48</option>
-                    </select>
-                  </div>
-                </div>
-              </div> -->
+            
             <div class="product-list-area">
               <ul class="products-list" id="products-list">
                 <ng-container *ngIf="isLoading && (visibleItems.items.length == 0)">
@@ -60,8 +49,10 @@
                     </a>
                   </div>
                   <div class="product-shop">
-                    <h1 class="product-name"><a [title]="item.productName">{{item.productName}}</a></h1>
+                   
                     <div class="price-box">
+                     <h1 class="product-name"><a [title]="item.productName">{{item.productName}}</a></h1>
+                   
                       <p class="special-price"> <span class="price-label"></span> <span class="price"> Giá:
                           {{item.promotionPrice | currency: "VND"}}</span> </p>
                       <p class="old-price" *ngIf="item.promotionPrice !== 0"> <span class="price-label"></span> <span

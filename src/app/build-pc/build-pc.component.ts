@@ -34,15 +34,13 @@ export class BuildPCComponent {
     var _popup = this.dialog.open(component, {
       width: 'auto',
       height: 'auto',
-      minHeight: '800px',
-      minWidth: '800px',
       enterAnimationDuration: '500ms',
       exitAnimationDuration: '500ms',
       data: {
         title: title,
         code: code
       },
-
+       panelClass: 'custom-dialog-container2' 
     });
     _popup.afterClosed().subscribe(item => {
       this.buildPC = this._commonService.getBuildPCFromLocalStorage();

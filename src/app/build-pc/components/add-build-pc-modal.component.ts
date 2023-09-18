@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit ,ViewEncapsulation} from '@angular/core';
 import { of, Subscription } from 'rxjs';
 import { catchError, delay, finalize, first, tap } from 'rxjs/operators';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,7 +17,7 @@ import { CommonService } from 'src/services/common.service';
 @Component({
   selector: 'app-build-pc-modal',
   templateUrl: './add-build-pc-modal.component.html',
-  styleUrls: ['add-build-pc-modal.component.css']
+  styleUrls: ['add-build-pc-modal.component.css'],
 })
 export class AddBuildPCModalComponent implements OnInit, OnDestroy {
   public pagination: PaginationValue = { page: 1, pageSize: 20 };

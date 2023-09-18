@@ -455,7 +455,6 @@ span {
     width: 100px;
 }
 
-
 /*build pc mobile*/
 @media screen and (max-width: 768px) {
     .table tr td.att-name {
