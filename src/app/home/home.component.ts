@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
   public listProductSales: any;
   public listProductIsNew: any;
   public headerBanner: any;
+  public leftBanner: any;
+  public rightlBanner: any;
   public listProductIsHot: any;
   public allMenu : any;
   public activatedRoute: ActivatedRoute;
@@ -443,10 +445,10 @@ export class HomeComponent implements OnInit {
               this.headerBanner = item;
             }
             if(item.position.toLowerCase() ==="left"){
-
+              this.leftBanner = item;
             }
             if(item.position.toLowerCase() ==="right"){
-
+              this.rightlBanner = item;
             }
           })
         }

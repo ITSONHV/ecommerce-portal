@@ -1,6 +1,16 @@
 <app-slider></app-slider>
 <!-- service section -->
 <ng-container *ngIf="isLoadComplete">
+  <div class="imagebanner1fix">
+    <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
+    [src]="(leftBanner) && (urlImg + leftBanner.pathImage)" alt="HTML template"></a>
+  </div>
+  <div class="imagebanner2fix">
+    <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
+    [src]="(leftBanner) && (urlImg + leftBanner.pathImage)" alt="HTML template"></a>
+  </div>
+
+
   <div class="container">
     <div class="row">
       <div class="block__header" style="margin-top: 45px;">
