@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
   public listProductSales: any;
   public listProductIsNew: any;
   public headerBanner: any;
-  public leftBanner: any;
-  public rightlBanner: any;
+
+  public centerBanner: any;
   public listProductIsHot: any;
   public allMenu : any;
   public activatedRoute: ActivatedRoute;
@@ -437,18 +437,21 @@ export class HomeComponent implements OnInit {
   }
   getBanners(){
     this.spinner.show();
-    this._svc.getBanners(3).subscribe(
+    this._svc.getBanners(4).subscribe(
       (data: any)=>{
         if(data.data.length > 0){
             data.data.filter((item : any) => {
             if(item.position.toLowerCase() === "top"){
               this.headerBanner = item;
             }
-            if(item.position.toLowerCase() ==="left"){
-              this.leftBanner = item;
-            }
-            if(item.position.toLowerCase() ==="right"){
-              this.rightlBanner = item;
+            // if(item.position.toLowerCase() ==="left"){
+            //   this.leftBanner = item;
+            // }
+            // if(item.position.toLowerCase() ==="right"){
+            //   this.rightlBanner = item;
+            // }
+            if(item.position.toLowerCase() ==="center"){
+              this.centerBanner = item;
             }
           })
         }

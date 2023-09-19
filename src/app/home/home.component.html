@@ -1,14 +1,6 @@
 <app-slider></app-slider>
 <!-- service section -->
 <ng-container *ngIf="isLoadComplete">
-  <div class="imagebanner1fix">
-    <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
-    [src]="(leftBanner) && (urlImg + leftBanner.pathImage)" alt="HTML template"></a>
-  </div>
-  <div class="imagebanner2fix">
-    <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
-    [src]="(leftBanner) && (urlImg + leftBanner.pathImage)" alt="HTML template"></a>
-  </div>
 
 
   <div class="container">
@@ -22,7 +14,7 @@
           <div class="jtv-banner3-inner" style="text-align: center;">
             <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
                 [src]="(headerBanner) && (urlImg + headerBanner.pathImage)" alt="HTML template"
-                style="max-height: 338px;height: 338px;"></a>
+                style="max-height: 370px;height: 396px;"></a>
             <div class="hover_content">
             </div>
           </div>
@@ -78,6 +70,13 @@
       </div>
     </div>
   </div>
+  <div class="container" *ngIf="centerBanner">
+    <div class="home-tab">
+    <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
+      [src]="(centerBanner) && (urlImg + centerBanner.pathImage)" alt="Banner right"></a>
+    </div>
+  </div>
+
 
   <!-- All products-->
   <div class="container">
@@ -85,15 +84,14 @@
       <div class="block__header">
         <h2 class="block__header__title">SẢN PHẨM BÁN CHẠY</h2>
       </div>
-            <div *ngIf="this.listProductBestSelling">
-              <app-product-recent [listProduct]="this.listProductBestSelling?.data"
-                [isAutoPlay]="false"></app-product-recent>
+      <div *ngIf="this.listProductBestSelling">
+        <app-product-recent [listProduct]="this.listProductBestSelling?.data" [isAutoPlay]="false"></app-product-recent>
       </div>
     </div>
   </div>
   <div class="container">
     <div class="row home-tab">
-      <div class="col-md-12 text-center" >
+      <div class="col-md-12 text-center">
         <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 2}" class="but_medium2"><i
             class="fa fa-shopping-cart"></i>&nbsp; XEM THÊM</a>
       </div>
@@ -101,15 +99,14 @@
   </div>
   <div class="container">
     <div class="home-tab">
-    <div class="block__header">
-      <h2 class="block__header__title">SẢN PHẨM MỚI</h2>
+      <div class="block__header">
+        <h2 class="block__header__title">SẢN PHẨM MỚI</h2>
+      </div>
     </div>
-  </div>
     <div>
 
-              <div *ngIf="this.listProductIsNew">
-                <app-product-recent [listProduct]="this.listProductIsNew.data"
-                  [isAutoPlay]="false"></app-product-recent>
+      <div *ngIf="this.listProductIsNew">
+        <app-product-recent [listProduct]="this.listProductIsNew.data" [isAutoPlay]="false"></app-product-recent>
       </div>
     </div>
   </div>
@@ -123,15 +120,14 @@
   </div>
   <div class="container">
     <div class="home-tab">
-    <div class="block__header">
-      <h2 class="block__header__title">SẢN PHẨM NỔI BẬT</h2>
+      <div class="block__header">
+        <h2 class="block__header__title">SẢN PHẨM NỔI BẬT</h2>
+      </div>
     </div>
-  </div>
-            <div class="">
-              <div *ngIf="this.listProductIsHot">
-                <app-product-recent [listProduct]="this.listProductIsHot?.data"
-                  [isAutoPlay]="false"></app-product-recent>
-        
+    <div class="">
+      <div *ngIf="this.listProductIsHot">
+        <app-product-recent [listProduct]="this.listProductIsHot?.data" [isAutoPlay]="false"></app-product-recent>
+
       </div>
     </div>
   </div>
@@ -156,7 +152,8 @@
                   [src]="urlImg + item.imageUrl" alt="{{item.categoryName}}"></a>
               <h4><a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)">{{item.categoryName}}</a>
               </h4>
-              <a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)" class="read-more">Xem ngay</a>
+              <a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)" class="read-more">Xem
+                ngay</a>
             </div>
           </div>
         </div>
@@ -209,8 +206,6 @@
     </div>
   </div>
   </div> -->
-
-
 </ng-container>
 <app-quick-view (sendEventToParent)="listenEventFromChild($event)" *ngIf="isShowQuickView"
   productSlug="{{this.productSlugToChild}}"></app-quick-view>

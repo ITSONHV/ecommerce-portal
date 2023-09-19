@@ -13,6 +13,15 @@
         </li>
     </ul>
 </div>
+<div class="imagebanner1fix huver">
+    <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
+        [src]="(leftBanner) && (urlImg + leftBanner.pathImage)" alt="Banner left"></a>
+  </div>
+  <div class="imagebanner2fix huver">
+    <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
+        [src]="(leftBanner) && (urlImg + leftBanner.pathImage)" alt="Banner right"></a>
+  </div>
+
 <div id="page" [style.left]="isShowMenu ? '250px' : '0px'">
     <app-header ></app-header>
     <app-menu-top (sendEventToParent)="listenEventFromChild($event)"></app-menu-top>

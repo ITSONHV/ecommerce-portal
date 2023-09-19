@@ -104,25 +104,3 @@
 
 }
 
-.imagebanner1fix {
-	left: 325.5px;
-    z-index: 9999;
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.imagebanner2fix {
-    z-index: 9999;
-    position: fixed;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-}
-@media screen and (max-width: 1480px) {
-
-	.imagebanner1fix, .imagebanner2fix{
-		display: none;
-	}
-}

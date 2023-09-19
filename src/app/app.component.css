@@ -49,3 +49,42 @@ body {
     font-family: Chakra Petch;
     font-size: 14px;
 }
+
+/*BANNER*/
+
+.imagebanner1fix {
+    z-index: 9999;
+    position: fixed;
+    /* left: 0; */
+    top: 50%;
+	padding-left: calc(47vw - 703px);
+    transform: translateY(-50%);
+}
+
+.imagebanner2fix {
+    z-index: 9999;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+	padding-right: calc(47vw - 703px);
+}
+
+.imagebanner1fix.huver, .imagebanner2fix.huver {
+	transition: 0.3s all ease; }
+  
+  .imagebanner1fix.huver:hover {
+	left: 0 !important;
+	transition: 0.3s all ease; }
+  
+  .imagebanner2fix.huver:hover {
+	right: 0 !important;
+	transition: 0.3s all ease; }
+  
+
+@media screen and (max-width: 1480px) {
+
+	.imagebanner1fix, .imagebanner2fix{
+		display: none;
+	}
+}

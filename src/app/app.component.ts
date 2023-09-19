@@ -18,9 +18,9 @@ export class AppComponent implements OnInit  {
   isShowMenu = false;
   isShowIconMenuChild = false;
   allMenu : any;
-  showHeader = true;
-  showSidebar = true;
-  showFooter = true;
+  public leftBanner: any;
+  public rightlBanner: any;
+  public urlImg: string = environment.urlImg;
   public pageId = environment.pageId;
   @HostListener('window:resize', ['$event'])
   onResize(event : any) {
@@ -69,12 +69,13 @@ export class AppComponent implements OnInit  {
     private router: Router, 
     @Inject(DOCUMENT) private document: Document,
     private spinner: NgxSpinnerService,
-
+    private _svc: MainService,
     private facebookService: FacebookService
 
     ){}
   ngOnInit(): void {
     this.loadMenuToMobile();
+    this.getBanners();
     this.initFacebookService();
     // this.router.events.subscribe(event => {
     //   if (event instanceof NavigationEnd) {
@@ -144,6 +145,31 @@ export class AppComponent implements OnInit  {
     this.listenEventFromChild(true);
     event.preventDefault();
   }
+
+  getBanners(){
+    this.spinner.show();
+    this._svc.getBanners(4).subscribe(
+      (data: any)=>{
+        if(data.data.length > 0){
+            data.data.filter((item : any) => {
+            // if(item.position.toLowerCase() === "top"){
+            //   this.headerBanner = item;
+            // }
+            if(item.position.toLowerCase() ==="left"){
+              this.leftBanner = item;
+            }
+            if(item.position.toLowerCase() ==="right"){
+              this.rightlBanner = item;
+            }
+            // if(item.position.toLowerCase() ==="center"){
+            //   this.centerBanner = item;
+            // }
+          })
+        }
+      }
+    )
+  }
+
   onActivate(event: any) {
     window.scroll(0, 0);
   }
