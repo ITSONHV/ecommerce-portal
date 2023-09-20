@@ -99,6 +99,11 @@
 	margin-top: 0px;
 }
 
+.home-tab-banner {
+	padding: 0px;
+	margin-bottom: 4px;
+	margin-top: 30px;
+}
 
 @media screen and (max-width: 1024px) {
 

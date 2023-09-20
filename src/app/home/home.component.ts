@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   public centerBanner: any;
   public listProductIsHot: any;
-  public allMenu : any;
+  public allMenu: any;
   public activatedRoute: ActivatedRoute;
   public productSlugToChild: string;
   @Input() modalOpen: boolean;
@@ -38,11 +38,11 @@ export class HomeComponent implements OnInit {
   slideConfigProductSales = {
     "slidesToShow": 3,
     "slidesToScroll": 3,
-    "autoplay": true ,
+    "autoplay": true,
     "autoplaySpeed": 3000,
     "infinity": true,
     "pauseOnFocus": true,
-    "speed" : 3000,
+    "speed": 3000,
     "pauseOnHover": true,
     "swipeToSlide": false,
     // "variableWidth": false,
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
           "arrows": false,
           "centerMode": false,
           "slidesToShow": 2,
-           "centerPadding": 0,
+          "centerPadding": 0,
         },
       },
       {
@@ -63,8 +63,8 @@ export class HomeComponent implements OnInit {
         "settings": {
           "arrows": false,
           "centerMode": false,
-          "slidesToShow": 2, 
-            "centerPadding": 0,
+          "slidesToShow": 2,
+          "centerPadding": 0,
         },
       },
     ],
@@ -75,12 +75,12 @@ export class HomeComponent implements OnInit {
     mouseDrag: true,
     touchDrag: false,
     pullDrag: false,
-    items:6,
+    items: 6,
     dots: false,
-    margin:10,
+    margin: 10,
     autoplayTimeout: 3000,
     autoplaySpeed: 1000,
-    autoplay:  false ,
+    autoplay: false,
     navSpeed: 1000,
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
@@ -108,16 +108,16 @@ export class HomeComponent implements OnInit {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: false,
-    items:6,
+    items: 6,
     dots: false,
-    margin:10,
+    margin: 10,
     autoplayTimeout: 4000,
     autoplaySpeed: 3000,
-    autoplay:true,
+    autoplay: true,
     navSpeed: 3000,
     autoplayHoverPause: true,
-    autoWidth:true,
-    autoHeight:true,
+    autoWidth: true,
+    autoHeight: true,
 
     navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
     responsive: {
@@ -147,7 +147,7 @@ export class HomeComponent implements OnInit {
     pullDrag: false,
     items: 4,
     dots: false,
-    margin:10,
+    margin: 10,
     autoplayTimeout: 3000,
     autoplaySpeed: 2000,
     autoplay: false,
@@ -180,7 +180,7 @@ export class HomeComponent implements OnInit {
     pullDrag: false,
     items: 4,
     dots: false,
-    margin:10,
+    margin: 10,
     autoplayTimeout: 3000,
     autoplaySpeed: 2000,
     autoplay: false,
@@ -213,7 +213,7 @@ export class HomeComponent implements OnInit {
     pullDrag: false,
     items: 8,
     dots: false,
-    margin:10,
+    margin: 10,
     autoplayTimeout: 3000,
     autoplaySpeed: 1000,
     autoplay: true,
@@ -240,17 +240,17 @@ export class HomeComponent implements OnInit {
     },
     nav: false
   };
-  pathBanner="./../assets/images/sub1.jpg";
-  constructor(private _svc: MainService, 
-    private spinner: NgxSpinnerService, 
+  pathBanner = "./../assets/images/sub1.jpg";
+  constructor(private _svc: MainService,
+    private spinner: NgxSpinnerService,
     public elementRef: ElementRef,
     private meta: Meta,
     private _routerActive: ActivatedRoute,
     private router: Router,
     private titleService: Title,
     private _swal: SwalService,
-    private encryptSvc : EncryptService
-    ) {
+    private encryptSvc: EncryptService
+  ) {
   }
   ngOnInit(): void {
     this.titleService.setTitle('DMC Computer');
@@ -274,7 +274,7 @@ export class HomeComponent implements OnInit {
     this._svc.getProductIsBestSellingPages(6).subscribe(
       (respones: ObjectModel) => {
         this.listProductBestSelling = respones.data;
-      this.spinner.hide();
+        this.spinner.hide();
       },
       (err) => {
         console.log(err);
@@ -292,7 +292,7 @@ export class HomeComponent implements OnInit {
       },
       (err) => {
         console.log(err);
-       this.spinner.hide();
+        this.spinner.hide();
       }
     );
   }
@@ -301,7 +301,7 @@ export class HomeComponent implements OnInit {
     this._svc.getProductBestDiscountPages().subscribe(
       (respones: ObjectModel) => {
         this.listProductSales = respones.data;
-      this.spinner.hide();
+        this.spinner.hide();
       },
       (err) => {
         console.log(err);
@@ -315,7 +315,7 @@ export class HomeComponent implements OnInit {
     this._svc.getProductIsHotPages().subscribe(
       (respones: ObjectModel) => {
         this.listProductIsHot = respones.data;
-      this.spinner.hide();
+        this.spinner.hide();
       },
       (err) => {
         console.log(err);
@@ -329,7 +329,7 @@ export class HomeComponent implements OnInit {
     this._svc.getProductIsNewPages().subscribe(
       (respones: ObjectModel) => {
         this.listProductIsNew = respones.data;
-      this.spinner.hide();
+        this.spinner.hide();
       },
       (err) => {
         console.log(err);
@@ -341,9 +341,9 @@ export class HomeComponent implements OnInit {
     return new Array(i);
   }
   handleViewDetailProduct(event: any, product: any): void {
-    this.meta.updateTag({ name: 'description', content: product.seoDescription ?? ""});
+    this.meta.updateTag({ name: 'description', content: product.seoDescription ?? "" });
     this.titleService.setTitle("DM Computer");
-    this.meta.updateTag({ name: 'keywords', content: product.seoKeyword ?? ""});
+    this.meta.updateTag({ name: 'keywords', content: product.seoKeyword ?? "" });
     const queryParams: Params = { slug: product.productNameSlug };
     this.router.navigate(
       ['chi-tiet'],
@@ -359,10 +359,10 @@ export class HomeComponent implements OnInit {
     this.productSlugToChild = itemProduct.productNameSlug;
     this.isShowQuickView = !this.isShowQuickView;
   }
-  listenEventFromChild(check: boolean) : void { 
+  listenEventFromChild(check: boolean): void {
     this.isShowQuickView = check;
   }
-  addToShopingCard(product:ProductModel): void{
+  addToShopingCard(product: ProductModel): void {
     this._svc.addToCart(product, 1);
     this.showAddCartSuccess();
   }
@@ -387,7 +387,7 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
   }
 
-  addToFavorite(product:ProductModel): void{
+  addToFavorite(product: ProductModel): void {
     this._svc.addToFavorite(product);
     this.showAddCartFavorite();
   }
@@ -395,11 +395,11 @@ export class HomeComponent implements OnInit {
   getMenu() {
     this._svc.getCategories().subscribe(
       (data: any) => {
-        let menuObject :any = { ...data }.data;
+        let menuObject: any = { ...data }.data;
         this.allMenu = menuObject.filter((item: any) => {
           return item.categoryParent == 0 || item.categoryParent == null
         });
-        let subMenu :any= menuObject.filter((item: any) => {
+        let subMenu: any = menuObject.filter((item: any) => {
           return (item.categoryParent != 0 && item.categoryParent != null)
         });
         this.allMenu.forEach((parent: any) => {
@@ -429,34 +429,27 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  showAddCartSuccess(){
+  showAddCartSuccess() {
     this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào giỏ hàng.", false);
   }
-  showAddCartFavorite(){
+  showAddCartFavorite() {
     this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào yêu thích.", false);
   }
-  getBanners(){
+  getBanners() {
     this.spinner.show();
-    this._svc.getBanners(4).subscribe(
-      (data: any)=>{
-        if(data.data.length > 0){
-            data.data.filter((item : any) => {
-            if(item.position.toLowerCase() === "top"){
-              this.headerBanner = item;
-            }
-            // if(item.position.toLowerCase() ==="left"){
-            //   this.leftBanner = item;
-            // }
-            // if(item.position.toLowerCase() ==="right"){
-            //   this.rightlBanner = item;
-            // }
-            if(item.position.toLowerCase() ==="center"){
-              this.centerBanner = item;
-            }
-          })
+    var data = this._svc.getBannersFromLocalStorage();
+
+    if (data.length > 0) {
+      data.filter((item: any) => {
+        if (item.position.toLowerCase() === "top") {
+          this.headerBanner = item;
         }
-        console.log(this.headerBanner);
-      }
-    )
+        if (item.position.toLowerCase() === "center") {
+          this.centerBanner = item;
+        }
+      })
+    }
+    console.log(this.headerBanner);
+
   }
 }

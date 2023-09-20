@@ -281,7 +281,7 @@
 /**/
 
 
-.custom-dialog-container2{
+.custom-dialog-container2 {
     width: 860px !important;
     height: 860px !important;
 }
@@ -302,6 +302,28 @@
         line-height: 22px;
         font-family: Arial, Helvetica, sans-serif;
     }
+
+    .product .percent,
+    .product-img .percent {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: #f9495f;
+        color: #fff;
+        font-weight: 600;
+        font-size: 10px;
+        width: 35px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: skew(-12deg);
+        margin-left: -5px;
+        z-index: 999;
+    }
+    /* .product-inline-table{
+        display: inline-table;
+    } */
 
     .header-title {
         font-size: 14px;

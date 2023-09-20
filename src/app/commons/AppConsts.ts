@@ -1,5 +1,6 @@
 export  const AppConsts = {
      myCart: 'itemsCart',
      myFavorite: 'itemsFavorite',
-     buildPC: 'buildPC'
+     buildPC: 'buildPC',
+     banner: 'banners'
 }

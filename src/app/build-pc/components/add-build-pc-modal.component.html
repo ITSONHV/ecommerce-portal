@@ -15,9 +15,9 @@
   <div class="coll-build__search">
     <h4 class="header-title">{{data.title}}</h4>
 		<div class="pc-search__form">
-			<form action="/search">
+			<form [formGroup]="searchGroup">
 				<input type="hidden" name="type" value="product">
-				<input required="" autocomplete="off" type="text" name="q" placeholder="Tìm kiếm sản phẩm">
+				<input required="" autocomplete="off" type="text" name="q" formControlName="searchTerm" placeholder="Tìm kiếm sản phẩm">
 			</form>
 		</div>
     <a (click)="closepopup()" ><i class="fa fa-window-close"></i></a>
@@ -48,11 +48,11 @@
 
                     </a>
                   </div>
-                  <div class="product-shop">
-                   
-                    <div class="price-box">
-                     <h1 class="product-name"><a [title]="item.productName">{{item.productName}}</a></h1>
-                   
+                
+                  <div class="product-shop">     
+                    <div class="price-box"><a  class="product-name product-inline-table" [title]="item.productName">{{item.productName}}</a>
+                    </div>         
+                    <div class="price-box">                 
                       <p class="special-price"> <span class="price-label"></span> <span class="price"> Giá:
                           {{item.promotionPrice | currency: "VND"}}</span> </p>
                       <p class="old-price" *ngIf="item.promotionPrice !== 0"> <span class="price-label"></span> <span

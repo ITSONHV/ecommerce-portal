@@ -151,19 +151,15 @@ export class AppComponent implements OnInit  {
     this._svc.getBanners(4).subscribe(
       (data: any)=>{
         if(data.data.length > 0){
+
+            this._svc.setBannersToLocalStorage(data.data);
             data.data.filter((item : any) => {
-            // if(item.position.toLowerCase() === "top"){
-            //   this.headerBanner = item;
-            // }
             if(item.position.toLowerCase() ==="left"){
               this.leftBanner = item;
             }
             if(item.position.toLowerCase() ==="right"){
               this.rightlBanner = item;
             }
-            // if(item.position.toLowerCase() ==="center"){
-            //   this.centerBanner = item;
-            // }
           })
         }
       }

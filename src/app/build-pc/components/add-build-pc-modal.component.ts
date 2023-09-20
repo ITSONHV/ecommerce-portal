@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnDestroy, OnInit ,ViewEncapsulation} from '@angular/core';
 import { of, Subscription } from 'rxjs';
-import { catchError, delay, finalize, first, tap } from 'rxjs/operators';
+import { catchError, debounceTime, delay, distinctUntilChanged, finalize, first, tap } from 'rxjs/operators';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
@@ -28,6 +28,7 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
   public minPrice = 0;
   public maxPrice = 0;
   public searchKey = '';
+  searchGroup: FormGroup;
   closemessage = 'closed using directive';
   public urlImg: string = environment.urlImg;
   public listProduct: any = [];
@@ -45,6 +46,7 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
   ngOnInit(): void {
     this.loadForm();
+    this.searchForm();
     this.onPageChange(this.pagination);
     this.paginationControl.valueChanges.subscribe(x => {
       this.onPageChange(x);
@@ -80,7 +82,6 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
       '0',
       this.data.code).subscribe(
         (respones: ApiPagingResponse<PagingModel>) => {
-
           this.totalRecords = respones.data.total;
           this.listProduct = respones.data.data;
           this.visibleItems = { items: respones.data.data, total: respones.data.total };
@@ -93,6 +94,49 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
           this.spinner.hide();
         });
   }
+
+  searchForm() {
+    this.searchGroup = this.fb.group({
+      searchTerm: [''],
+    });
+    const searchEvent = this.searchGroup.controls['searchTerm'].valueChanges
+      .pipe(
+        /*
+  The user can type quite quickly in the input box, and that could trigger a lot of server requests. With this operator,
+  we are limiting the amount of server requests emitted to a maximum of one every 150ms
+  */
+        debounceTime(500),
+        distinctUntilChanged()
+      )
+      .subscribe((val) => 
+      {
+      //  this.search(val)
+      let currentPage = 1;
+      this._svc.getProductListForBuildPC(currentPage,
+        this.pagination.pageSize,
+        val,
+        this.minPrice ?? 0,
+        this.maxPrice ?? 0,
+        '',
+        1,
+        '0',
+        this.data.code).subscribe(
+          (respones: ApiPagingResponse<PagingModel>) => {
+            this.totalRecords = respones.data.total;
+            this.listProduct = respones.data.data;
+            this.visibleItems = { items: respones.data.data, total: respones.data.total };
+            this.isLoading = true;
+            //window.scroll(0, 50); // scroll lên 1 tý sau khi change value
+            this.spinner.hide();
+          },
+          (err: any) => {
+            console.log(err);
+            this.spinner.hide();
+          });
+      });
+    this.subscriptions.push(searchEvent);
+  }
+
   addToBuildPC(product: ProductModel): void {
     this.commonSvc.addToBuidPC(this.data.code, 1, product);
     //this. showAddCartFavorite();

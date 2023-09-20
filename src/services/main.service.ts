@@ -611,9 +611,29 @@ export class MainService implements OnInit{
     getBanners(limit: number): Observable<ResponseBase> { 
         return this.http.get<any>(`${this.urlApi}${AppConfigs.urls.getBanners}${limit}`).pipe(
             mergeMap((response_: any) => {
+                
                 return of<ResponseBase>(<ResponseBase>response_);
             })
         )
+    }
+
+    setBannersToLocalStorage(data: any){
+        localStorage.setItem(AppConsts.banner, JSON.stringify(data));
+    }
+
+    getBannersFromLocalStorage(){
+        try{
+            debugger;
+            if (localStorage.getItem(AppConsts.banner) !== null &&
+            localStorage.getItem(AppConsts.banner)?.length != 0) {
+            var obj = JSON.parse(localStorage.getItem(AppConsts.banner) ?? "");
+            return obj ?? [];
+        }
+        }catch{
+            console.log("banners err");
+            localStorage.removeItem(AppConsts.banner);
+            return []
+        }
     }
 
     getServerErrorMessage(error: HttpErrorResponse): string {
