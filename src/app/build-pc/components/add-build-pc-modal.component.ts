@@ -110,7 +110,7 @@ export class AddBuildPCModalComponent implements OnInit, OnDestroy {
       )
       .subscribe((val) => 
       {
-      //  this.search(val)
+      this.searchKey = val;
       let currentPage = 1;
       this._svc.getProductListForBuildPC(currentPage,
         this.pagination.pageSize,

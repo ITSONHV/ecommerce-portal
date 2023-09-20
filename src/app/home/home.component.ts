@@ -439,7 +439,7 @@ export class HomeComponent implements OnInit {
     this.spinner.show();
     var data = this._svc.getBannersFromLocalStorage();
 
-    if (data.length > 0) {
+    if (data && data.length > 0) {
       data.filter((item: any) => {
         if (item.position.toLowerCase() === "top") {
           this.headerBanner = item;

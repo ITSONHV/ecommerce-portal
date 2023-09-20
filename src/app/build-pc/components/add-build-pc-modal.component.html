@@ -35,7 +35,7 @@
           <div class="shop-inner">
             
             <div class="product-list-area">
-              <ul class="products-list" id="products-list">
+              <ul class="products-list" id="products-list" style="line-height: 1.1;">
                 <ng-container *ngIf="isLoading && (visibleItems.items.length == 0)">
                   <p>Không có sản phẩm nào phù hợp.</p>
                 </ng-container>
@@ -48,10 +48,10 @@
 
                     </a>
                   </div>
-                
+                  <div class="product-shop">  
+                    <a  class="product-name product-inline-table" [title]="item.productName">{{item.productName}}</a>
+                  </div>
                   <div class="product-shop">     
-                    <div class="price-box"><a  class="product-name product-inline-table" [title]="item.productName">{{item.productName}}</a>
-                    </div>         
                     <div class="price-box">                 
                       <p class="special-price"> <span class="price-label"></span> <span class="price"> Giá:
                           {{item.promotionPrice | currency: "VND"}}</span> </p>
@@ -65,12 +65,7 @@
                     <div class="actions">
 
                       <div class="add-cart-buttons"><button type="button" class="btn-add-cart btn-add-cart" (click)="addToBuildPC(item)">
-                          <svg width="13" style="vertical-align: sub;" height="16" viewBox="0 0 17 18" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                              d="M15.9187 9.83092L15.9187 8.16922L9.33085 8.16922L9.33085 1.58134H7.66915L7.66915 8.16922L1.08127 8.16922L1.08127 9.83092L7.66915 9.83092L7.66915 16.4188H9.33085L9.33085 9.83092L15.9187 9.83092Z"
-                              fill="white"></path>
-                          </svg>
+                      
                           Chọn
                         </button>
                       </div>
