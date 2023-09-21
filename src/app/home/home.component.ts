@@ -429,6 +429,17 @@ export class HomeComponent implements OnInit {
     )
   }
 
+  checkTrademarkUrl(url: any) {
+    if (url && url != '' && url != 'null' && url != undefined) { return this.baseUrl + url };
+
+    return "#";
+  }
+  checkBannerkUrl(url: any) {
+    if (url && url != '' && url != 'null' && url != undefined) { return this.baseUrl + url };
+
+    return "danh-muc-san-pham-g?typeStatus=1";
+  }
+
   showAddCartSuccess() {
     this._swal.toast(TYPE.SUCCESS, "Sản phẩm đã được thêm vào giỏ hàng.", false);
   }

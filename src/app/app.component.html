@@ -14,11 +14,11 @@
     </ul>
 </div>
 <div class="imagebanner1fix huver" *ngIf="leftBanner">
-    <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
+    <a href="{{checkBannerkUrl(leftBanner.urlTarget)}}"><img
         [src]="(leftBanner) && (urlImg + leftBanner.pathImage)" alt="Banner left"></a>
   </div>
   <div class="imagebanner2fix huver"  *ngIf="rightlBanner">
-    <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
+    <a href="{{checkBannerkUrl(rightlBanner.urlTarget)}}"><img
         [src]="(rightlBanner) && (urlImg + rightlBanner.pathImage)" alt="Banner right"></a>
   </div>
 

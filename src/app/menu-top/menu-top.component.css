@@ -32,3 +32,10 @@
 .menu-item .product {
     border: 1px solid #dddfe6 !important;
 }
+
+@media screen and (max-width: 1200px) {
+    .hidden-sos{
+        display: none;;
+    }
+    
+}

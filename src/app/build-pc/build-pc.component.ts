@@ -68,8 +68,7 @@ export class BuildPCComponent {
   }
 
   onChangeQuantityItemBuildPC(code :number, event: any){
-    debugger;
-    this.commonSvc.addQuantiyuBuidPC(code, event.target.value);
+    this.commonSvc.addQuantiyuBuidPC(code, Number(event.target.value));
   }
 
   addItemBuildToCard() {
@@ -79,11 +78,12 @@ export class BuildPCComponent {
         id : element.productid,
         image : element.image,
         price : element.promotionPrice,
-        quantity : element.quantity,
+        quantity : Number(element.quantity),
         productNameSlug : element.productNameSlug,
         productName : element.productName
       }
-      this._svc.addToCartWithCart(card,element.quantity);
+      debugger;
+      this._svc.addToCartWithCart(card,Number(element.quantity));
     });
 
     this.router.navigate(

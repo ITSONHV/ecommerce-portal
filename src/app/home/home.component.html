@@ -9,10 +9,10 @@
         <h2 class="block__header__title">ƯU ĐÃI ĐẶC BIỆT</h2>
       </div>
       <!-- Banner -->
-      <div class="col-md-4 top-banner hidden-sm">
+      <div class="col-md-4 top-banner hidden-sm" *ngIf="headerBanner">
         <div class="jtv-banner3">
           <div class="jtv-banner3-inner" style="text-align: center;">
-            <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
+            <a href="{{checkBannerkUrl(headerBanner.urlTarget)}}"><img
                 [src]="(headerBanner) && (urlImg + headerBanner.pathImage)" alt="HTML template"
                 style="max-height: 370px;height: 396px;"></a>
             <div class="hover_content">
@@ -72,7 +72,7 @@
   </div>
   <div class="container" *ngIf="centerBanner">
     <div class="home-tab-banner">
-    <a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{typeStatus: 1}"><img
+    <a href="{{checkBannerkUrl(centerBanner.urlTarget)}}"><img
       [src]="(centerBanner) && (urlImg + centerBanner.pathImage)" alt="Banner right"></a>
     </div>
   </div>
@@ -176,7 +176,7 @@
                 <owl-carousel-o [options]="customBrand">
                   <ng-container *ngFor="let item of listTrademark">
                     <ng-template carouselSlide [id]="item.id.toString()">
-                      <div class="item"><a href="{{this.baseUrl + item.url}}"><img [src]="urlImg + item.imageUrl"
+                      <div class="item"><a href="{{checkTrademarkUrl(item.url)}}"><img [src]="urlImg + item.imageUrl"
                             alt="Image"></a> </div>
                     </ng-template>
                   </ng-container>

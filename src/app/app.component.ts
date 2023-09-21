@@ -21,6 +21,7 @@ export class AppComponent implements OnInit  {
   public leftBanner: any;
   public rightlBanner: any;
   public urlImg: string = environment.urlImg;
+  public baseUrl: string = environment.baseUrl;
   public pageId = environment.pageId;
   @HostListener('window:resize', ['$event'])
   onResize(event : any) {
@@ -146,16 +147,11 @@ export class AppComponent implements OnInit  {
     event.preventDefault();
   }
 
-  // actionRedirect(url: any){
-  //   this.router.navigate(
-  //     ['danh-muc-san-pham-g'],
-  //     {
-  //       relativeTo: this.activatedRoute,
-  //       queryParams: null,
-  //       queryParamsHandling: 'merge'
-  //     }
-  //   )
-  // }
+  checkBannerkUrl(url: any) {
+    if (url && url != '' && url != 'null' && url != undefined) { return this.baseUrl + url };
+
+    return "danh-muc-san-pham-g?typeStatus=1";
+  }
 
   getBanners(){
     this.spinner.show();
