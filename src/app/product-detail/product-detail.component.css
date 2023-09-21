@@ -357,3 +357,77 @@
     justify-content: space-between;
     margin-top: 12px;  flex-direction: row-reverse;
 }
+
+
+/*REview*/
+.comments-wrapper {
+	padding: 15px 0px;
+}
+.commentlist {
+	padding: 0;
+	margin: 0;
+}
+.commentlist li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.commentlist li .comment-wrapper {
+	position: relative;
+	padding: 0 20px 17px 0px;
+	margin-bottom: 25px;
+	border-bottom: 1px dotted #c9c8c5;
+}
+.commentlist li:last-child .comment-wrapper {
+	position: relative;
+	padding: 0 20px 5px 0px;
+	margin-bottom: 0px;
+	border-bottom: 0px dotted #c9c8c5;
+}
+.comments-form-wrapper {
+	margin-top: 25px
+}
+.comment-form .field{ display:inline-block; width:45%; margin-right:18px; margin-bottom:10px;}
+.comment-form .field.aw-blog-comment-area{ display:inline-block; width:92.5%;}
+/* Comment Author */
+.commentlist li .gravatar {
+	display: inline-block;
+	float: left;
+	margin-right: 10px;
+}
+.commentlist li .gravatar img {
+	float: left;
+	border: 1px solid #fff;
+	-webkit-transition: all 0.1s ease-out;
+	-moz-transition: all 0.1s ease-out;
+	transition: all 0.1s ease-out;
+}
+.commentlist li .gravatar img:hover {
+	border-color: #6E9B76;
+}
+.commentlist li .comment-author {
+	font-size: 15px;
+	color: #222; font-weight:600;
+}
+.commentlist li .comment-meta {
+	color: #999;
+	margin-bottom: .3em;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-style: italic;
+}
+.commentlist li .comment-reply {
+	text-align: right;
+	padding-top: 5px;
+}
+.commentlist li .comment-reply a {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #EB593C;
+	font-style: italic;
+}
+.commentlist li .comment-reply a:hover {
+	color: #eb593c;
+}
+.commentlist .children {
+	margin: 0;
+	padding: 0 0 0 80px;
+}

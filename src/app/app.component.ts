@@ -146,6 +146,17 @@ export class AppComponent implements OnInit  {
     event.preventDefault();
   }
 
+  // actionRedirect(url: any){
+  //   this.router.navigate(
+  //     ['danh-muc-san-pham-g'],
+  //     {
+  //       relativeTo: this.activatedRoute,
+  //       queryParams: null,
+  //       queryParamsHandling: 'merge'
+  //     }
+  //   )
+  // }
+
   getBanners(){
     this.spinner.show();
     this._svc.getBanners(4).subscribe(

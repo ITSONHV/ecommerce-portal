@@ -143,13 +143,14 @@
     <div class="block__header home-tab">
       <h2 class="block__header__title">DANH MỤC SẢN PHẨM</h2>
     </div>
-    <div class="row" *ngIf="this.allMenu &&this.allMenu != '' ">
+    <div class="row" *ngIf="this.allMenu && this.allMenu != '' ">
       <ng-container *ngFor="let item of allMenu; let i= index; ">
         <div class="col-lg-4 col-sm-6" *ngIf="i < 6">
           <div class="">
             <div style="height: 144px;" ngClass="{{'single-categories '+ 'bg'+ i}}">
-              <a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)"><img
-                  [src]="urlImg + item.imageUrl" alt="{{item.categoryName}}"></a>
+              <a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)">
+                <img *ngIf="(item.imageUrl)" [src]="urlImg + item.imageUrl" alt="{{item.categoryName}}">
+                </a>
               <h4><a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)">{{item.categoryName}}</a>
               </h4>
               <a [routerLink]="['/danh-muc-san-pham-g']" (click)="handleMenu($event,item)" class="read-more">Xem

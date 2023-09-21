@@ -4,10 +4,11 @@
       <ul class="breadcrumb__list">
         <li><a href="/"><i aria-hidden="true" class="fa fa-home"></i></a> <i aria-hidden="true"
             class="fa fa-angle-right"></i></li>
-        <li><a [routerLink]="['/']" routerLinkActive="router-link-active">Trang chủ</a> <i aria-hidden="true" class="fa fa-angle-right"></i></li>
-        <li><a (click)="redirecUrl($event,product?.categorySlug ?? '', '')">{{this.categoryName}}</a> <i aria-hidden="true"
+        <li><a [routerLink]="['/']" routerLinkActive="router-link-active">Trang chủ</a> <i aria-hidden="true"
             class="fa fa-angle-right"></i></li>
-        <li><a >{{product?.productName}}</a></li>
+        <li><a (click)="redirecUrl($event,product?.categorySlug ?? '', '')">{{this.categoryName}}</a> <i
+            aria-hidden="true" class="fa fa-angle-right"></i></li>
+        <li><a>{{product?.productName}}</a></li>
       </ul>
     </div>
     <!-- <div class="row">
@@ -37,11 +38,12 @@
                 rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" [src]="urlImg + imgfirst"
                   alt="products"> </a> </div>
             <div class="slide-images">
-              <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" style="    margin-top: 40px;">
+              <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                style="    margin-top: 40px;">
                 <div ngxSlickItem *ngFor="let item of product?.productImages ;  let i = index ;" class="slide">
                   <li><a (click)="changeImageLarge(item.id)" class='cloud-zoom-gallery'
-                      rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img style="border: 1px groove #f1e9ec;"
-                        [src]="urlImg + item.imageUrl" alt="Thumbnail 2" /></a></li>
+                      rel="useZoom: 'zoom1', smallImage: '{{urlImg + item.imageUrl}}' "><img
+                        style="border: 1px groove #f1e9ec;" [src]="urlImg + item.imageUrl" alt="Thumbnail 2" /></a></li>
                 </div>
               </ngx-slick-carousel>
 
@@ -97,7 +99,8 @@
             </div>
             <div *ngIf="product?.stock <= 0">
               <p class="status_stock">
-                <span class="status status1" ><i aria-hidden="true" class="fa fa-circle"></i> <a href="https://www.facebook.com/dangminhpc70/?ref=embed_page">Giá liên hệ</a></span>
+                <span class="status status1"><i aria-hidden="true" class="fa fa-circle"></i> <a
+                    href="https://www.facebook.com/dangminhpc70/?ref=embed_page">Giá liên hệ</a></span>
               </p>
             </div>
             <div class="product-variation">
@@ -138,12 +141,13 @@
               </ul>
             </div>
             <div class="block popular-tags-area " style="margin-top: 10px;">
-              <div class="sidebar-bar-title" >
+              <div class="sidebar-bar-title">
                 <h3> Tags</h3>
               </div>
               <div class="tag">
-                <ul >
-                  <li *ngFor="let item of product?.productTags"><a [routerLink]="['/danh-muc-san-pham-g']" [queryParams]="{searchKey: item}">{{item}}</a></li>
+                <ul>
+                  <li *ngFor="let item of product?.productTags"><a [routerLink]="['/danh-muc-san-pham-g']"
+                      [queryParams]="{searchKey: item}">{{item}}</a></li>
                 </ul>
               </div>
             </div>
@@ -184,7 +188,7 @@
                       <p>Không có đánh giá cho sản phẩm này.</p>
                     </ng-container>
 
-                    <ng-container *ngFor="let review of reviewsProducts; let i = index">
+                    <!-- <ng-container *ngFor="let review of reviewsProducts; let i = index">
                       <div [ngClass]=" i % 2 == 0 ? 'review-ratting background-review' : 'review-ratting'">
                         <p> {{review.content}}</p>
                         <div class="rating"><a>Đánh giá: </a>
@@ -195,7 +199,38 @@
                         </div>
                         <p class="author">Người dùng : {{review.name}}<small> {{review.createdDate}}</small> </p>
                       </div>
-                    </ng-container>
+                    </ng-container> -->
+
+                    <div class="comment-content">
+                      <div class="comments-wrapper">
+                        <ul class="commentlist">
+                          <ng-container *ngFor="let review of reviewsProducts; let i = index">
+                            <li class="comment">
+                              <div class="comment-wrapper">
+                                <div class="comment-author vcard">
+                                  <p class="gravatar"><a href="#"><img class="img-responsive" width="60" height="60"
+                                        alt="avatar" src="../../assets/images/avatar60x60.jpg"></a></p>
+                                  <span class="author" style="font-family: 'Poppins', sans-serif;"> {{review.name}}</span>
+                                </div>
+                                <div class="comment-meta">
+                                  <time datetime="2014-07-10T07:28:32+00:00" class="entry-date">
+                                    {{review.createdDate}}</time>
+                                  .
+                                </div>
+                                <div class="rating"><a>Đánh giá: </a>
+                                  <ng-container *ngIf="review.rate >= 0">
+                                    <i class="fa fa-star" *ngFor="let rate of counterRate(review.rate)"></i>
+                                    <i class="fa fa-star-o" *ngFor="let rate of counterRate(5 - review.rate)"></i>
+                                  </ng-container>
+                                </div>
+                                <div class="comment-body" style="font-family: 'Poppins', sans-serif;"> {{review.content}} </div>
+                              </div>
+                            </li>
+                          </ng-container>
+                        </ul>
+                      </div>
+
+                    </div>
 
                   </div>
                 </div>
@@ -432,8 +467,7 @@
             <div id="related-product-slider" class="product-flexslider hidden-buttons">
               <div class="slider-items slider-width-col4 fadeInUp">
                 <div *ngIf="this.productsRelate">
-                  <app-product-recent [listProduct]="this.productsRelate"
-                    [isAutoPlay]="false"></app-product-recent>
+                  <app-product-recent [listProduct]="this.productsRelate" [isAutoPlay]="false"></app-product-recent>
                 </div>
               </div>
             </div>
