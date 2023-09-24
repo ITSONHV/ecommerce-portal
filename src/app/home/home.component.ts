@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
       {
         "breakpoint": 768,
         "settings": {
-          "arrows": false,
+          "arrows": true,
           "centerMode": false,
           "slidesToShow": 2,
           "centerPadding": 0,
@@ -61,149 +61,13 @@ export class HomeComponent implements OnInit {
       {
         "breakpoint": 480,
         "settings": {
-          "arrows": false,
+          "arrows": true,
           "centerMode": false,
           "slidesToShow": 2,
           "centerPadding": 0,
         },
       },
     ],
-  };
-
-  public customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: false,
-    pullDrag: false,
-    items: 6,
-    dots: false,
-    margin: 10,
-    autoplayTimeout: 3000,
-    autoplaySpeed: 1000,
-    autoplay: false,
-    navSpeed: 1000,
-    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-    responsive: {
-      0: {
-        items: 2
-      },
-      400: {
-        items: 3
-      },
-      640: {
-        items: 4
-      },
-      900: {
-        items: 4
-      },
-      1024: {
-        items: 4
-      }
-    },
-    nav: false
-  };
-
-  public customBestSaleProduct: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: false,
-    items: 6,
-    dots: false,
-    margin: 10,
-    autoplayTimeout: 4000,
-    autoplaySpeed: 3000,
-    autoplay: true,
-    navSpeed: 3000,
-    autoplayHoverPause: true,
-    autoWidth: true,
-    autoHeight: true,
-
-    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-    responsive: {
-      0: {
-        items: 2
-      },
-      400: {
-        items: 3
-      },
-      640: {
-        items: 4
-      },
-      900: {
-        items: 4
-      },
-      1024: {
-        items: 4
-      }
-    },
-    nav: false
-  };
-
-  public customHotProduct: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: false,
-    items: 4,
-    dots: false,
-    margin: 10,
-    autoplayTimeout: 3000,
-    autoplaySpeed: 2000,
-    autoplay: false,
-    navSpeed: 2000,
-    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-    responsive: {
-      0: {
-        items: 2
-      },
-      400: {
-        items: 3
-      },
-      640: {
-        items: 4
-      },
-      900: {
-        items: 4
-      },
-      1024: {
-        items: 4
-      }
-    },
-    nav: false
-  };
-
-  public customNewProduct: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: false,
-    items: 4,
-    dots: false,
-    margin: 10,
-    autoplayTimeout: 3000,
-    autoplaySpeed: 2000,
-    autoplay: false,
-    navSpeed: 2000,
-    navText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-    responsive: {
-      0: {
-        items: 2
-      },
-      400: {
-        items: 3
-      },
-      640: {
-        items: 4
-      },
-      900: {
-        items: 4
-      },
-      1024: {
-        items: 4
-      }
-    },
-    nav: false
   };
 
   public customBrand: OwlOptions = {

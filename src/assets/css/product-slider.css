@@ -614,7 +614,7 @@
 .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
     outline: none;
     background:  #99a0ad;;
-    color: transparent;
+    color: transparent; 
 }
 .slick-prev:before, .slick-next:before {
     font-family: 'slick';
@@ -624,6 +624,7 @@
     opacity: 0.75;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+      cursor: pointer;
 }
 
 

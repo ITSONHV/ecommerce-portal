@@ -431,3 +431,21 @@
 	margin: 0;
 	padding: 0 0 0 80px;
 }
+
+.is-link{
+    color: #288ad6;
+    text-decoration: none;
+    font-weight: 700;
+    cursor: pointer !important;
+}
+
+.att-value > a{
+    cursor: auto;
+    
+}
+
+
+.att-value > a:hover{
+    color: #000;
+    
+}

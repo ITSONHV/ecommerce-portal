@@ -45,7 +45,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   public quantity = 1 ;
   public reviewsProducts : any;
   public productsRelate : any;
-
+  public baseUrl: string = environment.baseUrl;
   /* review*/
   reviewForm: FormGroup = new FormGroup({
     name: new FormControl(''),
@@ -196,7 +196,7 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
     );
   }
   getProductsRelate(categoryId : number){
-    this._svc.getProductPagesByCategoryId(categoryId).subscribe(
+    this._svc.getProductPagesByCategoryId(categoryId, this.product.id).subscribe(
       (respones: ObjectModel)=>{
         if(respones.hasOwnProperty("data")){
           const products = {...respones.data} as any;  
@@ -345,6 +345,13 @@ export class ProductDetailComponent implements OnInit, AfterViewInit {
   onReset(): void {
     this.submitted = false;
     this.reviewForm.reset();
+  }
+
+  GetUrlLink(url : string)
+  {
+    if (url && url != '' && url != 'null' && url != undefined) { return this.baseUrl + url };
+
+    return null;
   }
 
   redirecUrl(event: any, cate: string, searchKey: string){

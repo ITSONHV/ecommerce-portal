@@ -82,7 +82,6 @@ export class BuildPCComponent {
         productNameSlug : element.productNameSlug,
         productName : element.productName
       }
-      debugger;
       this._svc.addToCartWithCart(card,Number(element.quantity));
     });
 

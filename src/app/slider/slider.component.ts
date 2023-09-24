@@ -51,7 +51,7 @@ export class SliderComponent implements OnInit {
   ) {
   }
   ngOnInit(): void {
-    this.getSliderLimitFromService(3)//lấy giới hạn 3 hình, này cần config
+    this.getSliderLimitFromService(4)//lấy giới hạn 3 hình, này cần config
   }
 
   getSliderLimitFromService(limit: number) {
@@ -69,9 +69,8 @@ export class SliderComponent implements OnInit {
   }
   
   getUrl(url: string){
-    if(url != '')
+    if(url != '' && url != null)
     {
-
       return  `${this.baseUrl}${url}`
     }
   

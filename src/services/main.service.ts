@@ -144,8 +144,8 @@ export class MainService implements OnInit{
             )
     }
 
-    getProductPagesByCategoryId(categoryId: number): Observable<ObjectModel> {
-        var objReq = this._encrypt.encryptNoStringfy(JSON.stringify({ CategoryId : categoryId}));    
+    getProductPagesByCategoryId(categoryId: number, productIDRelate: number): Observable<ObjectModel> {
+        var objReq = this._encrypt.encryptNoStringfy(JSON.stringify({ CategoryId : categoryId, ProductID: productIDRelate}));    
         
         return this.http.get<any>(this.urlApi + AppConfigs.urls.getProductPages
             + "?HashKey=" + `${encodeURIComponent( objReq.HashKey)}`
@@ -623,7 +623,6 @@ export class MainService implements OnInit{
 
     getBannersFromLocalStorage(){
         try{
-            debugger;
             if (localStorage.getItem(AppConsts.banner) !== null &&
             localStorage.getItem(AppConsts.banner)?.length != 0) {
             var obj = JSON.parse(localStorage.getItem(AppConsts.banner) ?? "");

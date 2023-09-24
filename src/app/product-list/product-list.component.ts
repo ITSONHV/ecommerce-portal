@@ -90,7 +90,7 @@ export class ProductListComponent implements OnInit {
     );
   }
   getProductPagesbyCategoryId(categoryId : number){
-    this._svc.getProductPagesByCategoryId(categoryId).subscribe(
+    this._svc.getProductPagesByCategoryId(categoryId, 0).subscribe(
       (respones: ObjectModel)=>{
         this.listProduct = respones.data;
       },
