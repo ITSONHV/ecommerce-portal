@@ -120,7 +120,7 @@
                   <div class="price-box">
                     <p class="special-price"> <span class="price-label"></span> <span
                         class="price">{{item.promotionPrice | currency: "VND"}}</span> </p>
-                    <p class="old-price" *ngIf="item.promotionPrice !== 0"> <span class="price-label"></span> <span
+                    <p class="old-price" *ngIf="item.promotionPrice !== 0"> <span class="price-label"></span> <span  *ngIf="item.promotionPrice < item.price" 
                         class="price">{{item.price | currency: "VND" }} </span> </p>
                   </div>
                   <div class="desc std">

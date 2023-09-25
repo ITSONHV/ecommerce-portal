@@ -63,7 +63,7 @@
             <div class="price-box">
               <p class="special-price"> <span class="price-label">Special Price</span> <span class="price">
                   {{product?.promotionPrice | currency: "VND"}}</span> </p>
-              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price">{{product?.price
+              <p class="old-price"> <span  class="price-label">Regular Price:</span> <span  *ngIf="product.promotionPrice < product.price"  class="price">{{product?.price
                   | currency: "VND"}} </span> </p>
             </div>
             <div class="ratings">

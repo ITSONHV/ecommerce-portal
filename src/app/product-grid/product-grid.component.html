@@ -116,7 +116,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="product__price"><span class="price__selling">{{item.promotionPrice | currency: "VND" }}</span> <span class="price__old">{{item.price | currency: "VND" }}</span></div> 
+                      <div class="product__price"><span class="price__selling">{{item.promotionPrice | currency: "VND" }}</span> <span  *ngIf="item.promotionPrice < item.price"  class="price__old">{{item.price | currency: "VND" }}</span></div> 
                       <button type="button" class="add-to-cart" (click)="addToShopingCard(item)"><i class="fa fa-shopping-cart"></i> &nbsp;GIỎ HÀNG</button>
                     </div>
                   </div>
